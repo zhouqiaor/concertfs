@@ -44,7 +44,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ..\..\..\test\w1\run-w1-test
 powershell -NoProfile -ExecutionPolicy Bypass -File ..\..\..\test\w1\mount-cycles.ps1 -Cycles 3
 ```
 
-结果在 `test/w1/runs/`：`w1-results-<tag>.{txt,json}`、`mount-cycles.txt`、`cycle*-trace.log`。
+结果在 `test/w1/runs/`：`w1-results-<tag>.{txt,json}` 与 `mount-cycles.txt` 入档；
+`cycle*-trace.log` 为全量 FUSE 回调 trace（每个数十万行），**不入库**——
+`test/w1/.gitignore` 排除 `runs/*.log`，仅本机运行 `mount-cycles.ps1` 时生成。
 
 ## W1 已验证语义（给 M1 internal/fshost 的注意点）
 
