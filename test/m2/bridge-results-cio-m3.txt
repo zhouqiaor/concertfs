@@ -1,0 +1,17 @@
+﻿PhoneFS M2 rw bridge - cio-m3 - 2026-11-01 21:51:55 - drive=P: serial=192.168.43.1:5555
+PASS 15/15 FAIL 0 TOTAL 8.9s
+PASS [01] mkdir-isolated-root                        21:51:47.769 | P:\内部存储\PhoneFS-m2-bridge
+PASS [02] create-multichunk-write-fsync-server-sha   21:51:48.265 | 2500000B (3 chunks) server sha256=488E71E6CC99D3D23A93425B6F155C6B80BBE1F01A25F201A5F35161D9283520
+PASS [03] fuse-readback-sha                          21:51:48.596 | FUSE readback sha256=488E71E6CC99D3D23A93425B6F155C6B80BBE1F01A25F201A5F35161D9283520
+PASS [04] other-open-handle-cache-invalidation       21:51:49.629 | existing handle dropped old block after node version changed
+PASS [05] random-unaligned-write-and-extension       21:51:50.556 | unaligned overwrite=100003B extension=50017B size=2550017 sha=9E640AE1D71563C8782B1623A6C673D4D03B05E19A2C9DCAEAF31C3213C71243
+PASS [06] nonzero-truncate-enosys                    21:51:50.646 | SetLength(123456) rejected; server bytes unchanged
+PASS [07] zero-truncate-supported                    21:51:51.005 | SetLength(0)+empty upload passed; rewrote 30B
+PASS [08] rename-file                                21:51:51.876 | old id/path gone; renamed bytes match
+PASS [09] mkdir-and-move-file                        21:51:52.148 | cross-directory PATCH parent_id; server bytes match
+PASS [10] utimens-mtime                              21:51:52.207 | mtime=2026-10-29T13:51:52.0000000Z
+PASS [11] create-conflict-eexist                     21:51:52.352 | CreateNew existing file failed; bytes unchanged
+PASS [12] nonempty-rmdir-enotempty                   21:51:52.389 | nonempty Rmdir rejected; child intact
+PASS [13] shell-explorer-copyhere                    21:51:54.890 | Shell.Application.CopyHere 3200123B sha=8BE7D2D3F2168807308FF9B4F8FAD05B4C61A265E3D40415051A56636B1EB935
+PASS [14] unlink-and-rmdir                           21:51:55.044 | Unlink + empty Rmdir passed
+PASS [15] cleanup-isolated-tree                      21:51:55.881 | all M2 bridge test objects removed through FUSE

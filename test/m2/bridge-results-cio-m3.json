@@ -1,0 +1,107 @@
+﻿[
+    {
+        "id":  "01",
+        "name":  "mkdir-isolated-root",
+        "pass":  true,
+        "detail":  "P:\\内部存储\\PhoneFS-m2-bridge",
+        "ts":  "21:51:47.769"
+    },
+    {
+        "id":  "02",
+        "name":  "create-multichunk-write-fsync-server-sha",
+        "pass":  true,
+        "detail":  "2500000B (3 chunks) server sha256=488E71E6CC99D3D23A93425B6F155C6B80BBE1F01A25F201A5F35161D9283520",
+        "ts":  "21:51:48.265"
+    },
+    {
+        "id":  "03",
+        "name":  "fuse-readback-sha",
+        "pass":  true,
+        "detail":  "FUSE readback sha256=488E71E6CC99D3D23A93425B6F155C6B80BBE1F01A25F201A5F35161D9283520",
+        "ts":  "21:51:48.596"
+    },
+    {
+        "id":  "04",
+        "name":  "other-open-handle-cache-invalidation",
+        "pass":  true,
+        "detail":  "existing handle dropped old block after node version changed",
+        "ts":  "21:51:49.629"
+    },
+    {
+        "id":  "05",
+        "name":  "random-unaligned-write-and-extension",
+        "pass":  true,
+        "detail":  "unaligned overwrite=100003B extension=50017B size=2550017 sha=9E640AE1D71563C8782B1623A6C673D4D03B05E19A2C9DCAEAF31C3213C71243",
+        "ts":  "21:51:50.556"
+    },
+    {
+        "id":  "06",
+        "name":  "nonzero-truncate-enosys",
+        "pass":  true,
+        "detail":  "SetLength(123456) rejected; server bytes unchanged",
+        "ts":  "21:51:50.646"
+    },
+    {
+        "id":  "07",
+        "name":  "zero-truncate-supported",
+        "pass":  true,
+        "detail":  "SetLength(0)+empty upload passed; rewrote 30B",
+        "ts":  "21:51:51.005"
+    },
+    {
+        "id":  "08",
+        "name":  "rename-file",
+        "pass":  true,
+        "detail":  "old id/path gone; renamed bytes match",
+        "ts":  "21:51:51.876"
+    },
+    {
+        "id":  "09",
+        "name":  "mkdir-and-move-file",
+        "pass":  true,
+        "detail":  "cross-directory PATCH parent_id; server bytes match",
+        "ts":  "21:51:52.148"
+    },
+    {
+        "id":  "10",
+        "name":  "utimens-mtime",
+        "pass":  true,
+        "detail":  "mtime=2026-10-29T13:51:52.0000000Z",
+        "ts":  "21:51:52.207"
+    },
+    {
+        "id":  "11",
+        "name":  "create-conflict-eexist",
+        "pass":  true,
+        "detail":  "CreateNew existing file failed; bytes unchanged",
+        "ts":  "21:51:52.352"
+    },
+    {
+        "id":  "12",
+        "name":  "nonempty-rmdir-enotempty",
+        "pass":  true,
+        "detail":  "nonempty Rmdir rejected; child intact",
+        "ts":  "21:51:52.389"
+    },
+    {
+        "id":  "13",
+        "name":  "shell-explorer-copyhere",
+        "pass":  true,
+        "detail":  "Shell.Application.CopyHere 3200123B sha=8BE7D2D3F2168807308FF9B4F8FAD05B4C61A265E3D40415051A56636B1EB935",
+        "ts":  "21:51:54.890"
+    },
+    {
+        "id":  "14",
+        "name":  "unlink-and-rmdir",
+        "pass":  true,
+        "detail":  "Unlink + empty Rmdir passed",
+        "ts":  "21:51:55.044"
+    },
+    {
+        "id":  "15",
+        "name":  "cleanup-isolated-tree",
+        "pass":  true,
+        "detail":  "all M2 bridge test objects removed through FUSE",
+        "ts":  "21:51:55.881"
+    }
+]

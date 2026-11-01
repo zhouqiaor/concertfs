@@ -34,6 +34,30 @@
 - stdout/stderr：`tequ-m3-protocol.txt`。
 - 结构化结果：`protocol-results.json`。
 - 测试结束后递归删除隔离根；另经 adb 核验路径不存在。
-- 仅执行小文件协议测试，未运行大文件 GET/吞吐，未停止服务、卸载或修改 APK，未改生产代码。
+- 协议矩阵本身为小文件测试；大文件 GET 单独在「大文件流式 GET（>2GiB）内存准入」一节记录（含引擎修复与真机复验）。协议矩阵期间未停止服务、卸载或修改 APK，未改生产代码。
 
 本轮 delta/replace 未发现生产协议 bug。
+
+## 大文件流式 GET（>2GiB）内存准入
+
+M3 硬化把「大文件 GET 不得随文件大小无界增长内存」列为准入门槛。Netty 环回引擎未通过：
+2,147,495,993B 文件在交付约 58–65MiB 后 RSS 涨到 4.74–7.29GiB 被厂商 SWAP 杀。纯环回
+明文口 A/B（绕过 TLS front）同样爆炸，排除 Conscrypt/TLS 为主因；`respondOutputStream`
+换 `respondBytesWriter` + `writeFully/flush` 仍失败（RSS 7.29GiB），确认根因在 Netty
+应用/响应路径。
+
+**修复**：把环回 HTTP 引擎从 Netty 换成 CIO。W2 当时选 Netty 仅因 CIO 3.6.1 不能直接服务
+HTTPS；现在 TLS 由 `LoopbackTlsFront`（Conscrypt SSLServerSocket → 127.0.0.1 明文）承担，
+CIO 只需环回明文，约束消失。同版本钉 3.6.1，TLS front、端口、契约均不变。
+
+**真机复验（同一 2,147,495,993B 文件，sha256=b27908f1…54d4）**：
+
+| 路径 | 结果 | 速率 | RSS 采样 / HWM |
+|---|---|---|---|
+| 纯环回明文（adb forward） | 全量 200，sha 匹配 | 20.6 MiB/s | ~160–167MB / 184MB |
+| HTTPS（LoopbackTlsFront） | 全量 200，sha 匹配 | 20.9 MiB/s | ~159–170MB / 184MB |
+
+整个传输过程 VmRSS 恒定在 ~160–170MB，VmHWM 184MB，未再随流量增长，进程存活。
+
+**回归矩阵（CIO 构建，真机）**：W2 只读 41/41、M2 写 20/20、M3 delta/replace 12/12
+（+1 ENV_LIMIT）、rw 桥 15/15、ro 桥 16/16、core JVM 23/23。设备序列号每次复验。

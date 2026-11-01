@@ -57,7 +57,7 @@
     {
       "name": "chunk-quota-507",
       "pass": true,
-      "detail": "declared total=47130492928 > free=46056751104 -> 507 before allocation"
+      "detail": "declared total=49390374912 > free=48316633088 -> 507 before allocation"
     },
     {
       "name": "meta-file-rename",
