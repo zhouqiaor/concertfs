@@ -1,1 +1,2 @@
-size_bytes=21469819
+size_bytes=19182015
+# 2026-11-01 更正（Colossus P1-2）：原记录 21469819 为早期构建残留；终版包以 apk-release-final-sha256.txt 记录的 sha256 为准。

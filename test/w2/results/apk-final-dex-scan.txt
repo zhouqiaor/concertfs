@@ -1,0 +1,14 @@
+# 2026-11-01 Colossus P2-3：终版 APK 全 dex 诊断类字符串扫描
+apk=C:\Code\Wideawake-wt-phonefs-w2\projects\phonefs\android\source\build\outputs\apk\release\source-release.apk
+size_bytes=19182015
+sha256=1daa6f1f724bdf59184eea5675893b1583deb68c3b6f826ffd442b10176db071
+method=python -I zipfile；遍历全部 *.dex，逐字节查找 DiagTlsSocketServer / DIAG_TLS_SOCKET
+dex_files=3: classes.dex, classes2.dex, classes3.dex
+classes.dex DiagTlsSocketServer hits=0
+classes.dex DIAG_TLS_SOCKET hits=0
+classes2.dex DiagTlsSocketServer hits=0
+classes2.dex DIAG_TLS_SOCKET hits=0
+classes3.dex DiagTlsSocketServer hits=0
+classes3.dex DIAG_TLS_SOCKET hits=0
+TOTAL_HITS=0
+RESULT=PASS（0 命中）
