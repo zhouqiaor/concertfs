@@ -16,20 +16,21 @@ W2 退出标准见 `docs/design/2026-10-31-phone-files-selfbuild.md` §13，闸�
 | BouncyCastle | bcpkix-jdk18on 1.86 | Maven Central latest=1.86，仅用于自签 X.509 构建（SPEC §2.2） |
 | compileSdk / target | 36 | SPEC 冻结；minSdk 26；本机 platform android-36、build-tools 36/37 已装 |
 
-依赖：Ktor server-core / server-netty / content-negotiation / serialization-kotlinx-json、Conscrypt、bcpkix-jdk18on。
+依赖：Ktor server-core / server-cio / content-negotiation / serialization-kotlinx-json、Conscrypt、bcpkix-jdk18on。
 **未引入** OkHttp（W2 无客户端需求，YAGNI）、Room（M1 索引才引入）、AndroidX（UI 用框架控件，零额外依赖）。
 
-## W2 关键变更：CIO → Netty（F-W2-1，待 ADR）
+## 引擎沿革：CIO → Netty → CIO（ADR-19 增补，2026-11-01）
 
-SPEC §2.2 钉「Ktor 3.6.1 CIO engine + TLS」。实测 Ktor 3.6.1 的 CIO 服务端引擎在 JVM 上
+SPEC §2.2 钉「Ktor 3.6.1 CIO engine + TLS」。W2 发现 Ktor 3.6.1 的 CIO 服务端引擎在 JVM 上
 **不支持 HTTPS**：`CIOApplicationEngine.initServerJob` 对 `ConnectorType.HTTPS` 显式抛
 `UnsupportedOperationException("CIO Engine does not currently support HTTPS…")`
-（GitHub ktorio/ktor tag 3.6.1，ktor-server-cio/common/.../CIOApplicationEngine.kt 第 223–228 行；
-KTOR-825 长期开放）。
+（KTOR-825 长期开放），于是 W2 切 **Netty**（`ktor-server-netty:3.6.1`，JDK SSL + Conscrypt，
+`enabledProtocols=["TLSv1.3"]`）并写进 ADR-19。
 
-W2 改用同一 Ktor 版本的 **Netty 引擎**（`io.ktor:ktor-server-netty:3.6.1`）：协程模型、content-negotiation、
-SSE 插件生态全部不变；Netty 走 JDK SSL（未带 netty-tcnative）→ provider 顺序首位 Conscrypt 出 TLS1.3，
-`EngineSSLConnectorBuilder.enabledProtocols=["TLSv1.3"]` 强制禁降级。SPEC §2.2/ADR-16 需补 ADR。
+M3 硬化时 Netty 在 >2GiB 大文件 GET 上 RSS 涨到 4.74–7.29GiB 被系统杀；SPEC ADR-19 增补把生产引擎
+**回切 CIO**：TLS 由 `LoopbackTlsFront`（Conscrypt `SSLServerSocket`）对外承担，CIO 只服务
+`127.0.0.1` 明文，原「CIO 不支持 HTTPS」约束不再适用。真机 2,147,495,993B 全量 GET 内存恒定
+（VmHWM ~188MiB），W2/M2/M3/rw/ro 回归全绿。详见 SPEC ADR-19 增补与 `test/m3/m3-report.md`。
 
 ## 构建
 
