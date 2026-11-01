@@ -1,0 +1,17 @@
+﻿PhoneFS M2 rw bridge - mainintegrate - 2026-11-01 17:49:14 - drive=P: serial=192.168.43.1:5555
+PASS 13/15 FAIL 2 TOTAL 7.6s
+PASS [01] mkdir-isolated-root                        17:49:07.337 | P:\内部存储\PhoneFS-m2-bridge
+PASS [02] create-multichunk-write-fsync-server-sha   17:49:07.856 | 2500000B (3 chunks) server sha256=7D41EC4B80CC2444CEC32CB88825C5BCACF9D329C282CA31C81B2A8F8E882022
+PASS [03] fuse-readback-sha                          17:49:08.085 | FUSE readback sha256=7D41EC4B80CC2444CEC32CB88825C5BCACF9D329C282CA31C81B2A8F8E882022
+FAIL [04] other-open-handle-cache-invalidation       17:49:08.783 | RuntimeException: existing read handle returned stale Range block
+PASS [05] random-unaligned-write-and-extension       17:49:09.532 | unaligned overwrite=100003B extension=50017B size=2550017 sha=2F49F826F295F353BFAD1BFC4BFF68A735002433E43584690634AA0510C5D371
+PASS [06] nonzero-truncate-enosys                    17:49:09.612 | SetLength(123456) rejected; server bytes unchanged
+PASS [07] zero-truncate-supported                    17:49:09.925 | SetLength(0)+empty upload passed; rewrote 30B
+PASS [08] rename-file                                17:49:10.729 | old id/path gone; renamed bytes match
+PASS [09] mkdir-and-move-file                        17:49:10.957 | cross-directory PATCH parent_id; server bytes match
+FAIL [10] utimens-mtime                              17:49:10.982 | MethodInvocationException: 使用“2”个参数调用“SetLastWriteTimeUtc”时发生异常:“未能找到文件“P:\内部存储\PhoneFS-m2-bridge\moved\renamed.bin”。”
+PASS [11] create-conflict-eexist                     17:49:11.075 | CreateNew existing file failed; bytes unchanged
+PASS [12] nonempty-rmdir-enotempty                   17:49:11.143 | nonempty Rmdir rejected; child intact
+PASS [13] shell-explorer-copyhere                    17:49:13.406 | Shell.Application.CopyHere 3200123B sha=F6DEFB757392E2AA5E1DB876F996DDC567C4498B38958B2D2971CA52FD8104B2
+PASS [14] unlink-and-rmdir                           17:49:13.548 | Unlink + empty Rmdir passed
+PASS [15] cleanup-isolated-tree                      17:49:14.270 | all M2 bridge test objects removed through FUSE

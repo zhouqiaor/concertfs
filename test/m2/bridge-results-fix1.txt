@@ -1,0 +1,17 @@
+﻿PhoneFS M2 rw bridge - fix1 - 2026-11-01 17:55:14 - drive=P: serial=192.168.43.1:5555
+PASS 14/15 FAIL 1 TOTAL 7.3s
+PASS [01] mkdir-isolated-root                        17:55:07.432 | P:\内部存储\PhoneFS-m2-bridge
+PASS [02] create-multichunk-write-fsync-server-sha   17:55:07.913 | 2500000B (3 chunks) server sha256=2CCA8AD0FEA34A9B86BA1D97F31AEAC82203B28B5321C8B50CE08E87284EB4DF
+PASS [03] fuse-readback-sha                          17:55:08.124 | FUSE readback sha256=2CCA8AD0FEA34A9B86BA1D97F31AEAC82203B28B5321C8B50CE08E87284EB4DF
+PASS [04] other-open-handle-cache-invalidation       17:55:08.838 | existing handle dropped old block after node version changed
+PASS [05] random-unaligned-write-and-extension       17:55:09.548 | unaligned overwrite=100003B extension=50017B size=2550017 sha=027DC464257E471737BCC7F39E9D104B3BDFE8CCEF7E4332640DF455D3AD72CB
+PASS [06] nonzero-truncate-enosys                    17:55:09.629 | SetLength(123456) rejected; server bytes unchanged
+PASS [07] zero-truncate-supported                    17:55:09.909 | SetLength(0)+empty upload passed; rewrote 30B
+PASS [08] rename-file                                17:55:10.651 | old id/path gone; renamed bytes match
+PASS [09] mkdir-and-move-file                        17:55:10.869 | cross-directory PATCH parent_id; server bytes match
+FAIL [10] utimens-mtime                              17:55:10.887 | MethodInvocationException: 使用“2”个参数调用“SetLastWriteTimeUtc”时发生异常:“未能找到文件“P:\内部存储\PhoneFS-m2-bridge\moved\renamed.bin”。”
+PASS [11] create-conflict-eexist                     17:55:10.976 | CreateNew existing file failed; bytes unchanged
+PASS [12] nonempty-rmdir-enotempty                   17:55:11.031 | nonempty Rmdir rejected; child intact
+PASS [13] shell-explorer-copyhere                    17:55:13.320 | Shell.Application.CopyHere 3200123B sha=E025134511772B01B5D3237FAD320309535DA2C3922CC582357C6756334F3F91
+PASS [14] unlink-and-rmdir                           17:55:13.447 | Unlink + empty Rmdir passed
+PASS [15] cleanup-isolated-tree                      17:55:14.147 | all M2 bridge test objects removed through FUSE

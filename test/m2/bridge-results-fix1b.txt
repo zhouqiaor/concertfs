@@ -1,0 +1,17 @@
+﻿PhoneFS M2 rw bridge - fix1b - 2026-11-01 17:58:33 - drive=P: serial=192.168.43.1:5555
+PASS 15/15 FAIL 0 TOTAL 7.3s
+PASS [01] mkdir-isolated-root                        17:58:26.389 | P:\内部存储\PhoneFS-m2-bridge
+PASS [02] create-multichunk-write-fsync-server-sha   17:58:26.862 | 2500000B (3 chunks) server sha256=DABED4F6E3AEF0BAB6B0AC1F0D9E2D487B6F4511C56EE1E78ADDD79711359A09
+PASS [03] fuse-readback-sha                          17:58:27.072 | FUSE readback sha256=DABED4F6E3AEF0BAB6B0AC1F0D9E2D487B6F4511C56EE1E78ADDD79711359A09
+PASS [04] other-open-handle-cache-invalidation       17:58:27.762 | existing handle dropped old block after node version changed
+PASS [05] random-unaligned-write-and-extension       17:58:28.427 | unaligned overwrite=100003B extension=50017B size=2550017 sha=7CDFE34B291DA29DD594B5829314A523E4AF35AC0FDA8E9794FDEF3941C2D38F
+PASS [06] nonzero-truncate-enosys                    17:58:28.509 | SetLength(123456) rejected; server bytes unchanged
+PASS [07] zero-truncate-supported                    17:58:28.799 | SetLength(0)+empty upload passed; rewrote 30B
+PASS [08] rename-file                                17:58:29.565 | old id/path gone; renamed bytes match
+PASS [09] mkdir-and-move-file                        17:58:29.773 | cross-directory PATCH parent_id; server bytes match
+PASS [10] utimens-mtime                              17:58:29.823 | mtime=2026-10-29T09:58:29.0000000Z
+PASS [11] create-conflict-eexist                     17:58:29.930 | CreateNew existing file failed; bytes unchanged
+PASS [12] nonempty-rmdir-enotempty                   17:58:29.960 | nonempty Rmdir rejected; child intact
+PASS [13] shell-explorer-copyhere                    17:58:32.212 | Shell.Application.CopyHere 3200123B sha=55795C8CDAECDCCCE086F7D8B9DE7B4BC84C1866588A6FECB625ECBF92BBEE7B
+PASS [14] unlink-and-rmdir                           17:58:32.314 | Unlink + empty Rmdir passed
+PASS [15] cleanup-isolated-tree                      17:58:33.000 | all M2 bridge test objects removed through FUSE

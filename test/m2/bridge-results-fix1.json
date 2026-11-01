@@ -1,0 +1,107 @@
+﻿[
+    {
+        "id":  "01",
+        "name":  "mkdir-isolated-root",
+        "pass":  true,
+        "detail":  "P:\\内部存储\\PhoneFS-m2-bridge",
+        "ts":  "17:55:07.432"
+    },
+    {
+        "id":  "02",
+        "name":  "create-multichunk-write-fsync-server-sha",
+        "pass":  true,
+        "detail":  "2500000B (3 chunks) server sha256=2CCA8AD0FEA34A9B86BA1D97F31AEAC82203B28B5321C8B50CE08E87284EB4DF",
+        "ts":  "17:55:07.913"
+    },
+    {
+        "id":  "03",
+        "name":  "fuse-readback-sha",
+        "pass":  true,
+        "detail":  "FUSE readback sha256=2CCA8AD0FEA34A9B86BA1D97F31AEAC82203B28B5321C8B50CE08E87284EB4DF",
+        "ts":  "17:55:08.124"
+    },
+    {
+        "id":  "04",
+        "name":  "other-open-handle-cache-invalidation",
+        "pass":  true,
+        "detail":  "existing handle dropped old block after node version changed",
+        "ts":  "17:55:08.838"
+    },
+    {
+        "id":  "05",
+        "name":  "random-unaligned-write-and-extension",
+        "pass":  true,
+        "detail":  "unaligned overwrite=100003B extension=50017B size=2550017 sha=027DC464257E471737BCC7F39E9D104B3BDFE8CCEF7E4332640DF455D3AD72CB",
+        "ts":  "17:55:09.548"
+    },
+    {
+        "id":  "06",
+        "name":  "nonzero-truncate-enosys",
+        "pass":  true,
+        "detail":  "SetLength(123456) rejected; server bytes unchanged",
+        "ts":  "17:55:09.629"
+    },
+    {
+        "id":  "07",
+        "name":  "zero-truncate-supported",
+        "pass":  true,
+        "detail":  "SetLength(0)+empty upload passed; rewrote 30B",
+        "ts":  "17:55:09.909"
+    },
+    {
+        "id":  "08",
+        "name":  "rename-file",
+        "pass":  true,
+        "detail":  "old id/path gone; renamed bytes match",
+        "ts":  "17:55:10.651"
+    },
+    {
+        "id":  "09",
+        "name":  "mkdir-and-move-file",
+        "pass":  true,
+        "detail":  "cross-directory PATCH parent_id; server bytes match",
+        "ts":  "17:55:10.869"
+    },
+    {
+        "id":  "10",
+        "name":  "utimens-mtime",
+        "pass":  false,
+        "detail":  "MethodInvocationException: 使用“2”个参数调用“SetLastWriteTimeUtc”时发生异常:“未能找到文件“P:\\内部存储\\PhoneFS-m2-bridge\\moved\\renamed.bin”。”",
+        "ts":  "17:55:10.887"
+    },
+    {
+        "id":  "11",
+        "name":  "create-conflict-eexist",
+        "pass":  true,
+        "detail":  "CreateNew existing file failed; bytes unchanged",
+        "ts":  "17:55:10.976"
+    },
+    {
+        "id":  "12",
+        "name":  "nonempty-rmdir-enotempty",
+        "pass":  true,
+        "detail":  "nonempty Rmdir rejected; child intact",
+        "ts":  "17:55:11.031"
+    },
+    {
+        "id":  "13",
+        "name":  "shell-explorer-copyhere",
+        "pass":  true,
+        "detail":  "Shell.Application.CopyHere 3200123B sha=E025134511772B01B5D3237FAD320309535DA2C3922CC582357C6756334F3F91",
+        "ts":  "17:55:13.320"
+    },
+    {
+        "id":  "14",
+        "name":  "unlink-and-rmdir",
+        "pass":  true,
+        "detail":  "Unlink + empty Rmdir passed",
+        "ts":  "17:55:13.447"
+    },
+    {
+        "id":  "15",
+        "name":  "cleanup-isolated-tree",
+        "pass":  true,
+        "detail":  "all M2 bridge test objects removed through FUSE",
+        "ts":  "17:55:14.147"
+    }
+]
