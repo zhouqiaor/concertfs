@@ -1,0 +1,108 @@
+{
+  "base_url": "https://192.168.43.1:18443",
+  "isolated_root": "/storage/emulated/0/PhoneFS-m2-protocol",
+  "pass": 20,
+  "fail": 0,
+  "results": [
+    {
+      "name": "create-root-201",
+      "pass": true,
+      "detail": "PhoneFS-m2-protocol"
+    },
+    {
+      "name": "create-duplicate-409",
+      "pass": true,
+      "detail": "ALREADY_EXISTS"
+    },
+    {
+      "name": "create-invalid-name-400",
+      "pass": true,
+      "detail": 400
+    },
+    {
+      "name": "create-missing-parent-404",
+      "pass": true,
+      "detail": 404
+    },
+    {
+      "name": "create-full-file-201",
+      "pass": true,
+      "detail": "p:L3N0b3JhZ2UvZW11bGF0ZWQvMC9QaG9uZUZTLW0yLXByb3RvY29sL2Z1bGwuYmlu"
+    },
+    {
+      "name": "full-write-sha-and-mtime",
+      "pass": true,
+      "detail": "1048699B sha=f506539592f27eea9a757dc53630dc56e6b592795f689b9f30b3e502c1130ccc mtime=1700000000000 (fs seconds)"
+    },
+    {
+      "name": "full-atomic-replace-shorter",
+      "pass": true,
+      "detail": "123457B sha=82fe31cdd3e6dea02f175760443f61428663f5d2b2308d2397f083c3040fb6d4 mtime=1700000000000 (fs seconds)"
+    },
+    {
+      "name": "full-empty-write",
+      "pass": true,
+      "detail": "zero-length PUT/GET sha=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "chunk-out-of-order-and-idempotent",
+      "pass": true,
+      "detail": "168869B out-of-order complete; sha=78e55a332d9f1e5225dcfcee3d4a08bcc826b308c16a580bdcd8916f666e78b4; retransmit idempotent"
+    },
+    {
+      "name": "chunk-missing-409",
+      "pass": true,
+      "detail": "last chunk with missing prefix -> 409; session retained"
+    },
+    {
+      "name": "chunk-quota-507",
+      "pass": true,
+      "detail": "declared total=47132626944 > free=46058885120 -> 507 before allocation"
+    },
+    {
+      "name": "meta-file-rename",
+      "pass": true,
+      "detail": "old id 404; new name readback sha=82fe31cdd3e6dea02f175760443f61428663f5d2b2308d2397f083c3040fb6d4"
+    },
+    {
+      "name": "meta-file-move",
+      "pass": true,
+      "detail": "file moved across directories; bytes unchanged"
+    },
+    {
+      "name": "meta-directory-501",
+      "pass": true,
+      "detail": 501
+    },
+    {
+      "name": "meta-conflict-409",
+      "pass": true,
+      "detail": "rename onto existing file -> 409"
+    },
+    {
+      "name": "meta-mtime",
+      "pass": true,
+      "detail": "modified_ms=1700000000000 (requested 1700000000999, fs seconds)"
+    },
+    {
+      "name": "delete-not-empty-409",
+      "pass": true,
+      "detail": 409
+    },
+    {
+      "name": "delete-missing-idempotent-204",
+      "pass": true,
+      "detail": 204
+    },
+    {
+      "name": "delete-recursive-cleanup-204",
+      "pass": true,
+      "detail": 204
+    },
+    {
+      "name": "deleted-root-get-404",
+      "pass": true,
+      "detail": 404
+    }
+  ]
+}

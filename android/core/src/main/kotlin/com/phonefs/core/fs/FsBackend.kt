@@ -23,6 +23,9 @@ interface FsBackend {
 
     /** 路径越界（T10）/非存储根内 → false。 */
     fun isInsideStorage(path: String): Boolean
+
+    /** FR-20：写完成/改名/删除后触发 MediaStore 回映；目录由实现自行忽略。 */
+    fun scanFile(path: String)
 }
 
 data class FileInfo(

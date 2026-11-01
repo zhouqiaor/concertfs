@@ -13,6 +13,12 @@ object ErrCode {
     const val NOT_READY = "NOT_READY"
     const val RANGE_NOT_SATISFIABLE = "RANGE_NOT_SATISFIABLE"
     const val INTERNAL = "INTERNAL"
+    const val INVALID_NAME = "INVALID_NAME"
+    const val ALREADY_EXISTS = "ALREADY_EXISTS"
+    const val NOT_EMPTY = "NOT_EMPTY"
+    const val UPLOAD_INCOMPLETE = "UPLOAD_INCOMPLETE"
+    const val PARTIAL = "PARTIAL"
+    const val INSUFFICIENT_STORAGE = "INSUFFICIENT_STORAGE"
 }
 
 class PhoneFsException(

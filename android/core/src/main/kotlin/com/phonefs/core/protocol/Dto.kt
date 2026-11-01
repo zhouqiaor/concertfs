@@ -55,6 +55,33 @@ data class StatFsResp(
     @SerialName("block_size") val blockSize: Long,
 )
 
+/** §6.5.6 POST /v1/fs/create。 */
+@Serializable
+data class CreateReq(
+    val parent: String,
+    val name: String,
+    @SerialName("is_dir") val isDir: Boolean,
+    val mime: String? = null,
+    val tmp: Boolean = false,
+)
+
+/** §6.5.7 PUT /v1/fs/content；complete/etag 对整写与分块完成均返回。 */
+@Serializable
+data class WriteResp(
+    val received: Long,
+    val complete: Boolean = true,
+    val etag: String? = null,
+)
+
+/** §6.5.8 PATCH /v1/fs/meta（M2 不开放 size patch）。 */
+@Serializable
+data class MetaReq(
+    val id: String,
+    val name: String? = null,
+    @SerialName("parent_id") val parentId: String? = null,
+    @SerialName("modified_ms") val modifiedMs: Long? = null,
+)
+
 /** §6.5 通用错误包络。 */
 @Serializable
 data class ErrorEnvelope(val error: ErrBody)

@@ -1,0 +1,1 @@
+28b58d88551292b2fc8628164c4bf71f8c971718ebf3d2ebdda350b38b75f40a *C:/Code/Wideawake-wt-phonefs-m2/projects/phonefs/android/source/build/outputs/apk/release/source-release.apk

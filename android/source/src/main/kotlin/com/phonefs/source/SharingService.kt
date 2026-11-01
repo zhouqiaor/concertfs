@@ -69,7 +69,7 @@ class SharingService : Service() {
             val token = app.store.loadOrCreateToken()
             val deviceId = app.store.loadOrCreateDeviceId()
             val srv = PhoneFsServer(
-                backend = MesFsBackend(),
+                backend = MesFsBackend(applicationContext),
                 identity = identity,
                 deviceId = deviceId,
                 deviceName = resolveDeviceName(),

@@ -5,10 +5,12 @@ import com.phonefs.core.fs.DocIds
 import com.phonefs.core.fs.FsBackend
 import com.phonefs.core.fs.FileInfo
 import com.phonefs.core.protocol.Attr
+import com.phonefs.core.protocol.CreateReq
 import com.phonefs.core.protocol.ErrBody
 import com.phonefs.core.protocol.ErrCode
 import com.phonefs.core.protocol.ErrorEnvelope
 import com.phonefs.core.protocol.ListResp
+import com.phonefs.core.protocol.MetaReq
 import com.phonefs.core.protocol.PairDeviceInfo
 import com.phonefs.core.protocol.PairInfo
 import com.phonefs.core.protocol.PhoneFsException
@@ -30,18 +32,30 @@ import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.request.header
 import io.ktor.server.request.path
+import io.ktor.server.request.receive
 import io.ktor.server.response.header
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondBytes
+import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
+import io.ktor.server.routing.patch
+import io.ktor.server.routing.post
+import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileInputStream
+import java.io.IOException
 import java.net.InetAddress
 import java.net.ServerSocket
+import java.nio.file.FileVisitResult
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.SimpleFileVisitor
+import java.nio.file.StandardCopyOption
+import java.nio.file.attribute.BasicFileAttributes
 import java.security.MessageDigest
 import java.security.SecureRandom
 import java.time.ZoneOffset
@@ -69,6 +83,7 @@ class PhoneFsServer(
 ) {
     private var engine: io.ktor.server.engine.EmbeddedServer<*, *>? = null
     private var tlsFront: LoopbackTlsFront? = null
+    private val uploadStore = UploadStore(backend)
 
     /** @return 实际 TLS 公网口；首选 18443，占用则 OS 动态端口。 */
     fun start(preferredPort: Int = 18443): Int {
@@ -106,6 +121,7 @@ class PhoneFsServer(
         tlsFront = null
         engine?.stop(500, 1000)
         engine = null
+        uploadStore.close()
     }
 
     private fun choosePort(preferred: Int): Int {
@@ -299,6 +315,133 @@ class PhoneFsServer(
                     }
                 }
             }
+
+            // §6.5.6：POST create；tmp 仅提示客户端意图，实际临时文件由 PUT 原子写管理。
+            post("/v1/fs/create") {
+                requireReady()
+                val req = call.receive<CreateReq>()
+                validateName(req.name)
+                val parent = realPath(req.parent, allowStorageRoot = true)
+                if (!parent.isDirectory) throw notFound()
+                val child = File(parent, req.name)
+                if (!backend.isInsideStorage(child.absolutePath)) throw badRequest("child escapes storage root")
+                if (child.exists()) throw alreadyExists()
+                val created = if (req.isDir) child.mkdir() else child.createNewFile()
+                if (!created) throw alreadyExists()
+                if (!req.isDir) backend.scanFile(child.absolutePath)
+                val info = backend.stat(child.absolutePath)
+                    ?: throw IOException("created entry vanished")
+                call.respond(HttpStatusCode.Created, info.toAttr(backend.storageRoot.absolutePath))
+            }
+
+            // §6.5.7：整写/分块共用流式上传存储；目标须由 create 先行创建。
+            put("/v1/fs/content") {
+                requireReady()
+                val id = call.request.queryParameters["id"] ?: throw badRequest("missing id")
+                val target = realPath(id, allowStorageRoot = false)
+                if (!target.isFile) throw notFound()
+                val contentLength = call.request.header(HttpHeaders.ContentLength)?.toLongOrNull()
+                    ?: throw badRequest("Content-Length required")
+                if (contentLength < 0) throw badRequest("negative Content-Length")
+                val mtime = parseSetMtime(call.request.header("X-Set-Mtime"))
+                val rangeHeader = call.request.header(HttpHeaders.ContentRange)
+                val uploadId = call.request.header("X-Upload-Id")
+                val result = if (rangeHeader == null && uploadId == null) {
+                    uploadStore.full(call, target, contentLength, mtime)
+                } else {
+                    if (rangeHeader == null || uploadId.isNullOrBlank()) {
+                        throw badRequest("Content-Range and X-Upload-Id must be sent together")
+                    }
+                    val (start, end, total) = parseContentRange(rangeHeader)
+                    if (contentLength != end - start + 1) {
+                        throw badRequest("Content-Length does not match Content-Range")
+                    }
+                    uploadStore.chunk(call, target, uploadId, start, end, total, mtime)
+                }
+                call.respond(result)
+            }
+
+            // §6.5.8 + FR-19：M2 仅文件 rename/move/mtime；目录一律 501。
+            patch("/v1/fs/meta") {
+                requireReady()
+                val req = call.receive<MetaReq>()
+                if (req.name == null && req.parentId == null && req.modifiedMs == null) {
+                    throw badRequest("at least one meta field is required")
+                }
+                if (req.modifiedMs != null && req.modifiedMs < 0) throw badRequest("negative modified_ms")
+                val source = realPath(req.id, allowStorageRoot = false)
+                if (source.isDirectory) {
+                    throw PhoneFsException(
+                        ErrCode.NOT_SUPPORTED, HttpStatusCode.NotImplemented,
+                        "directory rename/move/meta is deferred to M4",
+                    )
+                }
+                if (!source.isFile) throw notFound()
+                req.name?.let(::validateName)
+                val parent = req.parentId?.let { realPath(it, allowStorageRoot = true) } ?: source.parentFile
+                if (parent == null || !parent.isDirectory) throw notFound()
+                val target = File(parent, req.name ?: source.name)
+                if (!backend.isInsideStorage(target.absolutePath)) throw badRequest("target escapes storage root")
+                val moved = target.absolutePath != source.absolutePath
+                if (moved) {
+                    if (target.exists()) throw alreadyExists()
+                    try {
+                        Files.move(source.toPath(), target.toPath(), StandardCopyOption.ATOMIC_MOVE)
+                    } catch (_: java.nio.file.AtomicMoveNotSupportedException) {
+                        Files.move(source.toPath(), target.toPath())
+                    }
+                }
+                req.modifiedMs?.let {
+                    if (!target.setLastModified(it)) throw IOException("setLastModified failed")
+                }
+                if (moved) {
+                    backend.scanFile(source.absolutePath)
+                    backend.scanFile(target.absolutePath)
+                } else if (req.modifiedMs != null) {
+                    backend.scanFile(target.absolutePath)
+                }
+                val info = backend.stat(target.absolutePath) ?: throw IOException("patched entry vanished")
+                call.respond(info.toAttr(backend.storageRoot.absolutePath))
+            }
+
+            // §6.5.9：不存在幂等 204；递归删除不跟随符号链接，部分失败显式 409 PARTIAL。
+            delete("/v1/fs") {
+                requireReady()
+                val id = call.request.queryParameters["id"] ?: throw badRequest("missing id")
+                val recursive = when (call.request.queryParameters["recursive"] ?: "false") {
+                    "true" -> true
+                    "false" -> false
+                    else -> throw badRequest("recursive must be true/false")
+                }
+                val target = realPath(id, allowStorageRoot = false)
+                if (!target.exists()) {
+                    call.respond(HttpStatusCode.NoContent)
+                    return@delete
+                }
+                if (target.isDirectory && !recursive && target.listFiles()?.isNotEmpty() == true) {
+                    throw PhoneFsException(ErrCode.NOT_EMPTY, HttpStatusCode.Conflict, "directory is not empty")
+                }
+                if (target.isDirectory && recursive) {
+                    val (deleted, failed) = deleteTree(target)
+                    if (failed > 0) {
+                        throw PhoneFsException(
+                            ErrCode.PARTIAL, HttpStatusCode.Conflict, "recursive delete partially failed",
+                            false, mapOf("deleted" to deleted.toString(), "failed" to failed.toString()),
+                        )
+                    }
+                } else {
+                    try {
+                        Files.deleteIfExists(target.toPath())
+                    } catch (t: IOException) {
+                        throw PhoneFsException(
+                            ErrCode.PARTIAL, HttpStatusCode.Conflict, "delete failed: ${t.javaClass.simpleName}",
+                            false, mapOf("deleted" to "0", "failed" to "1"),
+                        )
+                    }
+                    backend.scanFile(target.absolutePath)
+                }
+                call.respond(HttpStatusCode.NoContent)
+            }
         }
     }
 
@@ -316,6 +459,83 @@ class PhoneFsServer(
                 if (read == out.size) out else out.copyOf(read)
             }
         }
+
+    private fun requireReady() {
+        if (!backend.ready()) throw notReady()
+    }
+
+    /** id 解码 + canonical 根边界；写操作禁止把 stor:primary 本身当目标。 */
+    private fun realPath(id: String, allowStorageRoot: Boolean): File {
+        if (id == DocIds.STOR_PRIMARY) {
+            if (allowStorageRoot) return backend.storageRoot
+            throw badRequest("storage root itself is not a valid write target")
+        }
+        if (!id.startsWith(DocIds.P_PREFIX)) throw notFound()
+        val path = DocIds.decodePath(id)?.takeIf { backend.isInsideStorage(it) }
+            ?: throw badRequest("malformed or escaping id")
+        return File(path)
+    }
+
+    private fun validateName(name: String) {
+        val invalid = name.isBlank() || name == "." || name == ".." ||
+            name.length > 255 || name.any { it == '/' || it == '\\' || it.code < 0x20 }
+        if (invalid) {
+            throw PhoneFsException(
+                ErrCode.INVALID_NAME, HttpStatusCode.BadRequest, "invalid file name",
+                false, mapOf("reason" to "blank, dot, control, separator, or overlong name"),
+            )
+        }
+    }
+
+    private fun parseSetMtime(value: String?): Long? {
+        if (value == null) return null
+        return value.toLongOrNull()?.takeIf { it >= 0 }
+            ?: throw badRequest("X-Set-Mtime must be unix milliseconds")
+    }
+
+    private fun parseContentRange(value: String): Triple<Long, Long, Long> {
+        val match = CONTENT_RANGE_RE.matchEntire(value.trim()) ?: throw badRequest("invalid Content-Range")
+        val start = match.groupValues[1].toLongOrNull() ?: throw badRequest("invalid range start")
+        val end = match.groupValues[2].toLongOrNull() ?: throw badRequest("invalid range end")
+        val total = match.groupValues[3].toLongOrNull() ?: throw badRequest("invalid range total")
+        if (total <= 0 || start < 0 || end < start || end >= total) throw badRequest("invalid Content-Range bounds")
+        return Triple(start, end, total)
+    }
+
+    private fun alreadyExists() = PhoneFsException(
+        ErrCode.ALREADY_EXISTS, HttpStatusCode.Conflict, "target already exists",
+    )
+
+    private fun deleteTree(root: File): Pair<Int, Int> {
+        var deleted = 0
+        var failed = 0
+        fun remove(path: Path, scan: Boolean) {
+            try {
+                Files.deleteIfExists(path)
+                deleted++
+                if (scan) backend.scanFile(path.toString())
+            } catch (_: IOException) {
+                failed++
+            }
+        }
+        Files.walkFileTree(root.toPath(), object : SimpleFileVisitor<Path>() {
+            override fun visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult {
+                remove(file, scan = true)
+                return FileVisitResult.CONTINUE
+            }
+
+            override fun visitFileFailed(file: Path, exc: IOException): FileVisitResult {
+                failed++
+                return FileVisitResult.CONTINUE
+            }
+
+            override fun postVisitDirectory(dir: Path, exc: IOException?): FileVisitResult {
+                if (exc != null) failed++ else remove(dir, scan = false)
+                return FileVisitResult.CONTINUE
+            }
+        })
+        return deleted to failed
+    }
 
     private fun enforceSiteLocal(conn: RequestConnectionPoint) {
         val addr = runCatching { InetAddress.getByName(conn.remoteHost) }.getOrNull()
@@ -426,6 +646,7 @@ class PhoneFsServer(
     companion object {
         private const val LOOPBACK_HOST = "127.0.0.1"
         private const val PATH_PAIR_INFO = "/v1/pair/info"
+        private val CONTENT_RANGE_RE = Regex("""bytes (\d+)-(\d+)/(\d+)""")
 
         // §6.5.1 固定 8 行（7 cat + stor），cat:camera 不入（P2-7）
         val FIXED_ROOTS: List<Attr> = listOf(

@@ -1,6 +1,8 @@
 package com.phonefs.core.fs
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.media.MediaScannerConnection
 import android.os.Environment
 import android.os.StatFs
 import android.webkit.MimeTypeMap
@@ -12,7 +14,7 @@ import java.util.Locale
  * §5.8 backend-fs：MES 授权后 java.io.File 真实树（ADR-07）。
  * W2：只读；MediaStore 写回映/Shizuku/分类索引均未做。
  */
-class MesFsBackend : FsBackend {
+class MesFsBackend(private val context: Context) : FsBackend {
 
     override val storageRoot: File = Environment.getExternalStorageDirectory()
 
@@ -66,6 +68,12 @@ class MesFsBackend : FsBackend {
             fis.close()
             throw t
         }
+    }
+
+    override fun scanFile(path: String) {
+        if (!isInsideStorage(path)) return
+        // 对已删除路径调用也会驱动 MediaProvider 清理对应行；目录无需媒体回映。
+        MediaScannerConnection.scanFile(context, arrayOf(path), null, null)
     }
 
     private fun File.toInfo(): FileInfo = FileInfo(

@@ -1,0 +1,55 @@
+== 0. TLS1.3 握手证据（openssl s_client） ==
+PASS tls protocol TLSv1.3         
+    cipher=TLS_AES_256_GCM_SHA384
+    server fingerprint=96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f
+PASS fingerprint pin              
+== 1. GET /v1/pair/info（免鉴权） ==
+PASS pair-info-200                200
+PASS pair-info-service            phonefs
+PASS pair-info-proto              1
+PASS pair-info-pairing-closed     
+PASS pair-info-fingerprint        
+PASS pair-info-device-name        
+== 2. 401 路径 ==
+PASS roots-noauth-401             401
+PASS roots-noauth-code            TOKEN_INVALID
+PASS roots-badtoken-401           401
+== 3. GET /v1/roots ==
+PASS roots-count-8                8
+PASS roots-stor                   
+PASS cat:camera 不在固定 8 行 
+PASS roots-stor-name              
+PASS list-root-entries-8          8
+PASS list-root-cursor-400         400
+PASS list-root-cursor-code        BAD_CURSOR
+== 4. list 真实树（含中文/emoji/空格） ==
+PASS list-stor-root-fixture-dir   
+PASS list-unicode-space-file      
+PASS list-emoji-file              
+PASS list-space-md                
+PASS real-tree media_type 缺省  
+== 5. 路径穿越 ==
+PASS traversal-400                400
+== 6. content 全量 200 ==
+PASS content-200                  200
+PASS accept-ranges                
+    etag="40-1793494005000"
+PASS etag-present                 
+PASS last-modified                
+== 7. Range 206 / 416 / If-Range ==
+PASS range-206                    206
+PASS content-range                bytes 0-999/10485760
+PASS range-body-1000B             
+PASS range-416                    416
+PASS 416 content-range            
+PASS range-416-code               RANGE_NOT_SATISFIABLE
+PASS ifrange-mismatch-200         200
+PASS ifrange-match-206            206
+PASS suffix-206                   206
+PASS suffix-100B                  
+== 8. statfs / cat 501 / 404 ==
+PASS statfs-fields                
+PASS cat-501                      501
+PASS unknown-404                  404
+
+RESULT pass=41 fail=0  tmp=./.w2tmp-46471
