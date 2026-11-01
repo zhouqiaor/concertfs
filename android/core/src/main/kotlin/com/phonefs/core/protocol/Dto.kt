@@ -2,6 +2,7 @@ package com.phonefs.core.protocol
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
 
 /** §6.4 GET /v1/pair/info 载荷（W2：device 为附加字段，容忍未知字段前向兼容）。 */
 @Serializable
@@ -92,5 +93,5 @@ data class ErrBody(
     val message: String,
     @SerialName("trace_id") val traceId: String,
     val retriable: Boolean,
-    val details: Map<String, String>? = null,
+    val details: Map<String, JsonElement>? = null,
 )

@@ -1,0 +1,5 @@
+=== RUN   TestIncompleteReceivedIsGoNumberAndResumeUsesWatermark
+    go_details_resume_test.go:109: Go details.received type=float64 value=100; resumed 100..899; sha256=57799de80e3dd6e2ac4d40c41a150d1662f7f87d0d994776a2fdc37c39b0ea4e
+--- PASS: TestIncompleteReceivedIsGoNumberAndResumeUsesWatermark (0.77s)
+PASS
+ok  	command-line-arguments	1.428s

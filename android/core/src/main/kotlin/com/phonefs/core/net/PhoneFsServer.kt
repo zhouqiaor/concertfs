@@ -45,6 +45,7 @@ import io.ktor.server.routing.routing
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonPrimitive
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
@@ -573,12 +574,19 @@ class PhoneFsServer(
         code: String,
         message: String,
         retriable: Boolean,
-        details: Map<String, String>? = null,
+        details: Map<String, Any>? = null,
     ) {
         val trace = request.header("X-Trace-Id")
             ?: ByteArray(16).also { SecureRandom().nextBytes(it) }.joinToString("") { "%02x".format(it) }
         response.header("X-Trace-Id", trace)
-        respond(status, ErrorEnvelope(ErrBody(code, message, trace, retriable, details)))
+        val jsonDetails = details?.mapValues { (_, value) ->
+            when (value) {
+                is Number -> JsonPrimitive(value)
+                is Boolean -> JsonPrimitive(value)
+                else -> JsonPrimitive(value.toString())
+            }
+        }
+        respond(status, ErrorEnvelope(ErrBody(code, message, trace, retriable, jsonDetails)))
     }
 
     private fun FileInfo.toAttr(rootPath: String): Attr {

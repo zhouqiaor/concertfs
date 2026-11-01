@@ -40,4 +40,6 @@ dependencies {
     api(libs.ktor.serialization.kotlinx.json)
     api(libs.conscrypt.android)
     api(libs.bcpkix.jdk18on)
+
+    testImplementation("junit:junit:4.13.2")
 }

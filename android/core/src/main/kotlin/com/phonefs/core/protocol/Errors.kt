@@ -26,5 +26,5 @@ class PhoneFsException(
     val status: HttpStatusCode,
     message: String,
     val retriable: Boolean = false,
-    val details: Map<String, String>? = null,
+    val details: Map<String, Any>? = null,
 ) : RuntimeException(message)

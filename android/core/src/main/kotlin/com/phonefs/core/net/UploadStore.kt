@@ -4,6 +4,7 @@ import com.phonefs.core.fs.FsBackend
 import com.phonefs.core.protocol.ErrCode
 import com.phonefs.core.protocol.PhoneFsException
 import com.phonefs.core.protocol.WriteResp
+import com.phonefs.core.telemetry.FsLog
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.request.receiveChannel
@@ -27,9 +28,15 @@ import java.util.UUID
  * 分块以 X-Upload-Id 建会话，任意顺序覆盖写并由区间表判全；末块先到且仍缺块时
  * 按冻结契约返回 409 UPLOAD_INCOMPLETE（会话保留可补传）。完成会话保留 24h，
  * 同 Upload-Id 重传不再改文件，直接返回 complete=true（含末块重试幂等）。
- * 会话在进程内存中，进程死亡即失效并清临时文件；M4 再评估跨重启续传。
+ * 会话在进程内存中，进程死亡即失效；优雅停止清临时文件，硬崩溃残留与启动清扫挂账。
  */
-internal class UploadStore(private val backend: FsBackend) {
+internal class UploadStore(
+    private val backend: FsBackend,
+    private val mtimeSetter: (File, Long) -> Boolean = { file, modified -> file.setLastModified(modified) },
+    private val warning: (String, Throwable?) -> Unit = { message, error ->
+        FsLog.e("phonefs.upload", message, error)
+    },
+) {
 
     private data class Session(
         val target: File,
@@ -134,7 +141,7 @@ internal class UploadStore(private val backend: FsBackend) {
                                 HttpStatusCode.Conflict,
                                 "last chunk arrived but upload is incomplete",
                                 true,
-                                mapOf("received" to contiguousReceived(session.ranges).toString()),
+                                mapOf("received" to contiguousReceived(session.ranges)),
                             )
                         }
                         WriteResp(received = end + 1, complete = false)
@@ -159,18 +166,29 @@ internal class UploadStore(private val backend: FsBackend) {
         return File(parent, ".phonefs-$kind-${UUID.randomUUID()}.tmp")
     }
 
-    private fun commit(temp: File, target: File, mtimeMs: Long?): WriteResp {
+    internal fun commit(temp: File, target: File, mtimeMs: Long?): WriteResp {
         try {
             Files.move(temp.toPath(), target.toPath(), StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING)
         } catch (_: AtomicMoveNotSupportedException) {
             // 同目录 rename 仍是 M2 的最佳可用原子形态；ROM 不支持 ATOMIC_MOVE 时显式回退。
             Files.move(temp.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING)
         }
+        // move 成功即内容完成。此后 mtime/媒体回映失败不得再把同 Upload-Id 打成未完成，
+        // 否则重试会重建稀疏 temp 并覆盖已完整目标（Colossus P1-1）。
         val modified = mtimeMs ?: System.currentTimeMillis()
-        if (!target.setLastModified(modified)) {
-            throw IOException("setLastModified failed for completed upload")
+        val mtimeError = try {
+            if (mtimeSetter(target, modified)) null else IOException("setLastModified returned false")
+        } catch (t: Throwable) {
+            t
         }
-        backend.scanFile(target.absolutePath) // FR-20 MES 回映
+        if (mtimeError != null) {
+            warning("atomic move completed; mtime failed but upload remains complete", mtimeError)
+        }
+        try {
+            backend.scanFile(target.absolutePath) // FR-20 MES 回映
+        } catch (t: Throwable) {
+            warning("atomic move completed; MediaStore scan failed but upload remains complete", t)
+        }
         return WriteResp(target.length(), complete = true, etag = etag(target))
     }
 
@@ -183,7 +201,7 @@ internal class UploadStore(private val backend: FsBackend) {
                 HttpStatusCode(507, "Insufficient Storage"),
                 "not enough free space for upload",
                 false,
-                mapOf("required" to bytes.toString()),
+                mapOf("required" to bytes),
             )
         }
     }
@@ -223,7 +241,7 @@ internal class UploadStore(private val backend: FsBackend) {
         HttpStatusCode.Conflict,
         "request body length mismatch",
         true,
-        mapOf("expected" to expected.toString(), "received" to copied.toString()),
+        mapOf("expected" to expected, "received" to copied),
     )
 
     private fun badRange() = PhoneFsException(
