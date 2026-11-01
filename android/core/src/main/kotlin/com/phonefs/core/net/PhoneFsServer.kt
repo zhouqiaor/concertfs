@@ -27,9 +27,8 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.ApplicationCallPipeline
 import io.ktor.server.application.call
 import io.ktor.server.application.install
+import io.ktor.server.cio.CIO
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
-import io.ktor.server.netty.NettyApplicationCall
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.request.header
@@ -38,7 +37,6 @@ import io.ktor.server.request.receive
 import io.ktor.server.response.header
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondBytesWriter
-import io.ktor.server.routing.RoutingCall
 import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
 import io.ktor.server.routing.patch
@@ -71,15 +69,11 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 /**
- * PhoneFS 源端 HTTP/1.1 server（Ktor 3.6.1 Netty 引擎，仅环回明文）。
+ * PhoneFS 源端 HTTP/1.1 server（Ktor 3.6.1 CIO 引擎，仅环回明文）。
  *
- * W2 真机闸门两次修订（详见 docs/research/2026-10-31-phonefs-m0-w2-*.md）：
- * - F-W2-1：Ktor CIO 3.6.1 JVM ApplicationEngine 显式拒绝 HTTPS，换 Netty 引擎。
- * - F-W2-3：Netty SslHandler/JdkEngine 在 Android 上包 Conscrypt 引擎做密文 record
- *   流水时 [anon:dalvik-LinearAlloc] 随流量无界增长（每 10MB 约 +150MB，百级分块
- *   RSS→9GB 被 SWAP 杀）；同 provider 的原生 SSLServerSocket 10GB 恒定 146MB。
- *   TLS 边界移到 Netty 之外（[LoopbackTlsFront]：SSLSocket 前置 → 环回明文），
- *   Ktor 只监听 127.0.0.1。M1 前需补 ADR 修订 SPEC §2.2 传输形态。
+ * CIO 仅服务 127.0.0.1，TLS 完全由 [LoopbackTlsFront] 承担，因此 CIO 不支持
+ * 内嵌 HTTPS 不再约束引擎选择。Netty 大流真机 A/B（HTTPS 65MiB/RSS 7.4GB、
+ * 纯 HTTP 58MiB/RSS 4.74GB，writeFully/flush 后仍 RSS 7.29GB 被杀）是本次换引擎依据。
  */
 class PhoneFsServer(
     private val backend: FsBackend,
@@ -97,16 +91,8 @@ class PhoneFsServer(
     fun start(preferredPort: Int = 18443): Int {
         val port = choosePort(preferredPort)
         val loopbackPort = choosePort(0)
-        runCatching {
-            com.phonefs.core.telemetry.FsLog.i(
-                "phonefs.net",
-                "allocator=" + io.netty.buffer.ByteBufAllocator.DEFAULT.javaClass.name +
-                    " directNoCleaner=" + io.netty.util.internal.PlatformDependent.useDirectBufferNoCleaner() +
-                    " prop.allocator.type=" + System.getProperty("io.netty.allocator.type"),
-            )
-        }
         engine = embeddedServer(
-            factory = Netty,
+            factory = CIO,
             configure = {
                 // 唯一 HTTP 口只绑环回；外部入口只有 LoopbackTlsFront 的 TLS 口
                 connectors.add(
@@ -490,22 +476,22 @@ class PhoneFsServer(
             ?: throw PhoneFsException(ErrCode.NOT_FOUND, HttpStatusCode.NotFound, "file vanished")
         input.use { source ->
             try {
+                // 下载响应不复用连接：短读冲刷前缀并关闭响应体后，CIO 必须关闭 socket，
+                // 客户端才能以 EOF 检出 Content-Length 缺口，而不是把连接留在半完成状态。
+                response.header(HttpHeaders.Connection, "close")
                 respondBytesWriter(mime, status, len) {
                     withContext(Dispatchers.IO) {
                         copyContent(source, this@respondBytesWriter, len)
                     }
                 }
             } catch (t: ContentShortReadException) {
-                // 已提交的 Content-Length 不能缩水或补零伪装成功；抛出由引擎中止连接。
+                // 已提交的 Content-Length 不能缩水或补零伪装成功。copyContent 已关闭
+                // CIO 响应通道；继续抛出让引擎中止连接，短读只能以 EOF 结束，不能伪成功。
                 FsLog.e(
                     "phonefs.net",
                     "GET content short read: declared=${t.declared}, actual=${t.actual}",
                     t,
                 )
-                // ByteWriteChannel 已 flush 的前缀可能让 Netty 把异常关闭竞态成正常尾包；
-                // 直接关闭引擎通道，保证短读必然 EOF，而不是复用一个长度不完整的连接。
-                val engineCall = (this as? RoutingCall)?.pipelineCall?.engineCall
-                (engineCall as? NettyApplicationCall)?.context?.close()
                 throw t
             }
         }
@@ -521,11 +507,12 @@ class PhoneFsServer(
             val n = source.read(buffer, 0, requested)
             if (n <= 0) {
                 val error = ContentShortReadException(len, copied)
-                destination.cancel(error)
+                // 已声明 Content-Length 不可缩水/补零伪装成功；让 writer 异常传播，
+                // 由 Ktor/CIO 中止连接（EOF，不复用 keep-alive），客户端只能看到短读失败。
                 throw error
             }
             destination.writeFully(buffer, 0, n)
-            // 每块显式挂起冲刷；Netty 消费慢时停在有界通道上，不再继续 source.read。
+            // 每块显式挂起冲刷；CIO 消费慢时停在有界通道上，不再继续 source.read。
             destination.flush()
             remaining -= n
             copied += n

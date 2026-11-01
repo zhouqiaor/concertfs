@@ -1,7 +1,5 @@
 # PhoneFS W2 版本钉点（2026-10-31 联网核实，见 README.md「选型与下载证据」）
-# 注：SPEC §2.2 钉 Ktor CIO 引擎；W2 真机前核实 CIO 3.6.1 JVM 不支持 HTTPS
-# （CIOApplicationEngine 显式抛 UnsupportedOperationException，KTOR-825 仍开放），
-# W2 改用同版本 Ktor Netty 引擎，详见 W2 闸门报告 F-W2-1 / ADR 待修订项。
+# CIO 只承载环回明文；HTTPS 由 LoopbackTlsFront 承担，Ktor 仍统一钉 3.6.1。
 # 注2：AGP 9.0 起内置 Kotlin（默认 KGP 2.2.10），经 root build.gradle.kts
 # buildscript classpath 升到 Kotlin 2.4.21；不 apply org.jetbrains.kotlin.android。
 [versions]
@@ -13,7 +11,7 @@ bouncycastle = "1.86"
 
 [libraries]
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
-ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
+ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
 ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
 ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }

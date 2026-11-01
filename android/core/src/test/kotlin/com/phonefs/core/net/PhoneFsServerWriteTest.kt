@@ -15,8 +15,8 @@ import com.phonefs.core.protocol.StatFsResp
 import com.phonefs.core.protocol.WriteResp
 import io.ktor.http.HttpMethod
 import io.ktor.http.encodeURLParameter
+import io.ktor.server.cio.CIO
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonPrimitive
@@ -316,7 +316,7 @@ class PhoneFsServerWriteTest {
             deviceFormFactor = "phone",
             token = TOKEN,
         )
-        val engine = embeddedServer(Netty, host = "127.0.0.1", port = 0) {
+        val engine = embeddedServer(CIO, host = "127.0.0.1", port = 0) {
             with(server) { configure() }
         }
         try {

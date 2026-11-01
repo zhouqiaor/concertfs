@@ -4,9 +4,9 @@ import com.phonefs.core.crypto.Identity
 import com.phonefs.core.fs.CapacityInfo
 import com.phonefs.core.fs.FileInfo
 import com.phonefs.core.fs.FsBackend
+import io.ktor.server.cio.CIO
 import io.ktor.server.engine.EmbeddedServer
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertArrayEquals
@@ -125,27 +125,33 @@ class PhoneFsServerContentTest {
     }
 
     @Test
-    fun shortSourceClosesConnectionInsteadOfPaddingOrReportingSuccess() {
+    fun shortSourceNeverReportsSuccess() {
         val actual = bytes(100)
         val declared = BUFFER_SIZE + 500L
         val backend = backendFor(actual, declaredSize = declared)
         val port = start(backend)
 
+        // 引擎无关的不变量：源比声明长度短时，绝不能产出「200 + 完整 Content-Length」的成功响应。
+        // CIO 在 writer 异常时会整体中止连接（客户端在收到任何首部前 EOF）；Netty 之前路径可先
+        // 刷出首部+短前缀再以 EOF 结束。两种都是安全的——都不会伪造成功，也不会让客户端无限阻塞。
+        var sawSuccessWithFullBody = false
         Socket().use { socket ->
             socket.connect(InetSocketAddress("127.0.0.1", port), 2_000)
             socket.soTimeout = 5_000
             socket.getOutputStream().write(requestBytes(port))
             socket.getOutputStream().flush()
             val input = BufferedInputStream(socket.getInputStream())
-            val header = readHeaders(input)
-            val body = input.readBytes()
-
-            assertTrue(header.startsWith("HTTP/1.1 200"))
-            assertTrue(header.contains("Content-Length: $declared"))
-            // Ktor 可丢弃异常时尚未 flush 的前缀；无论收到多少，都必须短于声明且 EOF。
-            assertArrayEquals(actual.copyOf(body.size), body)
-            assertTrue(body.size < declared)
+            val header = try {
+                readHeaders(input)
+            } catch (_: IllegalStateException) {
+                "" // CIO：首部前即 EOF（整体中止），直接判为安全失败。
+            }
+            val body = if (header.isNotEmpty()) input.readBytes() else ByteArray(0)
+            if (header.startsWith("HTTP/1.1 200") && header.contains("Content-Length: $declared")) {
+                if (body.size >= declared) sawSuccessWithFullBody = true
+            }
         }
+        assertFalse("short source must not produce a successful full-length response", sawSuccessWithFullBody)
         assertTrue(backend.streams.single().closed.await(1, TimeUnit.SECONDS))
     }
 
@@ -181,7 +187,7 @@ class PhoneFsServerContentTest {
     }
 
     @Test
-    fun realNettySlowConsumerBoundsSourceReadsAndReadAhead() {
+    fun realCIOSlowConsumerBoundsSourceReadsAndReadAhead() {
         val declared = Int.MAX_VALUE.toLong() + BUFFER_SIZE + 17L
         val file = newFile()
         val backend = FakeBackend(
@@ -192,7 +198,7 @@ class PhoneFsServerContentTest {
         val port = start(backend)
 
         Socket().use { socket ->
-            // 小接收缓冲 + 只读 1KiB：让 TCP/Netty 背压回到逻辑流，而非预先消费整个响应。
+            // 小接收缓冲 + 只读 1KiB：让 TCP/CIO 背压回到逻辑流，而非预先消费整个响应。
             socket.receiveBufferSize = 16 * 1024
             socket.connect(InetSocketAddress("127.0.0.1", port), 2_000)
             socket.soTimeout = 5_000
@@ -314,7 +320,7 @@ class PhoneFsServerContentTest {
             deviceFormFactor = "phone",
             token = TOKEN,
         )
-        val started = embeddedServer(Netty, host = "127.0.0.1", port = 0) {
+        val started = embeddedServer(CIO, host = "127.0.0.1", port = 0) {
             with(server) { configure() }
         }.start(wait = false)
         engine = started

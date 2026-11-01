@@ -18,7 +18,7 @@ android {
     }
 
     testOptions {
-        // JVM Netty 集成测试覆盖 FsLog 分支，android.util.Log 使用 Android 默认桩。
+        // JVM CIO 真实 HTTP 集成测试覆盖 FsLog 分支，android.util.Log 使用 Android 默认桩。
         unitTests.isReturnDefaultValues = true
     }
 }
@@ -31,15 +31,8 @@ kotlin {
 
 dependencies {
     api(libs.ktor.server.core)
-    // W2 HTTP/1.1 only（ALPN 只 http/1.1）：排除 QUIC/HTTP3 原生 codec。
-    // 注意：epoll/kqueue 的「Java 检测类」主 jar 不能排——Ktor NettyApplicationEngine
-    // 选 channel 时直接引用 io.netty.channel.kqueue.KQueue / epoll.Epoll 类字面量，
-    // 排掉会在启动时 NoClassDefFoundError（isAvailable()=false 后正常回退 NIO）。
-    // 真正的 .so/.jnilib 在独立 classifier 构件（linux-x86_64/osx-*）里，Android 本就不拉。
-    api(libs.ktor.server.netty) {
-        exclude(group = "io.netty", module = "netty-codec-native-quic")
-        exclude(group = "io.netty", module = "netty-codec-http3")
-    }
+    // CIO 仅用于环回 HTTP；公网 TLS 由 LoopbackTlsFront 承担。
+    api(libs.ktor.server.cio)
     api(libs.ktor.server.content.negotiation)
     api(libs.ktor.server.status.pages)
     api(libs.ktor.serialization.kotlinx.json)
