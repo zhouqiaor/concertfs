@@ -1,0 +1,15 @@
+# 本地 SDK 路径（SPEC §12：local.properties 不入库）
+local.properties
+# Gradle/Android 构建产物
+.gradle/
+build/
+*/build/
+.cxx/
+*.iml
+.idea/
+captures/
+# 取证 APK 不入库（SHA256/大小证据落 test/w2/results/）
+*.apk
+*.aab
+*.ap_
+*.dex

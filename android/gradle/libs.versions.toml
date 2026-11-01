@@ -1,0 +1,26 @@
+# PhoneFS W2 版本钉点（2026-10-31 联网核实，见 README.md「选型与下载证据」）
+# 注：SPEC §2.2 钉 Ktor CIO 引擎；W2 真机前核实 CIO 3.6.1 JVM 不支持 HTTPS
+# （CIOApplicationEngine 显式抛 UnsupportedOperationException，KTOR-825 仍开放），
+# W2 改用同版本 Ktor Netty 引擎，详见 W2 闸门报告 F-W2-1 / ADR 待修订项。
+# 注2：AGP 9.0 起内置 Kotlin（默认 KGP 2.2.10），经 root build.gradle.kts
+# buildscript classpath 升到 Kotlin 2.4.21；不 apply org.jetbrains.kotlin.android。
+[versions]
+agp = "9.5.0"
+kotlin = "2.4.21"
+ktor = "3.6.1"
+conscrypt = "2.8.0"
+bouncycastle = "1.86"
+
+[libraries]
+ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
+ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
+ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+# kotlinx-serialization-json 由 ktor-serialization-kotlinx-json 传递，不另行钉版（YAGNI）
+conscrypt-android = { module = "org.conscrypt:conscrypt-android", version.ref = "conscrypt" }
+bcpkix-jdk18on = { module = "org.bouncycastle:bcpkix-jdk18on", version.ref = "bouncycastle" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
