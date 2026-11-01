@@ -1,0 +1,86 @@
+> Task :core:clean
+> Task :source:clean
+> Task :source:preBuild UP-TO-DATE
+> Task :source:preDebugBuild UP-TO-DATE
+> Task :source:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :core:preBuild UP-TO-DATE
+> Task :core:preDebugBuild UP-TO-DATE
+> Task :core:generateDebugResources FROM-CACHE
+> Task :core:packageDebugResources FROM-CACHE
+> Task :core:processDebugNavigationResources FROM-CACHE
+> Task :core:parseDebugLocalResources FROM-CACHE
+> Task :core:generateDebugRFile FROM-CACHE
+> Task :core:compileDebugKotlin FROM-CACHE
+> Task :core:javaPreCompileDebug FROM-CACHE
+> Task :core:compileDebugJavaWithJavac NO-SOURCE
+> Task :source:generateDebugBuildConfig FROM-CACHE
+> Task :source:generateDebugResources FROM-CACHE
+> Task :source:packageDebugResources FROM-CACHE
+> Task :source:processDebugNavigationResources FROM-CACHE
+> Task :source:parseDebugLocalResources FROM-CACHE
+> Task :source:generateDebugRFile FROM-CACHE
+> Task :source:javaPreCompileDebug FROM-CACHE
+> Task :core:generateDebugAssets UP-TO-DATE
+> Task :core:mergeDebugAssets
+> Task :source:generateDebugAssets UP-TO-DATE
+> Task :source:mergeDebugAssets
+> Task :source:compressDebugAssets FROM-CACHE
+> Task :source:generateDebugGlobalSynthetics FROM-CACHE
+> Task :core:compressDebugJavaRes FROM-CACHE
+> Task :source:desugarDebugFileDependencies FROM-CACHE
+> Task :core:mapDebugSourceSetPaths
+> Task :source:checkDebugDuplicateClasses
+> Task :core:compileDebugLibraryResources FROM-CACHE
+> Task :core:bundleLibCompileToJarDebug
+> Task :core:bundleLibRuntimeToDirDebug
+> Task :source:mergeExtDexDebug FROM-CACHE
+> Task :source:compileDebugKotlin FROM-CACHE
+> Task :source:compileDebugJavaWithJavac FROM-CACHE
+> Task :source:compressDebugJavaRes FROM-CACHE
+> Task :source:mergeLibDexDebug FROM-CACHE
+> Task :core:writeDebugAarMetadata
+> Task :source:mapDebugSourceSetPaths
+> Task :source:mergeDebugJavaResource
+> Task :source:checkDebugAarMetadata
+> Task :source:compileDebugNavigationResources FROM-CACHE
+> Task :source:mergeDebugResources FROM-CACHE
+> Task :source:createDebugCompatibleScreenManifests
+> Task :core:extractDeepLinksDebug FROM-CACHE
+> Task :core:processDebugManifest FROM-CACHE
+> Task :source:extractDeepLinksDebug FROM-CACHE
+> Task :source:processDebugMainManifest FROM-CACHE
+> Task :source:processDebugManifest FROM-CACHE
+> Task :source:processDebugManifestForPackage FROM-CACHE
+> Task :source:processDebugResources FROM-CACHE
+> Task :source:dexBuilderDebug FROM-CACHE
+> Task :source:mergeProjectDexDebug FROM-CACHE
+> Task :core:mergeDebugJniLibFolders
+> Task :core:mergeDebugNativeLibs NO-SOURCE
+> Task :core:copyDebugJniLibsProjectOnly
+> Task :source:mergeDebugJniLibFolders
+> Task :source:validateSigningDebug
+> Task :source:writeDebugAppMetadata
+> Task :source:writeDebugSigningConfigVersions
+> Task :source:mergeDebugNativeLibs
+
+> Task :source:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libconscrypt_jni.so. Run with --info option to learn more.
+
+> Task :source:packageDebug
+> Task :source:createDebugApkListingFileRedirect
+> Task :source:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Code/Wideawake-wt-phonefs-w2/projects/phonefs/android/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 2s
+58 actionable tasks: 23 executed, 35 from cache
+
+real	0m2.348s
+user	0m0.000s
+sys	0m0.000s

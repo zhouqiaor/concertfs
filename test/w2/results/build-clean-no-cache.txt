@@ -1,0 +1,90 @@
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :core:clean
+> Task :source:clean
+> Task :source:preBuild UP-TO-DATE
+> Task :source:preDebugBuild UP-TO-DATE
+> Task :source:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :core:preBuild UP-TO-DATE
+> Task :core:preDebugBuild UP-TO-DATE
+> Task :core:generateDebugResources
+> Task :core:packageDebugResources
+> Task :core:processDebugNavigationResources
+> Task :core:javaPreCompileDebug
+> Task :source:generateDebugBuildConfig
+> Task :source:generateDebugResources
+> Task :core:parseDebugLocalResources
+> Task :source:packageDebugResources
+> Task :core:generateDebugRFile
+> Task :source:processDebugNavigationResources
+> Task :core:generateDebugAssets UP-TO-DATE
+> Task :source:javaPreCompileDebug
+> Task :source:parseDebugLocalResources
+> Task :core:mergeDebugAssets
+> Task :source:generateDebugAssets UP-TO-DATE
+> Task :source:mergeDebugAssets
+> Task :source:compressDebugAssets
+> Task :source:generateDebugRFile
+> Task :source:generateDebugGlobalSynthetics
+> Task :source:desugarDebugFileDependencies
+> Task :core:mapDebugSourceSetPaths
+> Task :source:checkDebugDuplicateClasses
+> Task :core:compileDebugLibraryResources
+> Task :core:writeDebugAarMetadata
+> Task :source:mapDebugSourceSetPaths
+> Task :source:checkDebugAarMetadata
+> Task :source:compileDebugNavigationResources
+> Task :source:mergeDebugResources
+> Task :source:createDebugCompatibleScreenManifests
+> Task :core:extractDeepLinksDebug
+> Task :source:extractDeepLinksDebug
+> Task :core:mergeDebugJniLibFolders
+> Task :core:mergeDebugNativeLibs NO-SOURCE
+> Task :core:copyDebugJniLibsProjectOnly
+> Task :source:mergeDebugJniLibFolders
+> Task :source:validateSigningDebug
+> Task :source:writeDebugAppMetadata
+> Task :source:mergeDebugNativeLibs
+> Task :core:processDebugManifest
+> Task :source:writeDebugSigningConfigVersions
+> Task :source:processDebugMainManifest
+> Task :source:processDebugManifest
+> Task :source:processDebugManifestForPackage
+
+> Task :source:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libconscrypt_jni.so. Run with --info option to learn more.
+
+> Task :source:processDebugResources
+> Task :source:mergeExtDexDebug
+> Task :core:compileDebugKotlin
+> Task :core:compileDebugJavaWithJavac NO-SOURCE
+> Task :core:bundleLibCompileToJarDebug
+> Task :core:compressDebugJavaRes
+> Task :core:bundleLibRuntimeToDirDebug
+> Task :source:mergeLibDexDebug
+
+> Task :source:compileDebugKotlin
+w: file:///C:/Code/Wideawake-wt-phonefs-w2/projects/phonefs/android/source/src/main/kotlin/com/phonefs/source/SharingService.kt:148:14 'fun addAction(p0: Int, p1: CharSequence!, p2: PendingIntent!): Notification.Builder!' is deprecated. Deprecated in Java.
+
+> Task :source:compileDebugJavaWithJavac
+> Task :source:compressDebugJavaRes
+> Task :source:mergeDebugJavaResource
+> Task :source:dexBuilderDebug
+> Task :source:mergeProjectDexDebug
+> Task :source:packageDebug
+> Task :source:createDebugApkListingFileRedirect
+> Task :source:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Code/Wideawake-wt-phonefs-w2/projects/phonefs/android/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 24s
+58 actionable tasks: 58 executed
+
+real	0m24.225s
+user	0m0.000s
+sys	0m0.015s
