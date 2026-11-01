@@ -476,17 +476,17 @@ class PhoneFsServer(
             ?: throw PhoneFsException(ErrCode.NOT_FOUND, HttpStatusCode.NotFound, "file vanished")
         input.use { source ->
             try {
-                // 下载响应不复用连接：短读冲刷前缀并关闭响应体后，CIO 必须关闭 socket，
-                // 客户端才能以 EOF 检出 Content-Length 缺口，而不是把连接留在半完成状态。
-                response.header(HttpHeaders.Connection, "close")
+                // 正常完成保持 keep-alive：桥按 1MiB Range 顺序读，强制 close 会让每块
+                // 都重走 TCP+TLS 握手。短读时 writer 抛异常，CIO 会整体中止连接（EOF），
+                // 不需要靠 Connection: close 才能检测缺口。
                 respondBytesWriter(mime, status, len) {
                     withContext(Dispatchers.IO) {
                         copyContent(source, this@respondBytesWriter, len)
                     }
                 }
             } catch (t: ContentShortReadException) {
-                // 已提交的 Content-Length 不能缩水或补零伪装成功。copyContent 已关闭
-                // CIO 响应通道；继续抛出让引擎中止连接，短读只能以 EOF 结束，不能伪成功。
+                // 已提交的 Content-Length 不能缩水或补零伪装成功；抛出让引擎中止连接，
+                // 客户端只能以 EOF 结束，不能伪成功。
                 FsLog.e(
                     "phonefs.net",
                     "GET content short read: declared=${t.declared}, actual=${t.actual}",

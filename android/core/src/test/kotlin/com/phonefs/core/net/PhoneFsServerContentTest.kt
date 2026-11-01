@@ -131,10 +131,12 @@ class PhoneFsServerContentTest {
         val backend = backendFor(actual, declaredSize = declared)
         val port = start(backend)
 
-        // 引擎无关的不变量：源比声明长度短时，绝不能产出「200 + 完整 Content-Length」的成功响应。
-        // CIO 在 writer 异常时会整体中止连接（客户端在收到任何首部前 EOF）；Netty 之前路径可先
-        // 刷出首部+短前缀再以 EOF 结束。两种都是安全的——都不会伪造成功，也不会让客户端无限阻塞。
-        var sawSuccessWithFullBody = false
+        // 引擎无关的不变量：源比声明长度短时，客户端绝不能看到「看似完整」的 200。
+        // 危险回归是服务端把 Content-Length 缩成实际短长度并正常收尾——客户端会当作
+        // 成功（静默截断）。因此：200 且 body.size == Content-Length 即判失败，无论该
+        // 长度是否等于 declared。CIO 现在整体中止连接（首部前 EOF）；Netty 曾先刷出
+        // 首部+短前缀再 EOF（Content-Length 仍是 declared、body 更短），两者都安全。
+        var completeLookingSuccess: String? = null
         Socket().use { socket ->
             socket.connect(InetSocketAddress("127.0.0.1", port), 2_000)
             socket.soTimeout = 5_000
@@ -147,11 +149,18 @@ class PhoneFsServerContentTest {
                 "" // CIO：首部前即 EOF（整体中止），直接判为安全失败。
             }
             val body = if (header.isNotEmpty()) input.readBytes() else ByteArray(0)
-            if (header.startsWith("HTTP/1.1 200") && header.contains("Content-Length: $declared")) {
-                if (body.size >= declared) sawSuccessWithFullBody = true
+            val contentLength = Regex("(?im)^Content-Length:\\s*(\\d+)\\s*$")
+                .find(header)?.groupValues?.get(1)?.toLongOrNull()
+            if (header.startsWith("HTTP/1.1 200") && contentLength != null &&
+                body.size.toLong() == contentLength
+            ) {
+                completeLookingSuccess = "Content-Length=$contentLength body=${body.size}"
             }
         }
-        assertFalse("short source must not produce a successful full-length response", sawSuccessWithFullBody)
+        assertTrue(
+            "short source produced a complete-looking 200 response: $completeLookingSuccess",
+            completeLookingSuccess == null,
+        )
         assertTrue(backend.streams.single().closed.await(1, TimeUnit.SECONDS))
     }
 
