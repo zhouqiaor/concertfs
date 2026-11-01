@@ -9,6 +9,7 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.request.receiveChannel
 import io.ktor.utils.io.jvm.javaio.copyTo
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
@@ -19,7 +20,6 @@ import java.nio.file.AtomicMoveNotSupportedException
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import java.util.UUID
-import java.util.concurrent.locks.ReentrantLock
 
 /**
  * §6.5.7 写上传存储：请求体流式落同目录临时文件，完成后原子替换。
@@ -36,7 +36,7 @@ internal class UploadStore(private val backend: FsBackend) {
         val total: Long,
         val temp: File,
         val ranges: MutableList<LongRange> = mutableListOf(),
-        val lock: ReentrantLock = ReentrantLock(),
+        val lock: Mutex = Mutex(),
         var touchedMs: Long = System.currentTimeMillis(),
         var completed: Boolean = false,
     )
@@ -105,7 +105,7 @@ internal class UploadStore(private val backend: FsBackend) {
                 }
             }
 
-            // copyTo 会挂起，不能用 synchronized 临界区；显式锁只串行化同一 Upload-Id。
+            // copyTo 会挂起；协程 Mutex 不绑定线程，恢复后可安全 unlock，只串行化同一 Upload-Id。
             session.lock.lock()
             try {
                 session.touchedMs = System.currentTimeMillis()

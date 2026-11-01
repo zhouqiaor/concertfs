@@ -1,0 +1,21 @@
+PASS create-root-201: PhoneFS-m2-protocol
+PASS create-duplicate-409: ALREADY_EXISTS
+PASS create-invalid-name-400: 400
+PASS create-missing-parent-404: 404
+PASS create-full-file-201: p:L3N0b3JhZ2UvZW11bGF0ZWQvMC9QaG9uZUZTLW0yLXByb3RvY29sL2Z1bGwuYmlu
+PASS full-write-sha-and-mtime: 1048699B sha=f506539592f27eea9a757dc53630dc56e6b592795f689b9f30b3e502c1130ccc mtime=1700000000000 (fs seconds)
+PASS full-atomic-replace-shorter: 123457B sha=82fe31cdd3e6dea02f175760443f61428663f5d2b2308d2397f083c3040fb6d4 mtime=1700000000000 (fs seconds)
+PASS full-empty-write: zero-length PUT/GET sha=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+PASS chunk-out-of-order-and-idempotent: 168869B out-of-order complete; sha=78e55a332d9f1e5225dcfcee3d4a08bcc826b308c16a580bdcd8916f666e78b4; retransmit idempotent
+PASS chunk-missing-409: last chunk with missing prefix -> 409; session retained
+PASS chunk-quota-507: declared total=47103926272 > free=46030184448 -> 507 before allocation
+PASS meta-file-rename: old id 404; new name readback sha=82fe31cdd3e6dea02f175760443f61428663f5d2b2308d2397f083c3040fb6d4
+PASS meta-file-move: file moved across directories; bytes unchanged
+PASS meta-directory-501: 501
+PASS meta-conflict-409: rename onto existing file -> 409
+PASS meta-mtime: modified_ms=1700000000000 (requested 1700000000999, fs seconds)
+PASS delete-not-empty-409: 409
+PASS delete-missing-idempotent-204: 204
+PASS delete-recursive-cleanup-204: 204
+PASS deleted-root-get-404: 404
+RESULT pass=20 fail=0 evidence=C:\Code\Wideawake-wt-phonefs-m2\projects\phonefs\test\m2\protocol-results.json
