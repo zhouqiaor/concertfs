@@ -1,0 +1,18 @@
+﻿PhoneFS M1 results - round1 - 2026-11-01 10:39:05 - drive=P: device=HUAWEI TEQU-S2C
+PASS 14/16  FAIL 2  TOTAL 4s
+PASS [01] roots/eight-chinese-roots    10:39:02.606 | roots=8 all 8 expected present
+PASS [02] volume/device-label-and-statfs 10:39:02.715 | label='HUAWEI TEQU-S2C' fixed DriveType=3 Size=53840183296==statfs Free=46191812608
+PASS [03] tree/phonefs-w2-fixtures     10:39:02.800 | w2 has txt(40B)+bin(10MiB)+中文目录; mtime matches server modified_ms
+PASS [04] content/txt-40b-exact        10:39:02.933 | 40 bytes sha256=6875592D2454CE6A... == server; UTF8 decodes
+PASS [05] names/chinese-dir-and-emoji  10:39:03.036 | cn dir: 2 entries incl emoji-name bin(8B) + 'a b c.md'(20B)
+PASS [06] random/bin-head-1k           10:39:03.284 | head 1KiB sha256 == server range ref
+PASS [07] random/bin-tail-1k           10:39:03.458 | tail 1KiB @10484736 sha256 == server range ref
+FAIL [08] random/bin-mid-unaligned     10:39:03.736 | MethodInvocationException: 使用“5”个参数调用“Copy”时发生异常:“源数组长度不足。请检查 srcIndex 和长度以及数组的下限。”
+PASS [09] stream/bin-full-10mb-sha256  10:39:05.352 | 10MiB full-stream sha256 match in 0.83s
+PASS [10] category/cat-root-empty-501  10:39:05.397 | category root opens and enumerates empty (W2 501 NOT_SUPPORTED mapped)
+PASS [11] names/case-insensitive       10:39:05.414 | PHONEFS-W2/TEST10MB.BIN resolves
+PASS [12] readonly/create-denied       10:39:05.461 | create on read-only volume denied, nothing created
+FAIL [13] readonly/delete-denied       10:39:05.496 | RuntimeException: delete was NOT denied
+PASS [14] errors/missing-path-enonet   10:39:05.513 | missing path -> not found (ENOENT mapped)
+PASS [15] errors/eof-zero-read         10:39:05.723 | EOF read=0; last-10-bytes read=10
+PASS [16] shell/shell-application-browse 10:39:05.911 | shell sees 8 root items incl 内部存储

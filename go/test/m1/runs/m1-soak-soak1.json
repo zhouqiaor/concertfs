@@ -1,0 +1,15 @@
+﻿{
+    "tag":  "soak1",
+    "drive":  "P:",
+    "bridgePid":  12372,
+    "soakSeconds":  301.8,
+    "iterations":  59,
+    "readOK":  59,
+    "errors":  [
+
+               ],
+    "killedAt":  "10:49:20",
+    "driveGoneAfterKill":  true,
+    "goneAfterSec":  0.5,
+    "pass":  true
+}

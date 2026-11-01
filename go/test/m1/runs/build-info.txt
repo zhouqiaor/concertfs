@@ -1,0 +1,11 @@
+bin/phonefs-m1.exe: go1.26.2
+	path	phonefs/go/cmd/phonefs-m1
+	mod	phonefs/go	(devel)	
+	dep	github.com/winfsp/cgofuse	v1.6.0	h1:re3W+HTd0hj4fISPBqfsrwyvPFpzqhDu8doJ9nOPDB0=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	CGO_ENABLED=0
+	build	GOARCH=amd64
+	build	GOOS=windows
+	build	GOAMD64=v1
+go version go1.26.2 windows/amd64

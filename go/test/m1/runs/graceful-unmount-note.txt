@@ -1,0 +1,7 @@
+== graceful unmount (Ctrl-C in terminal tab, bridge mounted 2m4s) ==
+The service phonefs-m1 has been stopped.
+2026/11/01 10:52:49.367880 INFO  Destroy: bridge torn down (open handles=0)
+2026/11/01 10:52:49.368308 INFO  Mount returned ok=true after 2m4.3628035s
+Get-CimInstance Win32_LogicalDisk DeviceID='P:' -> absent (P: gone after Ctrl-C)
+== hard kill (Stop-Process -Force, see m1-soak-soak1.json) ==
+drive gone=True after 0.5s

@@ -1,0 +1,6 @@
+== server-death resilience (keepalive stopped, app force-stopped) ==
+pair after kill=000
+Get-ChildItem P:\内部存储\Download -> "The request could not be performed because of an I/O device error." (EIO)
+Get-ChildItem P:\内部存储 -> same clear error; bridge process alive (pid 1712)
+== after SharingService restart ==
+Get-ChildItem P:\内部存储 -> 388 entries (recovered, no remount needed)

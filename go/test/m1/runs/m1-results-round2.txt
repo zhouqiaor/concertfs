@@ -1,0 +1,18 @@
+﻿PhoneFS M1 results - round2 - 2026-11-01 10:42:31 - drive=P: device=HUAWEI TEQU-S2C
+PASS 16/16  FAIL 0  TOTAL 5.8s
+PASS [01] roots/eight-chinese-roots    10:42:26.635 | roots=8 all 8 expected present
+PASS [02] volume/device-label-and-statfs 10:42:26.749 | label='HUAWEI TEQU-S2C' fixed DriveType=3 Size=53840183296==statfs Free=46191165440
+PASS [03] tree/phonefs-w2-fixtures     10:42:27.374 | w2 has txt(40B)+bin(10MiB)+中文目录; mtime matches server modified_ms
+PASS [04] content/txt-40b-exact        10:42:27.503 | 40 bytes sha256=6875592D2454CE6A... == server; UTF8 decodes
+PASS [05] names/chinese-dir-and-emoji  10:42:27.604 | cn dir: 2 entries incl emoji-name bin(8B) + 'a b c.md'(20B)
+PASS [06] random/bin-head-1k           10:42:27.889 | head 1KiB sha256 == server range ref
+PASS [07] random/bin-tail-1k           10:42:28.204 | tail 1KiB @10484736 sha256 == server range ref
+PASS [08] random/bin-mid-unaligned     10:42:28.637 | mid 4KiB @5242881 (unaligned) sha256 == server ref
+PASS [09] stream/bin-full-10mb-sha256  10:42:30.848 | 10MiB full-stream sha256 match in 1.21s
+PASS [10] category/cat-root-empty-501  10:42:30.885 | category root opens and enumerates empty (W2 501 NOT_SUPPORTED mapped)
+PASS [11] names/case-insensitive       10:42:30.888 | PHONEFS-W2/TEST10MB.BIN resolves
+PASS [12] readonly/create-denied       10:42:30.930 | create on read-only volume denied, nothing created
+PASS [13] readonly/delete-denied       10:42:30.953 | delete denied; fixture intact
+PASS [14] errors/missing-path-enonet   10:42:30.956 | missing path -> not found (ENOENT mapped)
+PASS [15] errors/eof-zero-read         10:42:31.384 | EOF read=0; last-10-bytes read=10
+PASS [16] shell/shell-application-browse 10:42:31.496 | shell sees 8 root items incl 内部存储

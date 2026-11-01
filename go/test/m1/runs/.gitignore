@@ -1,0 +1,5 @@
+# 参考字节（10MiB 级）与运行态文件不入库；验收结果 JSON/TXT 与 build-info 入库
+ref-*/
+*.pid
+keepalive-log.txt
+m1-bridge-*.txt

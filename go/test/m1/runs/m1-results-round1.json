@@ -1,0 +1,114 @@
+﻿[
+    {
+        "id":  1,
+        "category":  "roots/eight-chinese-roots",
+        "pass":  true,
+        "detail":  "roots=8 all 8 expected present",
+        "ts":  "10:39:02.606"
+    },
+    {
+        "id":  2,
+        "category":  "volume/device-label-and-statfs",
+        "pass":  true,
+        "detail":  "label=\u0027HUAWEI TEQU-S2C\u0027 fixed DriveType=3 Size=53840183296==statfs Free=46191812608",
+        "ts":  "10:39:02.715"
+    },
+    {
+        "id":  3,
+        "category":  "tree/phonefs-w2-fixtures",
+        "pass":  true,
+        "detail":  "w2 has txt(40B)+bin(10MiB)+中文目录; mtime matches server modified_ms",
+        "ts":  "10:39:02.800"
+    },
+    {
+        "id":  4,
+        "category":  "content/txt-40b-exact",
+        "pass":  true,
+        "detail":  "40 bytes sha256=6875592D2454CE6A... == server; UTF8 decodes",
+        "ts":  "10:39:02.933"
+    },
+    {
+        "id":  5,
+        "category":  "names/chinese-dir-and-emoji",
+        "pass":  true,
+        "detail":  "cn dir: 2 entries incl emoji-name bin(8B) + \u0027a b c.md\u0027(20B)",
+        "ts":  "10:39:03.036"
+    },
+    {
+        "id":  6,
+        "category":  "random/bin-head-1k",
+        "pass":  true,
+        "detail":  "head 1KiB sha256 == server range ref",
+        "ts":  "10:39:03.284"
+    },
+    {
+        "id":  7,
+        "category":  "random/bin-tail-1k",
+        "pass":  true,
+        "detail":  "tail 1KiB @10484736 sha256 == server range ref",
+        "ts":  "10:39:03.458"
+    },
+    {
+        "id":  8,
+        "category":  "random/bin-mid-unaligned",
+        "pass":  false,
+        "detail":  "MethodInvocationException: 使用“5”个参数调用“Copy”时发生异常:“源数组长度不足。请检查 srcIndex 和长度以及数组的下限。”",
+        "ts":  "10:39:03.736"
+    },
+    {
+        "id":  9,
+        "category":  "stream/bin-full-10mb-sha256",
+        "pass":  true,
+        "detail":  "10MiB full-stream sha256 match in 0.83s",
+        "ts":  "10:39:05.352"
+    },
+    {
+        "id":  10,
+        "category":  "category/cat-root-empty-501",
+        "pass":  true,
+        "detail":  "category root opens and enumerates empty (W2 501 NOT_SUPPORTED mapped)",
+        "ts":  "10:39:05.397"
+    },
+    {
+        "id":  11,
+        "category":  "names/case-insensitive",
+        "pass":  true,
+        "detail":  "PHONEFS-W2/TEST10MB.BIN resolves",
+        "ts":  "10:39:05.414"
+    },
+    {
+        "id":  12,
+        "category":  "readonly/create-denied",
+        "pass":  true,
+        "detail":  "create on read-only volume denied, nothing created",
+        "ts":  "10:39:05.461"
+    },
+    {
+        "id":  13,
+        "category":  "readonly/delete-denied",
+        "pass":  false,
+        "detail":  "RuntimeException: delete was NOT denied",
+        "ts":  "10:39:05.496"
+    },
+    {
+        "id":  14,
+        "category":  "errors/missing-path-enonet",
+        "pass":  true,
+        "detail":  "missing path -\u003e not found (ENOENT mapped)",
+        "ts":  "10:39:05.513"
+    },
+    {
+        "id":  15,
+        "category":  "errors/eof-zero-read",
+        "pass":  true,
+        "detail":  "EOF read=0; last-10-bytes read=10",
+        "ts":  "10:39:05.723"
+    },
+    {
+        "id":  16,
+        "category":  "shell/shell-application-browse",
+        "pass":  true,
+        "detail":  "shell sees 8 root items incl 内部存储",
+        "ts":  "10:39:05.911"
+    }
+]
