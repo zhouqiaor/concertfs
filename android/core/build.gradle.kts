@@ -47,4 +47,5 @@ dependencies {
     api(libs.bcpkix.jdk18on)
 
     testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.ktor.server.test.host)
 }

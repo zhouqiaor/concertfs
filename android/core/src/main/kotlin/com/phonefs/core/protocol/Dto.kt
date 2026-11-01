@@ -81,6 +81,7 @@ data class MetaReq(
     val name: String? = null,
     @SerialName("parent_id") val parentId: String? = null,
     @SerialName("modified_ms") val modifiedMs: Long? = null,
+    val replace: Boolean = false,
 )
 
 /** §6.5 通用错误包络。 */

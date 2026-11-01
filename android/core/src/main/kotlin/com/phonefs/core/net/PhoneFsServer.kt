@@ -339,24 +339,38 @@ class PhoneFsServer(
                 requireReady()
                 val id = call.request.queryParameters["id"] ?: throw badRequest("missing id")
                 val target = realPath(id, allowStorageRoot = false)
-                if (!target.isFile) throw notFound()
+                val rangeHeader = call.request.header(HttpHeaders.ContentRange)
+                val uploadId = call.request.header("X-Upload-Id")
+                val baseEtag = call.request.header("X-Base-ETag")
+                val finalHeader = call.request.header("X-Upload-Final")
+                val chunked = rangeHeader != null || uploadId != null || baseEtag != null || finalHeader != null
+                if (!chunked && !target.isFile) throw notFound()
                 val contentLength = call.request.header(HttpHeaders.ContentLength)?.toLongOrNull()
                     ?: throw badRequest("Content-Length required")
                 if (contentLength < 0) throw badRequest("negative Content-Length")
                 val mtime = parseSetMtime(call.request.header("X-Set-Mtime"))
-                val rangeHeader = call.request.header(HttpHeaders.ContentRange)
-                val uploadId = call.request.header("X-Upload-Id")
-                val result = if (rangeHeader == null && uploadId == null) {
+                val final = when (finalHeader?.trim()?.lowercase(Locale.US)) {
+                    null, "false" -> false
+                    "true" -> true
+                    else -> throw badRequest("X-Upload-Final must be true/false")
+                }
+                if (baseEtag?.isBlank() == true) throw badRequest("X-Base-ETag must not be blank")
+                if (finalHeader != null && baseEtag == null) {
+                    throw badRequest("X-Upload-Final requires X-Base-ETag")
+                }
+                val result = if (!chunked) {
                     uploadStore.full(call, target, contentLength, mtime)
                 } else {
                     if (rangeHeader == null || uploadId.isNullOrBlank()) {
                         throw badRequest("Content-Range and X-Upload-Id must be sent together")
                     }
+                    // delta 新会话的缺失目标由 UploadStore 统一映射为 412；其它写保持 404。
+                    if (!target.isFile && baseEtag == null) throw notFound()
                     val (start, end, total) = parseContentRange(rangeHeader)
                     if (contentLength != end - start + 1) {
                         throw badRequest("Content-Length does not match Content-Range")
                     }
-                    uploadStore.chunk(call, target, uploadId, start, end, total, mtime)
+                    uploadStore.chunk(call, target, uploadId, start, end, total, mtime, baseEtag, final)
                 }
                 call.respond(result)
             }
@@ -384,11 +398,27 @@ class PhoneFsServer(
                 if (!backend.isInsideStorage(target.absolutePath)) throw badRequest("target escapes storage root")
                 val moved = target.absolutePath != source.absolutePath
                 if (moved) {
-                    if (target.exists()) throw alreadyExists()
+                    // Windows case-only rename 会看见目标已存在；同一 inode 不是另一个文件冲突。
+                    val sameFile = target.exists() && Files.isSameFile(source.toPath(), target.toPath())
+                    if (target.exists() && !sameFile && (target.isDirectory || !req.replace)) {
+                        throw alreadyExists()
+                    }
+                    val replaceExisting = req.replace || sameFile
                     try {
-                        Files.move(source.toPath(), target.toPath(), StandardCopyOption.ATOMIC_MOVE)
+                        if (replaceExisting) {
+                            Files.move(
+                                source.toPath(), target.toPath(),
+                                StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING,
+                            )
+                        } else {
+                            Files.move(source.toPath(), target.toPath(), StandardCopyOption.ATOMIC_MOVE)
+                        }
                     } catch (_: java.nio.file.AtomicMoveNotSupportedException) {
-                        Files.move(source.toPath(), target.toPath())
+                        if (replaceExisting) {
+                            Files.move(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING)
+                        } else {
+                            Files.move(source.toPath(), target.toPath())
+                        }
                     }
                 }
                 req.modifiedMs?.let {

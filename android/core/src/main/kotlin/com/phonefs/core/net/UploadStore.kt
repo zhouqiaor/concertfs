@@ -26,8 +26,9 @@ import java.util.UUID
  * §6.5.7 写上传存储：请求体流式落同目录临时文件，完成后原子替换。
  *
  * 分块以 X-Upload-Id 建会话，任意顺序覆盖写并由区间表判全；末块先到且仍缺块时
- * 按冻结契约返回 409 UPLOAD_INCOMPLETE（会话保留可补传）。完成会话保留 24h，
- * 同 Upload-Id 重传不再改文件，直接返回 complete=true（含末块重试幂等）。
+ * 按冻结契约返回 409 UPLOAD_INCOMPLETE（会话保留可补传）。带 X-Base-ETag 的 delta
+ * 会话先复制目标再扩展，仅 final 块提交且不要求区间覆盖全文件。完成会话保留 24h，
+ * 同 Upload-Id 重传只消费请求体并返回原完成结果，目标 ETag 改变则拒绝伪成功。
  * 会话在进程内存中，进程死亡即失效；优雅停止清临时文件，硬崩溃残留与启动清扫挂账。
  */
 internal class UploadStore(
@@ -42,10 +43,11 @@ internal class UploadStore(
         val target: File,
         val total: Long,
         val temp: File,
+        val baseEtag: String?,
         val ranges: MutableList<LongRange> = mutableListOf(),
         val lock: Mutex = Mutex(),
         var touchedMs: Long = System.currentTimeMillis(),
-        var completed: Boolean = false,
+        var completedResult: WriteResp? = null,
     )
 
     private val sessions = mutableMapOf<String, Session>()
@@ -80,35 +82,48 @@ internal class UploadStore(
         end: Long,
         total: Long,
         mtimeMs: Long?,
+        baseEtag: String? = null,
+        final: Boolean = false,
     ): WriteResp {
         if (total <= 0 || start < 0 || end < start || end >= total) throw badRange()
+        if (final && baseEtag == null) {
+            throw PhoneFsException(
+                ErrCode.INVALID_ARGUMENT, HttpStatusCode.BadRequest,
+                "X-Upload-Final requires X-Base-ETag",
+            )
+        }
         val expected = end - start + 1
         val channel = call.receiveChannel()
         return withContext(Dispatchers.IO) {
             val session = synchronized(sessions) {
                 purgeExpiredLocked()
                 sessions[uploadId]?.let {
-                    if (it.target.absolutePath != target.absolutePath || it.total != total) {
+                    if (it.target.absolutePath != target.absolutePath || it.total != total || it.baseEtag != baseEtag) {
                         throw PhoneFsException(
                             ErrCode.INVALID_ARGUMENT, HttpStatusCode.BadRequest,
-                            "X-Upload-Id is already bound to another target/total",
+                            "X-Upload-Id is already bound to another target/total/base mode",
                         )
-                    }
-                    // 目标被删除/重建后，旧完成态不能对空的新 inode 直接报成功。
-                    if (it.completed && (!it.target.isFile || it.target.length() != it.total)) {
-                        sessions.remove(uploadId)
                     }
                 }
                 sessions[uploadId] ?: run {
+                    // base 前置条件优先于空间分配；缺失/不匹配都不得创建会话或 temp。
+                    if (baseEtag != null) requireBaseTarget(target, baseEtag)
                     ensureSpace(total)
                     val temp = temporary(target, "upload")
                     try {
-                        RandomAccessFile(temp, "rw").use { it.setLength(total) }
+                        if (baseEtag == null) {
+                            RandomAccessFile(temp, "rw").use { it.setLength(total) }
+                        } else {
+                            Files.copy(target.toPath(), temp.toPath())
+                            RandomAccessFile(temp, "rw").use { it.setLength(total) }
+                            // 复制期间目标若变化，本会话绝不能基于混合 base 继续。
+                            requireBaseTarget(target, baseEtag)
+                        }
                     } catch (t: Throwable) {
                         temp.delete()
                         throw t
                     }
-                    Session(target, total, temp).also { sessions[uploadId] = it }
+                    Session(target, total, temp, baseEtag).also { sessions[uploadId] = it }
                 }
             }
 
@@ -116,11 +131,15 @@ internal class UploadStore(
             session.lock.lock()
             try {
                 session.touchedMs = System.currentTimeMillis()
-                if (session.completed) {
+                val completed = session.completedResult
+                if (completed != null) {
                     // 完成后的任意同会话重传只消费请求体，不再触碰已原子替换的目标。
                     val copied = channel.copyTo(DiscardOutput, expected + 1)
                     if (copied != expected) throw incompleteBody(expected, copied)
-                    WriteResp(total, complete = true, etag = etag(target))
+                    if (!session.target.isFile || etag(session.target) != completed.etag) {
+                        throw preconditionFailed("upload target changed after completion")
+                    }
+                    completed
                 } else {
                     RandomAccessFile(session.temp, "rw").use { raf ->
                         raf.seek(start)
@@ -129,22 +148,34 @@ internal class UploadStore(
                         raf.fd.sync()
                     }
                     markReceived(session.ranges, start, end)
-                    val complete = isComplete(session.ranges, total)
-                    if (complete) {
-                        val result = commit(session.temp, session.target, mtimeMs)
-                        session.completed = true
-                        result
-                    } else {
-                        if (end + 1 == total) {
-                            throw PhoneFsException(
-                                ErrCode.UPLOAD_INCOMPLETE,
-                                HttpStatusCode.Conflict,
-                                "last chunk arrived but upload is incomplete",
-                                true,
-                                mapOf("received" to contiguousReceived(session.ranges)),
-                            )
+                    if (session.baseEtag != null) {
+                        // delta 非 final 永不提交；final 只要求 base 未变，不要求 ranges 覆盖全文件。
+                        if (!final) {
+                            WriteResp(received = end + 1, complete = false)
+                        } else {
+                            requireBaseTarget(session.target, session.baseEtag)
+                            val result = commit(session.temp, session.target, mtimeMs)
+                            session.completedResult = result
+                            result
                         }
-                        WriteResp(received = end + 1, complete = false)
+                    } else {
+                        val complete = isComplete(session.ranges, total)
+                        if (complete) {
+                            val result = commit(session.temp, session.target, mtimeMs)
+                            session.completedResult = result
+                            result
+                        } else {
+                            if (end + 1 == total) {
+                                throw PhoneFsException(
+                                    ErrCode.UPLOAD_INCOMPLETE,
+                                    HttpStatusCode.Conflict,
+                                    "last chunk arrived but upload is incomplete",
+                                    true,
+                                    mapOf("received" to contiguousReceived(session.ranges)),
+                                )
+                            }
+                            WriteResp(received = end + 1, complete = false)
+                        }
                     }
                 }
             } finally {
@@ -155,7 +186,7 @@ internal class UploadStore(
 
     fun close() {
         synchronized(sessions) {
-            sessions.values.forEach { if (!it.completed) it.temp.delete() }
+            sessions.values.forEach { if (it.completedResult == null) it.temp.delete() }
             sessions.clear()
         }
     }
@@ -194,6 +225,25 @@ internal class UploadStore(
 
     private fun etag(target: File): String = "\"${target.length()}-${target.lastModified()}\""
 
+    private fun requireBaseTarget(target: File, expected: String) {
+        val actual = if (target.isFile) etag(target) else null
+        if (actual != expected) {
+            throw PhoneFsException(
+                ErrCode.PRECONDITION_FAILED,
+                HttpStatusCode.PreconditionFailed,
+                "upload base ETag does not match current target",
+                false,
+                mapOf("expected" to expected, "actual" to (actual ?: "missing")),
+            )
+        }
+    }
+
+    private fun preconditionFailed(message: String) = PhoneFsException(
+        ErrCode.PRECONDITION_FAILED,
+        HttpStatusCode.PreconditionFailed,
+        message,
+    )
+
     private fun ensureSpace(bytes: Long) {
         if (backend.statFs().freeBytes < bytes) {
             throw PhoneFsException(
@@ -210,7 +260,7 @@ internal class UploadStore(
         val now = System.currentTimeMillis()
         val expired = sessions.filterValues { now - it.touchedMs > TTL_MS }.keys.toList()
         expired.forEach { id ->
-            sessions.remove(id)?.let { if (!it.completed) it.temp.delete() }
+            sessions.remove(id)?.let { if (it.completedResult == null) it.temp.delete() }
         }
     }
 
