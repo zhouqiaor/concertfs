@@ -5,12 +5,14 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.IBinder
+import android.provider.Settings
 import com.phonefs.core.telemetry.FsLog
 import com.phonefs.core.fs.MesFsBackend
 import com.phonefs.core.net.PhoneFsServer
@@ -69,7 +71,7 @@ class SharingService : Service() {
                 backend = MesFsBackend(),
                 identity = identity,
                 deviceId = deviceId,
-                deviceName = "${Build.MANUFACTURER} ${Build.MODEL}",
+                deviceName = resolveDeviceName(),
                 token = token,
             )
             port = srv.start(PREFERRED_PORT)
@@ -85,6 +87,23 @@ class SharingService : Service() {
             FsLog.e(TAG, "server start failed", t)
             stopSelf()
         }
+    }
+
+    /** 对标华为 HMDFS 卷标：使用系统「设置-设备名称」（softbus 同源），不是品牌+型号拼接。 */
+    private fun resolveDeviceName(): String {
+        val systemName = runCatching {
+            Settings.Global.getString(contentResolver, "device_name")
+        }.getOrNull()?.trim()
+        if (!systemName.isNullOrEmpty()) return systemName
+
+        // 无蓝牙适配器或未持 BLUETOOTH_CONNECT 时不得影响共享服务启动。
+        @Suppress("DEPRECATION")
+        val bluetoothName = runCatching {
+            BluetoothAdapter.getDefaultAdapter()?.name
+        }.getOrNull()?.trim()
+        if (!bluetoothName.isNullOrEmpty()) return bluetoothName
+
+        return Build.MODEL.orEmpty().trim().ifEmpty { "Android" }
     }
 
     private fun startHeartbeat() {
