@@ -1,0 +1,35 @@
+TLS TLSv1.3 TLS_AES_256_GCM_SHA384 fp=96e052a4ce15c5ec¡­ pinned=True
+  100/1000 ok=100 fail=0 1000 MiB / 44.7s = 22.35 MiB/s
+  200/1000 ok=200 fail=0 2000 MiB / 91.3s = 21.91 MiB/s
+  300/1000 ok=300 fail=0 3000 MiB / 138.5s = 21.66 MiB/s
+  400/1000 ok=400 fail=0 4000 MiB / 186.0s = 21.51 MiB/s
+  500/1000 ok=500 fail=0 5000 MiB / 235.9s = 21.19 MiB/s
+  600/1000 ok=600 fail=0 6000 MiB / 286.9s = 20.91 MiB/s
+  700/1000 ok=700 fail=0 7000 MiB / 341.8s = 20.48 MiB/s
+  800/1000 ok=800 fail=0 8000 MiB / 396.9s = 20.16 MiB/s
+  900/1000 ok=900 fail=0 9000 MiB / 452.8s = 19.88 MiB/s
+  1000/1000 ok=1000 fail=0 10000 MiB / 503.5s = 19.86 MiB/s
+{
+  "host": "192.168.43.1",
+  "port": 18443,
+  "mode": "pin",
+  "tls": {
+    "version": "TLSv1.3",
+    "cipher": "TLS_AES_256_GCM_SHA384",
+    "fingerprint": "96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f"
+  },
+  "chunk_bytes": 10485760,
+  "count": 1000,
+  "ok": 1000,
+  "failures": 0,
+  "reconnects": 0,
+  "total_bytes": 10485760000,
+  "wall_seconds": 503.528,
+  "avg_MiB_s": 19.86,
+  "p50_chunk_ms": 492.76,
+  "p95_chunk_ms": 614.75,
+  "min_chunk_ms": 371.34,
+  "max_chunk_ms": 884.54,
+  "fingerprint_verified": true,
+  "fail_samples": []
+}

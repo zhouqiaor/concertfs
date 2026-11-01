@@ -1,0 +1,2 @@
+11-01 08:55:59.759  5305  6121 I ActivityManager: appDiedLocked: pid=25103, app=ProcessRecord{b0db5bb 25103:com.phonefs.source/u0a90}, fromBinderDied=true, reason=null
+11-01 08:55:59.771  5305  6121 D ActivityManager: cleanUpApplicationRecord app: 25103:com.phonefs.source/u0a90, bad: false, restarting: false, allowRestart: true

@@ -1,0 +1,42 @@
+13:      E: uses-permission (line=11)
+14:        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.INTERNET" (Raw: "android.permission.INTERNET")
+15:      E: uses-permission (line=12)
+16:        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.ACCESS_NETWORK_STATE" (Raw: "android.permission.ACCESS_NETWORK_STATE")
+17:      E: uses-permission (line=13)
+18:        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.ACCESS_WIFI_STATE" (Raw: "android.permission.ACCESS_WIFI_STATE")
+19:      E: uses-permission (line=14)
+20:        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.CHANGE_WIFI_STATE" (Raw: "android.permission.CHANGE_WIFI_STATE")
+21:      E: uses-permission (line=15)
+22:        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.CHANGE_WIFI_MULTICAST_STATE" (Raw: "android.permission.CHANGE_WIFI_MULTICAST_STATE")
+23:      E: uses-permission (line=17)
+24:        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.WAKE_LOCK" (Raw: "android.permission.WAKE_LOCK")
+25:      E: uses-permission (line=20)
+26:        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.FOREGROUND_SERVICE" (Raw: "android.permission.FOREGROUND_SERVICE")
+27:      E: uses-permission (line=21)
+28:        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" (Raw: "android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE")
+29:      E: uses-permission (line=22)
+30:        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.FOREGROUND_SERVICE_DATA_SYNC" (Raw: "android.permission.FOREGROUND_SERVICE_DATA_SYNC")
+31:      E: uses-permission (line=23)
+32:        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.POST_NOTIFICATIONS" (Raw: "android.permission.POST_NOTIFICATIONS")
+33:      E: uses-permission (line=26)
+34:        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.MANAGE_EXTERNAL_STORAGE" (Raw: "android.permission.MANAGE_EXTERNAL_STORAGE")
+50:          E: service (line=45)
+53:            A: http://schemas.android.com/apk/res/android:foregroundServiceType(0x01010599)=0x00000010
+# 0x10 = ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE (1<<4)
+                  E: category (line=41)
+                    A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.intent.category.LAUNCHER" (Raw: "android.intent.category.LAUNCHER")
+          E: service (line=45)
+            A: http://schemas.android.com/apk/res/android:name(0x01010003)="com.phonefs.source.SharingService" (Raw: "com.phonefs.source.SharingService")
+            A: http://schemas.android.com/apk/res/android:exported(0x01010010)=false
+            A: http://schemas.android.com/apk/res/android:foregroundServiceType(0x01010599)=0x00000010
+## installed-package grant state
+    versionCode=1 minSdk=26 targetSdk=36
+    versionName=0.1.0-w2
+      android.permission.FOREGROUND_SERVICE
+      android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE
+      android.permission.FOREGROUND_SERVICE_DATA_SYNC
+      android.permission.FOREGROUND_SERVICE: granted=true
+## runtime: FGS promoted without SecurityException
+    app=ProcessRecord{b61fad9 18510:com.phonefs.source/u0a90}
+    isForeground=true foregroundId=1001 foregroundNoti=Notification(channel=phonefs-sharing shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x62 color=0x00000000 groupKey=ranker_group1001 actions=1 capsuleEnableStatus=-1 vis=PRIVATE)
+18510

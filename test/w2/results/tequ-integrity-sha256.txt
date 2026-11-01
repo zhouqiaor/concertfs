@@ -1,0 +1,5 @@
+独立整文件拉流 sha256（TLS1.3 pin，经 TLS front->环回->Ktor->FUSE 全链路）
+PC 夹具 5619857f84e0b9cb5e6765c6a56762c41729c9d8eb501f4319fd2a890a294058 test10mb.bin (10485760 bytes)
+设备拉回:
+5619857f84e0b9cb5e6765c6a56762c41729c9d8eb501f4319fd2a890a294058 */c/Users/georgeslark/AppData/Local/Temp/verify10mb.bin
+-rw-r--r-- 1 georgeslark 197121 10485760 Nov  1 11:20 /c/Users/georgeslark/AppData/Local/Temp/verify10mb.bin

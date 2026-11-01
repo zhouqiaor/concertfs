@@ -1,0 +1,10 @@
+/sdcard/PhoneFS-w2:
+total 10255
+-rw-rw---- 1 media_rw media_rw 10485760 2026-11-01 08:47 test10mb.bin
+drwxrwx--- 2 media_rw media_rw     3488 2026-11-01 08:46 中文目录
+-rw-rw---- 1 media_rw media_rw       40 2026-11-01 08:46 测试 文件.txt
+
+/sdcard/PhoneFS-w2/中文目录:
+total 8
+-rw-rw---- 1 media_rw media_rw 20 2026-11-01 08:46 a b c.md
+-rw-rw---- 1 media_rw media_rw  8 2026-11-01 08:46 截图 😀.bin

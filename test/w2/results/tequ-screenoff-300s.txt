@@ -1,0 +1,12 @@
+start 2026-11-01T11:49:03+08:00 host=192.168.43.1 seconds=300
+11:49:03 probe#1 statfs -> 200 0.038997s
+11:49:33 probe#2 statfs -> 200 0.024888s
+11:50:03 probe#3 statfs -> 200 0.039573s
+11:50:33 probe#4 statfs -> 200 0.034108s
+11:51:03 probe#5 statfs -> 200 0.031571s
+11:51:34 probe#6 statfs -> 200 0.024237s
+11:52:04 probe#7 statfs -> 200 0.020798s
+11:52:34 probe#8 statfs -> 200 0.022969s
+11:53:04 probe#9 statfs -> 200 0.055504s
+11:53:34 probe#10 statfs -> 200 0.025231s
+end 2026-11-01T11:54:04+08:00 probes=10

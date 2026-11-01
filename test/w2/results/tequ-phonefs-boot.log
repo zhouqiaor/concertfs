@@ -1,0 +1,17 @@
+11-01 08:44:08.172 I/phonefs.app(9536) Conscrypt provider inserted=true provider=Conscrypt version 1.0
+11-01 08:44:11.627 E/phonefs.svc(9536) server start failed
+java.lang.ClassCastException: org.bouncycastle.asn1.pkcs.PrivateKeyInfo cannot be cast to org.bouncycastle.util.io.pem.PemObject
+	at com.phonefs.core.net.PhoneFsServer.buildKeyStore(PhoneFsServer.kt:121)
+	at com.phonefs.core.net.PhoneFsServer.start(PhoneFsServer.kt:81)
+	at com.phonefs.source.SharingService.startServer(SharingService.kt:75)
+	at com.phonefs.source.SharingService.access$startServer(SharingService.kt:25)
+	at com.phonefs.source.SharingService$onStartCommand$1.invokeSuspend(SharingService.kt:43)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:798)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+

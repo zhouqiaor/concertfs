@@ -1,0 +1,47 @@
+Connecting to 192.168.43.1
+depth=0 CN=s-dc35baa62e6bb225
+verify error:num=18:self-signed certificate
+verify return:1
+depth=0 CN=s-dc35baa62e6bb225
+verify return:1
+CONNECTED(00000178)
+---
+Certificate chain
+ 0 s:CN=s-dc35baa62e6bb225
+   i:CN=s-dc35baa62e6bb225
+   a:PKEY: EC, (prime256v1); sigalg: ecdsa-with-SHA256
+   v:NotBefore: Nov  1 00:43:08 2026 GMT; NotAfter: Oct 29 00:44:08 2036 GMT
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIBXzCCAQWgAwIBAgIITLdEjuyLcOAwCgYIKoZIzj0EAwIwHTEbMBkGA1UEAwwS
+cy1kYzM1YmFhNjJlNmJiMjI1MB4XDTI2MTEwMTAwNDMwOFoXDTM2MTAyOTAwNDQw
+OFowHTEbMBkGA1UEAwwScy1kYzM1YmFhNjJlNmJiMjI1MFkwEwYHKoZIzj0CAQYI
+KoZIzj0DAQcDQgAEYGtJDbexoZ1kmonY0YhypFiGEk3aqKwUUW/peeCy3AcTQl6H
+LS9HAgl1XODs0YGvvaoG97+WPX7zyBtL4iwmZqMvMC0wHQYDVR0OBBYEFHofh1np
+N4p2Wbb+5LxzTjd97q+EMAwGA1UdEwEB/wQCMAAwCgYIKoZIzj0EAwIDSAAwRQIh
+AOntzajODlXWf0aKYPtPdKdN8/mmfsGkB6F758aCqggjAiAOA6s/Q4TEp+G1KJTW
+EcWbovqHY2HEQppYONynAEB7VQ==
+-----END CERTIFICATE-----
+subject=CN=s-dc35baa62e6bb225
+issuer=CN=s-dc35baa62e6bb225
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: ecdsa_secp256r1_sha256
+Negotiated TLS1.3 group: X25519MLKEM768
+---
+SSL handshake has read 1748 bytes and written 1554 bytes
+Verification error: self-signed certificate
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Protocol: TLSv1.3
+Server public key is 256 bit
+This TLS version forbids renegotiation.
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 18 (self-signed certificate)
+---
+DONE

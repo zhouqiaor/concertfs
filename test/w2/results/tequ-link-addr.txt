@@ -1,0 +1,10 @@
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    inet 127.0.0.1/8 scope host lo
+11: wlan1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    inet 192.168.43.1/24 brd 192.168.43.255 scope global wlan1
+13: ops@eth.phy: <BROADCAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    inet 169.254.1.199/24 brd 169.254.1.255 scope global ops
+14: touch@eth.phy: <BROADCAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    inet 169.254.0.199/24 brd 169.254.0.255 scope global touch
+16: usb0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UNKNOWN group default qlen 1000
+    inet 169.254.2.41/24 brd 169.254.2.255 scope global usb0

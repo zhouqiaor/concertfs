@@ -1,0 +1,60 @@
+11-01 08:51:52.968 E/selinux_dmd( 5141): avc:  denied  { find } for dsm=hisi_Q pid=4034 uid=1000 name=idea_sitename scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0 CMD=/system/bin/idea_os_pmsg
+11-01 08:51:53.030 E/FunctionImpl( 6492): getForegroundApplications failed!
+11-01 08:51:53.030 E/JsonDataParse(24605): screen info json exception
+11-01 08:51:53.166 E/AppInfoMgr( 6520): not find pkgs by uid: 0
+11-01 08:51:53.262 E/SELinux ( 3334): avc:  denied  { find } for pid=4034 uid=1000 name=AiTech scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0
+11-01 08:51:53.262 E/servicemanager( 3334): 'AiTech' is not accessible by 4034 (SELinux restricted)
+11-01 08:51:53.262 E/SELinux ( 3334): avc:  denied  { find } for pid=4034 uid=1000 name=idea_sitename scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0
+11-01 08:51:53.262 E/servicemanager( 3334): 'idea_sitename' is not accessible by 4034 (SELinux restricted)
+11-01 08:51:53.263 E/selinux_dmd( 5141): avc:  denied  { find } for dsm=hisi_Q pid=4034 uid=1000 name=AiTech scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0 CMD=/system/bin/idea_os_pmsg
+11-01 08:51:53.263 E/selinux_dmd( 5141): avc:  denied  { find } for dsm=hisi_Q pid=4034 uid=1000 name=idea_sitename scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0 CMD=/system/bin/idea_os_pmsg
+11-01 08:51:53.265 E/SELinux ( 3334): avc:  denied  { find } for pid=4034 uid=1000 name=AiTech scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0
+11-01 08:51:53.265 E/servicemanager( 3334): 'AiTech' is not accessible by 4034 (SELinux restricted)
+11-01 08:51:53.265 E/SELinux ( 3334): avc:  denied  { find } for pid=4034 uid=1000 name=idea_sitename scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0
+11-01 08:51:53.265 E/servicemanager( 3334): 'idea_sitename' is not accessible by 4034 (SELinux restricted)
+11-01 08:51:53.266 E/selinux_dmd( 5141): avc:  denied  { find } for dsm=hisi_Q pid=4034 uid=1000 name=AiTech scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0 CMD=/system/bin/idea_os_pmsg
+11-01 08:51:53.266 E/selinux_dmd( 5141): avc:  denied  { find } for dsm=hisi_Q pid=4034 uid=1000 name=idea_sitename scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0 CMD=/system/bin/idea_os_pmsg
+11-01 08:51:53.315 E/selinux_dmd( 5141): type=1400 audit(0.0:71038): avc: denied { syslog_read } for comm="hwdiagnosis@1.0" scontext=u:r:hal_hwdiagnosis:s0 tcontext=u:r:kernel:s0 tclass=system permissive=0 find  pid= failed
+11-01 08:51:53.315 E/selinux_dmd( 5141): type=1400 audit(0.0:71038): avc: denied { syslog_read } for comm="hwdiagnosis@1.0" scontext=u:r:hal_hwdiagnosis:s0 tcontext=u:r:kernel:s0 tclass=system permissive=0 ExtractKeys failed
+11-01 08:51:53.430 E/vendor.huaweitv.hardware.hwcameraproxy@1.0-service( 3921): QueryCmdLen ioctl get len errno: 25
+11-01 08:51:53.430 E/vendor.huaweitv.hardware.hwcameraproxy@1.0-service( 3921): QueryVersion QueryCmdLen errno:536870917
+11-01 08:51:53.430 E/vendor.huaweitv.hardware.hwcameraproxy@1.0-service( 3921): QueryVersionByUvc OpenCamera failed(536870913).
+11-01 08:51:53.431 I/adbd    ( 7508): adb shell pidof com.phonefs.source
+11-01 08:51:53.466 E/vendor.huaweitv.hardware.hwcameraproxy@1.0-service( 3921): QueryCmdLen ioctl get len errno: 25
+11-01 08:51:53.466 E/vendor.huaweitv.hardware.hwcameraproxy@1.0-service( 3921): QueryVersion QueryCmdLen errno:536870917
+11-01 08:51:53.466 E/vendor.huaweitv.hardware.hwcameraproxy@1.0-service( 3921): QueryVersionByUvc OpenCamera failed(536870913).
+11-01 08:51:53.466 E/vp_camclient( 3851): CameraHalGetViDeviceParam getViDeviceParam failed!
+11-01 08:51:53.466 E/uapi_camera( 3851): query_uvc_command_len[495]:ioctl query command(17:129:11) len error(25)
+11-01 08:51:53.466 E/uapi_camera( 3851): get_uvc_comman[516]:query_uvc_command_len error(0x80a10010)
+11-01 08:51:53.466 E/uapi_camera( 3851): camera_query_version[563]:get_uvc_comman error(0x80a10010)
+11-01 08:51:53.467 E/vidproxy( 3921): [4539][E] [2889][GetViDeviceCamVersion]GetUsbCamVersionByUvc ERR
+11-01 08:51:53.470 E/vendor.huaweitv.hardware.hwcameraproxy@1.0-service( 3921): QueryCmdLen ioctl get len errno: 25
+11-01 08:51:53.470 E/vendor.huaweitv.hardware.hwcameraproxy@1.0-service( 3921): QueryVersion QueryCmdLen errno:536870917
+11-01 08:51:53.470 E/vendor.huaweitv.hardware.hwcameraproxy@1.0-service( 3921): QueryVersionByUvc OpenCamera failed(536870913).
+11-01 08:51:53.470 E/vp_camclient( 3851): CameraHalGetViDeviceParam getViDeviceParam failed!
+11-01 08:51:53.470 E/vidproxy( 3921): [4539][E] [2889][GetViDeviceCamVersion]GetUsbCamVersionByUvc ERR
+11-01 08:51:53.470 E/uapi_camera( 3851): utils_device_open[965]:realpath file: failed, errno:2!
+11-01 08:51:53.470 E/uapi_camera( 3851): is_build_in_camera[576]:open dev failed.
+11-01 08:51:53.470 E/uapi_camera( 3851): utils_device_open[965]:realpath file: failed, errno:2!
+11-01 08:51:53.470 E/uapi_camera( 3851): is_build_in_camera[576]:open dev failed.
+11-01 08:51:53.470 E/uapi_camera( 3851): utils_device_open[965]:realpath file: failed, errno:2!
+11-01 08:51:53.470 E/uapi_camera( 3851): is_build_in_camera[576]:open dev failed.
+11-01 08:51:53.470 E/uapi_camera( 3851): utils_device_open[965]:realpath file: failed, errno:2!
+11-01 08:51:53.470 E/uapi_camera( 3851): is_build_in_camera[576]:open dev failed.
+11-01 08:51:53.470 E/uapi_camera( 3851): utils_device_open[965]:realpath file: failed, errno:2!
+11-01 08:51:53.470 E/uapi_camera( 3851): is_build_in_camera[576]:open dev failed.
+11-01 08:51:53.470 E/uapi_camera( 3851): utils_device_open[965]:realpath file: failed, errno:2!
+11-01 08:51:53.470 E/uapi_camera( 3851): is_build_in_camera[576]:open dev failed.
+11-01 08:51:53.561 E/SELinux ( 3334): avc:  denied  { find } for pid=4034 uid=1000 name=AiTech scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0
+11-01 08:51:53.561 E/servicemanager( 3334): 'AiTech' is not accessible by 4034 (SELinux restricted)
+11-01 08:51:53.561 E/SELinux ( 3334): avc:  denied  { find } for pid=4034 uid=1000 name=idea_sitename scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0
+11-01 08:51:53.562 E/servicemanager( 3334): 'idea_sitename' is not accessible by 4034 (SELinux restricted)
+11-01 08:51:53.562 E/selinux_dmd( 5141): avc:  denied  { find } for dsm=hisi_Q pid=4034 uid=1000 name=AiTech scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0 CMD=/system/bin/idea_os_pmsg
+11-01 08:51:53.562 E/selinux_dmd( 5141): avc:  denied  { find } for dsm=hisi_Q pid=4034 uid=1000 name=idea_sitename scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0 CMD=/system/bin/idea_os_pmsg
+11-01 08:51:53.565 E/SELinux ( 3334): avc:  denied  { find } for pid=4034 uid=1000 name=AiTech scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0
+11-01 08:51:53.565 E/servicemanager( 3334): 'AiTech' is not accessible by 4034 (SELinux restricted)
+11-01 08:51:53.565 E/SELinux ( 3334): avc:  denied  { find } for pid=4034 uid=1000 name=idea_sitename scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0
+11-01 08:51:53.565 E/servicemanager( 3334): 'idea_sitename' is not accessible by 4034 (SELinux restricted)
+11-01 08:51:53.566 E/selinux_dmd( 5141): avc:  denied  { find } for dsm=hisi_Q pid=4034 uid=1000 name=AiTech scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0 CMD=/system/bin/idea_os_pmsg
+11-01 08:51:53.568 E/selinux_dmd( 5141): avc:  denied  { find } for dsm=hisi_Q pid=4034 uid=1000 name=idea_sitename scontext=u:r:idea_os_pmsg:s0 tcontext=u:object_r:default_android_service:s0 tclass=service_manager permissive=0 CMD=/system/bin/idea_os_pmsg
+11-01 08:51:53.587 I/adbd    ( 7508): adb shell cat /data/data/com.phonefs.source/files/logs/phonefs.log

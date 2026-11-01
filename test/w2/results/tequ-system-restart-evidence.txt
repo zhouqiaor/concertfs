@@ -1,0 +1,40 @@
+11-01 08:50:57.239 I/ActivityManager( 5305): Start proc 25365:com.device.aiservice/u0a69 for service {com.device.aiservice/com.device.aiservice.service.AiService}
+11-01 08:50:57.245 I/AndroidRuntime(25365): RuntimeInit: Starting application from zygote
+11-01 08:50:57.246 D/AndroidRuntime(25365): Entered RuntimeInit!
+11-01 08:50:57.254 W/ActivityManager( 5305): Slow operation: 547ms so far, now at startProcess: asking zygote to start proc
+11-01 08:50:57.254 I/ActivityManager( 5305): startProcess: asking zygote to start proc ProcessRecord{729bf85 0:com.device.idea.webapp/u0a74}
+11-01 08:50:57.276 I/ActivityManager_activity( 5305): start process for launching activity: ActivityRecord{101de1c u0 com.device.launcheridea/com.device.idea.launcher.MainHomeActivity t2}
+11-01 08:50:57.308 W/ActivityManager( 5305): Slow operation: 601ms so far, now at startProcess: returned from zygote!
+11-01 08:50:57.309 I/ActivityManager( 5305): Start proc 25391:com.device.idea.webapp/u0a74 for service {com.device.idea.webapp/com.device.idea.webapp.WebAppService}
+11-01 08:50:57.310 W/ActivityManager( 5305): Slow operation: 172ms so far, now at startProcess: asking zygote to start proc
+11-01 08:50:57.310 I/ActivityManager( 5305): startProcess: asking zygote to start proc ProcessRecord{d88842e 0:com.device.launcheridea/u0a56}
+11-01 08:50:57.343 I/AndroidRuntime(25391): RuntimeInit: Starting application from zygote
+11-01 08:50:57.343 D/AndroidRuntime(25391): Entered RuntimeInit!
+11-01 08:50:57.366 I/AndroidRuntime(24605): RuntimeInit: Starting application from zygote
+11-01 08:50:57.366 D/AndroidRuntime(24605): Entered RuntimeInit!
+11-01 08:50:57.366 W/ActivityManager( 5305): Slow operation: 228ms so far, now at startProcess: returned from zygote!
+11-01 08:50:57.555 I/ActivityManager( 5305): Start proc 24605:com.device.launcheridea/u0a56 for top-activity {com.device.launcheridea/com.device.idea.launcher.MainHomeActivity}
+11-01 08:50:57.562 I/ActivityManager_activity( 5305): start process for launching activity: ActivityRecord{101de1c u0 com.device.launcheridea/com.device.idea.launcher.MainHomeActivity t2}
+11-01 08:50:57.749 I/ActivityManager( 5305): startProcess: asking zygote to start proc ProcessRecord{2d03ee5 0:com.device.cloudlink.smartrooms/u0a82}
+11-01 08:50:57.788 I/ActivityManager( 5305): Start proc 25452:com.device.cloudlink.smartrooms/u0a82 for service {com.device.cloudlink.smartrooms/com.huawei.alive.service.LocalService}
+11-01 08:50:57.823 I/AndroidRuntime(25452): RuntimeInit: Starting application from zygote
+11-01 08:50:57.823 D/AndroidRuntime(25452): Entered RuntimeInit!
+11-01 08:50:58.095 I/ActivityManager( 5305):   ntv   ??    4962: zygote (pid 3833) native
+11-01 08:50:58.095 I/ActivityManager( 5305):   ntv   ??    4264: zygote64 (pid 3832) native
+11-01 08:50:58.184 I/ActivityManager( 5305): startProcess: asking zygote to start proc ProcessRecord{9c29a82 0:com.device.meetingservice/u0a18}
+11-01 08:50:58.224 I/ActivityManager( 5305): Start proc 25502:com.device.meetingservice/u0a18 for service {com.device.meetingservice/com.device.meetingservice.MeetingSdkService}
+11-01 08:50:58.271 I/AndroidRuntime(25502): RuntimeInit: Starting application from zygote
+11-01 08:50:58.271 D/AndroidRuntime(25502): Entered RuntimeInit!
+11-01 08:50:59.914 I/Watchdog( 5305): waitTime 30000 timeout 0
+11-01 08:51:00.327 I/ActivityManager( 5305): startProcess: asking zygote to start proc ProcessRecord{55e636b 0:com.device.settings/u0a25}
+11-01 08:51:00.369 I/ActivityManager( 5305): Start proc 25626:com.device.settings/u0a25 for service {com.device.settings/com.device.settings.service.AdvancedPasswordVerificationService}
+11-01 08:51:00.433 I/AndroidRuntime(25626): RuntimeInit: Starting application from zygote
+11-01 08:51:00.433 D/AndroidRuntime(25626): Entered RuntimeInit!
+11-01 08:51:04.348 I/ActivityManager( 5305): startProcess: asking zygote to start proc ProcessRecord{431dba2 0:com.huawei.appmarket/u0a33}
+11-01 08:51:04.393 I/ActivityManager( 5305): Start proc 25777:com.huawei.appmarket/u0a33 for service {com.huawei.appmarket/com.huawei.appgallery.coreservice.impl.AGCoreService}
+11-01 08:51:04.428 I/AndroidRuntime(25777): RuntimeInit: Starting application from zygote
+11-01 08:51:04.428 D/AndroidRuntime(25777): Entered RuntimeInit!
+11-01 08:51:09.837 I/ActivityManager( 5305): startProcess: asking zygote to start proc ProcessRecord{7d25f21 0:com.device.infowinservice/u0a75}
+11-01 08:51:09.866 I/ActivityManager( 5305): Start proc 25918:com.device.infowinservice/u0a75 for service {com.device.infowinservice/com.device.infowinservice.GloWinAidlService}
+11-01 08:51:09.891 I/AndroidRuntime(25918): RuntimeInit: Starting application from zygote
+11-01 08:51:09.891 D/AndroidRuntime(25918): Entered RuntimeInit!

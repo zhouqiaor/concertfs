@@ -1,0 +1,5 @@
+HTTP/1.1 200 OK
+Content-Length: 257
+Content-Type: application/json
+
+{"service":"phonefs","protocol_versions":[1],"fingerprint":"96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f","pairing_open":false,"server_time_ms":1793494025184,"device":{"id":"s-dc35baa62e6bb225","name":"HUAWEI TEQU-S2C","type":"android"}}

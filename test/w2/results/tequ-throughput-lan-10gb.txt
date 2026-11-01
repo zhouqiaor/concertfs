@@ -1,0 +1,34 @@
+  100/1000 ok=100 fail=0 1000 MiB / 41.7s = 24.00 MiB/s
+  200/1000 ok=200 fail=0 2000 MiB / 83.2s = 24.05 MiB/s
+  300/1000 ok=300 fail=0 3000 MiB / 123.8s = 24.23 MiB/s
+  400/1000 ok=400 fail=0 4000 MiB / 163.7s = 24.43 MiB/s
+  500/1000 ok=500 fail=0 5000 MiB / 203.8s = 24.53 MiB/s
+  600/1000 ok=600 fail=0 6000 MiB / 243.9s = 24.60 MiB/s
+  700/1000 ok=700 fail=0 7000 MiB / 284.0s = 24.65 MiB/s
+  800/1000 ok=800 fail=0 8000 MiB / 324.3s = 24.67 MiB/s
+  900/1000 ok=900 fail=0 9000 MiB / 363.8s = 24.74 MiB/s
+  1000/1000 ok=1000 fail=0 10000 MiB / 403.7s = 24.77 MiB/s
+{
+  "host": "192.168.43.1",
+  "port": 18443,
+  "mode": "pin",
+  "tls": {
+    "version": "TLSv1.3",
+    "cipher": "TLS_AES_256_GCM_SHA384",
+    "fingerprint": "96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f"
+  },
+  "chunk_bytes": 10485760,
+  "count": 1000,
+  "ok": 1000,
+  "failures": 0,
+  "reconnects": 0,
+  "total_bytes": 10485760000,
+  "wall_seconds": 403.667,
+  "avg_MiB_s": 24.773,
+  "p50_chunk_ms": 399.03,
+  "p95_chunk_ms": 448.23,
+  "min_chunk_ms": 351.07,
+  "max_chunk_ms": 657.01,
+  "fingerprint_verified": true,
+  "fail_samples": []
+}

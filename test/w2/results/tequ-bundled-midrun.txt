@@ -1,0 +1,25 @@
+TLS TLSv1.3 TLS_AES_256_GCM_SHA384 fp=96e052a4ce15c5ec¡­ pinned=True
+{
+  "host": "192.168.43.1",
+  "port": 18443,
+  "mode": "pin",
+  "tls": {
+    "version": "TLSv1.3",
+    "cipher": "TLS_AES_256_GCM_SHA384",
+    "fingerprint": "96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f"
+  },
+  "chunk_bytes": 10485760,
+  "count": 60,
+  "ok": 60,
+  "failures": 0,
+  "reconnects": 0,
+  "total_bytes": 629145600,
+  "wall_seconds": 51.019,
+  "avg_MiB_s": 11.76,
+  "p50_chunk_ms": 861.77,
+  "p95_chunk_ms": 1145.95,
+  "min_chunk_ms": 578.75,
+  "max_chunk_ms": 1291.84,
+  "fingerprint_verified": true,
+  "fail_samples": []
+}

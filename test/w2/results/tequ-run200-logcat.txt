@@ -1,0 +1,1315 @@
+11-01 09:40:33.353 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:33.435 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:34.352 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:35.347 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:35.375 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:35.421 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:35.422 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497235347-1793497235422
+11-01 09:40:35.476 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:35.489 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:35.489 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497235347-1793497235489
+11-01 09:40:35.510 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:35.517 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:35.517 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497235347-1793497235517
+11-01 09:40:35.839 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:35.845 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:35.845 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497235347-1793497235845
+11-01 09:40:35.851 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:35.868 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:35.869 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497235347-1793497235869
+11-01 09:40:35.872 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:35.875 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:35.875 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497235347-1793497235875
+11-01 09:40:35.898 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:35.904 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:35.904 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497235347-1793497235904
+11-01 09:40:35.918 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:35.923 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:35.923 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497235347-1793497235923
+11-01 09:40:36.115 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:36.125 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:36.126 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497235347-1793497236126
+11-01 09:40:36.196 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:36.208 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:36.208 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497235347-1793497236208
+11-01 09:40:36.359 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:36.365 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:36.681 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:36.687 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:36.687 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497236366-1793497236687
+11-01 09:40:37.321 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:37.324 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:37.324 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497236366-1793497237324
+11-01 09:40:38.320 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:38.327 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:39.324 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:39.548 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:39.557 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:39.563 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:39.564 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497239548-1793497239564
+11-01 09:40:39.576 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:39.582 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:39.583 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497239548-1793497239583
+11-01 09:40:39.629 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:39.636 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:39.636 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497239548-1793497239636
+11-01 09:40:39.888 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:39.897 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:39.897 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497239548-1793497239897
+11-01 09:40:40.048 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:40.055 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:40.055 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497239548-1793497240055
+11-01 09:40:40.368 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:40.379 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:40.379 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497239548-1793497240379
+11-01 09:40:41.009 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:41.016 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:41.881 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:41.881 W/lmkd    ( 3332): type=1400 audit(0.0:90229): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:41.882 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:41.883 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:438 KillThreshold:400
+11-01 09:40:41.885 E/selinux_dmd( 5141): type=1400 audit(0.0:90229): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:41.885 E/selinux_dmd( 5141): type=1400 audit(0.0:90229): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:41.891 W/lmkd    ( 3332): type=1400 audit(0.0:90230): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:41.895 E/selinux_dmd( 5141): type=1400 audit(0.0:90230): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:41.895 E/selinux_dmd( 5141): type=1400 audit(0.0:90230): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:41.902 W/lmkd    ( 3332): type=1400 audit(0.0:90231): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:41.903 E/selinux_dmd( 5141): type=1400 audit(0.0:90231): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:41.903 E/selinux_dmd( 5141): type=1400 audit(0.0:90231): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:41.912 W/lmkd    ( 3332): type=1400 audit(0.0:90232): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:41.914 E/selinux_dmd( 5141): type=1400 audit(0.0:90232): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:41.914 E/selinux_dmd( 5141): type=1400 audit(0.0:90232): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:41.923 W/lmkd    ( 3332): type=1400 audit(0.0:90233): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:41.924 E/selinux_dmd( 5141): type=1400 audit(0.0:90233): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:41.924 E/selinux_dmd( 5141): type=1400 audit(0.0:90233): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:41.933 W/lmkd    ( 3332): type=1400 audit(0.0:90234): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:41.935 E/selinux_dmd( 5141): type=1400 audit(0.0:90234): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:41.935 E/selinux_dmd( 5141): type=1400 audit(0.0:90234): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:41.984 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:428 KillThreshold:400
+11-01 09:40:41.986 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:41.987 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:41.990 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:426 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:42.008 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:42.024 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:42.025 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:42.036 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:42.037 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497242025-1793497242037
+11-01 09:40:42.037 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:42.062 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:42.062 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:42.062 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497242025-1793497242062
+11-01 09:40:42.069 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:42.069 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497242025-1793497242069
+11-01 09:40:42.082 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:42.086 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:413 KillThreshold:400
+11-01 09:40:42.088 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:42.089 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497242025-1793497242088
+11-01 09:40:42.089 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:42.089 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:42.090 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:42.094 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:412 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:42.096 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:412 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:42.121 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:42.135 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:42.135 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497242025-1793497242135
+11-01 09:40:42.136 I/SWAP_Buffer( 5305): zswapd keep idle, targetBuffer is min, call kill, curBuf: 406
+11-01 09:40:42.140 I/SWAP_Buffer( 5305): buffer low too long, zswapd keep fail, call kill
+11-01 09:40:42.143 I/SWAP_KillDecision( 5305): Begin killApplicationWithZswapdPresure. reqMem:545 405 405 isFull:false
+11-01 09:40:42.146 I/SWAP_AK ( 5305): kTag=1793497242143 ExecuteInternal Start execute AK
+11-01 09:40:42.148 I/SWAP_AK ( 5305): kTag=1793497242143 KillStart 545 405 ZswapdFail def
+11-01 09:40:42.148 I/SWAP_AK ( 5305): kTag=1793497242143 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS]
+11-01 09:40:42.150 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:42.151 I/SWAP_AK ( 5305): kTag=1793497242143 TotalKilledUss 0 MemAva:404
+11-01 09:40:42.151 I/SWAP_AK ( 5305): kTag=1793497242143 ExecuteInternal End execute AK
+11-01 09:40:42.152 I/SWAP_KillDecision( 5305): kTag=1793497242143 killResult:0
+11-01 09:40:42.156 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 404, targetBuffer: 950
+11-01 09:40:42.156 I/SWAP_Buffer( 5305): handle futile kill, close zswapd
+11-01 09:40:42.159 I/SWAP_Buffer( 5305): handle recover zswapd, set target to current
+11-01 09:40:42.196 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:407 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:42.198 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:407 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:42.201 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:42.212 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:42.213 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497242025-1793497242213
+11-01 09:40:42.302 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:408 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:42.362 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:42.378 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:42.378 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497242025-1793497242378
+11-01 09:40:42.684 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:42.695 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:42.695 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497242025-1793497242695
+11-01 09:40:42.896 W/lmkd    ( 3332): type=1400 audit(0.0:90328): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:42.899 E/selinux_dmd( 5141): type=1400 audit(0.0:90328): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:42.899 E/selinux_dmd( 5141): type=1400 audit(0.0:90328): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:42.907 W/lmkd    ( 3332): type=1400 audit(0.0:90329): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:42.908 E/selinux_dmd( 5141): type=1400 audit(0.0:90329): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:42.908 E/selinux_dmd( 5141): type=1400 audit(0.0:90329): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:42.917 W/lmkd    ( 3332): type=1400 audit(0.0:90330): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:42.919 E/selinux_dmd( 5141): type=1400 audit(0.0:90330): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:42.919 E/selinux_dmd( 5141): type=1400 audit(0.0:90330): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:42.921 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:42.922 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:42.921 W/lmkd    ( 3332): type=1400 audit(0.0:90331): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:42.924 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:387 KillThreshold:400
+11-01 09:40:42.924 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:42.927 E/selinux_dmd( 5141): type=1400 audit(0.0:90331): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:42.927 E/selinux_dmd( 5141): type=1400 audit(0.0:90331): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:42.927 I/SWAP_AK ( 5305): kTag=1793497242924 ExecuteInternal Start execute AK
+11-01 09:40:42.927 I/SWAP_AK ( 5305): kTag=1793497242924 KillStart 13 385 LowMem def
+11-01 09:40:42.928 I/SWAP_AK ( 5305): kTag=1793497242924 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:42.929 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:42.928 W/lmkd    ( 3332): type=1400 audit(0.0:90332): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:42.932 E/selinux_dmd( 5141): type=1400 audit(0.0:90332): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:42.932 E/selinux_dmd( 5141): type=1400 audit(0.0:90332): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:42.934 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:42.935 I/SWAP_AK ( 5305): kTag=1793497242924 TotalKilledUss 0 MemAva:381
+11-01 09:40:42.935 I/SWAP_AK ( 5305): kTag=1793497242924 ExecuteInternal End execute AK
+11-01 09:40:42.939 I/SWAP_AK ( 5305): kTag=1793497242924 Go to MmMonitor : nothing to kill
+11-01 09:40:42.939 E/SWAP_MmMonit( 5305): kTag=1793497242924close nothing to kill since userType = 3 or isReportEnable is false!
+11-01 09:40:42.940 I/SWAP_KillDecision( 5305): kTag=1793497242924 killResult:0
+11-01 09:40:42.942 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 378, targetBuffer: 950
+11-01 09:40:43.026 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:43.027 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:43.028 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:361 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:43.028 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:43.030 I/SWAP_AK ( 5305): kTag=1793497243028 ExecuteInternal Start execute AK
+11-01 09:40:43.030 I/SWAP_AK ( 5305): kTag=1793497243028 KillStart 39 360 LowMem def
+11-01 09:40:43.030 I/SWAP_AK ( 5305): kTag=1793497243028 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:43.031 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:43.033 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:43.034 I/SWAP_AK ( 5305): kTag=1793497243028 TotalKilledUss 0 MemAva:359
+11-01 09:40:43.034 I/SWAP_AK ( 5305): kTag=1793497243028 ExecuteInternal End execute AK
+11-01 09:40:43.035 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:43.036 I/SWAP_KillDecision( 5305): kTag=1793497243028 killResult:0
+11-01 09:40:43.038 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 364, targetBuffer: 950
+11-01 09:40:43.233 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:43.234 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:43.234 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:43.237 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:337 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:43.237 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:43.239 I/SWAP_AK ( 5305): kTag=1793497243237 ExecuteInternal Start execute AK
+11-01 09:40:43.239 I/SWAP_AK ( 5305): kTag=1793497243237 KillStart 63 337 LowMem def
+11-01 09:40:43.239 I/SWAP_AK ( 5305): kTag=1793497243237 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:43.240 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:43.243 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:43.244 I/SWAP_AK ( 5305): kTag=1793497243237 TotalKilledUss 0 MemAva:335
+11-01 09:40:43.244 I/SWAP_AK ( 5305): kTag=1793497243237 ExecuteInternal End execute AK
+11-01 09:40:43.245 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:43.245 I/SWAP_KillDecision( 5305): kTag=1793497243237 killResult:0
+11-01 09:40:43.248 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 336, targetBuffer: 950
+11-01 09:40:43.324 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:43.365 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:43.366 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:43.423 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:43.424 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497243366-1793497243424
+11-01 09:40:43.429 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:43.430 I/SWAP_Buffer( 5305): zswapd keep idle, targetBuffer is min, call kill, curBuf: 329
+11-01 09:40:43.456 I/SWAP_Buffer( 5305): buffer low too long, zswapd keep fail, call kill
+11-01 09:40:43.458 I/SWAP_KillDecision( 5305): Begin killApplicationWithZswapdPresure. reqMem:621 329 329 isFull:false
+11-01 09:40:43.460 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:43.460 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497243366-1793497243460
+11-01 09:40:43.460 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:43.464 I/SWAP_AK ( 5305): kTag=1793497243458 ExecuteInternal Start execute AK
+11-01 09:40:43.464 I/SWAP_AK ( 5305): kTag=1793497243458 KillStart 621 328 ZswapdFail def
+11-01 09:40:43.464 I/SWAP_AK ( 5305): kTag=1793497243458 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS]
+11-01 09:40:43.466 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:43.467 I/SWAP_AK ( 5305): kTag=1793497243458 TotalKilledUss 0 MemAva:328
+11-01 09:40:43.467 I/SWAP_AK ( 5305): kTag=1793497243458 ExecuteInternal End execute AK
+11-01 09:40:43.468 I/SWAP_KillDecision( 5305): kTag=1793497243458 killResult:0
+11-01 09:40:43.470 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 328, targetBuffer: 950
+11-01 09:40:43.470 I/SWAP_Buffer( 5305): handle futile kill, close zswapd
+11-01 09:40:43.477 I/SWAP_Buffer( 5305): handle recover zswapd, set target to current
+11-01 09:40:43.480 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:43.486 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:43.486 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497243366-1793497243486
+11-01 09:40:43.522 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:43.541 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:43.541 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497243366-1793497243541
+11-01 09:40:43.602 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:43.611 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:43.612 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497243366-1793497243612
+11-01 09:40:43.762 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:43.774 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:43.774 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497243366-1793497243774
+11-01 09:40:43.775 I/SWAP_Buffer( 5305): zswapd keep idle, targetBuffer is min, call kill, curBuf: 301
+11-01 09:40:43.904 W/lmkd    ( 3332): type=1400 audit(0.0:90417): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:43.905 E/selinux_dmd( 5141): type=1400 audit(0.0:90417): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:43.905 E/selinux_dmd( 5141): type=1400 audit(0.0:90417): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:43.915 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(321368kB) and free(219460kB)-reserved(335708kB) below min(322560kB) for oom_score_adj 950
+11-01 09:40:43.915 I/lowmemorykiller( 3332): Suppressed 1 failed kill reports
+11-01 09:40:43.914 W/lmkd    ( 3332): type=1400 audit(0.0:90418): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:43.915 W/lmkd    ( 3332): type=1400 audit(0.0:90419): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:43.917 E/selinux_dmd( 5141): type=1400 audit(0.0:90418): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:43.917 E/selinux_dmd( 5141): type=1400 audit(0.0:90418): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:43.917 E/selinux_dmd( 5141): type=1400 audit(0.0:90419): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:43.917 E/selinux_dmd( 5141): type=1400 audit(0.0:90419): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:43.925 W/lmkd    ( 3332): type=1400 audit(0.0:90420): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:43.927 E/selinux_dmd( 5141): type=1400 audit(0.0:90420): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:43.927 E/selinux_dmd( 5141): type=1400 audit(0.0:90420): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:43.936 W/lmkd    ( 3332): type=1400 audit(0.0:90421): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:43.941 E/selinux_dmd( 5141): type=1400 audit(0.0:90421): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:43.941 E/selinux_dmd( 5141): type=1400 audit(0.0:90421): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:43.964 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:43.964 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:43.967 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:278 KillThreshold:400
+11-01 09:40:43.967 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:43.969 I/SWAP_AK ( 5305): kTag=1793497243967 ExecuteInternal Start execute AK
+11-01 09:40:43.969 I/SWAP_AK ( 5305): kTag=1793497243967 KillStart 122 278 LowMem def
+11-01 09:40:43.969 I/SWAP_AK ( 5305): kTag=1793497243967 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:43.970 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:43.973 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:43.974 I/SWAP_AK ( 5305): kTag=1793497243967 TotalKilledUss 0 MemAva:277
+11-01 09:40:43.974 I/SWAP_AK ( 5305): kTag=1793497243967 ExecuteInternal End execute AK
+11-01 09:40:43.975 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:43.979 I/SWAP_KillDecision( 5305): kTag=1793497243967 killResult:0
+11-01 09:40:43.983 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 275, targetBuffer: 950
+11-01 09:40:44.065 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:44.065 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:44.068 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:266 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:44.068 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:44.070 I/SWAP_AK ( 5305): kTag=1793497244068 ExecuteInternal Start execute AK
+11-01 09:40:44.070 I/SWAP_AK ( 5305): kTag=1793497244068 KillStart 134 266 LowMem def
+11-01 09:40:44.070 I/SWAP_AK ( 5305): kTag=1793497244068 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:44.071 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:44.073 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:44.074 I/SWAP_AK ( 5305): kTag=1793497244068 TotalKilledUss 0 MemAva:268
+11-01 09:40:44.074 I/SWAP_AK ( 5305): kTag=1793497244068 ExecuteInternal End execute AK
+11-01 09:40:44.075 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:44.076 I/SWAP_KillDecision( 5305): kTag=1793497244068 killResult:0
+11-01 09:40:44.087 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:44.087 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 283, targetBuffer: 950
+11-01 09:40:44.094 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:44.094 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497243366-1793497244094
+11-01 09:40:44.274 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:44.274 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:44.275 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:44.276 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:271 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:44.276 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:44.278 I/SWAP_AK ( 5305): kTag=1793497244276 ExecuteInternal Start execute AK
+11-01 09:40:44.278 I/SWAP_AK ( 5305): kTag=1793497244276 KillStart 129 271 LowMem def
+11-01 09:40:44.278 I/SWAP_AK ( 5305): kTag=1793497244276 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:44.279 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:44.282 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:44.283 I/SWAP_AK ( 5305): kTag=1793497244276 TotalKilledUss 0 MemAva:271
+11-01 09:40:44.283 I/SWAP_AK ( 5305): kTag=1793497244276 ExecuteInternal End execute AK
+11-01 09:40:44.284 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:44.284 I/SWAP_KillDecision( 5305): kTag=1793497244276 killResult:0
+11-01 09:40:44.286 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 271, targetBuffer: 950
+11-01 09:40:44.727 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:44.728 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:44.914 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(267488kB) and free(225880kB)-reserved(339804kB) below min(322560kB) for oom_score_adj 950
+11-01 09:40:44.913 W/lmkd    ( 3332): type=1400 audit(0.0:90514): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:44.914 W/lmkd    ( 3332): type=1400 audit(0.0:90515): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:44.914 I/lowmemorykiller( 3332): Suppressed 95 failed kill reports
+11-01 09:40:44.915 E/selinux_dmd( 5141): type=1400 audit(0.0:90514): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:44.915 E/selinux_dmd( 5141): type=1400 audit(0.0:90514): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:44.915 E/selinux_dmd( 5141): type=1400 audit(0.0:90515): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:44.915 E/selinux_dmd( 5141): type=1400 audit(0.0:90515): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:44.924 W/lmkd    ( 3332): type=1400 audit(0.0:90516): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:44.926 E/selinux_dmd( 5141): type=1400 audit(0.0:90516): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:44.926 E/selinux_dmd( 5141): type=1400 audit(0.0:90516): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:44.935 W/lmkd    ( 3332): type=1400 audit(0.0:90517): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:44.936 E/selinux_dmd( 5141): type=1400 audit(0.0:90517): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:44.936 E/selinux_dmd( 5141): type=1400 audit(0.0:90517): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:44.945 W/lmkd    ( 3332): type=1400 audit(0.0:90518): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:44.946 E/selinux_dmd( 5141): type=1400 audit(0.0:90518): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:44.947 E/selinux_dmd( 5141): type=1400 audit(0.0:90518): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:45.002 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:45.003 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:45.072 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:302 KillThreshold:400
+11-01 09:40:45.073 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:45.086 I/SWAP_AK ( 5305): kTag=1793497245073 ExecuteInternal Start execute AK
+11-01 09:40:45.086 I/SWAP_AK ( 5305): kTag=1793497245073 KillStart 98 305 LowMem def
+11-01 09:40:45.086 I/SWAP_AK ( 5305): kTag=1793497245073 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:45.095 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:45.097 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:45.098 I/SWAP_AK ( 5305): kTag=1793497245073 TotalKilledUss 0 MemAva:323
+11-01 09:40:45.098 I/SWAP_AK ( 5305): kTag=1793497245073 ExecuteInternal End execute AK
+11-01 09:40:45.099 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:45.100 I/SWAP_KillDecision( 5305): kTag=1793497245073 killResult:0
+11-01 09:40:45.102 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 323, targetBuffer: 950
+11-01 09:40:45.106 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:45.106 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:45.107 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:326 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:45.107 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:45.109 I/SWAP_AK ( 5305): kTag=1793497245107 ExecuteInternal Start execute AK
+11-01 09:40:45.109 I/SWAP_AK ( 5305): kTag=1793497245107 KillStart 74 327 LowMem def
+11-01 09:40:45.109 I/SWAP_AK ( 5305): kTag=1793497245107 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:45.110 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:45.112 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:45.113 I/SWAP_AK ( 5305): kTag=1793497245107 TotalKilledUss 0 MemAva:327
+11-01 09:40:45.113 I/SWAP_AK ( 5305): kTag=1793497245107 ExecuteInternal End execute AK
+11-01 09:40:45.114 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:45.114 I/SWAP_KillDecision( 5305): kTag=1793497245107 killResult:0
+11-01 09:40:45.116 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 327, targetBuffer: 950
+11-01 09:40:45.313 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:45.313 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:45.314 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:45.315 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:398 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:45.315 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:45.317 I/SWAP_AK ( 5305): kTag=1793497245315 ExecuteInternal Start execute AK
+11-01 09:40:45.317 I/SWAP_AK ( 5305): kTag=1793497245315 KillStart 2 399 LowMem def
+11-01 09:40:45.317 I/SWAP_AK ( 5305): kTag=1793497245315 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:45.318 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:45.320 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:45.321 I/SWAP_AK ( 5305): kTag=1793497245315 TotalKilledUss 0 MemAva:400
+11-01 09:40:45.321 I/SWAP_AK ( 5305): kTag=1793497245315 ExecuteInternal End execute AK
+11-01 09:40:45.322 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:45.322 I/SWAP_KillDecision( 5305): kTag=1793497245315 killResult:0
+11-01 09:40:45.324 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 400, targetBuffer: 950
+11-01 09:40:45.726 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:45.733 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:45.918 W/lmkd    ( 3332): type=1400 audit(0.0:90611): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:45.919 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(316784kB) and free(416264kB)-reserved(339804kB) below min(322560kB) for oom_score_adj 950
+11-01 09:40:45.919 I/lowmemorykiller( 3332): Suppressed 96 failed kill reports
+11-01 09:40:45.919 E/selinux_dmd( 5141): type=1400 audit(0.0:90611): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:45.919 E/selinux_dmd( 5141): type=1400 audit(0.0:90611): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:45.918 W/lmkd    ( 3332): type=1400 audit(0.0:90612): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:45.920 E/selinux_dmd( 5141): type=1400 audit(0.0:90612): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:45.920 E/selinux_dmd( 5141): type=1400 audit(0.0:90612): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:45.929 W/lmkd    ( 3332): type=1400 audit(0.0:90613): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:45.930 E/selinux_dmd( 5141): type=1400 audit(0.0:90613): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:45.930 E/selinux_dmd( 5141): type=1400 audit(0.0:90613): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:45.939 W/lmkd    ( 3332): type=1400 audit(0.0:90614): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:45.941 E/selinux_dmd( 5141): type=1400 audit(0.0:90614): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:45.941 E/selinux_dmd( 5141): type=1400 audit(0.0:90614): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:45.950 W/lmkd    ( 3332): type=1400 audit(0.0:90615): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:45.951 E/selinux_dmd( 5141): type=1400 audit(0.0:90615): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:45.951 E/selinux_dmd( 5141): type=1400 audit(0.0:90615): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:46.041 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:46.042 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:46.043 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:496 KillThreshold:400
+11-01 09:40:46.144 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:530 KillThreshold:400
+11-01 09:40:46.145 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:46.146 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:46.149 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:531 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:46.245 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:546 KillThreshold:400
+11-01 09:40:46.251 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:545 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:46.352 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:535 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:46.727 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:46.759 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:46.760 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:46.775 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:46.775 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497246759-1793497246775
+11-01 09:40:46.776 I/SWAP_Buffer( 5305): zswapd keep idle, targetBuffer is min, call kill, curBuf: 538
+11-01 09:40:46.776 I/SWAP_Buffer( 5305): buffer low too long, zswapd keep fail, call kill
+11-01 09:40:46.779 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:46.780 I/SWAP_KillDecision( 5305): Begin killApplicationWithZswapdPresure. reqMem:411 539 539 isFull:false
+11-01 09:40:46.782 I/SWAP_AK ( 5305): kTag=1793497246780 ExecuteInternal Start execute AK
+11-01 09:40:46.782 I/SWAP_AK ( 5305): kTag=1793497246780 KillStart 411 540 ZswapdFail def
+11-01 09:40:46.782 I/SWAP_AK ( 5305): kTag=1793497246780 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS]
+11-01 09:40:46.784 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:46.785 I/SWAP_AK ( 5305): kTag=1793497246780 TotalKilledUss 0 MemAva:541
+11-01 09:40:46.785 I/SWAP_AK ( 5305): kTag=1793497246780 ExecuteInternal End execute AK
+11-01 09:40:46.785 I/SWAP_KillDecision( 5305): kTag=1793497246780 killResult:0
+11-01 09:40:46.787 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 541, targetBuffer: 950
+11-01 09:40:46.787 I/SWAP_Buffer( 5305): handle futile kill, close zswapd
+11-01 09:40:46.790 I/SWAP_Buffer( 5305): handle recover zswapd, set target to current
+11-01 09:40:46.827 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:46.840 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:46.840 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497246759-1793497246840
+11-01 09:40:46.935 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:46.942 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:46.942 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497246759-1793497246942
+11-01 09:40:47.081 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:47.081 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:47.082 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(320972kB) and free(573372kB)-reserved(339804kB) below min(322560kB) for oom_score_adj 950
+11-01 09:40:47.082 I/lowmemorykiller( 3332): Suppressed 41 failed kill reports
+11-01 09:40:47.081 W/lmkd    ( 3332): type=1400 audit(0.0:90658): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:47.083 E/selinux_dmd( 5141): type=1400 audit(0.0:90658): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:47.083 E/selinux_dmd( 5141): type=1400 audit(0.0:90658): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:47.081 W/lmkd    ( 3332): type=1400 audit(0.0:90659): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:47.084 E/selinux_dmd( 5141): type=1400 audit(0.0:90659): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:47.084 E/selinux_dmd( 5141): type=1400 audit(0.0:90659): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:47.084 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:635 KillThreshold:400
+11-01 09:40:47.092 W/lmkd    ( 3332): type=1400 audit(0.0:90660): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:47.093 E/selinux_dmd( 5141): type=1400 audit(0.0:90660): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:47.093 E/selinux_dmd( 5141): type=1400 audit(0.0:90660): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:47.095 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:47.102 W/lmkd    ( 3332): type=1400 audit(0.0:90661): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:47.104 E/selinux_dmd( 5141): type=1400 audit(0.0:90661): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:47.104 E/selinux_dmd( 5141): type=1400 audit(0.0:90661): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:47.113 W/lmkd    ( 3332): type=1400 audit(0.0:90662): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:47.114 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:47.114 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497246759-1793497247114
+11-01 09:40:47.117 E/selinux_dmd( 5141): type=1400 audit(0.0:90662): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:47.117 E/selinux_dmd( 5141): type=1400 audit(0.0:90662): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:47.185 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:47.185 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:47.187 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:672 KillThreshold:400
+11-01 09:40:47.188 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:672 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:47.290 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:707 KillThreshold:400
+11-01 09:40:47.293 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:709 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:47.397 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:744 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:47.415 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:47.417 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:47.417 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497246759-1793497247417
+11-01 09:40:48.055 I/SWAP_JniComm( 5305): Begin call handleZswapdUnmet.
+11-01 09:40:48.055 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:48.057 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497248055-1793497248057
+11-01 09:40:48.081 W/lmkd    ( 3332): type=1400 audit(0.0:90759): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:48.083 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(322436kB) and free(517868kB)-reserved(339804kB) below min(322560kB) for oom_score_adj 950
+11-01 09:40:48.083 I/lowmemorykiller( 3332): Suppressed 72 failed kill reports
+11-01 09:40:48.082 W/lmkd    ( 3332): type=1400 audit(0.0:90760): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:48.084 E/selinux_dmd( 5141): type=1400 audit(0.0:90759): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:48.084 E/selinux_dmd( 5141): type=1400 audit(0.0:90759): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:48.084 E/selinux_dmd( 5141): type=1400 audit(0.0:90760): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:48.084 E/selinux_dmd( 5141): type=1400 audit(0.0:90760): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:48.092 W/lmkd    ( 3332): type=1400 audit(0.0:90761): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:48.094 E/selinux_dmd( 5141): type=1400 audit(0.0:90761): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:48.094 E/selinux_dmd( 5141): type=1400 audit(0.0:90761): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:48.103 W/lmkd    ( 3332): type=1400 audit(0.0:90762): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:48.104 E/selinux_dmd( 5141): type=1400 audit(0.0:90762): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:48.104 E/selinux_dmd( 5141): type=1400 audit(0.0:90762): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:48.114 E/selinux_dmd( 5141): type=1400 audit(0.0:90763): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:48.115 E/selinux_dmd( 5141): type=1400 audit(0.0:90763): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:48.113 W/lmkd    ( 3332): type=1400 audit(0.0:90763): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:48.121 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:48.122 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:48.125 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:564 KillThreshold:400
+11-01 09:40:48.226 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:48.226 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:48.229 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:515 KillThreshold:400
+11-01 09:40:48.230 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:515 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:48.332 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:515 KillThreshold:400
+11-01 09:40:48.333 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:516 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:48.435 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:515 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:49.054 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:49.059 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:49.090 W/lmkd    ( 3332): type=1400 audit(0.0:90856): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:49.092 E/selinux_dmd( 5141): type=1400 audit(0.0:90856): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:49.092 E/selinux_dmd( 5141): type=1400 audit(0.0:90856): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:49.100 W/lmkd    ( 3332): type=1400 audit(0.0:90857): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:49.102 E/selinux_dmd( 5141): type=1400 audit(0.0:90857): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:49.102 E/selinux_dmd( 5141): type=1400 audit(0.0:90857): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:49.111 W/lmkd    ( 3332): type=1400 audit(0.0:90858): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:49.112 E/selinux_dmd( 5141): type=1400 audit(0.0:90858): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:49.112 E/selinux_dmd( 5141): type=1400 audit(0.0:90858): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:49.121 W/lmkd    ( 3332): type=1400 audit(0.0:90859): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:49.123 E/selinux_dmd( 5141): type=1400 audit(0.0:90859): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:49.123 E/selinux_dmd( 5141): type=1400 audit(0.0:90859): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:49.132 W/lmkd    ( 3332): type=1400 audit(0.0:90860): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:49.133 E/selinux_dmd( 5141): type=1400 audit(0.0:90860): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:49.133 E/selinux_dmd( 5141): type=1400 audit(0.0:90860): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:49.370 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:49.371 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:49.372 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:344 KillThreshold:400
+11-01 09:40:49.372 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:49.374 I/SWAP_AK ( 5305): kTag=1793497249372 ExecuteInternal Start execute AK
+11-01 09:40:49.374 I/SWAP_AK ( 5305): kTag=1793497249372 KillStart 56 344 LowMem def
+11-01 09:40:49.375 I/SWAP_AK ( 5305): kTag=1793497249372 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:49.376 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:49.379 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:49.380 I/SWAP_AK ( 5305): kTag=1793497249372 TotalKilledUss 0 MemAva:343
+11-01 09:40:49.380 I/SWAP_AK ( 5305): kTag=1793497249372 ExecuteInternal End execute AK
+11-01 09:40:49.382 I/SWAP_AK ( 5305): kTag=1793497249372 Go to MmMonitor : nothing to kill
+11-01 09:40:49.382 E/SWAP_MmMonit( 5305): kTag=1793497249372close nothing to kill since userType = 3 or isReportEnable is false!
+11-01 09:40:49.383 I/SWAP_KillDecision( 5305): kTag=1793497249372 killResult:0
+11-01 09:40:49.385 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 343, targetBuffer: 950
+11-01 09:40:50.055 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:50.076 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:50.099 W/lmkd    ( 3332): type=1400 audit(0.0:90942): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:50.101 E/selinux_dmd( 5141): type=1400 audit(0.0:90942): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:50.101 E/selinux_dmd( 5141): type=1400 audit(0.0:90942): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:50.109 W/lmkd    ( 3332): type=1400 audit(0.0:90943): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:50.112 E/selinux_dmd( 5141): type=1400 audit(0.0:90943): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:50.112 E/selinux_dmd( 5141): type=1400 audit(0.0:90943): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:50.120 W/lmkd    ( 3332): type=1400 audit(0.0:90944): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:50.121 E/selinux_dmd( 5141): type=1400 audit(0.0:90944): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:50.122 E/selinux_dmd( 5141): type=1400 audit(0.0:90944): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:50.130 W/lmkd    ( 3332): type=1400 audit(0.0:90945): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:50.132 E/selinux_dmd( 5141): type=1400 audit(0.0:90945): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:50.132 E/selinux_dmd( 5141): type=1400 audit(0.0:90945): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:50.141 W/lmkd    ( 3332): type=1400 audit(0.0:90946): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:50.142 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(316448kB) and free(147152kB)-reserved(327516kB) below min(322560kB) for oom_score_adj 950
+11-01 09:40:50.142 E/selinux_dmd( 5141): type=1400 audit(0.0:90946): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:50.142 I/lowmemorykiller( 3332): Suppressed 12 failed kill reports
+11-01 09:40:50.142 E/selinux_dmd( 5141): type=1400 audit(0.0:90946): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:51.034 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:51.035 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:51.054 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:51.055 I/SWAP_JniComm( 5305): Begin call handleZswapdUnmet.
+11-01 09:40:51.055 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497250076-1793497251055
+11-01 09:40:51.055 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497250076-1793497251055
+11-01 09:40:51.077 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:120 KillThreshold:400
+11-01 09:40:51.077 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:51.082 I/SWAP_Buffer( 5305): zswapd keep idle, targetBuffer is min, call kill, curBuf: 108
+11-01 09:40:51.083 I/SWAP_Buffer( 5305): buffer low too long, zswapd keep fail, call kill
+11-01 09:40:51.093 I/SWAP_AK ( 5305): kTag=1793497251077 ExecuteInternal Start execute AK
+11-01 09:40:51.094 I/SWAP_AK ( 5305): kTag=1793497251077 KillStart 280 105 LowMem def
+11-01 09:40:51.094 I/SWAP_AK ( 5305): kTag=1793497251077 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:51.107 W/lmkd    ( 3332): type=1400 audit(0.0:90977): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:51.118 W/lmkd    ( 3332): type=1400 audit(0.0:90978): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:51.128 W/lmkd    ( 3332): type=1400 audit(0.0:90979): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:51.138 W/lmkd    ( 3332): type=1400 audit(0.0:90980): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:51.138 W/lmkd    ( 3332): type=1400 audit(0.0:90981): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:51.138 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:51.150 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(178972kB) and free(145572kB)-reserved(315228kB) below min(221184kB) for oom_score_adj 900
+11-01 09:40:51.150 I/lowmemorykiller( 3332): Suppressed 35 failed kill reports
+11-01 09:40:51.186 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:51.187 E/selinux_dmd( 5141): type=1400 audit(0.0:90977): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:51.187 E/selinux_dmd( 5141): type=1400 audit(0.0:90977): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:51.187 E/selinux_dmd( 5141): type=1400 audit(0.0:90978): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:51.187 E/selinux_dmd( 5141): type=1400 audit(0.0:90978): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:51.187 E/selinux_dmd( 5141): type=1400 audit(0.0:90979): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:51.187 E/selinux_dmd( 5141): type=1400 audit(0.0:90979): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:51.187 E/selinux_dmd( 5141): type=1400 audit(0.0:90980): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:51.187 E/selinux_dmd( 5141): type=1400 audit(0.0:90980): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:51.187 E/selinux_dmd( 5141): type=1400 audit(0.0:90981): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:51.187 E/selinux_dmd( 5141): type=1400 audit(0.0:90981): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:51.245 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:51.245 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:51.245 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:51.338 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:51.343 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:51.345 I/SWAP_AK ( 5305): kTag=1793497251077 TotalKilledUss 0 MemAva:121
+11-01 09:40:51.345 I/SWAP_AK ( 5305): kTag=1793497251077 ExecuteInternal End execute AK
+11-01 09:40:51.346 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:51.347 I/SWAP_KillDecision( 5305): kTag=1793497251077 killResult:0
+11-01 09:40:51.351 I/SWAP_KillDecision( 5305): Begin killApplicationWithZswapdPresure. reqMem:831 119 119 isFull:false
+11-01 09:40:51.353 I/SWAP_AK ( 5305): kTag=1793497251351 ExecuteInternal Start execute AK
+11-01 09:40:51.353 I/SWAP_AK ( 5305): kTag=1793497251351 KillStart 831 119 ZswapdFail def
+11-01 09:40:51.353 I/SWAP_AK ( 5305): kTag=1793497251351 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS]
+11-01 09:40:51.354 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:51.354 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 119, targetBuffer: 950
+11-01 09:40:51.355 I/SWAP_AK ( 5305): kTag=1793497251351 TotalKilledUss 0 MemAva:119
+11-01 09:40:51.355 I/SWAP_AK ( 5305): kTag=1793497251351 ExecuteInternal End execute AK
+11-01 09:40:51.356 I/SWAP_KillDecision( 5305): kTag=1793497251351 killResult:0
+11-01 09:40:51.359 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:121 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:51.359 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:51.360 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 121, targetBuffer: 950
+11-01 09:40:51.361 I/SWAP_Buffer( 5305): handle futile kill, close zswapd
+11-01 09:40:51.361 I/SWAP_AK ( 5305): kTag=1793497251359 ExecuteInternal Start execute AK
+11-01 09:40:51.361 I/SWAP_AK ( 5305): kTag=1793497251359 KillStart 279 120 LowMem def
+11-01 09:40:51.361 I/SWAP_AK ( 5305): kTag=1793497251359 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:51.362 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:51.365 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:51.366 I/SWAP_AK ( 5305): kTag=1793497251359 TotalKilledUss 0 MemAva:119
+11-01 09:40:51.366 I/SWAP_AK ( 5305): kTag=1793497251359 ExecuteInternal End execute AK
+11-01 09:40:51.367 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:51.373 I/SWAP_KillDecision( 5305): kTag=1793497251359 killResult:0
+11-01 09:40:51.374 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:118 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:51.374 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:51.375 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 118, targetBuffer: 950
+11-01 09:40:51.376 I/SWAP_AK ( 5305): kTag=1793497251374 ExecuteInternal Start execute AK
+11-01 09:40:51.376 I/SWAP_AK ( 5305): kTag=1793497251374 KillStart 282 118 LowMem def
+11-01 09:40:51.376 I/SWAP_AK ( 5305): kTag=1793497251374 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:51.378 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:51.380 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:51.381 I/SWAP_AK ( 5305): kTag=1793497251374 TotalKilledUss 0 MemAva:117
+11-01 09:40:51.381 I/SWAP_AK ( 5305): kTag=1793497251374 ExecuteInternal End execute AK
+11-01 09:40:51.382 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:51.383 I/SWAP_KillDecision( 5305): kTag=1793497251374 killResult:0
+11-01 09:40:51.388 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 117, targetBuffer: 950
+11-01 09:40:51.414 I/lowmemorykiller( 3332): Kill 'com.device.launcheridea' (1475), uid 10056, oom_score_adj 200 to free 93940kB rss, 171524kb swap
+11-01 09:40:51.415 I/lowmemorykiller( 3332): Reclaimed 93940kB, cache(108440kB) and free(198136kB)-reserved(319324kB) below min(110592kB) for oom_score_adj 200
+11-01 09:40:51.415 I/lowmemorykiller( 3332): Suppressed 25 failed kill reports
+11-01 09:40:51.415 E/lowmemorykiller( 3332): Attempt to wait for a kill while another wait is in progress
+11-01 09:40:51.417 I/lowmemorykiller( 3332): Kill 'com.device.meeting' (3418), uid 10019, oom_score_adj 200 to free 43560kB rss, 34328kb swap
+11-01 09:40:51.417 E/lowmemorykiller( 3332): /proc/3418/status too large
+11-01 09:40:51.417 I/lowmemorykiller( 3332): Reclaimed 43560kB, cache(106724kB) and free(197632kB)-reserved(319324kB) below min(110592kB) for oom_score_adj 200
+11-01 09:40:51.429 I/PgedBinderListener( 6520): kstate callback type:8 value1=1475 value2=KILLED value3=[9]
+11-01 09:40:51.448 I/PgedBinderListener( 6520): kstate callback type:8 value1=3418 value2=KILLED value3=[9]
+11-01 09:40:51.506 I/Zygote  ( 3832): Process 3418 exited due to signal 9 (Killed)
+11-01 09:40:51.513 I/ActivityManager( 5305): appDiedLocked: pid=3418, app=ProcessRecord{549a366 3418:com.device.meeting/u0a19}, fromBinderDied=true, reason=null
+11-01 09:40:51.531 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10019 pid 3418 in 0ms
+11-01 09:40:51.620 I/Zygote  ( 3832): Process 1475 exited due to signal 9 (Killed)
+11-01 09:40:52.055 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:52.073 I/lowmemorykiller( 3332): 5 memory pressure events were skipped after a kill!
+11-01 09:40:52.074 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:52.074 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:52.075 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:216 KillThreshold:400
+11-01 09:40:52.075 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:52.085 I/SWAP_AK ( 5305): kTag=1793497252075 ExecuteInternal Start execute AK
+11-01 09:40:52.085 I/SWAP_AK ( 5305): kTag=1793497252075 KillStart 184 217 LowMem def
+11-01 09:40:52.086 I/SWAP_AK ( 5305): kTag=1793497252075 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:52.087 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:52.090 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:52.091 I/SWAP_AK ( 5305): kTag=1793497252075 TotalKilledUss 0 MemAva:217
+11-01 09:40:52.091 I/SWAP_AK ( 5305): kTag=1793497252075 ExecuteInternal End execute AK
+11-01 09:40:52.092 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:52.093 I/SWAP_KillDecision( 5305): kTag=1793497252075 killResult:0
+11-01 09:40:52.095 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 217, targetBuffer: 950
+11-01 09:40:52.097 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:52.103 E/MediaClientController( 6203): handleUnusualAppDied, savedForegroundApp does not equal appDied packageName, pkgName = com.device.meeting, savedForegroundAppPkg = com.phonefs.source
+11-01 09:40:52.115 W/lmkd    ( 3332): type=1400 audit(0.0:91021): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:52.117 E/selinux_dmd( 5141): type=1400 audit(0.0:91021): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:52.117 E/selinux_dmd( 5141): type=1400 audit(0.0:91021): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:52.118 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:52.125 W/lmkd    ( 3332): type=1400 audit(0.0:91022): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:52.128 E/selinux_dmd( 5141): type=1400 audit(0.0:91022): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:52.128 E/selinux_dmd( 5141): type=1400 audit(0.0:91022): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:52.136 W/lmkd    ( 3332): type=1400 audit(0.0:91023): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:52.137 E/selinux_dmd( 5141): type=1400 audit(0.0:91023): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:52.137 E/selinux_dmd( 5141): type=1400 audit(0.0:91023): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:52.146 W/lmkd    ( 3332): type=1400 audit(0.0:91024): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:52.150 E/selinux_dmd( 5141): type=1400 audit(0.0:91024): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:52.151 E/selinux_dmd( 5141): type=1400 audit(0.0:91024): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:52.151 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.meeting uid:10019 pid:3418 proc: activity:null
+11-01 09:40:52.157 W/lmkd    ( 3332): type=1400 audit(0.0:91025): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:52.159 E/selinux_dmd( 5141): type=1400 audit(0.0:91025): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:52.159 E/selinux_dmd( 5141): type=1400 audit(0.0:91025): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:52.173 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:52.173 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497252097-1793497252173
+11-01 09:40:52.177 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:52.178 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:52.179 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:220 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:52.179 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:52.180 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:52.190 I/SWAP_Scene( 5305): This app was killed: com.device.meeting
+11-01 09:40:52.224 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:52.224 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497252097-1793497252224
+11-01 09:40:52.235 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:52.282 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:52.282 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:52.283 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:52.300 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:52.300 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497252097-1793497252300
+11-01 09:40:52.305 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:52.393 I/SWAP_AK ( 5305): kTag=1793497252179 ExecuteInternal Start execute AK
+11-01 09:40:52.393 I/SWAP_AK ( 5305): kTag=1793497252179 KillStart 180 252 LowMem def
+11-01 09:40:52.393 I/SWAP_AK ( 5305): kTag=1793497252179 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:52.407 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(231140kB) and free(250600kB)-reserved(323420kB) below min(322560kB) for oom_score_adj 950
+11-01 09:40:52.408 I/lowmemorykiller( 3332): Suppressed 35 failed kill reports
+11-01 09:40:52.408 I/ActivityManager( 5305): appDiedLocked: pid=1475, app=ProcessRecord{20f635b 1475:com.device.launcheridea/u0a56}, fromBinderDied=true, reason=null
+11-01 09:40:52.408 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:52.421 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10056 pid 1475 in 0ms
+11-01 09:40:52.424 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:52.426 I/SWAP_AK ( 5305): kTag=1793497252179 TotalKilledUss 0 MemAva:252
+11-01 09:40:52.426 I/SWAP_AK ( 5305): kTag=1793497252179 ExecuteInternal End execute AK
+11-01 09:40:52.427 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:52.427 I/SWAP_KillDecision( 5305): kTag=1793497252179 killResult:0
+11-01 09:40:52.430 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:251 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:52.430 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:52.430 E/MediaClientController( 6203): handleUnusualAppDied, savedForegroundApp does not equal appDied packageName, pkgName = com.device.launcheridea, savedForegroundAppPkg = com.phonefs.source
+11-01 09:40:52.435 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 252, targetBuffer: 950
+11-01 09:40:52.435 I/SWAP_AK ( 5305): kTag=1793497252430 ExecuteInternal Start execute AK
+11-01 09:40:52.435 I/SWAP_AK ( 5305): kTag=1793497252430 KillStart 149 250 LowMem def
+11-01 09:40:52.435 I/SWAP_AK ( 5305): kTag=1793497252430 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:52.436 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:52.437 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:52.439 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:52.440 I/SWAP_AK ( 5305): kTag=1793497252430 TotalKilledUss 0 MemAva:250
+11-01 09:40:52.440 I/SWAP_AK ( 5305): kTag=1793497252430 ExecuteInternal End execute AK
+11-01 09:40:52.441 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:52.442 I/SWAP_KillDecision( 5305): kTag=1793497252430 killResult:0
+11-01 09:40:52.444 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 250, targetBuffer: 950
+11-01 09:40:52.455 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:52.519 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.launcheridea uid:10056 pid:1475 proc: activity:null
+11-01 09:40:52.526 E/SWAP_Stat( 5305): runStateInfo logfile is too large: 802043
+11-01 09:40:52.527 I/SWAP_Scene( 5305): This app was killed: com.device.launcheridea
+11-01 09:40:52.640 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_CREATE pkg:com.device.meeting uid:10019 pid:6753 proc: activity:null
+11-01 09:40:52.698 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:52.698 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497252097-1793497252698
+11-01 09:40:52.699 I/SWAP_Buffer( 5305): zswapd keep idle, targetBuffer is min, call kill, curBuf: 240
+11-01 09:40:52.700 I/SWAP_Buffer( 5305): buffer low too long, zswapd keep fail, call kill
+11-01 09:40:52.702 I/SWAP_KillDecision( 5305): Begin killApplicationWithZswapdPresure. reqMem:711 239 240 isFull:false
+11-01 09:40:52.704 I/SWAP_AK ( 5305): kTag=1793497252702 ExecuteInternal Start execute AK
+11-01 09:40:52.704 I/SWAP_AK ( 5305): kTag=1793497252702 KillStart 711 242 ZswapdFail def
+11-01 09:40:52.705 I/SWAP_AK ( 5305): kTag=1793497252702 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS]
+11-01 09:40:52.706 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:52.708 I/SWAP_AK ( 5305): kTag=1793497252702 TotalKilledUss 0 MemAva:251
+11-01 09:40:52.708 I/SWAP_AK ( 5305): kTag=1793497252702 ExecuteInternal End execute AK
+11-01 09:40:52.708 I/SWAP_KillDecision( 5305): kTag=1793497252702 killResult:0
+11-01 09:40:52.710 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 254, targetBuffer: 950
+11-01 09:40:52.710 I/SWAP_Buffer( 5305): handle futile kill, close zswapd
+11-01 09:40:52.710 I/SWAP_JniComm( 5305): Begin call handleZswapdUnmet.
+11-01 09:40:52.711 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:52.711 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497252097-1793497252711
+11-01 09:40:52.711 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497252097-1793497252711
+11-01 09:40:52.712 I/SWAP_Buffer( 5305): handle recover zswapd, set target to current
+11-01 09:40:52.790 I/SWAP_JniComm( 5305): Begin call handleZswapdUnmet.
+11-01 09:40:52.791 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497252097-1793497252791
+11-01 09:40:52.791 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:52.791 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497252097-1793497252791
+11-01 09:40:52.951 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:53.031 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:53.031 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497252097-1793497253031
+11-01 09:40:53.035 I/SWAP_Buffer( 5305): zswapd keep idle, targetBuffer is min, call kill, curBuf: 263
+11-01 09:40:53.114 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:53.115 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:53.116 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:266 KillThreshold:400
+11-01 09:40:53.117 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:53.117 W/lmkd    ( 3332): type=1400 audit(0.0:91130): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:53.119 I/SWAP_AK ( 5305): kTag=1793497253117 ExecuteInternal Start execute AK
+11-01 09:40:53.119 I/SWAP_AK ( 5305): kTag=1793497253117 KillStart 134 266 LowMem def
+11-01 09:40:53.119 E/selinux_dmd( 5141): type=1400 audit(0.0:91130): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:53.119 E/selinux_dmd( 5141): type=1400 audit(0.0:91130): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:53.119 I/SWAP_AK ( 5305): kTag=1793497253117 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:53.120 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:53.128 W/lmkd    ( 3332): type=1400 audit(0.0:91131): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:53.130 E/selinux_dmd( 5141): type=1400 audit(0.0:91131): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:53.130 E/selinux_dmd( 5141): type=1400 audit(0.0:91131): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:53.138 W/lmkd    ( 3332): type=1400 audit(0.0:91132): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:53.141 E/selinux_dmd( 5141): type=1400 audit(0.0:91132): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:53.141 E/selinux_dmd( 5141): type=1400 audit(0.0:91132): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:53.145 D/AdvancedKillerIO( 5305): AkRead Can't access file: /proc/gpu_memory
+11-01 09:40:53.146 I/SWAP_AK ( 5305): kTag=1793497253117 Candidate com.device.infowinservice 0 -1 1208 0 0 1159 0 0 -1
+11-01 09:40:53.146 I/SWAP_AK ( 5305): ExecuteInternal Kill List: LEVEL_2
+11-01 09:40:53.149 W/lmkd    ( 3332): type=1400 audit(0.0:91133): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:53.150 E/selinux_dmd( 5141): type=1400 audit(0.0:91133): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:53.150 E/selinux_dmd( 5141): type=1400 audit(0.0:91133): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:53.160 W/lmkd    ( 3332): type=1400 audit(0.0:91134): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:53.163 E/selinux_dmd( 5141): type=1400 audit(0.0:91134): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:53.163 E/selinux_dmd( 5141): type=1400 audit(0.0:91134): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:53.180 D/SWAP_AK ( 5305): kTag=1793497253117 ModelResults UB sorted pkglist:
+11-01 09:40:53.181 D/SWAP_AK ( 5305): kTag=1793497253117 	Sorted 01 com.device.infowinservice(predictPos=0)
+11-01 09:40:53.194 D/SWAP_AK ( 5305): kTag=1793497253117 getVictimInfo 1st chosen from greedy: 
+11-01 09:40:53.194 D/SWAP_AK ( 5305): kTag=1793497253117 getVictimInfo 	com.device.infowinservice
+11-01 09:40:53.194 D/SWAP_AK ( 5305): kTag=1793497253117 getVictimInfo 2nd chosen from filtered: 
+11-01 09:40:53.194 D/SWAP_AK ( 5305): kTag=1793497253117 getVictimInfo 3rd the rest: 
+11-01 09:40:53.194 D/SWAP_AK ( 5305): kTag=1793497253117 getVictimInfo Added for memory emerg: 
+11-01 09:40:53.194 D/SWAP_AK ( 5305): kTag=1793497253117 getVictimInfo Added from lastestUsed: 
+11-01 09:40:53.197 D/SWAP_AK ( 5305): KillForMem com.device.infowinservice need to recheck adj
+11-01 09:40:53.217 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:53.217 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:53.224 D/ActivityManager( 5305): Unofficial unlink for pid:3536, dyingPid:0, caller:com.android.server.am.HwActivityManagerServiceEx.killProcessRecordInternal:1030 com.android.server.am.HwActivityManagerServiceEx.killProcessRecordFast:969 com.android.server.am.ActivityManagerService$HwInnerActivityManagerService.killProcessRecordFast:20793 com.huawei.android.app.HwActivityManager.killProcessRecordFast:670 com.android.server.mtm.taskstatus.ProcessCleaner.killProcessFast:1200 com.android.server.mtm.taskstatus.ProcessCleaner.getFastKillResult:909 com.android.server.mtm.taskstatus.ProcessCleaner.killProcessesSameUidFast:1010 
+11-01 09:40:53.224 I/ActivityManager( 5305): Killing 3536:com.device.infowinservice/u0a75 (adj 905): iAwareF[AK-LowMem](cch-empty) -1ms
+11-01 09:40:53.226 D/ProcessCleaner( 5305): [aware_mem] fast kill success , pid:3536, uid:10075, com.device.infowinservice, [com.device.infowinservice], mHasShownUi:false, null, class:0, 0, 0, 0, adj:905 is killed
+11-01 09:40:53.226 I/SWAP_AK ( 5305): kTag=1793497253117 Killed com.device.infowinservice killReason: LowMem killType: regular
+11-01 09:40:53.229 I/SWAP_AK ( 5305): kTag=1793497253117 TotalKilledUss 2367 MemAva:266
+11-01 09:40:53.229 I/SWAP_AK ( 5305): kTag=1793497253117 ExecuteInternal End execute AK
+11-01 09:40:53.232 I/SWAP_KillDecision( 5305): kTag=1793497253117 killResult:1
+11-01 09:40:53.232 I/PgedBinderListener( 6520): kstate callback type:8 value1=3536 value2=KILLED value3=[9]
+11-01 09:40:53.233 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:266 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:53.233 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:53.236 I/SWAP_AK ( 5305): kTag=1793497253233 ExecuteInternal Start execute AK
+11-01 09:40:53.236 I/SWAP_AK ( 5305): kTag=1793497253233 KillStart 134 266 LowMem def
+11-01 09:40:53.236 I/SWAP_AK ( 5305): kTag=1793497253233 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:53.237 E/MediaClientController( 6203): handleUnusualAppDied, savedForegroundApp does not equal appDied packageName, pkgName = com.device.infowinservice, savedForegroundAppPkg = com.phonefs.source
+11-01 09:40:53.237 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:53.238 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.infowinservice uid:10075 pid:3536 proc: activity:null
+11-01 09:40:53.240 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:53.241 I/SWAP_AK ( 5305): kTag=1793497253233 TotalKilledUss 0 MemAva:266
+11-01 09:40:53.241 I/SWAP_AK ( 5305): kTag=1793497253233 ExecuteInternal End execute AK
+11-01 09:40:53.242 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:53.248 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 266, targetBuffer: 950
+11-01 09:40:53.251 I/SWAP_Scene( 5305): This app was killed: com.device.infowinservice
+11-01 09:40:53.252 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10075 pid 3536 in 26ms
+11-01 09:40:53.253 I/SWAP_KillDecision( 5305): kTag=1793497253233 killResult:0
+11-01 09:40:53.255 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 267, targetBuffer: 950
+11-01 09:40:53.263 I/Zygote  ( 3832): Process 3536 exited due to signal 9 (Killed)
+11-01 09:40:53.271 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:53.360 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:53.911 I/SWAP_JniComm( 5305): Begin call handleZswapdUnmet.
+11-01 09:40:53.911 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:53.911 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497253360-1793497253911
+11-01 09:40:53.911 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497253360-1793497253911
+11-01 09:40:54.155 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(208876kB) and free(223252kB)-reserved(339804kB) below min(221184kB) for oom_score_adj 900
+11-01 09:40:54.155 I/lowmemorykiller( 3332): Suppressed 87 failed kill reports
+11-01 09:40:54.155 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:54.156 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:54.157 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:214 KillThreshold:400
+11-01 09:40:54.158 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:54.154 W/lmkd    ( 3332): type=1400 audit(0.0:91152): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:54.155 W/lmkd    ( 3332): type=1400 audit(0.0:91153): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:54.164 I/SWAP_AK ( 5305): kTag=1793497254158 ExecuteInternal Start execute AK
+11-01 09:40:54.165 I/SWAP_AK ( 5305): kTag=1793497254158 KillStart 186 213 LowMem def
+11-01 09:40:54.165 I/SWAP_AK ( 5305): kTag=1793497254158 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:54.165 E/selinux_dmd( 5141): type=1400 audit(0.0:91152): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:54.165 E/selinux_dmd( 5141): type=1400 audit(0.0:91152): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:54.165 E/selinux_dmd( 5141): type=1400 audit(0.0:91153): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:54.165 W/lmkd    ( 3332): type=1400 audit(0.0:91154): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:54.165 E/selinux_dmd( 5141): type=1400 audit(0.0:91153): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:54.166 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:54.166 E/selinux_dmd( 5141): type=1400 audit(0.0:91154): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:54.166 E/selinux_dmd( 5141): type=1400 audit(0.0:91154): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:54.169 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:54.170 I/SWAP_AK ( 5305): kTag=1793497254158 TotalKilledUss 0 MemAva:213
+11-01 09:40:54.170 I/SWAP_AK ( 5305): kTag=1793497254158 ExecuteInternal End execute AK
+11-01 09:40:54.171 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:54.172 I/SWAP_KillDecision( 5305): kTag=1793497254158 killResult:0
+11-01 09:40:54.174 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 213, targetBuffer: 950
+11-01 09:40:54.257 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:54.257 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:54.259 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:211 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:54.259 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:54.261 I/SWAP_AK ( 5305): kTag=1793497254259 ExecuteInternal Start execute AK
+11-01 09:40:54.261 I/SWAP_AK ( 5305): kTag=1793497254259 KillStart 189 211 LowMem def
+11-01 09:40:54.261 I/SWAP_AK ( 5305): kTag=1793497254259 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:54.262 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:54.265 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:54.266 I/SWAP_AK ( 5305): kTag=1793497254259 TotalKilledUss 0 MemAva:211
+11-01 09:40:54.266 I/SWAP_AK ( 5305): kTag=1793497254259 ExecuteInternal End execute AK
+11-01 09:40:54.266 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:54.267 I/SWAP_KillDecision( 5305): kTag=1793497254259 killResult:0
+11-01 09:40:54.269 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 210, targetBuffer: 950
+11-01 09:40:54.777 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:54.777 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:54.778 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:54.912 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:55.027 I/ActivityManager( 5305):   ntv   ??    1048: lmkd (pid 3332) native
+11-01 09:40:55.027 I/ActivityManager( 5305):   fg     TOP  10176866: com.phonefs.source (pid 2169) top-activity
+11-01 09:40:55.027 I/ActivityManager( 5305):   ZRAM:   233,456K RAM, 2,293,756K swap total,         0K swap free
+11-01 09:40:55.065 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:55.157 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(119684kB) and free(221956kB)-reserved(339804kB) below min(129024kB) for oom_score_adj 250
+11-01 09:40:55.157 I/lowmemorykiller( 3332): Suppressed 97 failed kill reports
+11-01 09:40:55.156 W/lmkd    ( 3332): type=1400 audit(0.0:91252): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:55.157 W/lmkd    ( 3332): type=1400 audit(0.0:91253): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:55.159 E/selinux_dmd( 5141): type=1400 audit(0.0:91252): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:55.159 E/selinux_dmd( 5141): type=1400 audit(0.0:91252): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:55.159 E/selinux_dmd( 5141): type=1400 audit(0.0:91253): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:55.159 E/selinux_dmd( 5141): type=1400 audit(0.0:91253): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:55.167 W/lmkd    ( 3332): type=1400 audit(0.0:91254): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:55.169 E/selinux_dmd( 5141): type=1400 audit(0.0:91254): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:55.169 E/selinux_dmd( 5141): type=1400 audit(0.0:91254): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:55.178 W/lmkd    ( 3332): type=1400 audit(0.0:91255): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:55.179 E/selinux_dmd( 5141): type=1400 audit(0.0:91255): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:55.179 E/selinux_dmd( 5141): type=1400 audit(0.0:91255): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:55.188 W/lmkd    ( 3332): type=1400 audit(0.0:91256): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:55.190 E/selinux_dmd( 5141): type=1400 audit(0.0:91256): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:55.190 E/selinux_dmd( 5141): type=1400 audit(0.0:91256): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:55.401 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:55.402 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:55.402 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:55.402 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:55.403 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:141 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:55.403 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:55.458 I/SWAP_AK ( 5305): kTag=1793497255403 ExecuteInternal Start execute AK
+11-01 09:40:55.458 I/SWAP_AK ( 5305): kTag=1793497255403 KillStart 259 156 LowMem def
+11-01 09:40:55.458 I/SWAP_AK ( 5305): kTag=1793497255403 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:55.486 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:55.489 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:55.490 I/SWAP_AK ( 5305): kTag=1793497255403 TotalKilledUss 0 MemAva:157
+11-01 09:40:55.490 I/SWAP_AK ( 5305): kTag=1793497255403 ExecuteInternal End execute AK
+11-01 09:40:55.494 I/SWAP_AK ( 5305): kTag=1793497255403 Go to MmMonitor : nothing to kill
+11-01 09:40:55.494 E/SWAP_MmMonit( 5305): kTag=1793497255403close nothing to kill since userType = 3 or isReportEnable is false!
+11-01 09:40:55.495 I/SWAP_KillDecision( 5305): kTag=1793497255403 killResult:0
+11-01 09:40:55.496 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:156 KillThreshold:400
+11-01 09:40:55.496 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:55.497 I/SWAP_AK ( 5305): kTag=1793497255496 ExecuteInternal Start execute AK
+11-01 09:40:55.498 I/SWAP_AK ( 5305): kTag=1793497255496 KillStart 244 156 LowMem def
+11-01 09:40:55.498 I/SWAP_AK ( 5305): kTag=1793497255496 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:55.498 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:55.501 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:55.502 I/SWAP_AK ( 5305): kTag=1793497255496 TotalKilledUss 0 MemAva:156
+11-01 09:40:55.502 I/SWAP_AK ( 5305): kTag=1793497255496 ExecuteInternal End execute AK
+11-01 09:40:55.503 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:55.504 I/SWAP_KillDecision( 5305): kTag=1793497255496 killResult:0
+11-01 09:40:55.505 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:156 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:55.505 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:55.507 I/SWAP_AK ( 5305): kTag=1793497255505 ExecuteInternal Start execute AK
+11-01 09:40:55.507 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 156, targetBuffer: 950
+11-01 09:40:55.507 I/SWAP_AK ( 5305): kTag=1793497255505 KillStart 244 156 LowMem def
+11-01 09:40:55.507 I/SWAP_AK ( 5305): kTag=1793497255505 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:55.508 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:55.509 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 156, targetBuffer: 950
+11-01 09:40:55.510 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:55.511 I/SWAP_AK ( 5305): kTag=1793497255505 TotalKilledUss 0 MemAva:156
+11-01 09:40:55.511 I/SWAP_AK ( 5305): kTag=1793497255505 ExecuteInternal End execute AK
+11-01 09:40:55.512 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:55.513 I/SWAP_KillDecision( 5305): kTag=1793497255505 killResult:0
+11-01 09:40:55.524 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 155, targetBuffer: 950
+11-01 09:40:55.817 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:55.817 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:55.817 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:55.819 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:150 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:55.819 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:55.820 I/SWAP_AK ( 5305): kTag=1793497255819 ExecuteInternal Start execute AK
+11-01 09:40:55.820 I/SWAP_AK ( 5305): kTag=1793497255819 KillStart 250 149 LowMem def
+11-01 09:40:55.820 I/SWAP_AK ( 5305): kTag=1793497255819 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:55.822 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:55.824 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:55.825 I/SWAP_AK ( 5305): kTag=1793497255819 TotalKilledUss 0 MemAva:149
+11-01 09:40:55.825 I/SWAP_AK ( 5305): kTag=1793497255819 ExecuteInternal End execute AK
+11-01 09:40:55.826 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:55.827 I/SWAP_KillDecision( 5305): kTag=1793497255819 killResult:0
+11-01 09:40:55.830 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 147, targetBuffer: 950
+11-01 09:40:55.912 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:56.111 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:56.120 I/SWAP_Buffer( 5305): zswapd keep idle, targetBuffer is min, call kill, curBuf: 157
+11-01 09:40:56.140 I/SWAP_Buffer( 5305): buffer low too long, zswapd keep fail, call kill
+11-01 09:40:56.142 I/SWAP_KillDecision( 5305): Begin killApplicationWithZswapdPresure. reqMem:788 162 162 isFull:false
+11-01 09:40:56.165 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(131240kB) and free(230976kB)-reserved(335708kB) below min(221184kB) for oom_score_adj 900
+11-01 09:40:56.165 I/lowmemorykiller( 3332): Suppressed 96 failed kill reports
+11-01 09:40:56.168 I/SWAP_AK ( 5305): kTag=1793497256142 ExecuteInternal Start execute AK
+11-01 09:40:56.168 I/SWAP_AK ( 5305): kTag=1793497256142 KillStart 788 165 ZswapdFail def
+11-01 09:40:56.168 I/SWAP_AK ( 5305): kTag=1793497256142 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS]
+11-01 09:40:56.192 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:56.193 I/SWAP_AK ( 5305): kTag=1793497256142 TotalKilledUss 0 MemAva:164
+11-01 09:40:56.193 I/SWAP_AK ( 5305): kTag=1793497256142 ExecuteInternal End execute AK
+11-01 09:40:56.194 I/SWAP_KillDecision( 5305): kTag=1793497256142 killResult:0
+11-01 09:40:56.196 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 165, targetBuffer: 950
+11-01 09:40:56.196 I/SWAP_Buffer( 5305): handle futile kill, close zswapd
+11-01 09:40:56.199 I/SWAP_Buffer( 5305): handle recover zswapd, set target to current
+11-01 09:40:56.164 W/lmkd    ( 3332): type=1400 audit(0.0:91352): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:56.164 W/lmkd    ( 3332): type=1400 audit(0.0:91353): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:56.175 W/lmkd    ( 3332): type=1400 audit(0.0:91354): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:56.185 W/lmkd    ( 3332): type=1400 audit(0.0:91355): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:56.196 W/lmkd    ( 3332): type=1400 audit(0.0:91356): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:56.206 E/selinux_dmd( 5141): type=1400 audit(0.0:91352): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:56.206 E/selinux_dmd( 5141): type=1400 audit(0.0:91352): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:56.206 E/selinux_dmd( 5141): type=1400 audit(0.0:91353): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:56.206 E/selinux_dmd( 5141): type=1400 audit(0.0:91353): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:56.206 E/selinux_dmd( 5141): type=1400 audit(0.0:91354): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:56.206 E/selinux_dmd( 5141): type=1400 audit(0.0:91354): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:56.206 E/selinux_dmd( 5141): type=1400 audit(0.0:91355): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:56.206 E/selinux_dmd( 5141): type=1400 audit(0.0:91355): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:56.206 E/selinux_dmd( 5141): type=1400 audit(0.0:91356): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:56.206 E/selinux_dmd( 5141): type=1400 audit(0.0:91356): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:56.240 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:56.242 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:56.243 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:164 KillThreshold:400
+11-01 09:40:56.243 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:56.245 I/SWAP_AK ( 5305): kTag=1793497256243 ExecuteInternal Start execute AK
+11-01 09:40:56.245 I/SWAP_AK ( 5305): kTag=1793497256243 KillStart 236 164 LowMem def
+11-01 09:40:56.245 I/SWAP_AK ( 5305): kTag=1793497256243 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:56.247 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:56.249 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:56.250 I/SWAP_AK ( 5305): kTag=1793497256243 TotalKilledUss 0 MemAva:162
+11-01 09:40:56.250 I/SWAP_AK ( 5305): kTag=1793497256243 ExecuteInternal End execute AK
+11-01 09:40:56.251 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:56.252 I/SWAP_KillDecision( 5305): kTag=1793497256243 killResult:0
+11-01 09:40:56.275 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 163, targetBuffer: 950
+11-01 09:40:56.338 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:56.339 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:56.340 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:162 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:56.340 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:56.342 I/SWAP_AK ( 5305): kTag=1793497256340 ExecuteInternal Start execute AK
+11-01 09:40:56.342 I/SWAP_AK ( 5305): kTag=1793497256340 KillStart 238 161 LowMem def
+11-01 09:40:56.342 I/SWAP_AK ( 5305): kTag=1793497256340 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:56.343 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:56.346 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:56.347 I/SWAP_AK ( 5305): kTag=1793497256340 TotalKilledUss 0 MemAva:160
+11-01 09:40:56.347 I/SWAP_AK ( 5305): kTag=1793497256340 ExecuteInternal End execute AK
+11-01 09:40:56.348 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:56.349 I/SWAP_KillDecision( 5305): kTag=1793497256340 killResult:0
+11-01 09:40:56.351 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 161, targetBuffer: 950
+11-01 09:40:56.632 I/lowmemorykiller( 3332): Kill 'com.device.meeting' (6753), uid 10019, oom_score_adj 200 to free 42160kB rss, 29716kb swap
+11-01 09:40:56.632 I/lowmemorykiller( 3332): Reclaimed 42160kB, cache(110580kB) and free(218016kB)-reserved(335708kB) below min(110592kB) for oom_score_adj 200
+11-01 09:40:56.632 I/lowmemorykiller( 3332): Suppressed 46 failed kill reports
+11-01 09:40:56.676 I/PgedBinderListener( 6520): kstate callback type:8 value1=6753 value2=KILLED value3=[9]
+11-01 09:40:56.708 I/Zygote  ( 3832): Process 6753 exited due to signal 9 (Killed)
+11-01 09:40:56.857 I/lowmemorykiller( 3332): 2 memory pressure events were skipped after a kill!
+11-01 09:40:56.866 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:56.870 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:56.870 I/lowmemorykiller( 3332): Kill 'com.device.cloudlink.smartrooms' (3653), uid 10082, oom_score_adj 100 to free 30620kB rss, 65716kb swap
+11-01 09:40:56.871 I/lowmemorykiller( 3332): Reclaimed 30620kB, cache(82760kB) and free(217540kB)-reserved(335708kB) below min(92160kB) for oom_score_adj 100
+11-01 09:40:56.871 I/lowmemorykiller( 3332): Suppressed 1 failed kill reports
+11-01 09:40:56.871 I/PgedBinderListener( 6520): kstate callback type:8 value1=3653 value2=KILLED value3=[9]
+11-01 09:40:56.872 E/lowmemorykiller( 3332): Attempt to wait for a kill while another wait is in progress
+11-01 09:40:56.873 I/lowmemorykiller( 3332): Kill 'com.huawei.appmarket' (3953), uid 10033, oom_score_adj 100 to free 30564kB rss, 48824kb swap
+11-01 09:40:56.873 E/lowmemorykiller( 3332): /proc/3953/status too large
+11-01 09:40:56.873 I/lowmemorykiller( 3332): Reclaimed 30564kB, cache(78336kB) and free(220752kB)-reserved(335708kB) below min(92160kB) for oom_score_adj 100
+11-01 09:40:56.874 E/lowmemorykiller( 3332): Attempt to wait for a kill while another wait is in progress
+11-01 09:40:56.884 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:56.886 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:112 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:56.886 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:56.889 I/lowmemorykiller( 3332): Kill 'com.device.settings' (3391), uid 10025, oom_score_adj 100 to free 28932kB rss, 39948kb swap
+11-01 09:40:56.890 I/lowmemorykiller( 3332): Reclaimed 28932kB, cache(78596kB) and free(219744kB)-reserved(335708kB) below min(92160kB) for oom_score_adj 100
+11-01 09:40:56.891 E/lowmemorykiller( 3332): Attempt to wait for a kill while another wait is in progress
+11-01 09:40:56.892 I/lowmemorykiller( 3332): Kill 'com.device.idea.webapp' (3217), uid 10074, oom_score_adj 100 to free 28292kB rss, 33148kb swap
+11-01 09:40:56.892 I/lowmemorykiller( 3332): Reclaimed 28292kB, cache(79116kB) and free(217872kB)-reserved(335708kB) below min(92160kB) for oom_score_adj 100
+11-01 09:40:56.893 E/lowmemorykiller( 3332): Attempt to wait for a kill while another wait is in progress
+11-01 09:40:56.895 I/lowmemorykiller( 3332): Kill 'com.device.meetingservice' (3190), uid 10018, oom_score_adj 100 to free 28016kB rss, 33884kb swap
+11-01 09:40:56.895 I/lowmemorykiller( 3332): Reclaimed 28016kB, cache(78856kB) and free(218376kB)-reserved(335708kB) below min(92160kB) for oom_score_adj 100
+11-01 09:40:56.895 E/lowmemorykiller( 3332): Error opening /proc/lmkd_dbg_trigger; errno=2
+11-01 09:40:56.912 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:56.947 I/PgedBinderListener( 6520): kstate callback type:8 value1=3953 value2=KILLED value3=[9]
+11-01 09:40:56.949 I/PgedBinderListener( 6520): kstate callback type:8 value1=3391 value2=KILLED value3=[9]
+11-01 09:40:56.950 I/PgedBinderListener( 6520): kstate callback type:8 value1=3217 value2=KILLED value3=[9]
+11-01 09:40:56.952 I/PgedBinderListener( 6520): kstate callback type:8 value1=3190 value2=KILLED value3=[9]
+11-01 09:40:56.960 I/lowmemorykiller( 3332): Kill 'com.device.aiservice' (3209), uid 10069, oom_score_adj 100 to free 26468kB rss, 33936kb swap
+11-01 09:40:56.960 E/lowmemorykiller( 3332): /proc/3209/status too large
+11-01 09:40:56.960 I/lowmemorykiller( 3332): Reclaimed 26468kB, cache(82356kB) and free(217436kB)-reserved(335708kB) below min(92160kB) for oom_score_adj 100
+11-01 09:40:56.975 I/PgedBinderListener( 6520): kstate callback type:8 value1=3209 value2=KILLED value3=[9]
+11-01 09:40:56.987 I/Zygote  ( 3832): Process 3391 exited due to signal 9 (Killed)
+11-01 09:40:56.992 I/Zygote  ( 3832): Process 3653 exited due to signal 9 (Killed)
+11-01 09:40:56.996 I/Zygote  ( 3832): Process 3217 exited due to signal 9 (Killed)
+11-01 09:40:57.011 I/Zygote  ( 3832): Process 3190 exited due to signal 9 (Killed)
+11-01 09:40:57.011 I/Zygote  ( 3832): Process 3953 exited due to signal 9 (Killed)
+11-01 09:40:57.014 I/Zygote  ( 3832): Process 3209 exited due to signal 9 (Killed)
+11-01 09:40:57.025 I/SWAP_AK ( 5305): kTag=1793497256886 ExecuteInternal Start execute AK
+11-01 09:40:57.025 I/SWAP_AK ( 5305): kTag=1793497256886 KillStart 288 122 LowMem def
+11-01 09:40:57.097 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:57.097 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497256111-1793497257097
+11-01 09:40:57.099 I/SWAP_AK ( 5305): kTag=1793497256886 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:57.099 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:57.128 I/ScreemCommon( 4135): <LOGMGR> <CompletePm> [case:LOW_MEM_KILL id:205 type:1 Level:3 filter:33]
+11-01 09:40:57.185 W/ActivityManager( 5305): Slow operation: 82ms so far, now at startProcess: done killing old proc
+11-01 09:40:57.187 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10019 pid 6753 in 0ms
+11-01 09:40:57.257 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:57.274 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:57.275 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:57.274 I/lowmemorykiller( 3332): 5 memory pressure events were skipped after a kill!
+11-01 09:40:57.277 E/selinux_dmd( 5141): type=1400 audit(0.0:91415): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:57.277 E/selinux_dmd( 5141): type=1400 audit(0.0:91415): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:57.274 W/lmkd    ( 3332): type=1400 audit(0.0:91415): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:57.278 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:57.279 I/SWAP_AK ( 5305): kTag=1793497256886 TotalKilledUss 0 MemAva:158
+11-01 09:40:57.279 I/SWAP_AK ( 5305): kTag=1793497256886 ExecuteInternal End execute AK
+11-01 09:40:57.280 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:57.283 I/SWAP_KillDecision( 5305): kTag=1793497256886 killResult:0
+11-01 09:40:57.284 W/lmkd    ( 3332): type=1400 audit(0.0:91416): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:57.286 E/selinux_dmd( 5141): type=1400 audit(0.0:91416): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:57.286 E/selinux_dmd( 5141): type=1400 audit(0.0:91416): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:57.289 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:155 KillThreshold:400
+11-01 09:40:57.289 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:57.294 I/SWAP_AK ( 5305): kTag=1793497257289 ExecuteInternal Start execute AK
+11-01 09:40:57.295 I/SWAP_AK ( 5305): kTag=1793497257289 KillStart 245 154 LowMem def
+11-01 09:40:57.295 I/SWAP_AK ( 5305): kTag=1793497257289 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:57.296 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:57.295 W/lmkd    ( 3332): type=1400 audit(0.0:91417): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:57.299 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:57.299 E/selinux_dmd( 5141): type=1400 audit(0.0:91417): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:57.299 E/selinux_dmd( 5141): type=1400 audit(0.0:91417): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:57.300 I/SWAP_AK ( 5305): kTag=1793497257289 TotalKilledUss 0 MemAva:153
+11-01 09:40:57.300 I/SWAP_AK ( 5305): kTag=1793497257289 ExecuteInternal End execute AK
+11-01 09:40:57.301 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:57.301 I/SWAP_KillDecision( 5305): kTag=1793497257289 killResult:0
+11-01 09:40:57.305 W/lmkd    ( 3332): type=1400 audit(0.0:91418): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:57.307 E/selinux_dmd( 5141): type=1400 audit(0.0:91418): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:57.307 E/selinux_dmd( 5141): type=1400 audit(0.0:91418): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:57.316 W/lmkd    ( 3332): type=1400 audit(0.0:91419): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:57.318 E/selinux_dmd( 5141): type=1400 audit(0.0:91419): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:57.318 E/selinux_dmd( 5141): type=1400 audit(0.0:91419): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:57.321 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 156, targetBuffer: 950
+11-01 09:40:57.321 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:57.324 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 156, targetBuffer: 950
+11-01 09:40:57.361 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:57.377 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:57.378 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:57.416 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:156 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:57.416 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:57.433 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:57.436 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:57.511 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:57.512 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497257433-1793497257512
+11-01 09:40:57.515 I/SWAP_JniComm( 5305): Begin call handleZswapdUnmet.
+11-01 09:40:57.515 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497257433-1793497257515
+11-01 09:40:57.515 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:57.515 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497257433-1793497257515
+11-01 09:40:57.536 I/SWAP_JniComm( 5305): Begin call handleZswapdUnmet.
+11-01 09:40:57.536 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497257433-1793497257536
+11-01 09:40:57.536 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:57.536 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497257433-1793497257536
+11-01 09:40:57.538 I/SWAP_Buffer( 5305): zswapd keep idle, targetBuffer is min, call kill, curBuf: 156
+11-01 09:40:57.545 I/SWAP_Buffer( 5305): buffer low too long, zswapd keep fail, call kill
+11-01 09:40:57.546 I/SWAP_AK ( 5305): kTag=1793497257416 ExecuteInternal Start execute AK
+11-01 09:40:57.546 I/SWAP_AK ( 5305): kTag=1793497257416 KillStart 244 156 LowMem def
+11-01 09:40:57.546 I/SWAP_AK ( 5305): kTag=1793497257416 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:57.551 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:57.559 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:57.560 I/SWAP_AK ( 5305): kTag=1793497257416 TotalKilledUss 0 MemAva:156
+11-01 09:40:57.560 I/SWAP_AK ( 5305): kTag=1793497257416 ExecuteInternal End execute AK
+11-01 09:40:57.561 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:57.561 I/SWAP_KillDecision( 5305): kTag=1793497257416 killResult:0
+11-01 09:40:57.564 I/SWAP_KillDecision( 5305): Begin killApplicationWithZswapdPresure. reqMem:793 157 158 isFull:false
+11-01 09:40:57.566 I/SWAP_AK ( 5305): kTag=1793497257564 ExecuteInternal Start execute AK
+11-01 09:40:57.566 I/SWAP_AK ( 5305): kTag=1793497257564 KillStart 793 157 ZswapdFail def
+11-01 09:40:57.566 I/SWAP_AK ( 5305): kTag=1793497257564 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS]
+11-01 09:40:57.567 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:57.568 I/SWAP_AK ( 5305): kTag=1793497257564 TotalKilledUss 0 MemAva:157
+11-01 09:40:57.568 I/SWAP_AK ( 5305): kTag=1793497257564 ExecuteInternal End execute AK
+11-01 09:40:57.571 I/SWAP_KillDecision( 5305): kTag=1793497257564 killResult:0
+11-01 09:40:57.571 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 157, targetBuffer: 950
+11-01 09:40:57.579 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 157, targetBuffer: 950
+11-01 09:40:57.580 I/SWAP_Buffer( 5305): handle futile kill, close zswapd
+11-01 09:40:57.581 I/SWAP_JniComm( 5305): Begin call handleZswapdUnmet.
+11-01 09:40:57.581 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497257433-1793497257581
+11-01 09:40:57.583 I/SWAP_Buffer( 5305): handle recover zswapd, set target to current
+11-01 09:40:57.661 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:57.729 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:57.729 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497257433-1793497257729
+11-01 09:40:57.750 I/ActivityManager( 5305): appDiedLocked: pid=6753, app=ProcessRecord{e0968b2 6753:com.device.meeting/u0a19}, fromBinderDied=true, reason=null
+11-01 09:40:57.753 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10019 pid 6753 in 0ms
+11-01 09:40:57.820 I/SWAP_JniComm( 5305): Begin call handleZswapd.
+11-01 09:40:57.898 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:57.898 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497257433-1793497257898
+11-01 09:40:57.914 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:57.914 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:57.914 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:57.959 I/lowmemorykiller( 3332): Reclaimed 0kB, cache(127776kB) and free(219352kB)-reserved(335708kB) below min(129024kB) for oom_score_adj 250
+11-01 09:40:57.959 I/lowmemorykiller( 3332): Suppressed 68 failed kill reports
+11-01 09:40:57.981 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:147 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:40:57.981 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:57.997 I/SWAP_AK ( 5305): kTag=1793497257981 ExecuteInternal Start execute AK
+11-01 09:40:57.997 I/SWAP_AK ( 5305): kTag=1793497257981 KillStart 253 148 LowMem def
+11-01 09:40:57.997 I/SWAP_AK ( 5305): kTag=1793497257981 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:40:58.009 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:40:58.023 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:40:58.037 I/SWAP_AK ( 5305): kTag=1793497257981 TotalKilledUss 0 MemAva:146
+11-01 09:40:58.037 I/SWAP_AK ( 5305): kTag=1793497257981 ExecuteInternal End execute AK
+11-01 09:40:58.038 I/SWAP_AK ( 5305): notifyNTK last time NTK happen less than5000ms, ignore logprint
+11-01 09:40:58.039 I/SWAP_KillDecision( 5305): kTag=1793497257981 killResult:0
+11-01 09:40:58.047 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 146, targetBuffer: 960
+11-01 09:40:58.157 I/SWAP_JniComm( 5305): Begin call handleZswapdUnmet.
+11-01 09:40:58.157 I/SWAP_JniComm( 5305): Begin call handleZswapdUnrecycle.
+11-01 09:40:58.158 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497257433-1793497258158
+11-01 09:40:58.182 E/MediaClientController( 6203): handleUnusualAppDied, savedForegroundApp does not equal appDied packageName, pkgName = com.device.meeting, savedForegroundAppPkg = com.phonefs.source
+11-01 09:40:58.211 D/SWAP_KernEvtRcv( 5305): handleZswapdUnmet:try to kill too frequently 1793497257433-1793497258211
+11-01 09:40:58.228 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.meeting uid:10019 pid:6753 proc: activity:null
+11-01 09:40:58.276 W/lmkd    ( 3332): type=1400 audit(0.0:91514): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:58.286 W/lmkd    ( 3332): type=1400 audit(0.0:91515): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:58.294 E/selinux_dmd( 5141): type=1400 audit(0.0:91514): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:58.294 E/selinux_dmd( 5141): type=1400 audit(0.0:91514): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:58.294 E/selinux_dmd( 5141): type=1400 audit(0.0:91515): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:58.294 E/selinux_dmd( 5141): type=1400 audit(0.0:91515): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:58.297 W/lmkd    ( 3332): type=1400 audit(0.0:91516): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:58.298 E/selinux_dmd( 5141): type=1400 audit(0.0:91516): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:58.298 E/selinux_dmd( 5141): type=1400 audit(0.0:91516): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:58.307 W/lmkd    ( 3332): type=1400 audit(0.0:91517): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:58.311 E/selinux_dmd( 5141): type=1400 audit(0.0:91517): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:58.311 E/selinux_dmd( 5141): type=1400 audit(0.0:91517): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:58.313 W/lmkd    ( 3332): type=1400 audit(0.0:91518): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:58.314 E/selinux_dmd( 5141): type=1400 audit(0.0:91518): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:58.314 E/selinux_dmd( 5141): type=1400 audit(0.0:91518): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:58.322 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:58.323 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:58.373 I/lowmemorykiller( 3332): Kill 'com.phonefs.source' (2169), uid 10090, oom_score_adj 0 to free 9165292kB rss, 1389920kb swap
+11-01 09:40:58.374 I/lowmemorykiller( 3332): Reclaimed 9165292kB, cache(70976kB) and free(215404kB)-reserved(327516kB) below min(73728kB) for oom_score_adj 0
+11-01 09:40:58.374 I/lowmemorykiller( 3332): Suppressed 39 failed kill reports
+11-01 09:40:58.418 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:58.419 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:58.465 I/lowmemorykiller( 3332): 9 memory pressure events were skipped after a kill!
+11-01 09:40:58.667 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:106 KillThreshold:400
+11-01 09:40:58.667 I/SWAP_KillDecision( 5305): Begin kill applications.
+11-01 09:40:58.753 I/SWAP_Scene( 5305): This app was killed: com.device.meeting
+11-01 09:40:58.770 I/PgedBinderListener( 6520): kstate callback type:8 value1=2169 value2=KILLED value3=[9]
+11-01 09:40:58.937 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:58.938 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:58.938 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:59.282 W/lmkd    ( 3332): type=1400 audit(0.0:91606): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:59.285 E/selinux_dmd( 5141): type=1400 audit(0.0:91606): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:59.285 E/selinux_dmd( 5141): type=1400 audit(0.0:91606): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:59.292 W/lmkd    ( 3332): type=1400 audit(0.0:91607): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:59.293 E/selinux_dmd( 5141): type=1400 audit(0.0:91607): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:59.294 E/selinux_dmd( 5141): type=1400 audit(0.0:91607): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:59.303 W/lmkd    ( 3332): type=1400 audit(0.0:91608): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:59.304 E/selinux_dmd( 5141): type=1400 audit(0.0:91608): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:59.304 E/selinux_dmd( 5141): type=1400 audit(0.0:91608): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:59.313 W/lmkd    ( 3332): type=1400 audit(0.0:91609): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:59.317 E/selinux_dmd( 5141): type=1400 audit(0.0:91609): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:59.317 E/selinux_dmd( 5141): type=1400 audit(0.0:91609): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:59.323 W/lmkd    ( 3332): type=1400 audit(0.0:91610): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:40:59.325 E/selinux_dmd( 5141): type=1400 audit(0.0:91610): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:40:59.325 E/selinux_dmd( 5141): type=1400 audit(0.0:91610): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:40:59.354 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:40:59.355 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:59.458 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:40:59.459 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:40:59.978 D/system_server( 5305): SWAP_KILL::Level is. 2
+11-01 09:40:59.978 I/system_server( 5305): SWAP_KILL::avoid multiple reporting.
+11-01 09:40:59.979 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:41:00.096 I/ActivityManager( 5305): appDiedLocked: pid=3953, app=ProcessRecord{a1f887b 3953:com.huawei.appmarket/u0a33}, fromBinderDied=true, reason=null
+11-01 09:41:00.098 I/SWAP_AK ( 5305): kTag=1793497258667 ExecuteInternal Start execute AK
+11-01 09:41:00.098 I/SWAP_AK ( 5305): kTag=1793497258667 KillStart 294 9019 LowMem def
+11-01 09:41:00.099 I/SWAP_AK ( 5305): kTag=1793497258667 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:41:00.099 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10033 pid 3953 in 0ms
+11-01 09:41:00.135 I/Zygote  ( 3832): Process 2169 exited due to signal 9 (Killed)
+11-01 09:41:00.166 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_CACHED_PROCESS
+11-01 09:41:00.173 E/SWAP_AK ( 5305): ExecuteInternal List null or empty: LEVEL_2
+11-01 09:41:00.174 I/SWAP_AK ( 5305): kTag=1793497258667 TotalKilledUss 0 MemAva:9042
+11-01 09:41:00.175 I/SWAP_AK ( 5305): kTag=1793497258667 ExecuteInternal End execute AK
+11-01 09:41:00.176 I/SWAP_KillDecision( 5305): kTag=1793497258667 killResult:0
+11-01 09:41:00.177 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:9042 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.178 I/SWAP_Buffer( 5305): handle kill stop end, current buffer: 9042, targetBuffer: 1900
+11-01 09:41:00.179 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:9042 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.180 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:9041 KillThreshold:400
+11-01 09:41:00.181 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:9041 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.182 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:9041 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.191 I/TaskSnapshot( 5305): taskId:481 Callers=com.android.server.wm.TaskSnapshotCache.removeRunningEntry:435 com.android.server.wm.TaskSnapshotCache.removeRunningEntry:385 com.android.server.wm.TaskSnapshotCache.onAppDied:321 com.android.server.wm.TaskSnapshotController.onAppDied:1149 com.android.server.wm.WindowState$DeathRecipient.binderDied:4428 android.os.IBinder$DeathRecipient.binderDied:329 android.os.BinderProxy.sendDeathNotice:747 <bottom of call stack> 
+11-01 09:41:00.209 E/MediaClientController( 6203): handleUnusualAppDied, savedForegroundApp does not equal appDied packageName, pkgName = com.huawei.appmarket, savedForegroundAppPkg = com.phonefs.source
+11-01 09:41:00.280 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:9039 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.281 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:9039 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.285 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:9039 KillThreshold:400
+11-01 09:41:00.286 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:9038 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.287 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:9038 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.292 W/lmkd    ( 3332): type=1400 audit(0.0:91702): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:41:00.293 E/selinux_dmd( 5141): type=1400 audit(0.0:91702): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:41:00.293 E/selinux_dmd( 5141): type=1400 audit(0.0:91702): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:41:00.302 W/lmkd    ( 3332): type=1400 audit(0.0:91703): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:41:00.303 E/selinux_dmd( 5141): type=1400 audit(0.0:91703): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:41:00.303 E/selinux_dmd( 5141): type=1400 audit(0.0:91703): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:41:00.304 I/ActivityManager_activity( 5305): windowsGone(): ActivityRecord{e7c322 u0 com.phonefs.source/.MainActivity t481}
+11-01 09:41:00.313 W/lmkd    ( 3332): type=1400 audit(0.0:91704): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:41:00.317 E/selinux_dmd( 5141): type=1400 audit(0.0:91704): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:41:00.317 E/selinux_dmd( 5141): type=1400 audit(0.0:91704): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:41:00.323 W/lmkd    ( 3332): type=1400 audit(0.0:91705): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:41:00.326 E/selinux_dmd( 5141): type=1400 audit(0.0:91705): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:41:00.326 E/selinux_dmd( 5141): type=1400 audit(0.0:91705): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:41:00.333 W/lmkd    ( 3332): type=1400 audit(0.0:91706): avc: denied { read } for name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0
+11-01 09:41:00.336 E/selinux_dmd( 5141): type=1400 audit(0.0:91706): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 find  pid= failed
+11-01 09:41:00.336 E/selinux_dmd( 5141): type=1400 audit(0.0:91706): avc: denied { read } for comm="lmkd" name="gpumem_process_info" dev="proc" ino=4026532896 scontext=u:r:lmkd:s0 tcontext=u:object_r:proc_gpumem_process_info:s0 tclass=file permissive=0 ExtractKeys failed
+11-01 09:41:00.381 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:9036 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.383 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:9036 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.387 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:9036 KillThreshold:400
+11-01 09:41:00.388 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:9036 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.389 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:9036 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.393 D/system_server( 5305): SWAP_KILL::Level is. 0
+11-01 09:41:00.394 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:41:00.394 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:9035 KillThreshold:400
+11-01 09:41:00.399 W/ActivityManager( 5305): 	at com.android.server.am.ActiveServices.killServicesLocked(ActiveServices.java:6014)
+11-01 09:41:00.399 W/ActivityManager( 5305): 	at com.android.server.am.ActivityManagerService.handleAppDiedLocked(ActivityManagerService.java:3642)
+11-01 09:41:00.399 W/ActivityManager( 5305): 	at com.android.server.am.ActivityManagerService.appDiedLocked(ActivityManagerService.java:3773)
+11-01 09:41:00.404 I/ActivityManager( 5305): appDiedLocked: pid=3391, app=ProcessRecord{8c12051 3391:com.device.settings/u0a25}, fromBinderDied=true, reason=null
+11-01 09:41:00.404 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10025 pid 3391 in 0ms
+11-01 09:41:00.406 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.huawei.appmarket uid:10033 pid:3953 proc: activity:null
+11-01 09:41:00.410 I/SWAP_Scene( 5305): This app was killed: com.huawei.appmarket
+11-01 09:41:00.411 E/MediaClientController( 6203): handleUnusualAppDied, savedForegroundApp does not equal appDied packageName, pkgName = com.device.settings, savedForegroundAppPkg = com.phonefs.source
+11-01 09:41:00.417 W/ActivityManager( 5305): 	at com.android.server.am.ActiveServices.killServicesLocked(ActiveServices.java:5864)
+11-01 09:41:00.417 W/ActivityManager( 5305): 	at com.android.server.am.ActivityManagerService.handleAppDiedLocked(ActivityManagerService.java:3642)
+11-01 09:41:00.417 W/ActivityManager( 5305): 	at com.android.server.am.ActivityManagerService.appDiedLocked(ActivityManagerService.java:3773)
+11-01 09:41:00.423 W/lowmemorykiller( 3332): Failed to open /proc/3209/oom_score_adj; errno=2: process 3209 might have been killed
+11-01 09:41:00.426 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.settings uid:10025 pid:3391 proc: activity:null
+11-01 09:41:00.428 I/SWAP_Scene( 5305): This app was killed: com.device.settings
+11-01 09:41:00.437 I/ActivityManager( 5305): appDiedLocked: pid=3190, app=ProcessRecord{93ec58c 3190:com.device.meetingservice/u0a18}, fromBinderDied=true, reason=null
+11-01 09:41:00.437 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10018 pid 3190 in 0ms
+11-01 09:41:00.441 E/MediaClientController( 6203): handleUnusualAppDied, savedForegroundApp does not equal appDied packageName, pkgName = com.device.meetingservice, savedForegroundAppPkg = com.phonefs.source
+11-01 09:41:00.445 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.meetingservice uid:10018 pid:3190 proc: activity:null
+11-01 09:41:00.449 I/SWAP_Scene( 5305): This app was killed: com.device.meetingservice
+11-01 09:41:00.449 I/ActivityManager( 5305): appDiedLocked: pid=3209, app=ProcessRecord{6f7eef9 3209:com.device.aiservice/u0a69}, fromBinderDied=true, reason=null
+11-01 09:41:00.449 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10069 pid 3209 in 0ms
+11-01 09:41:00.453 E/MediaClientController( 6203): handleUnusualAppDied, savedForegroundApp does not equal appDied packageName, pkgName = com.device.aiservice, savedForegroundAppPkg = com.phonefs.source
+11-01 09:41:00.454 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.aiservice uid:10069 pid:3209 proc: activity:null
+11-01 09:41:00.455 I/ActivityManager( 5305): appDiedLocked: pid=3217, app=ProcessRecord{3435733 3217:com.device.idea.webapp/u0a74}, fromBinderDied=true, reason=null
+11-01 09:41:00.456 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10074 pid 3217 in 0ms
+11-01 09:41:00.458 I/SWAP_Scene( 5305): This app was killed: com.device.aiservice
+11-01 09:41:00.460 E/MediaClientController( 6203): handleUnusualAppDied, savedForegroundApp does not equal appDied packageName, pkgName = com.device.idea.webapp, savedForegroundAppPkg = com.phonefs.source
+11-01 09:41:00.465 I/ActivityManager( 5305): appDiedLocked: pid=3653, app=ProcessRecord{ddd2d90 3653:com.device.cloudlink.smartrooms/u0a82}, fromBinderDied=true, reason=null
+11-01 09:41:00.466 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10082 pid 3653 in 0ms
+11-01 09:41:00.470 E/MediaClientController( 6203): handleUnusualAppDied, savedForegroundApp does not equal appDied packageName, pkgName = com.device.cloudlink.smartrooms, savedForegroundAppPkg = com.phonefs.source
+11-01 09:41:00.478 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.idea.webapp uid:10074 pid:3217 proc: activity:null
+11-01 09:41:00.479 I/SWAP_Scene( 5305): This app was killed: com.device.idea.webapp
+11-01 09:41:00.484 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.cloudlink.smartrooms uid:10082 pid:3653 proc: activity:null
+11-01 09:41:00.485 I/SWAP_Scene( 5305): This app was killed: com.device.cloudlink.smartrooms
+11-01 09:41:00.496 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:9031 KillThreshold:400
+11-01 09:41:00.497 D/system_server( 5305): SWAP_KILL::Level is. 1
+11-01 09:41:00.497 I/SWAP_JniComm( 5305): Begin call killApplicationWithThread.
+11-01 09:41:00.499 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:9031 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.551 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_CREATE pkg:com.device.meeting uid:10019 pid:6850 proc: activity:null
+11-01 09:41:00.580 I/ActivityManager( 5305): appDiedLocked: pid=2169, app=ProcessRecord{e62ef6e 2169:com.phonefs.source/u0a90}, fromBinderDied=true, reason=null
+11-01 09:41:00.580 I/ActivityManager( 5305): Process com.phonefs.source (pid 2169) has died: fg  TOP 
+11-01 09:41:00.581 I/libprocessgroup( 5305): Successfully killed process cgroup uid 10090 pid 2169 in 0ms
+11-01 09:41:00.582 D/ActivityManager( 5305): cleanUpApplicationRecord app: 2169:com.phonefs.source/u0a90, bad: false, restarting: false, allowRestart: true
+11-01 09:41:00.589 I/ActivityManager_service( 5305): Removed service that is not running: ServiceRecord{2be0a08 u0 com.phonefs.source/.SharingService}
+11-01 09:41:00.594 I/MediaClientController( 6203): handleUnusualAppDied, savedForegroundAppPkg is now topTask
+11-01 09:41:00.596 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.phonefs.source uid:10090 pid:2169 proc: activity:null
+11-01 09:41:00.599 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:9028 KillThreshold:400
+11-01 09:41:00.601 E/SWAP_Stat( 5305): runStateInfo logfile is too large: 802360
+11-01 09:41:00.605 I/SWAP_Scene( 5305): This app was killed: com.phonefs.source
+11-01 09:41:00.612 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:9027 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.662 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:APP_SWITCH_TO pkg:com.device.launcheridea uid:10056 pid:0 proc: activity:null
+11-01 09:41:00.662 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:APP_SWITCH_FROM pkg:com.phonefs.source uid:10090 pid:0 proc: activity:null
+11-01 09:41:00.679 I/SWAP_AK ( 5305): FG com.device.launcheridea -1 C M [-1,42.0,0,-1,2,-1,-1]
+11-01 09:41:00.679 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.device.launcheridea]
+11-01 09:41:00.691 E/SWAP_Stat( 5305): runStateInfo logfile is too large: 802648
+11-01 09:41:00.693 I/SWAP_AK ( 5305): BG com.phonefs.source M
+11-01 09:41:00.711 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_CREATE pkg:com.device.meetingservice uid:10018 pid:6899 proc: activity:null
+11-01 09:41:00.713 I/SWAP_KillDecision( 5305): high level check - PsiLevel 2. MemAva is:9020 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 09:41:00.765 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_CREATE pkg:com.device.idea.webapp uid:10074 pid:6939 proc: activity:null
+11-01 09:41:00.784 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 09:41:00.788 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 09:41:00.799 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 09:41:00.807 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 09:41:00.812 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_CREATE pkg:com.device.aiservice uid:10069 pid:6973 proc: activity:null
+11-01 09:41:00.829 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_CREATE pkg:com.device.launcheridea uid:10056 pid:2171 proc: activity:null
+11-01 09:41:04.221 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_CREATE pkg:com.device.settings uid:10025 pid:7326 proc: activity:null
+11-01 09:41:05.661 I/OpenGLRenderer( 2171): Davey! com.device.launcheridea/com.device.idea.launcher.MainHomeActivity. duration=1290ms; Flags=1, FrameTimelineVsyncId=23215, IntendedVsync=26756916292542, Vsync=26756932959208, InputEventId=0, HandleInputStart=26756949598632, AnimationStart=26756949602590, PerformTraversalsStart=26756949605007, DrawStart=26757781509216, FrameDeadline=26756932959208, FrameInterval=26756949509674, FrameStartTime=16666666, SyncQueued=26757807786674, SyncStart=26757808168174, IssueDrawCommandsStart=26758014655633, SwapBuffers=26758199947508, FrameCompleted=26758206703966, DequeueBufferDuration=32705875, QueueBufferDuration=5255333, GpuCompleted=26758204666341, SwapBuffersCompleted=26758206703966, DisplayPresentTime=0, MetaDataFps=0, 
+11-01 09:41:05.686 I/OpenGLRenderer( 2171): Davey! com.device.launcheridea/com.device.idea.launcher.MainHomeActivity. duration=1277ms; Flags=0, FrameTimelineVsyncId=23222, IntendedVsync=26756966259298, Vsync=26758216259248, InputEventId=0, HandleInputStart=26758218452174, AnimationStart=26758218455299, PerformTraversalsStart=26758218973049, DrawStart=26758220215049, FrameDeadline=26756999592630, FrameInterval=26758218323133, FrameStartTime=16666666, SyncQueued=26758221360758, SyncStart=26758221618758, IssueDrawCommandsStart=26758223183216, SwapBuffers=26758239649216, FrameCompleted=26758243785549, DequeueBufferDuration=13463834, QueueBufferDuration=1437541, GpuCompleted=26758243785549, SwapBuffersCompleted=26758242155966, DisplayPresentTime=0, MetaDataFps=0, 
+11-01 09:41:05.688 W/HiRMS_b ( 6315): kill background is not enable , do not stop pkg: com.phonefs.source
+11-01 09:41:10.361 W/AwareLog( 5305): AwareMem_FastRepairkillAction: execute kill action
+11-01 09:41:10.362 W/AwareLog( 5305): AwareMem_FastRepairkillAction: repairProcess len: 0
+11-01 09:41:10.362 I/AwareLog( 5305): AwareMem_FastRepairkillAction: no procs need to mem repair in block list
+11-01 09:41:13.186 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_CREATE pkg:com.device.infowinservice uid:10075 pid:7476 proc: activity:null
+11-01 09:41:29.062 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_CREATE pkg:com.device.cloudlink.smartrooms uid:10082 pid:7538 proc: activity:null
+11-01 09:41:33.186 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_CREATE pkg:com.huawei.appmarket uid:10033 pid:7734 proc: activity:null

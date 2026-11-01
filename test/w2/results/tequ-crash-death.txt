@@ -1,0 +1,50 @@
+11-01 08:50:50.153 I/HwActivityManagerServiceEx( 5305): the process name=com.device.aitechis killed
+11-01 08:50:50.155 I/HwActivityManagerServiceEx( 5305): the process name=android.ext.servicesis killed
+11-01 08:50:52.507 I/ActivityManager( 5305): appDiedLocked: pid=8081, app=ProcessRecord{dda42a8 8081:com.device.meeting/u0a19}, fromBinderDied=true, reason=null
+11-01 08:50:52.557 I/ActivityManager( 5305): Process com.device.meeting (pid 8081) has died: prcp FGS 
+11-01 08:50:56.232 I/ActivityManager( 5305): appDiedLocked: pid=8590, app=ProcessRecord{a3e9aef 8590:com.device.infowinservice/u0a75}, fromBinderDied=true, reason=null
+11-01 08:50:56.233 I/ActivityManager( 5305): Process com.device.infowinservice (pid 8590) has died: prcp FGS 
+11-01 08:50:56.263 I/ActivityManager( 5305): appDiedLocked: pid=6022, app=ProcessRecord{f3cbe02 6022:com.device.launcheridea/u0a56}, fromBinderDied=true, reason=null
+11-01 08:50:56.263 I/ActivityManager( 5305): Process com.device.launcheridea (pid 6022) has died: prcp FGS 
+11-01 08:50:56.562 I/ActivityManager( 5305): appDiedLocked: pid=8178, app=ProcessRecord{dba637e 8178:com.huawei.hms.dupdateengine/u0a6}, fromBinderDied=true, reason=null
+11-01 08:50:56.563 I/ActivityManager( 5305): Process com.huawei.hms.dupdateengine (pid 8178) has died: vis IMPF
+11-01 08:50:56.574 I/ActivityManager( 5305): appDiedLocked: pid=6856, app=ProcessRecord{a13a6e5 6856:com.device.aiservice/u0a69}, fromBinderDied=true, reason=null
+11-01 08:50:56.575 I/ActivityManager( 5305): Process com.device.aiservice (pid 6856) has died: vis FGS 
+11-01 08:50:56.583 I/ActivityManager( 5305): appDiedLocked: pid=8832, app=ProcessRecord{7e061a8 8832:com.huawei.appmarket/u0a33}, fromBinderDied=true, reason=null
+11-01 08:50:56.583 I/ActivityManager( 5305): Process com.huawei.appmarket (pid 8832) has died: vis IMPF
+11-01 08:50:56.604 W/ActivityManager( 5305): 	at com.android.server.am.ActiveServices.killServicesLocked(ActiveServices.java:6014)
+11-01 08:50:56.604 W/ActivityManager( 5305): 	at com.android.server.am.ActivityManagerService.handleAppDiedLocked(ActivityManagerService.java:3642)
+11-01 08:50:56.604 W/ActivityManager( 5305): 	at com.android.server.am.ActivityManagerService.appDiedLocked(ActivityManagerService.java:3773)
+11-01 08:50:56.604 W/ActivityManager( 5305): 	at com.android.server.am.ActivityManagerService$AppDeathRecipient.binderDied(ActivityManagerService.java:1735)
+11-01 08:50:56.604 W/ActivityManager( 5305): 	at android.os.IBinder$DeathRecipient.binderDied(IBinder.java:329)
+11-01 08:50:56.652 I/ActivityManager( 5305): appDiedLocked: pid=8630, app=ProcessRecord{5e380e5 8630:com.device.idea.webapp/u0a74}, fromBinderDied=true, reason=null
+11-01 08:50:56.653 I/ActivityManager( 5305): Process com.device.idea.webapp (pid 8630) has died: vis IMPF
+11-01 08:50:56.717 I/ActivityManager( 5305): appDiedLocked: pid=10092, app=ProcessRecord{99e7d4d 10092:com.device.cloudlink.smartrooms/u0a82}, fromBinderDied=true, reason=null
+11-01 08:50:56.722 I/ActivityManager( 5305): Process com.device.cloudlink.smartrooms (pid 10092) has died: vis IMPF
+11-01 08:50:56.741 I/ActivityManager( 5305): appDiedLocked: pid=6972, app=ProcessRecord{c6b2cee 6972:com.device.settings/u0a25}, fromBinderDied=true, reason=null
+11-01 08:50:56.742 I/ActivityManager( 5305): Process com.device.settings (pid 6972) has died: fg  FGS 
+11-01 08:50:57.011 I/ActivityManager( 5305): appDiedLocked: pid=9539, app=ProcessRecord{20aa043 9539:com.phonefs.source/u0a90}, fromBinderDied=true, reason=null
+11-01 08:50:57.011 I/ActivityManager( 5305): Process com.phonefs.source (pid 9539) has died: fg  TOP 
+11-01 08:50:57.013 D/ActivityManager( 5305): cleanUpApplicationRecord app: 9539:com.phonefs.source/u0a90, bad: false, restarting: false, allowRestart: true
+11-01 08:50:57.017 I/MultiTaskManagerService( 5305): onProcessDied pid = 9539, uid = 10090
+11-01 08:50:57.018 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.phonefs.source uid:10090 pid:9539 proc: activity:null
+11-01 08:50:57.116 I/ActivityManager( 5305): appDiedLocked: pid=6817, app=ProcessRecord{6482426 6817:com.device.meetingservice/u0a18}, fromBinderDied=true, reason=null
+11-01 08:50:57.117 I/ActivityManager( 5305): Process com.device.meetingservice (pid 6817) has died: vis FGS 
+11-01 08:50:58.095 I/ActivityManager( 5305):   ntv   ??    1086: lmkd (pid 3332) native
+11-01 08:50:58.095 I/ActivityManager( 5305):   ntv   ??     662: tombstoned (pid 3634) native
+11-01 08:50:58.095 I/ActivityManager( 5305):   fg     TOP        0: com.phonefs.source (pid 9539) top-activity
+11-01 08:52:03.094 E/Fence   ( 3870): waitForever: waiting for fb acquire fence:5064 0 - 10129: fence 49 didn't signal in 3000 ms
+11-01 08:52:03.891 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:04.905 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:05.918 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:06.932 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:07.945 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:08.959 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:09.378 E/Fence   ( 3870): waitForever: waiting for fb acquire fence:5065 0 - 10131: fence 50 didn't signal in 3000 ms
+11-01 08:52:09.974 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:10.988 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:12.002 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:13.017 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:14.032 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:15.046 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m
+11-01 08:52:16.061 D/HWAL_NatureToneAlgo( 3892): [1;34m[GetNatureToneEnable][637]: DebugInfo: NatureToneEnable = 0[0m

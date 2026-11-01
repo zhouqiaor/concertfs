@@ -1,0 +1,191 @@
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:27:53 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:27:55 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:27:57 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:00 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:02 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:04 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:06 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:09 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:11 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:13 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:15 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:18 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:20 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:22 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:24 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:27 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:29 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:31 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:34 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:36 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:38 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:40 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:42 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:45 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:47 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:49 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:52 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:54 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:56 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:28:58 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:29:01 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:29:03 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:29:05 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:29:08 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:29:10 pid= rss= lin=
+awk: can't open file /proc//status
+ source line number 1
+awk: can't open file /proc//smaps
+ source line number 1
+09:29:14 pid= rss= lin=
+09:28:35 PID GONE
+09:28:38 PID GONE
+09:28:40 PID GONE
+09:28:42 PID GONE
+09:28:44 PID GONE
+09:28:46 PID GONE
+09:28:48 PID GONE
+09:28:51 PID GONE
+09:28:53 PID GONE
+09:28:55 PID GONE
+09:28:57 PID GONE

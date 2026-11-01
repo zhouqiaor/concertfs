@@ -1,0 +1,108 @@
+11-01 08:44:08.172 I/phonefs.app(9536) Conscrypt provider inserted=true provider=Conscrypt version 1.0
+11-01 08:44:11.627 E/phonefs.svc(9536) server start failed
+java.lang.ClassCastException: org.bouncycastle.asn1.pkcs.PrivateKeyInfo cannot be cast to org.bouncycastle.util.io.pem.PemObject
+	at com.phonefs.core.net.PhoneFsServer.buildKeyStore(PhoneFsServer.kt:121)
+	at com.phonefs.core.net.PhoneFsServer.start(PhoneFsServer.kt:81)
+	at com.phonefs.source.SharingService.startServer(SharingService.kt:75)
+	at com.phonefs.source.SharingService.access$startServer(SharingService.kt:25)
+	at com.phonefs.source.SharingService$onStartCommand$1.invokeSuspend(SharingService.kt:43)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:798)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+11-01 08:45:12.397 E/phonefs.svc(9536) server start failed
+java.lang.ClassCastException: org.bouncycastle.asn1.pkcs.PrivateKeyInfo cannot be cast to org.bouncycastle.util.io.pem.PemObject
+	at com.phonefs.core.net.PhoneFsServer.buildKeyStore(PhoneFsServer.kt:121)
+	at com.phonefs.core.net.PhoneFsServer.start(PhoneFsServer.kt:81)
+	at com.phonefs.source.SharingService.startServer(SharingService.kt:75)
+	at com.phonefs.source.SharingService.access$startServer(SharingService.kt:25)
+	at com.phonefs.source.SharingService$onStartCommand$1.invokeSuspend(SharingService.kt:43)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:798)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+11-01 08:45:16.013 I/phonefs.app(9537) Conscrypt provider inserted=true provider=Conscrypt version 1.0
+11-01 08:45:19.967 E/phonefs.svc(9537) server start failed
+java.lang.NoClassDefFoundError: Failed resolution of: Lio/netty/channel/kqueue/KQueue;
+	at io.ktor.server.netty.NettyApplicationEngineKt.getChannelClass(NettyApplicationEngine.kt:572)
+	at io.ktor.server.netty.EventLoopGroupProxy$Companion.create(EventLoopGroupProxy.kt:43)
+	at io.ktor.server.netty.NettyApplicationEngine.connectionEventGroup_delegate$lambda$0(NettyApplicationEngine.kt:218)
+	at io.ktor.server.netty.NettyApplicationEngine$$ExternalSyntheticLambda0.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at io.ktor.server.netty.NettyApplicationEngine.getConnectionEventGroup(NettyApplicationEngine.kt:217)
+	at io.ktor.server.netty.NettyApplicationEngine.createBootstrap(NettyApplicationEngine.kt:283)
+	at io.ktor.server.netty.NettyApplicationEngine.bootstraps_delegate$lambda$0(NettyApplicationEngine.kt:268)
+	at io.ktor.server.netty.NettyApplicationEngine$$ExternalSyntheticLambda6.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at io.ktor.server.netty.NettyApplicationEngine.getBootstraps$ktor_server_netty(NettyApplicationEngine.kt:267)
+	at io.ktor.server.netty.NettyApplicationEngine.start(NettyApplicationEngine.kt:455)
+	at io.ktor.server.netty.NettyApplicationEngine.start(NettyApplicationEngine.kt:53)
+	at io.ktor.server.engine.EmbeddedServer.start(EmbeddedServerJvm.kt:415)
+	at com.phonefs.core.net.PhoneFsServer.start(PhoneFsServer.kt:99)
+	at com.phonefs.source.SharingService.startServer(SharingService.kt:75)
+	at com.phonefs.source.SharingService.access$startServer(SharingService.kt:25)
+	at com.phonefs.source.SharingService$onStartCommand$1.invokeSuspend(SharingService.kt:43)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:798)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+Caused by: java.lang.ClassNotFoundException: Didn't find class "io.netty.channel.kqueue.KQueue" on path: DexPathList[[zip file "/data/app/~~6-dCLiURBcVWIh7I2jRRsw==/com.phonefs.source-Z92PkNypVgRteSlny3mH2A==/base.apk"],nativeLibraryDirectories=[/data/app/~~6-dCLiURBcVWIh7I2jRRsw==/com.phonefs.source-Z92PkNypVgRteSlny3mH2A==/lib/arm64, /data/app/~~6-dCLiURBcVWIh7I2jRRsw==/com.phonefs.source-Z92PkNypVgRteSlny3mH2A==/base.apk!/lib/arm64-v8a, /system/lib64, /hw_product/lib64, /system/lib64/module/multimedia, /system/product/lib64]]
+	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:218)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
+	... 26 more
+
+11-01 08:45:23.300 E/phonefs.svc(9537) server start failed
+java.lang.NoClassDefFoundError: Failed resolution of: Lio/netty/channel/kqueue/KQueue;
+	at io.ktor.server.netty.NettyApplicationEngineKt.getChannelClass(NettyApplicationEngine.kt:572)
+	at io.ktor.server.netty.EventLoopGroupProxy$Companion.create(EventLoopGroupProxy.kt:43)
+	at io.ktor.server.netty.NettyApplicationEngine.connectionEventGroup_delegate$lambda$0(NettyApplicationEngine.kt:218)
+	at io.ktor.server.netty.NettyApplicationEngine$$ExternalSyntheticLambda0.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at io.ktor.server.netty.NettyApplicationEngine.getConnectionEventGroup(NettyApplicationEngine.kt:217)
+	at io.ktor.server.netty.NettyApplicationEngine.createBootstrap(NettyApplicationEngine.kt:283)
+	at io.ktor.server.netty.NettyApplicationEngine.bootstraps_delegate$lambda$0(NettyApplicationEngine.kt:268)
+	at io.ktor.server.netty.NettyApplicationEngine$$ExternalSyntheticLambda6.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at io.ktor.server.netty.NettyApplicationEngine.getBootstraps$ktor_server_netty(NettyApplicationEngine.kt:267)
+	at io.ktor.server.netty.NettyApplicationEngine.start(NettyApplicationEngine.kt:455)
+	at io.ktor.server.netty.NettyApplicationEngine.start(NettyApplicationEngine.kt:53)
+	at io.ktor.server.engine.EmbeddedServer.start(EmbeddedServerJvm.kt:415)
+	at com.phonefs.core.net.PhoneFsServer.start(PhoneFsServer.kt:99)
+	at com.phonefs.source.SharingService.startServer(SharingService.kt:75)
+	at com.phonefs.source.SharingService.access$startServer(SharingService.kt:25)
+	at com.phonefs.source.SharingService$onStartCommand$1.invokeSuspend(SharingService.kt:43)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:798)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+Caused by: java.lang.ClassNotFoundException: Didn't find class "io.netty.channel.kqueue.KQueue" on path: DexPathList[[zip file "/data/app/~~6-dCLiURBcVWIh7I2jRRsw==/com.phonefs.source-Z92PkNypVgRteSlny3mH2A==/base.apk"],nativeLibraryDirectories=[/data/app/~~6-dCLiURBcVWIh7I2jRRsw==/com.phonefs.source-Z92PkNypVgRteSlny3mH2A==/lib/arm64, /data/app/~~6-dCLiURBcVWIh7I2jRRsw==/com.phonefs.source-Z92PkNypVgRteSlny3mH2A==/base.apk!/lib/arm64-v8a, /system/lib64, /hw_product/lib64, /system/lib64/module/multimedia, /system/product/lib64]]
+	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:218)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
+	... 26 more
+
+11-01 08:46:41.057 I/phonefs.app(9539) Conscrypt provider inserted=true provider=Conscrypt version 1.0
+11-01 08:46:44.967 I/jul(9539) [JUL io.netty.util.internal.PlatformDependent] Your platform does not provide complete low-level API for accessing direct buffers reliably. Unless explicitly requested, heap buffer will always be preferred to avoid potential system instability.
+11-01 08:46:45.417 E/jul(9539) [JUL io.netty.util.internal.MacAddressUtil] Failed to find a usable hardware address from the network interfaces; using random bytes: 0f:05:84:30:f1:b5:a2:e2
+11-01 08:46:45.615 I/phonefs.fixture(9539) fixture ready at /storage/emulated/0/PhoneFS-w2: 测试 文件.txt, 中文目录
+11-01 08:46:45.623 I/phonefs.svc(9539) server started port=18443 ips=[192.168.43.1] fp=96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f
+11-01 08:46:45.628 I/phonefs.svc(9539) fixture=/storage/emulated/0/PhoneFS-w2 mes=true

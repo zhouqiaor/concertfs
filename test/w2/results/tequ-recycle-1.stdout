@@ -1,0 +1,26 @@
+TLS TLSv1.3 TLS_AES_256_GCM_SHA384 fp=96e052a4ce15c5ec¡­ pinned=True
+  100/100 ok=100 fail=0 1000 MiB / 49.7s = 20.13 MiB/s
+{
+  "host": "192.168.43.1",
+  "port": 18443,
+  "mode": "pin",
+  "tls": {
+    "version": "TLSv1.3",
+    "cipher": "TLS_AES_256_GCM_SHA384",
+    "fingerprint": "96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f"
+  },
+  "chunk_bytes": 10485760,
+  "count": 100,
+  "ok": 100,
+  "failures": 0,
+  "reconnects": 0,
+  "total_bytes": 1048576000,
+  "wall_seconds": 49.68,
+  "avg_MiB_s": 20.129,
+  "p50_chunk_ms": 493.34,
+  "p95_chunk_ms": 554.54,
+  "min_chunk_ms": 428.36,
+  "max_chunk_ms": 658.13,
+  "fingerprint_verified": true,
+  "fail_samples": []
+}

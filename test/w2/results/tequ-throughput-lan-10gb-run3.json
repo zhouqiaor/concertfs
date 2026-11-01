@@ -1,0 +1,24 @@
+{
+  "host": "192.168.43.1",
+  "port": 18443,
+  "mode": "pin",
+  "tls": {
+    "version": "TLSv1.3",
+    "cipher": "TLS_AES_256_GCM_SHA384",
+    "fingerprint": "96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f"
+  },
+  "chunk_bytes": 10485760,
+  "count": 1000,
+  "ok": 1000,
+  "failures": 0,
+  "reconnects": 0,
+  "total_bytes": 10485760000,
+  "wall_seconds": 424.676,
+  "avg_MiB_s": 23.547,
+  "p50_chunk_ms": 400.39,
+  "p95_chunk_ms": 536.94,
+  "min_chunk_ms": 355.82,
+  "max_chunk_ms": 1170.99,
+  "fingerprint_verified": true,
+  "fail_samples": []
+}

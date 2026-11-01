@@ -1,0 +1,37 @@
+start pid=2169 09:39:15
+09:39:15 adj=0 rss_kb=219428 hwm_kb=220288 linear_kb=169500 libc_kb=168860
+09:39:18 adj=0 rss_kb=219428 hwm_kb=220288 linear_kb=169500 libc_kb=168860
+09:39:21 adj=0 rss_kb=219428 hwm_kb=220288 linear_kb=169500 libc_kb=168860
+09:39:24 adj=0 rss_kb=219428 hwm_kb=220288 linear_kb=169500 libc_kb=168860
+09:39:26 adj=0 rss_kb=219428 hwm_kb=220288 linear_kb=169500 libc_kb=168860
+09:39:29 adj=0 rss_kb=219428 hwm_kb=220288 linear_kb=169500 libc_kb=168864
+09:39:32 adj=0 rss_kb=219436 hwm_kb=220288 linear_kb=169504 libc_kb=168864
+09:39:35 adj=0 rss_kb=219436 hwm_kb=220288 linear_kb=169504 libc_kb=168864
+09:39:38 adj=0 rss_kb=219436 hwm_kb=220288 linear_kb=169504 libc_kb=168864
+09:39:40 adj=0 rss_kb=219436 hwm_kb=220288 linear_kb=169504 libc_kb=168864
+09:39:43 adj=0 rss_kb=219436 hwm_kb=220288 linear_kb=169504 libc_kb=168864
+09:39:46 adj=0 rss_kb=236216 hwm_kb=238628 linear_kb=172256 libc_kb=171564
+09:39:49 adj=0 rss_kb=265948 hwm_kb=270532 linear_kb=191472 libc_kb=194060
+09:39:51 adj=0 rss_kb=346140 hwm_kb=370848 linear_kb=278760 libc_kb=229896
+09:39:54 adj=0 rss_kb=514128 hwm_kb=520028 linear_kb=450120 libc_kb=229992
+09:39:57 adj=0 rss_kb=753364 hwm_kb=758436 linear_kb=696688 libc_kb=230428
+09:40:00 adj=0 rss_kb=1036900 hwm_kb=1044660 linear_kb=984088 libc_kb=230800
+09:40:03 adj=0 rss_kb=1333840 hwm_kb=1337752 linear_kb=1284424 libc_kb=231052
+09:40:06 adj=0 rss_kb=1669412 hwm_kb=1676356 linear_kb=1615196 libc_kb=231344
+09:40:09 adj=0 rss_kb=2096640 hwm_kb=2105848 linear_kb=2031164 libc_kb=231732
+09:40:12 adj=0 rss_kb=2567456 hwm_kb=2575736 linear_kb=2524152 libc_kb=232040
+09:40:15 adj=0 rss_kb=3032508 hwm_kb=3038800 linear_kb=2987832 libc_kb=232220
+09:40:18 adj=0 rss_kb=3562188 hwm_kb=3562212 linear_kb=3490376 libc_kb=232584
+09:40:21 adj=0 rss_kb=4073928 hwm_kb=4082408 linear_kb=4018668 libc_kb=232676
+09:40:24 adj=0 rss_kb=4656316 hwm_kb=4661904 linear_kb=4606432 libc_kb=232764
+09:40:27 adj=0 rss_kb=5212324 hwm_kb=5218428 linear_kb=5163608 libc_kb=4837452
+09:40:30 adj=0 rss_kb=5824100 hwm_kb=5834052 linear_kb=5791620 libc_kb=4837828
+09:40:33 adj=0 rss_kb=6530032 hwm_kb=6533480 linear_kb=6463872 libc_kb=4838112
+09:40:36 adj=0 rss_kb=7212196 hwm_kb=7219860 linear_kb=7161884 libc_kb=4838212
+09:40:39 adj=0 rss_kb=7946700 hwm_kb=7951564 linear_kb=7898748 libc_kb=4838576
+09:40:43 adj=0 rss_kb=8661524 hwm_kb=8669092 linear_kb=8610604 libc_kb=4835988
+09:40:46 adj=0 rss_kb=8705116 hwm_kb=8867016 linear_kb=8542576 libc_kb=4232508
+09:40:50 adj=0 rss_kb=8570924 hwm_kb=8867016 linear_kb=8511572 libc_kb=3685736
+09:40:55 adj=0 rss_kb=8964212 hwm_kb=9069992 linear_kb=8871916 libc_kb=3470596
+09:40:58 adj=0 rss_kb=9098556 hwm_kb=9136808 linear_kb=9037100 libc_kb=0
+PID_GONE 09:41:00

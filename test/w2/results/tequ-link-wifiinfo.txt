@@ -1,0 +1,21 @@
+mCurrentSoftApConfiguration.SSID: Device_ap_235
+mCurrentSoftApConfiguration.mBand: 3
+mCurrentSoftApConfiguration.hiddenSSID: false
+mCurrentSoftApInfoMap {wlan1=SoftApInfo{bandwidth= 2, frequency= 5180,bssid=12:38:1f:22:fa:3d, wifiStandard= 5, mApInstanceIdentifier= wlan1, mIdleShutdownTimeoutMillis= 0}}
+mWifiLogProto.rssiPollCount: {}
+mWifiLogProto.rssiPollDeltaCount: Printing counts for [-127, 127]
+mWifiLogProto.numBssidFilteredDueToMboAssocDisallowInd=0
+mTotalSsidsInScanHistogram:{}
+mTotalBssidsInScanHistogram:{}
+mAvailableOpenSsidsInScanHistogram:{}
+mAvailableOpenBssidsInScanHistogram:{}
+mAvailableSavedSsidsInScanHistogram:{}
+mAvailableSavedBssidsInScanHistogram:{}
+mAvailableOpenOrSavedSsidsInScanHistogram:{}
+mAvailableOpenOrSavedBssidsInScanHistogram:{}
+mAvailableSavedPasspointProviderBssidsInScanHistogram:{}
+mWifiLogProto.bssidBlocklistStats:
+networkSelectionFilteredBssidCount={}
+mBlockedBssidPerReasonCount={}
+mBlockedConfigurationPerReasonCount={}, highMovementMultipleScansFeatureEnabled=true, numHighMovementConnectionSkipped=0, numHighMovementConnectionStarted=0, mBlockedBssidPerReasonCount={}, mBlockedConfigurationPerReasonCount={}
+Failed to write while dumping service wifi: Broken pipe

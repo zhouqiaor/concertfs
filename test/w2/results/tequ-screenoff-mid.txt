@@ -1,0 +1,5 @@
+mid pid=29992 adj=200
+  mWakefulness=Asleep
+  mScreenOn=false
+  mNetworkConnected=true
+  mCharging=false

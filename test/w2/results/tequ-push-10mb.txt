@@ -1,0 +1,1 @@
+test10mb.bin: 1 file pushed, 0 skipped. 14.7 MB/s (10485760 bytes in 0.682s)

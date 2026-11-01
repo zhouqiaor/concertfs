@@ -1,0 +1,10 @@
+23862.39 160893.64
+MemTotal:       11851868 kB
+MemFree:         8231428 kB
+MemAvailable:    8938236 kB
+Buffers:            2868 kB
+Cached:           921480 kB
+Total RAM: 11,851,868K (status normal)
+ Free RAM: 8,837,464K (        0K cached pss +   617,108K cached kernel + 8,220,356K free)
+ Used RAM: 3,059,275K (2,579,387K used pss +   479,888K kernel)
+ Lost RAM:   187,837K

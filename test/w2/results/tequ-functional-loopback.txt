@@ -1,0 +1,60 @@
+== 0. TLS1.3 握手证据（openssl s_client） ==
+PASS tls protocol TLSv1.3         
+    cipher=TLS_AES_256_GCM_SHA384
+    server fingerprint=96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f
+PASS fingerprint pin              
+== 1. GET /v1/pair/info（免鉴权） ==
+PASS pair-info-200                200
+PASS pair-info-service            phonefs
+PASS pair-info-proto              1
+PASS pair-info-pairing-closed     
+PASS pair-info-fingerprint        
+PASS pair-info-device-name        
+== 2. 401 路径 ==
+PASS roots-noauth-401             401
+PASS roots-noauth-code            TOKEN_INVALID
+PASS roots-badtoken-401           401
+== 3. GET /v1/roots ==
+PASS roots-count-8                8
+PASS roots-stor                   
+PASS cat:camera 不在固定 8 行 
+PASS roots-stor-name              
+PASS list-root-entries-8          8
+PASS list-root-cursor-400         400
+PASS list-root-cursor-code        BAD_CURSOR
+== 4. list 真实树（含中文/emoji/空格） ==
+PASS list-stor-root-fixture-dir   
+FAIL list-unicode-space-file      missing 测试 文件.txt
+FAIL list-emoji-file              missing 截图 😀.bin
+FAIL list-space-md                missing a b c.md
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import json;d=json.load(open('./.w2tmp-40685/body',encoding='utf-8'));print('media_type' in d['entries'][0])
+                                                                                                ~^^^^^^^^^^^
+KeyError: 'entries'
+FAIL real-tree media_type 不应出现 
+== 5. 路径穿越 ==
+PASS traversal-400                400
+== 6. content 全量 200 ==
+FAIL content-200                  want=200 got=400 {"error":{"code":"INVALID_ARGUMENT","message":"malformed or escaping id","trace_id":"493cd3118f511d9aa87ea194883fc84d","retriable":false}}
+FAIL accept-ranges                
+    etag=
+FAIL etag                         
+FAIL last-modified                
+== 7. Range 206 / 416 / If-Range ==
+FAIL range-206                    want=206 got=400 {"error":{"code":"INVALID_ARGUMENT","message":"malformed or escaping id","trace_id":"99e8cdde7149de9bf7558fc3ce595d61","retriable":false}}
+FAIL content-range                
+FAIL range-body-bytes             138
+FAIL range-416                    want=416 got=400 {"error":{"code":"INVALID_ARGUMENT","message":"malformed or escaping id","trace_id":"4e08f3c018731df9e3702abd7bc79752","retriable":false}}
+FAIL 416 content-range            
+FAIL range-416-code               want=RANGE_NOT_SATISFIABLE got=INVALID_ARGUMENT {"error":{"code":"INVALID_ARGUMENT","message":"malformed or escaping id","trace_id":"4e08f3c018731df9e3702abd7bc79752","retriable":false}}
+FAIL ifrange-mismatch-200         want=200 got=400 {"error":{"code":"INVALID_ARGUMENT","message":"malformed or escaping id","trace_id":"f95b179dded9f1b94bcc2c3109073381","retriable":false}}
+FAIL ifrange-match-206            want=206 got=400 {"error":{"code":"INVALID_ARGUMENT","message":"malformed or escaping id","trace_id":"685037f630530c6316908684f609b66d","retriable":false}}
+FAIL suffix-206                   want=206 got=400 {"error":{"code":"INVALID_ARGUMENT","message":"malformed or escaping id","trace_id":"98baeb6aec6f082a0fd3c4ebf27841f6","retriable":false}}
+FAIL suffix-bytes                 
+== 8. statfs / cat 501 / 404 ==
+PASS statfs-fields                
+PASS cat-501                      501
+PASS unknown-404                  404
+
+RESULT pass=23 fail=18  tmp=./.w2tmp-40685

@@ -1,0 +1,25 @@
+11-01 09:29:12.590 I/SWAP_AK ( 5305): kTag=1793496552588 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:29:13.967 I/SWAP_AK ( 5305): kTag=1793496553554 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:29:14.313 I/SWAP_AK ( 5305): kTag=1793496554306 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:29:14.324 I/SWAP_AK ( 5305): kTag=1793496554322 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:29:14.473 I/SWAP_AK ( 5305): kTag=1793496554471 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:29:14.630 I/SWAP_AK ( 5305): kTag=1793496554618 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:29:14.681 I/SWAP_AK ( 5305): kTag=1793496554674 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:29:15.541 I/SWAP_AK ( 5305): kTag=1793496555525 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:29:15.755 I/SWAP_AK ( 5305): kTag=1793496555743 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:29:15.840 I/SWAP_AK ( 5305): kTag=1793496555782 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 09:29:17.664 I/ActivityManager( 5305): appDiedLocked: pid=1474, app=ProcessRecord{9d13fd0 1474:com.phonefs.source/u0a90}, fromBinderDied=true, reason=null
+11-01 09:29:17.665 I/ActivityManager( 5305): Process com.phonefs.source (pid 1474) has died: fg  TOP 
+11-01 09:29:17.715 I/WindowManager( 5305): removeIfPossible: Window{d8b84a u0 com.phonefs.source/com.phonefs.source.MainActivity} callers=com.android.server.wm.WindowState.access$400:385 com.android.server.wm.WindowState$DeathRecipient.binderDied:4453 android.os.IBinder$DeathRecipient.binderDied:329 android.os.BinderProxy.sendDeathNotice:747 <bottom of call stack> 
+11-01 09:29:17.813 I/MultiTaskManagerService( 5305): onProcessDied pid = 1474, uid = 10090
+11-01 09:29:17.814 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.phonefs.source uid:10090 pid:1474 proc: activity:null
+11-01 09:29:17.820 W/ActivityTaskManager( 5305): Force removing ActivityRecord{5662b91 u0 com.phonefs.source/.MainActivity t479}: app died, no saved state
+11-01 09:29:17.827 I/SWAP_Scene( 5305): This app was killed: com.phonefs.source
+11-01 09:29:17.834 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 09:29:17.840 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 09:29:17.843 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 09:29:17.844 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 09:29:17.870 I/HwActivityTaskManagerServiceEx( 5305):  notifyActivityDied: ProcessRecord{9d13fd0 0:com.phonefs.source/u0a90}
+11-01 09:29:17.878 I/SWAP_Scene( 5305): Entering notifySceneData notifySceneData. EventType:APP_SWITCH_FROM pkg:com.phonefs.source uid:10090 pid:0 proc: activity:null
+11-01 09:29:17.888 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.device.launcheridea]
+11-01 09:29:17.919 I/SWAP_AK ( 5305): BG com.phonefs.source M

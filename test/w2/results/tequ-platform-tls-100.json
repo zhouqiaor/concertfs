@@ -1,0 +1,45 @@
+{
+  "host": "192.168.43.1",
+  "port": 18443,
+  "mode": "pin",
+  "tls": {
+    "version": "TLSv1.3",
+    "cipher": "TLS_AES_256_GCM_SHA384",
+    "fingerprint": "96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f"
+  },
+  "chunk_bytes": 10485760,
+  "count": 100,
+  "ok": 0,
+  "failures": 100,
+  "reconnects": 100,
+  "total_bytes": 0,
+  "wall_seconds": 2.515,
+  "avg_MiB_s": 0.0,
+  "p50_chunk_ms": null,
+  "p95_chunk_ms": null,
+  "min_chunk_ms": null,
+  "max_chunk_ms": null,
+  "fingerprint_verified": true,
+  "fail_samples": [
+    {
+      "i": 1,
+      "error": "RemoteDisconnected:Remote end closed connection without response"
+    },
+    {
+      "i": 2,
+      "error": "RemoteDisconnected:Remote end closed connection without response"
+    },
+    {
+      "i": 3,
+      "error": "ConnectionResetError:[WinError 10054] 远程主机强迫关闭了一个现有的连接。"
+    },
+    {
+      "i": 4,
+      "error": "RemoteDisconnected:Remote end closed connection without response"
+    },
+    {
+      "i": 5,
+      "error": "RemoteDisconnected:Remote end closed connection without response"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+TLS TLSv1.3 TLS_AES_256_GCM_SHA384
+round 1: 2097152000 bytes, total 1GB, 20.76 MiB/s
+round 2: 2097152000 bytes, total 3GB, 20.93 MiB/s
+round 3: 2097152000 bytes, total 5GB, 21.12 MiB/s
+round 4: 2097152000 bytes, total 7GB, 21.77 MiB/s
+round 5: 2097152000 bytes, total 9GB, 21.41 MiB/s
+DONE total=10485760000 sec=467.2 MiB/s=21.41

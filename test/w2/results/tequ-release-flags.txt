@@ -1,0 +1,2 @@
+    flags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ]
+    hwflags=[ ]

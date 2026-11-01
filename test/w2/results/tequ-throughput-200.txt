@@ -1,0 +1,8 @@
+reconnect failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+reconnect failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+reconnect failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+reconnect failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+reconnect failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+reconnect failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+reconnect failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+reconnect failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。

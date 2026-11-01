@@ -1,0 +1,96 @@
+11-01 10:51:48.027 I/SWAP_Scene( 5305): This app was killed: com.phonefs.source
+11-01 10:51:48.074 I/SWAP_AK ( 5305): FG com.device.launcheridea -1 H M [-1,42.0,0,-1,2,-1,-1]
+11-01 10:51:48.074 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.device.launcheridea]
+11-01 10:51:48.078 I/SWAP_AK ( 5305): BG com.phonefs.source M
+11-01 10:51:48.339 I/ActivityManager( 5305): appDiedLocked: pid=17859, app=ProcessRecord{1e10dc8 0:com.phonefs.source/u0a90}, fromBinderDied=true, reason=null
+11-01 10:52:40.164 I/SWAP_Scene( 5305): This app was killed: com.phonefs.source
+11-01 10:52:40.201 I/ActivityManager( 5305): appDiedLocked: pid=25402, app=ProcessRecord{2e42f92 0:com.phonefs.source/u0a90}, fromBinderDied=true, reason=null
+11-01 10:57:13.346 I/SWAP_AK ( 5305): FG com.phonefs.source -1 C M [-1,42.0,0,-1,2,-1,254]
+11-01 10:57:13.346 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.device.launcheridea, com.phonefs.source]
+11-01 10:57:13.354 I/SWAP_AK ( 5305): BG com.device.launcheridea M
+11-01 11:07:27.048 I/SWAP_Scene( 5305): This app was killed: com.phonefs.source
+11-01 11:07:27.254 I/SWAP_AK ( 5305): FG com.device.launcheridea -1 H M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:07:27.254 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.device.launcheridea]
+11-01 11:07:27.258 I/SWAP_AK ( 5305): BG com.phonefs.source M
+11-01 11:07:27.311 I/ActivityManager( 5305): appDiedLocked: pid=25545, app=ProcessRecord{e4cc017 0:com.phonefs.source/u0a90}, fromBinderDied=true, reason=null
+11-01 11:07:31.353 I/SWAP_AK ( 5305): FG com.phonefs.source -1 C M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:07:31.353 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.device.launcheridea, com.phonefs.source]
+11-01 11:07:31.362 I/SWAP_AK ( 5305): BG com.device.launcheridea M
+11-01 11:10:28.859 I/SWAP_Scene( 5305): This app was killed: com.phonefs.source
+11-01 11:10:28.909 I/SWAP_AK ( 5305): FG com.device.launcheridea -1 H M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:10:28.909 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.device.launcheridea]
+11-01 11:10:28.916 I/SWAP_AK ( 5305): BG com.phonefs.source M
+11-01 11:10:28.946 I/ActivityManager( 5305): appDiedLocked: pid=17860, app=ProcessRecord{d529d39 0:com.phonefs.source/u0a90}, fromBinderDied=true, reason=null
+11-01 11:10:29.305 I/SWAP_AK ( 5305): FG com.phonefs.source -1 C M [-1,42.0,0,-1,2,-1,176]
+11-01 11:10:29.305 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.device.launcheridea, com.phonefs.source]
+11-01 11:10:29.339 I/SWAP_AK ( 5305): BG com.device.launcheridea M
+11-01 11:37:36.075 I/SWAP_Scene( 5305): This app was killed: com.phonefs.source
+11-01 11:37:36.146 I/SWAP_AK ( 5305): FG com.device.launcheridea -1 H M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:37:36.146 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.device.launcheridea]
+11-01 11:37:36.155 I/SWAP_AK ( 5305): BG com.phonefs.source M
+11-01 11:37:36.812 I/ActivityManager( 5305): appDiedLocked: pid=21474, app=ProcessRecord{b710d64 0:com.phonefs.source/u0a90}, fromBinderDied=true, reason=null
+11-01 11:37:36.992 I/SWAP_AK ( 5305): FG com.phonefs.source -1 C M [-1,42.0,0,-1,2,-1,1626]
+11-01 11:37:36.992 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.device.launcheridea, com.phonefs.source]
+11-01 11:37:37.009 I/SWAP_AK ( 5305): BG com.device.launcheridea M
+11-01 11:37:52.041 I/SWAP_AK ( 5305): FG com.netease.uuremote -1 C M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:37:52.041 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.device.launcheridea, com.phonefs.source, com.netease.uuremote]
+11-01 11:37:52.052 I/SWAP_AK ( 5305): BG com.phonefs.source M
+11-01 11:37:57.477 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:7822 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 11:37:57.479 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:7822 KillThreshold:400
+11-01 11:37:57.579 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:7822 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 11:37:57.581 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:7822 KillThreshold:400
+11-01 11:37:57.681 I/SWAP_KillDecision( 5305): high level check - PsiLevel 3. MemAva is:7822 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 11:37:57.682 D/SWAP_KillDecision( 5305): Kill check. now MemAva is:7822 KillThreshold:400
+11-01 11:37:59.567 I/SWAP_Scene( 5305): This app was killed: com.phonefs.source
+11-01 11:37:59.610 I/ActivityManager( 5305): appDiedLocked: pid=21475, app=ProcessRecord{3b2600 0:com.phonefs.source/u0a90}, fromBinderDied=true, reason=null
+11-01 11:39:46.089 I/SWAP_AK ( 5305): FG com.phonefs.source -1 C M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:39:46.089 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.device.launcheridea, com.netease.uuremote, com.phonefs.source]
+11-01 11:39:46.110 I/SWAP_AK ( 5305): BG com.netease.uuremote M
+11-01 11:44:12.029 I/SWAP_AK ( 5305): FG com.device.launcheridea -1 H M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:44:12.029 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.netease.uuremote, com.phonefs.source, com.device.launcheridea]
+11-01 11:44:12.043 I/SWAP_AK ( 5305): BG com.phonefs.source M
+11-01 11:44:17.936 I/SWAP_AK ( 5305): FG com.netease.uuremote -1 H M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:44:17.936 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.device.launcheridea, com.netease.uuremote]
+11-01 11:44:17.948 I/SWAP_AK ( 5305): BG com.device.launcheridea M
+11-01 11:44:21.069 I/SWAP_AK ( 5305): FG com.device.launcheridea -1 H M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:44:21.069 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.netease.uuremote, com.device.launcheridea]
+11-01 11:44:21.080 I/SWAP_AK ( 5305): BG com.netease.uuremote M
+11-01 11:44:21.356 W/lowmemorykiller( 3332): Failed to open /proc/29991/oom_score_adj; errno=2: process 29991 might have been killed
+11-01 11:45:11.217 I/SWAP_AK ( 5305): FG com.netease.uuremote -1 C M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:45:11.217 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.device.launcheridea, com.netease.uuremote]
+11-01 11:45:11.229 I/SWAP_AK ( 5305): BG com.device.launcheridea M
+11-01 11:45:16.790 I/SWAP_AK ( 5305): FG com.device.launcheridea -1 H M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:45:16.790 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.netease.uuremote, com.device.launcheridea]
+11-01 11:45:16.803 I/SWAP_AK ( 5305): BG com.netease.uuremote M
+11-01 11:45:20.349 I/SWAP_AK ( 5305): FG com.huawei.appmarket 31 C M [-1,42.0,0,-1,2,-1,-1]
+11-01 11:45:20.349 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.netease.uuremote, com.device.launcheridea, com.huawei.appmarket]
+11-01 11:45:20.408 I/SWAP_AK ( 5305): BG com.device.launcheridea M
+11-01 11:46:36.187 I/SWAP_AK ( 5305): FG com.netease.uuremote -1 C M [-1,42.0,0,0,2,-1,-1]
+11-01 11:46:36.187 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.device.launcheridea, com.huawei.appmarket, com.netease.uuremote]
+11-01 11:46:36.208 I/SWAP_AK ( 5305): BG com.huawei.appmarket M
+11-01 11:46:39.394 I/SWAP_AK ( 5305): FG com.huawei.appmarket 31 H M [-1,42.0,0,0,2,-1,51]
+11-01 11:46:39.394 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.device.launcheridea, com.netease.uuremote, com.huawei.appmarket]
+11-01 11:46:39.418 I/SWAP_AK ( 5305): BG com.netease.uuremote M
+11-01 11:46:45.026 I/SWAP_AK ( 5305): FG com.device.launcheridea -1 H M [-1,42.0,0,0,2,-1,-1]
+11-01 11:46:45.026 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.netease.uuremote, com.huawei.appmarket, com.device.launcheridea]
+11-01 11:46:45.040 I/SWAP_AK ( 5305): BG com.huawei.appmarket M
+11-01 11:46:50.995 I/SWAP_AK ( 5305): FG com.android.packageinstaller 255 C M [-1,42.0,0,0,2,-1,-1]
+11-01 11:46:50.996 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.netease.uuremote, com.huawei.appmarket, com.device.launcheridea, com.android.packageinstaller]
+11-01 11:46:51.005 I/SWAP_AK ( 5305): BG com.device.launcheridea M
+11-01 11:46:53.491 I/SWAP_AK ( 5305): FG com.device.launcheridea -1 H M [-1,42.0,0,0,2,-1,-1]
+11-01 11:46:53.491 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.netease.uuremote, com.huawei.appmarket, com.android.packageinstaller, com.device.launcheridea]
+11-01 11:46:53.506 I/SWAP_AK ( 5305): BG com.android.packageinstaller M
+11-01 11:46:58.738 I/SWAP_AK ( 5305): FG com.huawei.appmarket 31 H M [-1,42.0,0,0,2,-1,-1]
+11-01 11:46:58.738 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.netease.uuremote, com.android.packageinstaller, com.device.launcheridea, com.huawei.appmarket]
+11-01 11:46:58.756 I/SWAP_AK ( 5305): BG com.device.launcheridea M
+11-01 11:47:32.065 I/SWAP_AK ( 5305): FG com.netease.uuremote -1 C M [-1,42.0,0,0,2,-1,-1]
+11-01 11:47:32.065 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.android.packageinstaller, com.device.launcheridea, com.huawei.appmarket, com.netease.uuremote]
+11-01 11:47:32.090 I/SWAP_AK ( 5305): BG com.huawei.appmarket M
+11-01 11:47:35.164 I/SWAP_AK ( 5305): FG com.huawei.appmarket 31 H M [-1,42.0,0,0,2,-1,-1]
+11-01 11:47:35.164 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.phonefs.source, com.android.packageinstaller, com.device.launcheridea, com.netease.uuremote, com.huawei.appmarket]
+11-01 11:47:35.182 I/SWAP_AK ( 5305): BG com.netease.uuremote M
+11-01 11:49:28.163 I/SWAP_AK ( 5305): FG com.phonefs.source -1 H M [-1,42.0,0,0,2,-1,580]
+11-01 11:49:28.163 I/SWAP_AK ( 5305): appLruQueue:  [com.device.settings, com.android.packageinstaller, com.device.launcheridea, com.netease.uuremote, com.huawei.appmarket, com.phonefs.source]
+11-01 11:49:28.178 I/SWAP_AK ( 5305): BG com.huawei.appmarket M
+11-01 11:49:32.081 I/SWAP_AK ( 5305): Event ScreenOff
+11-01 11:55:41.333 I/SWAP_AK ( 5305): Event ScreenOn

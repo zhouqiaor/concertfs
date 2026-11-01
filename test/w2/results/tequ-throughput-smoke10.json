@@ -1,0 +1,46 @@
+{
+  "host": "192.168.43.1",
+  "port": 18443,
+  "mode": "pin",
+  "tls": {
+    "version": "TLSv1.3",
+    "cipher": "TLS_AES_256_GCM_SHA384",
+    "fingerprint": "96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f"
+  },
+  "chunk_bytes": 10485760,
+  "count": 10,
+  "ok": 3,
+  "failures": 7,
+  "reconnects": 0,
+  "total_bytes": 31457280,
+  "wall_seconds": 74.352,
+  "avg_MiB_s": 0.403,
+  "p50_chunk_ms": 4398.24,
+  "p95_chunk_ms": 11674.94,
+  "min_chunk_ms": 2826.65,
+  "max_chunk_ms": 12483.46,
+  "fingerprint_verified": true,
+  "fail_samples": [
+    {
+      "i": 4,
+      "status": 206,
+      "bytes": 8454144
+    },
+    {
+      "i": 5,
+      "error": "SSLEOFError:EOF occurred in violation of protocol (_ssl.c:2501)"
+    },
+    {
+      "i": 6,
+      "error": "ConnectionRefusedError:[WinError 10061] 由于目标计算机积极拒绝，无法连接。"
+    },
+    {
+      "i": 7,
+      "error": "ConnectionRefusedError:[WinError 10061] 由于目标计算机积极拒绝，无法连接。"
+    },
+    {
+      "i": 8,
+      "error": "ConnectionRefusedError:[WinError 10061] 由于目标计算机积极拒绝，无法连接。"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+  * ServiceRecord{b4b99ca u0 com.phonefs.source/.SharingService}
+    startForegroundCount=1
+    infoAllowStartForeground=[callingPackage: com.android.shell; callingUid: 0; uidState: NONE; intent: Intent { cmp=com.phonefs.source/.SharingService }; code:SYSTEM_UID; tempAllowListReason:<null>; targetSdkVersion:36; callerTargetSdkVersion:-1; startForegroundCount:0; bindFromPackage:null]
+    isForeground=true foregroundId=1001 foregroundNoti=Notification(channel=phonefs-sharing shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x62 color=0x00000000 groupKey=ranker_group1001 actions=1 capsuleEnableStatus=-1 vis=PRIVATE)

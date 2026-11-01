@@ -1,0 +1,45 @@
+{
+  "host": "192.168.43.1",
+  "port": 18443,
+  "mode": "pin",
+  "tls": {
+    "version": "TLSv1.3",
+    "cipher": "TLS_AES_256_GCM_SHA384",
+    "fingerprint": "96e052a4ce15c5ecb02fa76f614f62b0c0928d69016ee228867a7566c904519f"
+  },
+  "chunk_bytes": 10485760,
+  "count": 100,
+  "ok": 58,
+  "failures": 42,
+  "reconnects": 26,
+  "total_bytes": 608174080,
+  "wall_seconds": 189.829,
+  "avg_MiB_s": 3.055,
+  "p50_chunk_ms": 1159.7,
+  "p95_chunk_ms": 1868.25,
+  "min_chunk_ms": 648.19,
+  "max_chunk_ms": 2845.61,
+  "fingerprint_verified": true,
+  "fail_samples": [
+    {
+      "i": 59,
+      "error": "RemoteDisconnected:Remote end closed connection without response"
+    },
+    {
+      "i": 60,
+      "error": "ConnectionRefusedError:[WinError 10061] 由于目标计算机积极拒绝，无法连接。"
+    },
+    {
+      "i": 61,
+      "error": "ConnectionRefusedError:[WinError 10061] 由于目标计算机积极拒绝，无法连接。"
+    },
+    {
+      "i": 62,
+      "error": "ConnectionRefusedError:[WinError 10061] 由于目标计算机积极拒绝，无法连接。"
+    },
+    {
+      "i": 63,
+      "error": "ConnectionRefusedError:[WinError 10061] 由于目标计算机积极拒绝，无法连接。"
+    }
+  ]
+}

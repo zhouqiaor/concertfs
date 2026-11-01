@@ -1,0 +1,4 @@
+    SSID                   : Device_ap_235
+    AP BSSID               : 12:38:1f:22:fa:3d
+    SSID                   : Huawei-Guest
+    AP BSSID               : 50:1d:93:93:a2:12

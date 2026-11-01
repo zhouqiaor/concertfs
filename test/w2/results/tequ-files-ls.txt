@@ -1,0 +1,21 @@
+/data/data/com.phonefs.source/files:
+total 12
+drwxrwx--x 4 u0_a90 u0_a90 3488 2026-11-01 08:44 .
+drwx------ 5 u0_a90 u0_a90 3488 2026-11-01 08:44 ..
+drwx------ 2 u0_a90 u0_a90 3488 2026-11-01 08:44 identity
+drwx------ 2 u0_a90 u0_a90 3488 2026-11-01 08:44 logs
+
+/data/data/com.phonefs.source/files/identity:
+total 22
+drwx------ 2 u0_a90 u0_a90 3488 2026-11-01 08:44 .
+drwxrwx--x 4 u0_a90 u0_a90 3488 2026-11-01 08:44 ..
+-rw------- 1 u0_a90 u0_a90  538 2026-11-01 08:44 cert.pem
+-rw------- 1 u0_a90 u0_a90   18 2026-11-01 08:44 device.id
+-rw------- 1 u0_a90 u0_a90  241 2026-11-01 08:44 key.pem
+-rw------- 1 u0_a90 u0_a90   43 2026-11-01 08:44 token
+
+/data/data/com.phonefs.source/files/logs:
+total 10
+drwx------ 2 u0_a90 u0_a90 3488 2026-11-01 08:44 .
+drwxrwx--x 4 u0_a90 u0_a90 3488 2026-11-01 08:44 ..
+-rw------- 1 u0_a90 u0_a90 1355 2026-11-01 08:44 phonefs.log

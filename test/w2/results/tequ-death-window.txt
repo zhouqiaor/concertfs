@@ -1,0 +1,665 @@
+11-01 08:55:50.023  5305  6198 I ActivityManager: appDiedLocked: pid=26162, app=ProcessRecord{145f5ff 26162:com.device.meeting/u0a19}, fromBinderDied=true, reason=null
+11-01 08:55:50.055  5305  6198 I ActivityManager: Process com.device.meeting (pid 26162) has died: prcp FGS 
+11-01 08:55:50.231  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494550201-1793494550230
+11-01 08:55:50.307  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:50.308  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:50.319  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:43 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:50.319  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:50.733  5305  6198 W ActivityManager: Scheduling restart of crashed service com.device.meeting/.MeetingService in 1000ms for start-requested
+11-01 08:55:50.737  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:50.930  5305  5522 I MultiTaskManagerService: onProcessDied pid = 26162, uid = 10019
+11-01 08:55:50.957  5305 25289 I SWAP_AK : kTag=1793494550319 KillStart 357 65 LowMem def
+11-01 08:55:50.997  5305 25289 I SWAP_AK : kTag=1793494550319 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:51.020  5305  5522 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.meeting uid:10019 pid:26162 proc: activity:null
+11-01 08:55:51.042  5305  6198 I HwActivityTaskManagerServiceEx:  notifyActivityDied: ProcessRecord{145f5ff 0:com.device.meeting/u0a19}
+11-01 08:55:51.043  5305 25289 I SWAP_AK : kTag=1793494550319 TotalKilledUss 0 MemAva:93
+11-01 08:55:51.045  5305 25289 I SWAP_KillDecision: kTag=1793494550319 killResult:0
+11-01 08:55:51.051  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:95 KillThreshold:400
+11-01 08:55:51.052  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:51.053  5305  6198 D ActivityManager: beginTime 0 endTime 24043623 freezeTime 0
+11-01 08:55:51.054  5305  6198 D ActivityManager: beginTime 23950552 endTime 24043623 freezeTime 0
+11-01 08:55:51.054  5305  6198 D ActivityManager: beginTime 0 endTime 24043623 freezeTime 0
+11-01 08:55:51.072  5305  6198 D ActivityManager: beginTime 24014927 endTime 24043623 freezeTime 0
+11-01 08:55:51.072  5305  6198 D ActivityManager: beginTime 23950508 endTime 24043623 freezeTime 0
+11-01 08:55:51.077  5305  6198 D ActivityManager: beginTime 0 endTime 24043623 freezeTime 0
+11-01 08:55:51.077  5305  6198 D ActivityManager: beginTime 62578 endTime 24043623 freezeTime 0
+11-01 08:55:51.254  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494551223-1793494551254
+11-01 08:55:51.346  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:51.346  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:51.360  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 106, targetBuffer: 950
+11-01 08:55:51.363  5305  6042 I SWAP_Buffer: zswapd keep idle, targetBuffer is min, call kill, curBuf: 106
+11-01 08:55:51.368  5305  6042 I SWAP_Buffer: buffer low too long, zswapd keep fail, call kill
+11-01 08:55:51.380  5305  7663 I SWAP_Scene: This app was killed: com.device.meeting
+11-01 08:55:51.399  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494551223-1793494551399
+11-01 08:55:51.476  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494551223-1793494551476
+11-01 08:55:51.530  5305 25289 I SWAP_AK : kTag=1793494551052 KillStart 305 99 LowMem def
+11-01 08:55:51.530  5305 25289 I SWAP_AK : kTag=1793494551052 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:51.545  5305 25289 I SWAP_AK : kTag=1793494551052 TotalKilledUss 0 MemAva:99
+11-01 08:55:51.548  5305 25289 I SWAP_KillDecision: kTag=1793494551052 killResult:0
+11-01 08:55:51.549  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:100 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:51.549  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:51.550  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 100, targetBuffer: 950
+11-01 08:55:51.551  5305 25289 I SWAP_AK : kTag=1793494551549 KillStart 300 99 LowMem def
+11-01 08:55:51.551  5305 25289 I SWAP_AK : kTag=1793494551549 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:51.556  5305 25289 I SWAP_AK : kTag=1793494551549 TotalKilledUss 0 MemAva:99
+11-01 08:55:51.557  5305 25289 I SWAP_KillDecision: kTag=1793494551549 killResult:0
+11-01 08:55:51.564  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:99 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:51.564  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:51.566  5305 25289 I SWAP_AK : kTag=1793494551564 KillStart 301 97 LowMem def
+11-01 08:55:51.566  5305 25289 I SWAP_AK : kTag=1793494551564 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:51.567  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 97, targetBuffer: 950
+11-01 08:55:51.571  5305 25289 I SWAP_AK : kTag=1793494551564 TotalKilledUss 0 MemAva:95
+11-01 08:55:51.572  5305 25289 I SWAP_KillDecision: kTag=1793494551564 killResult:0
+11-01 08:55:51.578  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:95 KillThreshold:400
+11-01 08:55:51.578  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:51.580  5305 25289 I SWAP_AK : kTag=1793494551578 KillStart 305 93 LowMem def
+11-01 08:55:51.580  5305 25289 I SWAP_AK : kTag=1793494551578 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:51.586  5305 25289 I SWAP_AK : kTag=1793494551578 TotalKilledUss 0 MemAva:92
+11-01 08:55:51.589  5305 25289 I SWAP_KillDecision: kTag=1793494551578 killResult:0
+11-01 08:55:51.589  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 96, targetBuffer: 950
+11-01 08:55:51.590  5305 25289 I SWAP_KillDecision: Begin killApplicationWithZswapdPresure. reqMem:860 90 90 isFull:false
+11-01 08:55:51.595  5305 25289 I SWAP_AK : kTag=1793494551590 KillStart 860 91 ZswapdFail def
+11-01 08:55:51.596  5305 25289 I SWAP_AK : kTag=1793494551590 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS]
+11-01 08:55:51.598  5305 25289 I SWAP_AK : kTag=1793494551590 TotalKilledUss 0 MemAva:92
+11-01 08:55:51.598  5305 25289 I SWAP_KillDecision: kTag=1793494551590 killResult:0
+11-01 08:55:51.618  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 89, targetBuffer: 950
+11-01 08:55:51.621  5305  6042 I SWAP_Buffer: handle futile kill, close zswapd
+11-01 08:55:51.773  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:51.775  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:98 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:51.775  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:51.785  5305 25289 I SWAP_AK : kTag=1793494551775 KillStart 302 91 LowMem def
+11-01 08:55:51.785  5305 25289 I SWAP_AK : kTag=1793494551775 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:51.801  5305 25289 I SWAP_AK : kTag=1793494551775 TotalKilledUss 0 MemAva:93
+11-01 08:55:51.803  5305 25289 I SWAP_KillDecision: kTag=1793494551775 killResult:0
+11-01 08:55:51.832  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 90, targetBuffer: 950
+11-01 08:55:51.937  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494551223-1793494551937
+11-01 08:55:52.037  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494551223-1793494552037
+11-01 08:55:52.128  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494551223-1793494552128
+11-01 08:55:52.129  5305  6042 I SWAP_Buffer: zswapd keep idle, targetBuffer is min, call kill, curBuf: 67
+11-01 08:55:52.157  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494551223-1793494552157
+11-01 08:55:52.186  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494551223-1793494552186
+11-01 08:55:52.204  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494551223-1793494552204
+11-01 08:55:52.221  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494551223-1793494552220
+11-01 08:55:52.299  5305  6042 I SWAP_Buffer: zswapd keep idle, targetBuffer is min, call kill, curBuf: 66
+11-01 08:55:52.375  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494552254-1793494552375
+11-01 08:55:52.394  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:52.394  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:52.404  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:62 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:52.404  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:52.598  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494552254-1793494552562
+11-01 08:55:52.714  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494552254-1793494552714
+11-01 08:55:52.795  5305 25289 I SWAP_AK : kTag=1793494552404 KillStart 338 111 LowMem def
+11-01 08:55:52.801  5305 25289 I SWAP_AK : kTag=1793494552404 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:52.858  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:52.955  5305 25289 I SWAP_AK : kTag=1793494552404 TotalKilledUss 0 MemAva:130
+11-01 08:55:53.003  5305 25289 I SWAP_AK : kTag=1793494552404 Go to MmMonitor : nothing to kill
+11-01 08:55:53.003  5305 25289 E SWAP_MmMonit: kTag=1793494552404close nothing to kill since userType = 3 or isReportEnable is false!
+11-01 08:55:53.004  5305 25289 I SWAP_KillDecision: kTag=1793494552404 killResult:0
+11-01 08:55:53.010  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:127 KillThreshold:400
+11-01 08:55:53.010  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:53.012  5305 25289 I SWAP_AK : kTag=1793494553010 KillStart 273 128 LowMem def
+11-01 08:55:53.012  5305 25289 I SWAP_AK : kTag=1793494553010 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:53.013  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 128, targetBuffer: 950
+11-01 08:55:53.128  5305 25289 I SWAP_AK : kTag=1793494553010 TotalKilledUss 0 MemAva:120
+11-01 08:55:53.130  5305 25289 I SWAP_KillDecision: kTag=1793494553010 killResult:0
+11-01 08:55:53.145  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:115 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:53.145  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:53.150  5305 25289 I SWAP_AK : kTag=1793494553145 KillStart 285 118 LowMem def
+11-01 08:55:53.151  5305 25289 I SWAP_AK : kTag=1793494553145 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:53.159  5305 25289 I SWAP_AK : kTag=1793494553145 TotalKilledUss 0 MemAva:116
+11-01 08:55:53.161  5305 25289 I SWAP_KillDecision: kTag=1793494553145 killResult:0
+11-01 08:55:53.170  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 120, targetBuffer: 950
+11-01 08:55:53.212  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 112, targetBuffer: 950
+11-01 08:55:53.381  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494553363-1793494553381
+11-01 08:55:53.384  5305  6042 I SWAP_Buffer: zswapd keep idle, targetBuffer is min, call kill, curBuf: 109
+11-01 08:55:53.400  5305  6042 I SWAP_Buffer: buffer low too long, zswapd keep fail, call kill
+11-01 08:55:53.412  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494553363-1793494553412
+11-01 08:55:53.430  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:53.431  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:53.455  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494553363-1793494553455
+11-01 08:55:53.485  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494553363-1793494553485
+11-01 08:55:53.587  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494553363-1793494553587
+11-01 08:55:53.624  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494553363-1793494553624
+11-01 08:55:53.653  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494553363-1793494553653
+11-01 08:55:53.699  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494553363-1793494553699
+11-01 08:55:53.776  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494553363-1793494553776
+11-01 08:55:53.842  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:53.914  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494553363-1793494553914
+11-01 08:55:54.011  5305 25289 I SWAP_KillDecision: Begin killApplicationWithZswapdPresure. reqMem:832 118 118 isFull:false
+11-01 08:55:54.013  5305  6042 I SWAP_Buffer: zswapd keep idle, targetBuffer is min, call kill, curBuf: 120
+11-01 08:55:54.090  5305 25289 I SWAP_AK : kTag=1793494554017 KillStart 832 153 ZswapdFail def
+11-01 08:55:54.093  5305 25289 I SWAP_AK : kTag=1793494554017 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS]
+11-01 08:55:54.147  5305 25289 I SWAP_AK : kTag=1793494554017 TotalKilledUss 0 MemAva:160
+11-01 08:55:54.148  5305 25289 I SWAP_KillDecision: kTag=1793494554017 killResult:0
+11-01 08:55:54.149  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:161 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:54.149  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:54.150  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 161, targetBuffer: 950
+11-01 08:55:54.150  5305  6042 I SWAP_Buffer: handle futile kill, close zswapd
+11-01 08:55:54.150  5305 25289 I SWAP_AK : kTag=1793494554149 KillStart 239 161 LowMem def
+11-01 08:55:54.151  5305 25289 I SWAP_AK : kTag=1793494554149 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:54.167  5305 25289 I SWAP_AK : kTag=1793494554149 TotalKilledUss 0 MemAva:163
+11-01 08:55:54.169  5305 25289 I SWAP_KillDecision: kTag=1793494554149 killResult:0
+11-01 08:55:54.170  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:163 KillThreshold:400
+11-01 08:55:54.170  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:54.170  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 163, targetBuffer: 950
+11-01 08:55:54.214  5305  6810 I WindowManager: removeIfPossible: Window{d0810b7 u0 com.device.launcheridea/com.device.idea.launcher.MainHomeActivity} callers=com.android.server.wm.WindowState.access$400:385 com.android.server.wm.WindowState$DeathRecipient.binderDied:4453 android.os.IBinder$DeathRecipient.binderDied:329 android.os.BinderProxy.sendDeathNotice:747 <bottom of call stack> 
+11-01 08:55:54.252  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494553363-1793494554252
+11-01 08:55:54.254  5305  6042 I SWAP_Buffer: zswapd keep idle, targetBuffer is min, call kill, curBuf: 160
+11-01 08:55:54.470  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:54.470  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:54.632  5305 25289 I SWAP_AK : kTag=1793494554170 KillStart 237 160 LowMem def
+11-01 08:55:54.633  5305 25289 I SWAP_AK : kTag=1793494554170 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:54.641  5305 25289 I SWAP_AK : kTag=1793494554170 TotalKilledUss 0 MemAva:159
+11-01 08:55:54.643  5305 25289 I SWAP_KillDecision: kTag=1793494554170 killResult:0
+11-01 08:55:54.645  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 161, targetBuffer: 950
+11-01 08:55:54.647  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:160 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:54.647  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:54.668  5305 25289 I SWAP_AK : kTag=1793494554647 KillStart 240 158 LowMem def
+11-01 08:55:54.668  5305 25289 I SWAP_AK : kTag=1793494554647 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:54.674  5305 25289 I SWAP_AK : kTag=1793494554647 TotalKilledUss 0 MemAva:156
+11-01 08:55:54.679  5305 25289 I SWAP_KillDecision: kTag=1793494554647 killResult:0
+11-01 08:55:54.682  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:156 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:54.682  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:54.684  5305 25289 I SWAP_AK : kTag=1793494554682 KillStart 244 156 LowMem def
+11-01 08:55:54.684  5305 25289 I SWAP_AK : kTag=1793494554682 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:54.688  5305 25289 I SWAP_AK : kTag=1793494554682 TotalKilledUss 0 MemAva:156
+11-01 08:55:54.689  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 156, targetBuffer: 950
+11-01 08:55:54.690  5305 25289 I SWAP_KillDecision: kTag=1793494554682 killResult:0
+11-01 08:55:54.692  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:156 KillThreshold:400
+11-01 08:55:54.692  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:54.693  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 155, targetBuffer: 950
+11-01 08:55:54.694  5305 25289 I SWAP_AK : kTag=1793494554692 KillStart 244 156 LowMem def
+11-01 08:55:54.694  5305 25289 I SWAP_AK : kTag=1793494554692 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:54.699  5305 25289 I SWAP_AK : kTag=1793494554692 TotalKilledUss 0 MemAva:157
+11-01 08:55:54.702  5305 25289 I SWAP_KillDecision: kTag=1793494554692 killResult:0
+11-01 08:55:54.706  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 157, targetBuffer: 950
+11-01 08:55:54.708  5305  5423 D ActivityManager: beginTime 0 endTime 24047279 freezeTime 0
+11-01 08:55:54.708  5305  5423 D ActivityManager: beginTime 23950552 endTime 24047279 freezeTime 0
+11-01 08:55:54.712  5305  5423 D ActivityManager: beginTime 0 endTime 24047279 freezeTime 0
+11-01 08:55:54.718  5305  5423 D ActivityManager: beginTime 24014927 endTime 24047279 freezeTime 0
+11-01 08:55:54.718  5305  5423 D ActivityManager: beginTime 23950508 endTime 24047279 freezeTime 0
+11-01 08:55:54.719  5305  5423 D ActivityManager: beginTime 0 endTime 24047279 freezeTime 0
+11-01 08:55:54.719  5305  5423 D ActivityManager: beginTime 62578 endTime 24047279 freezeTime 0
+11-01 08:55:54.751  5305  6141 I ActivityManager: appDiedLocked: pid=26214, app=ProcessRecord{e5e60da 26214:com.device.aiservice/u0a69}, fromBinderDied=true, reason=null
+11-01 08:55:54.754  5305  6141 I ActivityManager: Process com.device.aiservice (pid 26214) has died: vis FGS 
+11-01 08:55:54.827  5305  6141 W ActivityManager: Scheduling restart of crashed service com.device.aiservice/.service.AiService in 1000ms for connection
+11-01 08:55:54.855  5305  6141 I HwActivityTaskManagerServiceEx:  notifyActivityDied: ProcessRecord{e5e60da 0:com.device.aiservice/u0a69}
+11-01 08:55:54.856  5305  6141 D ActivityManager: beginTime 0 endTime 24047429 freezeTime 0
+11-01 08:55:54.856  5305  6141 D ActivityManager: beginTime 23950552 endTime 24047429 freezeTime 0
+11-01 08:55:54.856  5305  6141 D ActivityManager: beginTime 0 endTime 24047429 freezeTime 0
+11-01 08:55:54.856  5305  6141 D ActivityManager: beginTime 24014927 endTime 24047429 freezeTime 0
+11-01 08:55:54.856  5305  6141 D ActivityManager: beginTime 23950508 endTime 24047429 freezeTime 0
+11-01 08:55:54.857  5305  6141 D ActivityManager: beginTime 62578 endTime 24047429 freezeTime 0
+11-01 08:55:54.882  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:54.914  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:140 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:54.914  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:54.969  5305 25319 I ActivityManager: appDiedLocked: pid=26185, app=ProcessRecord{68ea5f7 26185:com.device.meetingservice/u0a18}, fromBinderDied=true, reason=null
+11-01 08:55:54.970  5305 25319 I ActivityManager: Process com.device.meetingservice (pid 26185) has died: vis FGS 
+11-01 08:55:54.971  5305 25289 I SWAP_AK : kTag=1793494554914 KillStart 260 138 LowMem def
+11-01 08:55:54.971  5305 25289 I SWAP_AK : kTag=1793494554914 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:54.976  5305 25289 I SWAP_AK : kTag=1793494554914 TotalKilledUss 0 MemAva:136
+11-01 08:55:54.979  5305 25289 I SWAP_KillDecision: kTag=1793494554914 killResult:0
+11-01 08:55:54.990  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 136, targetBuffer: 950
+11-01 08:55:55.021  5305 25319 W ActivityManager: Scheduling restart of crashed service com.device.meetingservice/.MeetingSdkService in 10812ms for start-requested
+11-01 08:55:55.073  5305 25319 I HwActivityTaskManagerServiceEx:  notifyActivityDied: ProcessRecord{68ea5f7 0:com.device.meetingservice/u0a18}
+11-01 08:55:55.074  5305 25319 D ActivityManager: beginTime 24014927 endTime 24047647 freezeTime 0
+11-01 08:55:55.074  5305 25319 D ActivityManager: beginTime 23950508 endTime 24047647 freezeTime 0
+11-01 08:55:55.074  5305 25319 D ActivityManager: beginTime 0 endTime 24047647 freezeTime 0
+11-01 08:55:55.074  5305 25319 D ActivityManager: beginTime 62578 endTime 24047647 freezeTime 0
+11-01 08:55:55.076  5305  6079 I ActivityManager: appDiedLocked: pid=26248, app=ProcessRecord{82d6694 26248:com.device.settings/u0a25}, fromBinderDied=true, reason=null
+11-01 08:55:55.077  5305  6079 I ActivityManager: Process com.device.settings (pid 26248) has died: vis FGS 
+11-01 08:55:55.090  5305  6079 W ActivityManager: Scheduling restart of crashed service com.device.settings/.service.AdvancedPasswordVerificationService in 20742ms for connection
+11-01 08:55:55.093  5305  6079 I HwActivityTaskManagerServiceEx:  notifyActivityDied: ProcessRecord{82d6694 0:com.device.settings/u0a25}
+11-01 08:55:55.093  5305  6079 D ActivityManager: beginTime 24014927 endTime 24047666 freezeTime 0
+11-01 08:55:55.093  5305  6079 D ActivityManager: beginTime 23950508 endTime 24047666 freezeTime 0
+11-01 08:55:55.094  5305  6079 D ActivityManager: beginTime 62578 endTime 24047666 freezeTime 0
+11-01 08:55:55.095  5305 26155 I ActivityManager: appDiedLocked: pid=26653, app=ProcessRecord{1193f01 26653:com.huawei.appmarket/u0a33}, fromBinderDied=true, reason=null
+11-01 08:55:55.096  5305 26155 I ActivityManager: Process com.huawei.appmarket (pid 26653) has died: vis IMPF
+11-01 08:55:55.100  5305 26155 W ActivityManager: Scheduling restart of crashed service com.huawei.appmarket/com.huawei.appgallery.coreservice.impl.AGCoreService in 30732ms for connection
+11-01 08:55:55.164  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494555074-1793494555164
+11-01 08:55:55.193  5305 26155 W ActivityManager: Failure disconnecting service com.huawei.appmarket/com.huawei.appgallery.coreservice.impl.AGCoreService to connection android.os.BinderProxy@caf960b (in com.device.cloudlink.smartrooms)
+11-01 08:55:55.193  5305 26155 W ActivityManager: android.os.DeadObjectException
+11-01 08:55:55.193  5305 26155 W ActivityManager: 	at com.android.server.am.ActiveServices.killServicesLocked(ActiveServices.java:6014)
+11-01 08:55:55.193  5305 26155 W ActivityManager: 	at com.android.server.am.ActivityManagerService.handleAppDiedLocked(ActivityManagerService.java:3642)
+11-01 08:55:55.193  5305 26155 W ActivityManager: 	at com.android.server.am.ActivityManagerService.appDiedLocked(ActivityManagerService.java:3773)
+11-01 08:55:55.193  5305 26155 W ActivityManager: 	at com.android.server.am.ActivityManagerService$AppDeathRecipient.binderDied(ActivityManagerService.java:1735)
+11-01 08:55:55.193  5305 26155 W ActivityManager: 	at android.os.IBinder$DeathRecipient.binderDied(IBinder.java:329)
+11-01 08:55:55.210  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494555074-1793494555210
+11-01 08:55:55.250  5305 26155 I HwActivityTaskManagerServiceEx:  notifyActivityDied: ProcessRecord{1193f01 0:com.huawei.appmarket/u0a33}
+11-01 08:55:55.250  5305 26155 D ActivityManager: beginTime 24014927 endTime 24047823 freezeTime 0
+11-01 08:55:55.250  5305 26155 D ActivityManager: beginTime 23950508 endTime 24047823 freezeTime 0
+11-01 08:55:55.251  5305 26155 D ActivityManager: beginTime 62578 endTime 24047823 freezeTime 0
+11-01 08:55:55.251  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494555074-1793494555251
+11-01 08:55:55.255  5305 25338 I ActivityManager: appDiedLocked: pid=26504, app=ProcessRecord{340d780 26504:com.device.cloudlink.smartrooms/u0a82}, fromBinderDied=true, reason=null
+11-01 08:55:55.255  5305 25338 I ActivityManager: Process com.device.cloudlink.smartrooms (pid 26504) has died: vis IMPF
+11-01 08:55:55.256  5305 25338 D ActivityManager: cleanUpApplicationRecord app: 26504:com.device.cloudlink.smartrooms/u0a82, bad: false, restarting: false, allowRestart: true
+11-01 08:55:55.257  5305  5555 I HwActivityTaskManagerServiceEx:  NOTIFY_CALL packageName:com.device.cloudlink.smartrooms processName: com.device.cloudlink.smartrooms reason: appDie
+11-01 08:55:55.259  5305 25338 W ActivityManager: Scheduling restart of crashed service com.device.cloudlink.smartrooms/com.huawei.alive.service.LocalService in 30573ms for connection
+11-01 08:55:55.265  5305 25338 I HwActivityTaskManagerServiceEx:  notifyActivityDied: ProcessRecord{340d780 0:com.device.cloudlink.smartrooms/u0a82}
+11-01 08:55:55.266  5305 25338 D ActivityManager: beginTime 24014927 endTime 24047839 freezeTime 0
+11-01 08:55:55.266  5305 25338 D ActivityManager: beginTime 23950508 endTime 24047839 freezeTime 0
+11-01 08:55:55.266  5305 25338 D ActivityManager: beginTime 62578 endTime 24047839 freezeTime 0
+11-01 08:55:55.272  5305  6843 I ActivityManager: appDiedLocked: pid=26206, app=ProcessRecord{55be382 26206:com.device.idea.webapp/u0a74}, fromBinderDied=true, reason=null
+11-01 08:55:55.272  5305  6843 I ActivityManager: Process com.device.idea.webapp (pid 26206) has died: vis FGS 
+11-01 08:55:55.275  5305  6843 W ActivityManager: Scheduling restart of crashed service com.device.idea.webapp/.WebAppService in 40557ms for connection
+11-01 08:55:55.280  5305  6843 W ActivityManager: android.os.DeadObjectException
+11-01 08:55:55.280  5305  6843 W ActivityManager: 	at com.android.server.am.ActiveServices.killServicesLocked(ActiveServices.java:6014)
+11-01 08:55:55.280  5305  6843 W ActivityManager: 	at com.android.server.am.ActivityManagerService.handleAppDiedLocked(ActivityManagerService.java:3642)
+11-01 08:55:55.280  5305  6843 W ActivityManager: 	at com.android.server.am.ActivityManagerService.appDiedLocked(ActivityManagerService.java:3773)
+11-01 08:55:55.280  5305  6843 W ActivityManager: 	at com.android.server.am.ActivityManagerService$AppDeathRecipient.binderDied(ActivityManagerService.java:1735)
+11-01 08:55:55.280  5305  6843 W ActivityManager: 	at android.os.IBinder$DeathRecipient.binderDied(IBinder.java:329)
+11-01 08:55:55.287  5305  6843 I HwActivityTaskManagerServiceEx:  notifyActivityDied: ProcessRecord{55be382 0:com.device.idea.webapp/u0a74}
+11-01 08:55:55.288  5305  6843 D ActivityManager: beginTime 24014927 endTime 24047861 freezeTime 0
+11-01 08:55:55.288  5305  6843 D ActivityManager: beginTime 23950508 endTime 24047861 freezeTime 0
+11-01 08:55:55.288  5305  6843 D ActivityManager: beginTime 62578 endTime 24047861 freezeTime 0
+11-01 08:55:55.290  5305  6738 I ActivityManager: appDiedLocked: pid=26457, app=ProcessRecord{9f8b1a4 26457:com.device.infowinservice/u0a75}, fromBinderDied=true, reason=null
+11-01 08:55:55.290  5305  6738 I ActivityManager: Process com.device.infowinservice (pid 26457) has died: prcp FGS 
+11-01 08:55:55.297  5305  6738 W ActivityManager: Scheduling restart of crashed service com.device.infowinservice/.GloWinAidlService in 40535ms for connection
+11-01 08:55:55.307  5305  6738 I HwActivityTaskManagerServiceEx:  notifyActivityDied: ProcessRecord{9f8b1a4 0:com.device.infowinservice/u0a75}
+11-01 08:55:55.308  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494555074-1793494555308
+11-01 08:55:55.308  5305  6738 D ActivityManager: beginTime 24014927 endTime 24047881 freezeTime 0
+11-01 08:55:55.309  5305  6738 D ActivityManager: beginTime 23950508 endTime 24047881 freezeTime 0
+11-01 08:55:55.309  5305  6042 I SWAP_Buffer: zswapd keep idle, targetBuffer is min, call kill, curBuf: 140
+11-01 08:55:55.309  5305  6738 D ActivityManager: beginTime 62578 endTime 24047881 freezeTime 0
+11-01 08:55:55.310  5305  6042 I SWAP_Buffer: buffer low too long, zswapd keep fail, call kill
+11-01 08:55:55.312  5305 25289 I SWAP_KillDecision: Begin killApplicationWithZswapdPresure. reqMem:810 141 140 isFull:false
+11-01 08:55:55.318  5305 25289 I SWAP_AK : kTag=1793494555312 KillStart 810 138 ZswapdFail def
+11-01 08:55:55.318  5305 25289 I SWAP_AK : kTag=1793494555312 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS]
+11-01 08:55:55.321  5305 25289 I SWAP_AK : kTag=1793494555312 TotalKilledUss 0 MemAva:138
+11-01 08:55:55.325  5305 25289 I SWAP_KillDecision: kTag=1793494555312 killResult:0
+11-01 08:55:55.339  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 134, targetBuffer: 950
+11-01 08:55:55.340  5305  6042 I SWAP_Buffer: handle futile kill, close zswapd
+11-01 08:55:55.434  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494555074-1793494555434
+11-01 08:55:55.456  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494555074-1793494555456
+11-01 08:55:55.475  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494555074-1793494555475
+11-01 08:55:55.509  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:55.509  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:55.510  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:133 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:55.510  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:55.512  5305 25289 I SWAP_AK : kTag=1793494555510 KillStart 267 134 LowMem def
+11-01 08:55:55.512  5305 25289 I SWAP_AK : kTag=1793494555510 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:55.524  5305 25289 I SWAP_AK : kTag=1793494555510 TotalKilledUss 0 MemAva:132
+11-01 08:55:55.525  5305 25289 I SWAP_KillDecision: kTag=1793494555510 killResult:0
+11-01 08:55:55.530  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:132 KillThreshold:400
+11-01 08:55:55.530  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:55.532  5305 25289 I SWAP_AK : kTag=1793494555530 KillStart 268 131 LowMem def
+11-01 08:55:55.532  5305 25289 I SWAP_AK : kTag=1793494555530 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:55.536  5305 25289 I SWAP_AK : kTag=1793494555530 TotalKilledUss 0 MemAva:131
+11-01 08:55:55.536  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 131, targetBuffer: 950
+11-01 08:55:55.544  5305 25289 I SWAP_KillDecision: kTag=1793494555530 killResult:0
+11-01 08:55:55.554  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 130, targetBuffer: 950
+11-01 08:55:55.609  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494555074-1793494555609
+11-01 08:55:55.773  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494555074-1793494555773
+11-01 08:55:55.779  5305  6042 I SWAP_Buffer: zswapd keep idle, targetBuffer is min, call kill, curBuf: 133
+11-01 08:55:55.922  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:55.925  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:120 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:55.925  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:55.927  5305 25289 I SWAP_AK : kTag=1793494555925 KillStart 280 119 LowMem def
+11-01 08:55:55.927  5305 25289 I SWAP_AK : kTag=1793494555925 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:55.931  5305 25289 I SWAP_AK : kTag=1793494555925 TotalKilledUss 0 MemAva:118
+11-01 08:55:55.933  5305 25289 I SWAP_KillDecision: kTag=1793494555925 killResult:0
+11-01 08:55:55.936  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 117, targetBuffer: 950
+11-01 08:55:56.402  5305 25332 I ActivityManager: appDiedLocked: pid=25102, app=ProcessRecord{e43f8c7 25102:com.device.launcheridea/u0a56}, fromBinderDied=true, reason=null
+11-01 08:55:56.402  5305 25332 I ActivityManager: Process com.device.launcheridea (pid 25102) has died: prcp FGS 
+11-01 08:55:56.551  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:56.551  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:56.552  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:136 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:56.552  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:56.556  5305 25289 I SWAP_AK : kTag=1793494556552 KillStart 264 139 LowMem def
+11-01 08:55:56.556  5305 25289 I SWAP_AK : kTag=1793494556552 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:56.577  5305 25289 I SWAP_AK : kTag=1793494556552 TotalKilledUss 0 MemAva:138
+11-01 08:55:56.579  5305 25289 I SWAP_KillDecision: kTag=1793494556552 killResult:0
+11-01 08:55:56.582  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:138 KillThreshold:400
+11-01 08:55:56.582  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:56.584  5305 25289 I SWAP_AK : kTag=1793494556582 KillStart 262 139 LowMem def
+11-01 08:55:56.584  5305 25289 I SWAP_AK : kTag=1793494556582 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:56.591  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 137, targetBuffer: 950
+11-01 08:55:56.602  5305 25289 I SWAP_AK : kTag=1793494556582 TotalKilledUss 0 MemAva:139
+11-01 08:55:56.604  5305 25289 I SWAP_KillDecision: kTag=1793494556582 killResult:0
+11-01 08:55:56.608  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 136, targetBuffer: 950
+11-01 08:55:56.733  5305 25332 W ActivityManager: Scheduling restart of crashed service com.device.launcheridea/com.device.idea.systemui.SystemUiService in 1000ms for start-requested
+11-01 08:55:56.771  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494556105-1793494556771
+11-01 08:55:56.826  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494556105-1793494556826
+11-01 08:55:56.889  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494556105-1793494556889
+11-01 08:55:56.962  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:56.964  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:137 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:56.964  5305 25289 I SWAP_KillDecision: Begin kill applications.
+11-01 08:55:56.975  5305 25289 I SWAP_AK : kTag=1793494556964 KillStart 263 135 LowMem def
+11-01 08:55:56.975  5305 25289 I SWAP_AK : kTag=1793494556964 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS, LEVEL_2]
+11-01 08:55:56.987  5305 25289 I SWAP_AK : kTag=1793494556964 TotalKilledUss 0 MemAva:135
+11-01 08:55:56.991  5305 25289 I SWAP_KillDecision: kTag=1793494556964 killResult:0
+11-01 08:55:57.008  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494556105-1793494557008
+11-01 08:55:57.017  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 136, targetBuffer: 950
+11-01 08:55:57.019  5305  6042 I SWAP_Buffer: zswapd keep idle, targetBuffer is min, call kill, curBuf: 135
+11-01 08:55:57.026  5305  6042 I SWAP_Buffer: buffer low too long, zswapd keep fail, call kill
+11-01 08:55:57.028  5305 25289 I SWAP_KillDecision: Begin killApplicationWithZswapdPresure. reqMem:815 135 135 isFull:false
+11-01 08:55:57.030  5305 25289 I SWAP_AK : kTag=1793494557028 KillStart 815 134 ZswapdFail def
+11-01 08:55:57.030  5305 25289 I SWAP_AK : kTag=1793494557028 Settings ubSortLimit: 2147483647 killLimit: 2147483647 Lists: [LEVEL_CACHED_PROCESS]
+11-01 08:55:57.032  5305 25332 I HwActivityTaskManagerServiceEx:  notifyActivityDied: ProcessRecord{e43f8c7 0:com.device.launcheridea/u0a56}
+11-01 08:55:57.033  5305 25289 I SWAP_AK : kTag=1793494557028 TotalKilledUss 0 MemAva:135
+11-01 08:55:57.034  5305 25289 I SWAP_KillDecision: kTag=1793494557028 killResult:0
+11-01 08:55:57.043  5305  6042 I SWAP_Buffer: handle kill stop end, current buffer: 133, targetBuffer: 950
+11-01 08:55:57.043  5305  6042 I SWAP_Buffer: handle futile kill, close zswapd
+11-01 08:55:57.045  5305 25332 D ActivityManager: beginTime 62578 endTime 24049607 freezeTime 0
+11-01 08:55:57.195  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494557139-1793494557195
+11-01 08:55:57.232  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494557139-1793494557232
+11-01 08:55:57.277  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494557139-1793494557277
+11-01 08:55:57.315  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494557139-1793494557315
+11-01 08:55:57.316  5305  6042 I SWAP_Buffer: zswapd keep idle, targetBuffer is min, call kill, curBuf: 126
+11-01 08:55:57.852  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:57.853  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494557139-1793494557853
+11-01 08:55:57.854  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494557139-1793494557854
+11-01 08:55:57.885  5305  7437 D SWAP_KernEvtRcv: handleZswapdUnmet:try to kill too frequently 1793494557139-1793494557885
+11-01 08:55:58.166  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:58.166  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:58.229  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:1278 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:58.234  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:1700 KillThreshold:400
+11-01 08:55:58.236  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:1707 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:58.400  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:3210 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:58.403  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:3235 KillThreshold:400
+11-01 08:55:58.404  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:3250 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:58.593  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:5276 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:58.596  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:5352 KillThreshold:400
+11-01 08:55:58.597  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:5373 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:58.626  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:58.626  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:58.627  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:5692 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:58.628  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:5710 KillThreshold:400
+11-01 08:55:58.985  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:9013 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:58.986  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:9013 KillThreshold:400
+11-01 08:55:59.043  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:59.045  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:9035 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:59.086  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:9034 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:59.087  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:9034 KillThreshold:400
+11-01 08:55:59.134  5305 25332 D ActivityManager: beginTime 0 endTime 24051707 freezeTime 0
+11-01 08:55:59.147  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:9031 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:59.172  5305  5907 D ActivityManager: beginTime 0 endTime 24051745 freezeTime 0
+11-01 08:55:59.172  5305  5907 D ActivityManager: beginTime 24051741 endTime 24051745 freezeTime 0
+11-01 08:55:59.176  5305  5575 I OomAdjuster: setProcessGroup 26908 to 0:(AdjType=fg-service, AdjTarget=null)
+11-01 08:55:59.270  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 3. MemAva is:9024 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:59.281  5305  5522 I MultiTaskManagerService: onProcessDied pid = 26214, uid = 10069
+11-01 08:55:59.281  5305  5522 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.aiservice uid:10069 pid:26214 proc: activity:null
+11-01 08:55:59.347  5305  5522 I MultiTaskManagerService: onProcessDied pid = 26185, uid = 10018
+11-01 08:55:59.348  5305  5522 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.meetingservice uid:10018 pid:26185 proc: activity:null
+11-01 08:55:59.391  5305  5522 I MultiTaskManagerService: onProcessDied pid = 26248, uid = 10025
+11-01 08:55:59.391  5305  5522 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.settings uid:10025 pid:26248 proc: activity:null
+11-01 08:55:59.409  5305 26156 D ActivityManager: beginTime 0 endTime 24051982 freezeTime 0
+11-01 08:55:59.413  5305  5522 I MultiTaskManagerService: onProcessDied pid = 26653, uid = 10033
+11-01 08:55:59.413  5305  5522 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.huawei.appmarket uid:10033 pid:26653 proc: activity:null
+11-01 08:55:59.422  5305  7663 I SWAP_Scene: This app was killed: com.huawei.appmarket
+11-01 08:55:59.424  5305  5522 I MultiTaskManagerService: onProcessDied pid = 26504, uid = 10082
+11-01 08:55:59.424  5305  5522 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.cloudlink.smartrooms uid:10082 pid:26504 proc: activity:null
+11-01 08:55:59.425  5305  5522 I MultiTaskManagerService: onProcessDied pid = 26206, uid = 10074
+11-01 08:55:59.425  5305  5522 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.idea.webapp uid:10074 pid:26206 proc: activity:null
+11-01 08:55:59.425  5305  5522 I MultiTaskManagerService: onProcessDied pid = 26457, uid = 10075
+11-01 08:55:59.425  5305  5522 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.infowinservice uid:10075 pid:26457 proc: activity:null
+11-01 08:55:59.426  5305  5522 I MultiTaskManagerService: onProcessDied pid = 25102, uid = 10056
+11-01 08:55:59.426  5305  5522 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.device.launcheridea uid:10056 pid:25102 proc: activity:null
+11-01 08:55:59.441  5305  7663 I SWAP_Scene: This app was killed: com.device.cloudlink.smartrooms
+11-01 08:55:59.441  5305  7663 I SWAP_Scene: This app was killed: com.device.idea.webapp
+11-01 08:55:59.441  5305  7663 I SWAP_Scene: This app was killed: com.device.infowinservice
+11-01 08:55:59.444  5305  7663 I SWAP_Scene: This app was killed: com.device.launcheridea
+11-01 08:55:59.646  5305 25332 D ActivityManager: beginTime 0 endTime 24052219 freezeTime 0
+11-01 08:55:59.656  5305 25339 I WindowManager: WIN DEATH: Window{7022ee0 u0 com.phonefs.source/com.phonefs.source.MainActivity}
+11-01 08:55:59.667  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:59.667  5305  7434 I SWAP_JniComm: Begin call killApplicationWithThread.
+11-01 08:55:59.668  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:9062 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:59.673  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:9063 KillThreshold:400
+11-01 08:55:59.680  5305 25339 I TaskSnapshot: taskId:468 Callers=com.android.server.wm.TaskSnapshotCache.removeRunningEntry:435 com.android.server.wm.TaskSnapshotCache.removeRunningEntry:385 com.android.server.wm.TaskSnapshotCache.onAppDied:321 com.android.server.wm.TaskSnapshotController.onAppDied:1149 com.android.server.wm.WindowState$DeathRecipient.binderDied:4428 android.os.IBinder$DeathRecipient.binderDied:329 android.os.BinderProxy.sendDeathNotice:747 <bottom of call stack> 
+11-01 08:55:59.706  5305 25339 I WindowManager: removeIfPossible: Window{7022ee0 u0 com.phonefs.source/com.phonefs.source.MainActivity} callers=com.android.server.wm.WindowState.access$400:385 com.android.server.wm.WindowState$DeathRecipient.binderDied:4453 android.os.IBinder$DeathRecipient.binderDied:329 android.os.BinderProxy.sendDeathNotice:747 <bottom of call stack> 
+11-01 08:55:59.714  5305 25339 I WindowManager_visibility: Window{7022ee0 u0 com.phonefs.source/com.phonefs.source.MainActivity} setShown false
+11-01 08:55:59.714  5305 25339 I WindowManager_visibility: DrawState change: Window{7022ee0 u0 com.phonefs.source/com.phonefs.source.MainActivity} from:HAS_DRAWN to:NO_SURFACE reason:destroySurface
+11-01 08:55:59.715  5305 25339 I WindowManager: Removing Window{7022ee0 u0 com.phonefs.source/com.phonefs.source.MainActivity} from ActivityRecord{73086f2 u0 com.phonefs.source/.MainActivity t468}
+11-01 08:55:59.726  5305 25339 I ActivityTaskManager: Visibility changed in ActivityRecord{73086f2 u0 com.phonefs.source/.MainActivity t468}: vis=false
+11-01 08:55:59.728  5305 25339 I ActivityManager_activity: windowsGone(): ActivityRecord{73086f2 u0 com.phonefs.source/.MainActivity t468}
+11-01 08:55:59.737  5305 25339 I WindowManager: Changing focus from Window{7022ee0 u0 com.phonefs.source/com.phonefs.source.MainActivity} to null displayId=0
+11-01 08:55:59.759  5305  6121 I ActivityManager: appDiedLocked: pid=25103, app=ProcessRecord{b0db5bb 25103:com.phonefs.source/u0a90}, fromBinderDied=true, reason=null
+11-01 08:55:59.760  5305  6121 I ActivityManager: Process com.phonefs.source (pid 25103) has died: fg  TOP 
+11-01 08:55:59.771  5305  6121 D ActivityManager: cleanUpApplicationRecord app: 25103:com.phonefs.source/u0a90, bad: false, restarting: false, allowRestart: true
+11-01 08:55:59.771  5305  5555 I HwActivityTaskManagerServiceEx:  NOTIFY_CALL packageName:com.phonefs.source processName: com.phonefs.source reason: appDie
+11-01 08:55:59.779  5305  6121 I ActivityManager_service: Removed service that is not running: ServiceRecord{de6cfca u0 com.phonefs.source/.SharingService}
+11-01 08:55:59.783  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:9055 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:59.786  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:9054 KillThreshold:400
+11-01 08:55:59.787  5305  5522 I MultiTaskManagerService: onProcessDied pid = 25103, uid = 10090
+11-01 08:55:59.794  5305  5522 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:PROCESS_DIED pkg:com.phonefs.source uid:10090 pid:25103 proc: activity:null
+11-01 08:55:59.798  5305  5305 I NotificationService: cancelNotificationLocked called,tell the app,reason = 8,sbn key = 0|com.phonefs.source|1001|null|10090, false, true
+11-01 08:55:59.800  5305  6738 D HwActivityTaskManagerServiceEx: add visible task, topActivity=com.phonefs.source/.MainActivity taskId=468 isVisible=true isFocused=false windowMode=1 displayId=0
+11-01 08:55:59.810  5305  5305 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 08:55:59.811  5305  6121 I HwRestoreStateManager: com.phonefs.source doesn't support recovery
+11-01 08:55:59.811  5305  6121 W ActivityTaskManager: Force removing ActivityRecord{73086f2 u0 com.phonefs.source/.MainActivity t468}: app died, no saved state
+11-01 08:55:59.812  5305  7663 I SWAP_Scene: This app was killed: com.phonefs.source
+11-01 08:55:59.815  5305  5305 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 08:55:59.815  5305  5305 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 08:55:59.816  5305  5305 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:NOTIFICATION_RECEIVED pkg:com.phonefs.source uid:10090 pid:1001 proc: activity:null
+11-01 08:55:59.822  5305  6121 I WindowManager: removeWindowToken: displayid:0 binder:Token{f5f09fd ActivityRecord{73086f2 u0 com.phonefs.source/.MainActivity t468 f}}} token:ActivityRecord{73086f2 u0 com.phonefs.source/.MainActivity t468 f}}
+11-01 08:55:59.824  5305  6121 V WindowManager: commitVisibility: ActivityRecord{73086f2 u0 com.phonefs.source/.MainActivity t468 f}}: visible=false mVisibleRequested=false
+11-01 08:55:59.841  5305  6121 I WindowManager: removeWindowToken: displayid:0 binder:Token{f5f09fd ActivityRecord{73086f2 u0 com.phonefs.source/.MainActivity t468 f}}} token:null
+11-01 08:55:59.842  5305  6121 I WindowManager: removeChild: child=ActivityRecord{73086f2 u0 com.phonefs.source/.MainActivity t468 f}} reason=removeChild
+11-01 08:55:59.850  5305  6121 D ActivityTaskManager: onParentChanged: mDisplayContent=null. this=Task{11503c0 #468 type=standard A=10090:com.phonefs.source U=0 visible=false mode=fullscreen translucent=true sz=0}com.android.server.wm.WindowContainer.setParent:575 com.android.server.wm.WindowContainer.removeChild:767 com.android.server.wm.TaskDisplayArea.removeChildTask:517 com.android.server.wm.TaskDisplayArea.removeChild:495 com.android.server.wm.WindowContainer.removeImmediately:821 com.android.server.wm.Task.removeImmediately:5113 com.android.server.wm.Task.removeIfPossible:1693 com.android.server.wm.Task.removeChild:2684 
+11-01 08:55:59.865  5305  6121 W HwActivityTaskManagerServiceEx: appSwitch from: com.phonefs.source to: com.device.launcheridea
+11-01 08:55:59.871  5305  6121 V HwActivityTaskManagerServiceEx: takeTaskSnapShot package com.phonefs.source
+11-01 08:55:59.880  5305  6121 I HwActivityTaskManagerServiceEx:  notifyActivityDied: ProcessRecord{b0db5bb 0:com.phonefs.source/u0a90}
+11-01 08:55:59.881  5305  6121 D ActivityManager: beginTime 0 endTime 24052454 freezeTime 0
+11-01 08:55:59.881  5305  6121 D ActivityManager: beginTime 0 endTime 24052454 freezeTime 0
+11-01 08:55:59.881  5305  6121 D ActivityManager: beginTime 0 endTime 24052454 freezeTime 0
+11-01 08:55:59.881  5305  6121 D ActivityManager: beginTime 24051741 endTime 24052454 freezeTime 0
+11-01 08:55:59.881  5305  6121 D ActivityManager: beginTime 0 endTime 24052454 freezeTime 0
+11-01 08:55:59.881  5305  6121 D ActivityManager: beginTime 62578 endTime 24052454 freezeTime 0
+11-01 08:55:59.885  5305  5555 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:APP_SWITCH_FROM pkg:com.phonefs.source uid:10090 pid:0 proc: activity:null
+11-01 08:55:59.886  5305 25289 I SWAP_KillDecision: high level check - PsiLevel 2. MemAva is:9051 KillThreshold:400isInDeepSleep:falseisSystemLoadHigh:false
+11-01 08:55:59.887  5305 25289 D SWAP_KillDecision: Kill check. now MemAva is:9051 KillThreshold:400
+11-01 08:55:59.896  5305  7663 I SWAP_AK : appLruQueue:  [com.device.settings, com.phonefs.source, com.device.launcheridea]
+11-01 08:55:59.907  5305  7663 I SWAP_AK : BG com.phonefs.source M
+11-01 08:55:59.916  5305  5524 W ActivityManager: setHasOverlayUi called on unknown pid: 25103
+11-01 08:55:59.925  5305  5575 I OomAdjuster: setProcessGroup 27003 to 0:(AdjType=cch-empty, AdjTarget=null)
+11-01 08:55:59.936  5305 26153 D ActivityManager: beginTime 0 endTime 24052509 freezeTime 0
+11-01 08:55:59.936  5305 26153 D ActivityManager: beginTime 24051741 endTime 24052509 freezeTime 0
+11-01 08:56:00.100  5305  6121 D ActivityManager: beginTime 0 endTime 24052673 freezeTime 0
+11-01 08:56:00.100  5305  6121 D ActivityManager: beginTime 24052672 endTime 24052673 freezeTime 0
+11-01 08:56:00.197  5305 25339 D ActivityManager: beginTime 0 endTime 24052770 freezeTime 0
+11-01 08:56:00.206  5305 26153 D ActivityManager: beginTime 0 endTime 24052780 freezeTime 0
+11-01 08:56:00.258  5305 25339 D ActivityManager: beginTime 62578 endTime 24052831 freezeTime 0
+11-01 08:56:00.258  5305 25339 D ActivityManager: beginTime 0 endTime 24052831 freezeTime 0
+11-01 08:56:00.258  5305 25339 D ActivityManager: beginTime 0 endTime 24052831 freezeTime 0
+11-01 08:56:00.291  5305 25339 D ActivityManager: beginTime 0 endTime 24052863 freezeTime 0
+11-01 08:56:00.386  5305 25339 D ActivityManager: beginTime 0 endTime 24052959 freezeTime 0
+11-01 08:56:00.386  5305 25339 D ActivityManager: beginTime 0 endTime 24052959 freezeTime 0
+11-01 08:56:00.397  5305  6736 D ActivityManager: beginTime 0 endTime 24052970 freezeTime 0
+11-01 08:56:00.397  5305  6736 D ActivityManager: beginTime 0 endTime 24052970 freezeTime 0
+11-01 08:56:00.403  5305  6736 D ActivityManager: beginTime 0 endTime 24052976 freezeTime 0
+11-01 08:56:00.403  5305  6736 D ActivityManager: beginTime 0 endTime 24052976 freezeTime 0
+11-01 08:56:00.484  5305  6736 D ActivityManager: beginTime 0 endTime 24053057 freezeTime 0
+11-01 08:56:00.484  5305  6736 D ActivityManager: beginTime 24052672 endTime 24053057 freezeTime 0
+11-01 08:56:00.499  5305 25332 D ActivityManager: beginTime 0 endTime 24053072 freezeTime 0
+11-01 08:56:00.500  5305 25332 D ActivityManager: beginTime 24052672 endTime 24053072 freezeTime 0
+11-01 08:56:00.536  5305 25332 D ActivityManager: beginTime 62578 endTime 24053109 freezeTime 0
+11-01 08:56:00.536  5305 25332 D ActivityManager: beginTime 0 endTime 24053109 freezeTime 0
+11-01 08:56:00.536  5305 25332 D ActivityManager: beginTime 0 endTime 24053109 freezeTime 0
+11-01 08:56:00.536  5305 25332 D ActivityManager: beginTime 0 endTime 24053109 freezeTime 0
+11-01 08:56:00.558  5305  5569 D ActivityManager: beginTime 0 endTime 24053131 freezeTime 0
+11-01 08:56:00.558  5305  5569 D ActivityManager: beginTime 24052672 endTime 24053131 freezeTime 0
+11-01 08:56:00.559  5305  5569 D ActivityManager: beginTime 62578 endTime 24053131 freezeTime 0
+11-01 08:56:00.559  5305  5569 D ActivityManager: beginTime 0 endTime 24053131 freezeTime 0
+11-01 08:56:00.559  5305  5569 D ActivityManager: beginTime 0 endTime 24053131 freezeTime 0
+11-01 08:56:00.559  5305  5569 D ActivityManager: beginTime 0 endTime 24053131 freezeTime 0
+11-01 08:56:00.566  5305 25339 D ActivityManager: beginTime 0 endTime 24053139 freezeTime 0
+11-01 08:56:00.585  5305  6738 D ActivityManager: beginTime 0 endTime 24053148 freezeTime 0
+11-01 08:56:00.585  5305  6738 D ActivityManager: beginTime 0 endTime 24053148 freezeTime 0
+11-01 08:56:00.585  5305  6738 D ActivityManager: beginTime 0 endTime 24053148 freezeTime 0
+11-01 08:56:00.585  5305  6738 D ActivityManager: beginTime 24052672 endTime 24053148 freezeTime 0
+11-01 08:56:00.597  5305  5569 D ActivityManager: beginTime 24053128 endTime 24053170 freezeTime 0
+11-01 08:56:00.613  5305  6736 D ActivityManager: beginTime 24053128 endTime 24053186 freezeTime 0
+11-01 08:56:00.633  5305  6736 D ActivityManager: beginTime 0 endTime 24053201 freezeTime 0
+11-01 08:56:00.633  5305  6736 D ActivityManager: beginTime 24052672 endTime 24053201 freezeTime 0
+11-01 08:56:00.633  5305  6736 D ActivityManager: beginTime 0 endTime 24053201 freezeTime 0
+11-01 08:56:00.633  5305  6736 D ActivityManager: beginTime 0 endTime 24053201 freezeTime 0
+11-01 08:56:00.633  5305  6736 D ActivityManager: beginTime 62578 endTime 24053201 freezeTime 0
+11-01 08:56:00.634  5305  6736 D ActivityManager: beginTime 0 endTime 24053201 freezeTime 0
+11-01 08:56:00.659  5305  6738 D ActivityManager: beginTime 0 endTime 24053232 freezeTime 0
+11-01 08:56:00.662  5305  6738 D ActivityManager: beginTime 24053187 endTime 24053235 freezeTime 0
+11-01 08:56:00.664  5305  6738 D ActivityManager: beginTime 0 endTime 24053237 freezeTime 0
+11-01 08:56:00.664  5305  6738 D ActivityManager: beginTime 24052672 endTime 24053237 freezeTime 0
+11-01 08:56:00.664  5305  6738 D ActivityManager: beginTime 0 endTime 24053237 freezeTime 0
+11-01 08:56:00.664  5305  6738 D ActivityManager: beginTime 0 endTime 24053237 freezeTime 0
+11-01 08:56:00.664  5305  6738 D ActivityManager: beginTime 62578 endTime 24053237 freezeTime 0
+11-01 08:56:00.665  5305  6738 D ActivityManager: beginTime 0 endTime 24053237 freezeTime 0
+11-01 08:56:00.672  5305  6738 D ActivityManager: beginTime 24053236 endTime 24053245 freezeTime 0
+11-01 08:56:00.674  5305  6738 D ActivityManager: beginTime 0 endTime 24053247 freezeTime 0
+11-01 08:56:00.674  5305  6738 D ActivityManager: beginTime 24052672 endTime 24053247 freezeTime 0
+11-01 08:56:00.674  5305  6738 D ActivityManager: beginTime 0 endTime 24053247 freezeTime 0
+11-01 08:56:00.674  5305  6738 D ActivityManager: beginTime 0 endTime 24053247 freezeTime 0
+11-01 08:56:00.674  5305  6738 D ActivityManager: beginTime 62578 endTime 24053247 freezeTime 0
+11-01 08:56:00.674  5305  6738 D ActivityManager: beginTime 0 endTime 24053247 freezeTime 0
+11-01 08:56:00.700  5305  5569 D ActivityManager: beginTime 24053246 endTime 24053274 freezeTime 0
+11-01 08:56:00.727  5305  6121 D ActivityManager: beginTime 0 endTime 24053300 freezeTime 0
+11-01 08:56:00.727  5305  6121 D ActivityManager: beginTime 0 endTime 24053300 freezeTime 0
+11-01 08:56:00.727  5305  6121 D ActivityManager: beginTime 0 endTime 24053300 freezeTime 0
+11-01 08:56:00.727  5305  6121 D ActivityManager: beginTime 24052672 endTime 24053300 freezeTime 0
+11-01 08:56:00.727  5305  6121 D ActivityManager: beginTime 62578 endTime 24053300 freezeTime 0
+11-01 08:56:00.727  5305  6121 D ActivityManager: beginTime 0 endTime 24053300 freezeTime 0
+11-01 08:56:00.765  5305 26153 D ActivityManager: beginTime 24053246 endTime 24053338 freezeTime 0
+11-01 08:56:00.766  5305 26153 D ActivityManager: beginTime 0 endTime 24053339 freezeTime 0
+11-01 08:56:00.766  5305 26153 D ActivityManager: beginTime 24052672 endTime 24053339 freezeTime 0
+11-01 08:56:00.766  5305 26153 D ActivityManager: beginTime 0 endTime 24053339 freezeTime 0
+11-01 08:56:00.766  5305 26153 D ActivityManager: beginTime 0 endTime 24053339 freezeTime 0
+11-01 08:56:00.766  5305 26153 D ActivityManager: beginTime 62578 endTime 24053339 freezeTime 0
+11-01 08:56:00.766  5305 26153 D ActivityManager: beginTime 0 endTime 24053339 freezeTime 0
+11-01 08:56:00.981  5305  6736 D ActivityManager: beginTime 24053338 endTime 24053554 freezeTime 0
+11-01 08:56:00.981  5305  6736 D ActivityManager: beginTime 0 endTime 24053554 freezeTime 0
+11-01 08:56:00.981  5305  6736 D ActivityManager: beginTime 24052672 endTime 24053554 freezeTime 0
+11-01 08:56:00.981  5305  6736 D ActivityManager: beginTime 0 endTime 24053554 freezeTime 0
+11-01 08:56:00.981  5305  6736 D ActivityManager: beginTime 0 endTime 24053554 freezeTime 0
+11-01 08:56:00.982  5305  6736 D ActivityManager: beginTime 62578 endTime 24053554 freezeTime 0
+11-01 08:56:00.982  5305  6736 D ActivityManager: beginTime 0 endTime 24053554 freezeTime 0
+11-01 08:56:00.997  5305  5569 D ActivityManager: beginTime 0 endTime 24053570 freezeTime 0
+11-01 08:56:00.997  5305  5569 D ActivityManager: beginTime 24052672 endTime 24053570 freezeTime 0
+11-01 08:56:00.997  5305  5569 D ActivityManager: beginTime 0 endTime 24053570 freezeTime 0
+11-01 08:56:00.997  5305  5569 D ActivityManager: beginTime 0 endTime 24053570 freezeTime 0
+11-01 08:56:00.997  5305  5569 D ActivityManager: beginTime 62578 endTime 24053570 freezeTime 0
+11-01 08:56:00.997  5305  5569 D ActivityManager: beginTime 0 endTime 24053570 freezeTime 0
+11-01 08:56:01.000  5305  6121 D ActivityManager: beginTime 24053568 endTime 24053573 freezeTime 0
+11-01 08:56:01.002  5305  6121 D ActivityManager: beginTime 0 endTime 24053575 freezeTime 0
+11-01 08:56:01.002  5305  6121 D ActivityManager: beginTime 24052672 endTime 24053575 freezeTime 0
+11-01 08:56:01.002  5305  6121 D ActivityManager: beginTime 0 endTime 24053575 freezeTime 0
+11-01 08:56:01.002  5305  6121 D ActivityManager: beginTime 0 endTime 24053575 freezeTime 0
+11-01 08:56:01.002  5305  6121 D ActivityManager: beginTime 62578 endTime 24053575 freezeTime 0
+11-01 08:56:01.002  5305  6121 D ActivityManager: beginTime 0 endTime 24053575 freezeTime 0
+11-01 08:56:01.003  5305  5569 D ActivityManager: beginTime 24053574 endTime 24053576 freezeTime 0
+11-01 08:56:01.004  5305 26153 D ActivityManager: beginTime 24053574 endTime 24053577 freezeTime 0
+11-01 08:56:01.004  5305 26153 D ActivityManager: beginTime 0 endTime 24053578 freezeTime 0
+11-01 08:56:01.005  5305 26153 D ActivityManager: beginTime 24052672 endTime 24053578 freezeTime 0
+11-01 08:56:01.005  5305 26153 D ActivityManager: beginTime 0 endTime 24053578 freezeTime 0
+11-01 08:56:01.005  5305 26153 D ActivityManager: beginTime 0 endTime 24053578 freezeTime 0
+11-01 08:56:01.005  5305 26153 D ActivityManager: beginTime 62578 endTime 24053578 freezeTime 0
+11-01 08:56:01.005  5305 26153 D ActivityManager: beginTime 0 endTime 24053578 freezeTime 0
+11-01 08:56:01.016  5305  5569 D ActivityManager: beginTime 0 endTime 24053589 freezeTime 0
+11-01 08:56:01.016  5305  5569 D ActivityManager: beginTime 24052672 endTime 24053589 freezeTime 0
+11-01 08:56:01.016  5305  5569 D ActivityManager: beginTime 0 endTime 24053589 freezeTime 0
+11-01 08:56:01.016  5305  5569 D ActivityManager: beginTime 0 endTime 24053589 freezeTime 0
+11-01 08:56:01.016  5305  5569 D ActivityManager: beginTime 62578 endTime 24053589 freezeTime 0
+11-01 08:56:01.016  5305  5569 D ActivityManager: beginTime 0 endTime 24053589 freezeTime 0
+11-01 08:56:01.019  5305  5569 D ActivityManager: beginTime 24053588 endTime 24053592 freezeTime 0
+11-01 08:56:01.020  5305  6121 D ActivityManager: beginTime 24053588 endTime 24053593 freezeTime 0
+11-01 08:56:01.021  5305  6121 D ActivityManager: beginTime 0 endTime 24053595 freezeTime 0
+11-01 08:56:01.021  5305  6121 D ActivityManager: beginTime 24052672 endTime 24053595 freezeTime 0
+11-01 08:56:01.022  5305  6121 D ActivityManager: beginTime 0 endTime 24053595 freezeTime 0
+11-01 08:56:01.022  5305  6121 D ActivityManager: beginTime 0 endTime 24053595 freezeTime 0
+11-01 08:56:01.022  5305  6121 D ActivityManager: beginTime 62578 endTime 24053595 freezeTime 0
+11-01 08:56:01.022  5305  6121 D ActivityManager: beginTime 0 endTime 24053595 freezeTime 0
+11-01 08:56:01.044  5305  5569 D ActivityManager: beginTime 24053594 endTime 24053617 freezeTime 0
+11-01 08:56:01.048  5305 26153 D ActivityManager: beginTime 24053594 endTime 24053621 freezeTime 0
+11-01 08:56:01.050  5305 26153 D ActivityManager: beginTime 0 endTime 24053623 freezeTime 0
+11-01 08:56:01.050  5305 26153 D ActivityManager: beginTime 24052672 endTime 24053623 freezeTime 0
+11-01 08:56:01.050  5305 26153 D ActivityManager: beginTime 0 endTime 24053623 freezeTime 0
+11-01 08:56:01.050  5305 26153 D ActivityManager: beginTime 0 endTime 24053623 freezeTime 0
+11-01 08:56:01.050  5305 26153 D ActivityManager: beginTime 62578 endTime 24053623 freezeTime 0
+11-01 08:56:01.050  5305 26153 D ActivityManager: beginTime 0 endTime 24053623 freezeTime 0
+11-01 08:56:01.062  5305  6121 D ActivityManager: beginTime 24053621 endTime 24053635 freezeTime 0
+11-01 08:56:01.063  5305  6121 D ActivityManager: beginTime 0 endTime 24053636 freezeTime 0
+11-01 08:56:01.063  5305  6121 D ActivityManager: beginTime 24052672 endTime 24053636 freezeTime 0
+11-01 08:56:01.063  5305  6121 D ActivityManager: beginTime 0 endTime 24053636 freezeTime 0
+11-01 08:56:01.063  5305  6121 D ActivityManager: beginTime 0 endTime 24053636 freezeTime 0
+11-01 08:56:01.063  5305  6121 D ActivityManager: beginTime 62578 endTime 24053636 freezeTime 0
+11-01 08:56:01.063  5305  6121 D ActivityManager: beginTime 0 endTime 24053636 freezeTime 0
+11-01 08:56:01.341  5305 27061 I ActivityManager:   ntv   ??    1065: lmkd (pid 3332) native
+11-01 08:56:01.342  5305 27061 I ActivityManager:   pers   PER    10092: com.device.idea.roomsandroidservice (pid 6637) fixed
+11-01 08:56:01.376  5305 27061 E ZRHungInner: file not found exception.
+11-01 08:56:01.376  5305 27061 E ZRHungInner: file not found exception.
+11-01 08:56:01.376  5305 27061 E ZRHungInner: file not found exception.
+11-01 08:56:01.380  5305 27061 E ZRHungInner: file not found exception.
+11-01 08:56:01.719  5305 26153 D ActivityManager: beginTime 0 endTime 24054292 freezeTime 0
+11-01 08:56:01.719  5305 26153 D ActivityManager: beginTime 0 endTime 24054292 freezeTime 0
+11-01 08:56:01.719  5305 26153 D ActivityManager: beginTime 0 endTime 24054292 freezeTime 0
+11-01 08:56:01.719  5305 26153 D ActivityManager: beginTime 24052672 endTime 24054292 freezeTime 0
+11-01 08:56:01.892  5305  6736 D ActivityManager: beginTime 0 endTime 24054465 freezeTime 0
+11-01 08:56:01.892  5305  6736 D ActivityManager: beginTime 0 endTime 24054465 freezeTime 0
+11-01 08:56:01.892  5305  6736 D ActivityManager: beginTime 0 endTime 24054465 freezeTime 0
+11-01 08:56:01.892  5305  6736 D ActivityManager: beginTime 0 endTime 24054465 freezeTime 0
+11-01 08:56:01.892  5305  6736 D ActivityManager: beginTime 24052672 endTime 24054465 freezeTime 0
+11-01 08:56:01.893  5305  6736 D ActivityManager: beginTime 62578 endTime 24054465 freezeTime 0
+11-01 08:56:02.007  5305 26153 D ActivityManager: beginTime 62578 endTime 24054580 freezeTime 0
+11-01 08:56:02.007  5305 26153 D ActivityManager: beginTime 0 endTime 24054580 freezeTime 0
+11-01 08:56:02.007  5305 26153 D ActivityManager: beginTime 0 endTime 24054580 freezeTime 0
+11-01 08:56:02.007  5305 26153 D ActivityManager: beginTime 0 endTime 24054580 freezeTime 0
+11-01 08:56:02.007  5305 26153 D ActivityManager: beginTime 0 endTime 24054580 freezeTime 0
+11-01 08:56:02.007  5305 26153 D ActivityManager: beginTime 24052672 endTime 24054580 freezeTime 0
+11-01 08:56:02.048  5305  6121 D ActivityManager: beginTime 0 endTime 24054621 freezeTime 0
+11-01 08:56:02.049  5305  6121 D ActivityManager: beginTime 0 endTime 24054621 freezeTime 0
+11-01 08:56:02.049  5305  6121 D ActivityManager: beginTime 0 endTime 24054621 freezeTime 0
+11-01 08:56:02.049  5305  6121 D ActivityManager: beginTime 24052672 endTime 24054621 freezeTime 0
+11-01 08:56:02.054  5305  6736 D ActivityManager: beginTime 0 endTime 24054627 freezeTime 0
+11-01 08:56:02.054  5305  6736 D ActivityManager: beginTime 24054626 endTime 24054627 freezeTime 0
+11-01 08:56:02.054  5305  6736 D ActivityManager: beginTime 0 endTime 24054627 freezeTime 0
+11-01 08:56:02.054  5305  6736 D ActivityManager: beginTime 0 endTime 24054627 freezeTime 0
+11-01 08:56:02.054  5305  6736 D ActivityManager: beginTime 24052672 endTime 24054627 freezeTime 0
+11-01 08:56:02.054  5305  6736 D ActivityManager: beginTime 62578 endTime 24054627 freezeTime 0
+11-01 08:56:02.054  5305  6736 D ActivityManager: beginTime 0 endTime 24054627 freezeTime 0
+11-01 08:56:02.073  5305  6736 D ActivityManager: beginTime 0 endTime 24054646 freezeTime 0
+11-01 08:56:02.073  5305  6736 D ActivityManager: beginTime 24054626 endTime 24054646 freezeTime 0
+11-01 08:56:02.073  5305  6736 D ActivityManager: beginTime 0 endTime 24054646 freezeTime 0
+11-01 08:56:02.073  5305  6736 D ActivityManager: beginTime 0 endTime 24054646 freezeTime 0
+11-01 08:56:02.073  5305  6736 D ActivityManager: beginTime 24052672 endTime 24054646 freezeTime 0
+11-01 08:56:02.119  5305  6736 D ActivityManager: beginTime 0 endTime 24054692 freezeTime 0
+11-01 08:56:02.119  5305  6736 D ActivityManager: beginTime 24054626 endTime 24054692 freezeTime 0
+11-01 08:56:02.119  5305  6736 D ActivityManager: beginTime 0 endTime 24054692 freezeTime 0
+11-01 08:56:02.119  5305  6736 D ActivityManager: beginTime 0 endTime 24054692 freezeTime 0
+11-01 08:56:02.119  5305  6736 D ActivityManager: beginTime 24052672 endTime 24054692 freezeTime 0
+11-01 08:56:02.154  5305  6736 D ActivityManager: beginTime 0 endTime 24054727 freezeTime 0
+11-01 08:56:02.154  5305  6736 D ActivityManager: beginTime 24054626 endTime 24054727 freezeTime 0
+11-01 08:56:02.154  5305  6736 D ActivityManager: beginTime 0 endTime 24054727 freezeTime 0
+11-01 08:56:02.154  5305  6736 D ActivityManager: beginTime 0 endTime 24054727 freezeTime 0
+11-01 08:56:02.154  5305  6736 D ActivityManager: beginTime 24052672 endTime 24054727 freezeTime 0
+11-01 08:56:02.155  5305  6736 D ActivityManager: beginTime 62578 endTime 24054727 freezeTime 0
+11-01 08:56:02.155  5305  6736 D ActivityManager: beginTime 0 endTime 24054727 freezeTime 0
+11-01 08:56:02.581  5305 26153 D ActivityManager: beginTime 0 endTime 24055154 freezeTime 0
+11-01 08:56:02.581  5305 26153 D ActivityManager: beginTime 0 endTime 24055154 freezeTime 0
+11-01 08:56:02.581  5305 26153 D ActivityManager: beginTime 24054626 endTime 24055154 freezeTime 0
+11-01 08:56:02.581  5305 26153 D ActivityManager: beginTime 0 endTime 24055154 freezeTime 0
+11-01 08:56:02.581  5305 26153 D ActivityManager: beginTime 24052672 endTime 24055154 freezeTime 0
+11-01 08:56:02.581  5305 26153 D ActivityManager: beginTime 0 endTime 24055154 freezeTime 0
+11-01 08:56:02.581  5305 26153 D ActivityManager: beginTime 62578 endTime 24055154 freezeTime 0
+11-01 08:56:02.789  5305  6121 D ActivityManager: beginTime 0 endTime 24055362 freezeTime 0
+11-01 08:56:02.789  5305  6121 D ActivityManager: beginTime 0 endTime 24055362 freezeTime 0
+11-01 08:56:02.789  5305  6121 D ActivityManager: beginTime 24054626 endTime 24055362 freezeTime 0
+11-01 08:56:02.789  5305  6121 D ActivityManager: beginTime 0 endTime 24055362 freezeTime 0
+11-01 08:56:02.789  5305  6121 D ActivityManager: beginTime 24052672 endTime 24055362 freezeTime 0
+11-01 08:56:02.789  5305  6121 D ActivityManager: beginTime 0 endTime 24055362 freezeTime 0
+11-01 08:56:02.789  5305  6121 D ActivityManager: beginTime 62578 endTime 24055362 freezeTime 0
+11-01 08:56:02.796  5305  6736 D ActivityManager: beginTime 0 endTime 24055369 freezeTime 0
+11-01 08:56:02.796  5305  6736 D ActivityManager: beginTime 24054626 endTime 24055369 freezeTime 0
+11-01 08:56:02.796  5305  6736 D ActivityManager: beginTime 0 endTime 24055369 freezeTime 0
+11-01 08:56:02.796  5305  6736 D ActivityManager: beginTime 0 endTime 24055369 freezeTime 0
+11-01 08:56:02.796  5305  6736 D ActivityManager: beginTime 24052672 endTime 24055369 freezeTime 0
+11-01 08:56:02.796  5305  6736 D ActivityManager: beginTime 62578 endTime 24055369 freezeTime 0
+11-01 08:56:02.797  5305  6736 D ActivityManager: beginTime 0 endTime 24055369 freezeTime 0
+11-01 08:56:02.800  5305  6738 D ActivityManager: beginTime 0 endTime 24055373 freezeTime 0
+11-01 08:56:02.800  5305  6738 D ActivityManager: beginTime 24055372 endTime 24055373 freezeTime 0
+11-01 08:56:02.800  5305  6738 D ActivityManager: beginTime 0 endTime 24055373 freezeTime 0
+11-01 08:56:02.800  5305  6738 D ActivityManager: beginTime 24054626 endTime 24055373 freezeTime 0
+11-01 08:56:02.800  5305  6738 D ActivityManager: beginTime 0 endTime 24055373 freezeTime 0
+11-01 08:56:02.800  5305  6738 D ActivityManager: beginTime 62578 endTime 24055373 freezeTime 0
+11-01 08:56:02.801  5305  6738 D ActivityManager: beginTime 0 endTime 24055373 freezeTime 0
+11-01 08:56:02.801  5305  5575 I OomAdjuster: setProcessGroup 26908 to -1:(AdjType=fg-service, AdjTarget=null)
+11-01 08:56:02.824  5305  6738 D ActivityManager: beginTime 0 endTime 24055397 freezeTime 0
+11-01 08:56:02.824  5305  6738 D ActivityManager: beginTime 24055372 endTime 24055397 freezeTime 0
+11-01 08:56:02.825  5305  5575 I OomAdjuster: setProcessGroup 26908 to 0:(AdjType=fg-service, AdjTarget=null)
