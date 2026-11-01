@@ -1,0 +1,116 @@
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :core:preBuild UP-TO-DATE
+> Task :core:preReleaseBuild UP-TO-DATE
+> Task :core:mergeReleaseJniLibFolders
+> Task :core:mergeReleaseNativeLibs NO-SOURCE
+> Task :source:preBuild UP-TO-DATE
+> Task :source:preReleaseBuild UP-TO-DATE
+> Task :core:copyReleaseJniLibsProjectOnly
+> Task :source:mergeReleaseJniLibFolders
+> Task :core:generateReleaseResources FROM-CACHE
+> Task :core:packageReleaseResources FROM-CACHE
+> Task :core:processReleaseNavigationResources FROM-CACHE
+> Task :source:mergeReleaseNativeLibs
+> Task :core:parseReleaseLocalResources FROM-CACHE
+> Task :core:generateReleaseRFile FROM-CACHE
+
+> Task :source:stripReleaseDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libconscrypt_jni.so. Run with --info option to learn more.
+
+> Task :source:extractReleaseNativeSymbolTables FROM-CACHE
+> Task :source:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :core:javaPreCompileRelease FROM-CACHE
+> Task :source:generateReleaseBuildConfig FROM-CACHE
+> Task :source:generateReleaseResources FROM-CACHE
+> Task :source:packageReleaseResources FROM-CACHE
+> Task :source:processReleaseNavigationResources FROM-CACHE
+> Task :source:parseReleaseLocalResources FROM-CACHE
+> Task :source:generateReleaseRFile FROM-CACHE
+> Task :source:javaPreCompileRelease FROM-CACHE
+> Task :core:mapReleaseSourceSetPaths
+> Task :core:compileReleaseLibraryResources FROM-CACHE
+> Task :core:writeReleaseAarMetadata
+> Task :source:mapReleaseSourceSetPaths
+> Task :source:compileReleaseNavigationResources FROM-CACHE
+> Task :source:checkReleaseAarMetadata
+> Task :source:mergeReleaseResources FROM-CACHE
+> Task :source:createReleaseCompatibleScreenManifests
+> Task :core:extractDeepLinksRelease FROM-CACHE
+> Task :source:extractDeepLinksRelease FROM-CACHE
+> Task :source:desugarReleaseFileDependencies FROM-CACHE
+> Task :source:mergeReleaseStartupProfile
+> Task :core:prepareReleaseArtProfile
+> Task :core:generateReleaseAssets UP-TO-DATE
+> Task :source:mergeReleaseArtProfile
+> Task :core:mergeReleaseAssets
+> Task :source:generateReleaseAssets UP-TO-DATE
+> Task :source:mergeReleaseAssets
+> Task :source:compressReleaseAssets FROM-CACHE
+> Task :core:processReleaseManifest
+> Task :source:checkReleaseDuplicateClasses
+> Task :source:extractReleaseVersionControlInfo
+> Task :source:processReleaseMainManifest
+> Task :source:processReleaseManifest FROM-CACHE
+> Task :source:processReleaseManifestForPackage FROM-CACHE
+> Task :source:processReleaseResources FROM-CACHE
+> Task :source:mergeExtDexRelease FROM-CACHE
+> Task :core:extractProguardFiles
+> Task :core:prepareLintJarForPublish
+> Task :source:extractProguardFiles
+> Task :core:checkReleaseAarMetadata
+> Task :core:extractDeepLinksForAarRelease FROM-CACHE
+> Task :core:extractReleaseAnnotations
+> Task :core:writeReleaseLintModelMetadata
+> Task :source:optimizeReleaseResources FROM-CACHE
+> Task :source:collectReleaseDependencies
+> Task :source:sdkReleaseDependencyData
+> Task :source:validateSigningRelease
+> Task :source:writeReleaseAppMetadata
+> Task :source:writeReleaseSigningConfigVersions
+
+> Task :core:compileReleaseKotlin
+w: file:///C:/Code/Wideawake-wt-phonefs-m2/projects/phonefs/android/core/src/main/kotlin/com/phonefs/core/net/LoopbackTlsFront.kt:124:56 Cast is redundant.
+
+> Task :core:compileReleaseJavaWithJavac NO-SOURCE
+> Task :core:bundleLibRuntimeToJarRelease
+> Task :core:bundleLibCompileToJarRelease
+> Task :core:bundleLibRuntimeToDirRelease
+> Task :core:generateReleaseLintVitalModel
+> Task :core:compressReleaseJavaRes FROM-CACHE
+> Task :core:createFullJarRelease
+> Task :core:generateReleaseLintModel
+> Task :core:mergeReleaseGeneratedProguardFiles
+> Task :core:mergeReleaseConsumerProguardFiles
+> Task :core:mergeReleaseJavaResource
+> Task :core:syncReleaseLibJars
+> Task :core:bundleReleaseLocalLintAar
+
+> Task :source:compileReleaseKotlin
+w: file:///C:/Code/Wideawake-wt-phonefs-m2/projects/phonefs/android/source/src/main/kotlin/com/phonefs/source/SharingService.kt:180:14 'fun addAction(p0: Int, p1: CharSequence!, p2: PendingIntent!): Notification.Builder!' is deprecated. Deprecated in Java.
+
+> Task :source:compileReleaseJavaWithJavac
+> Task :source:dexBuilderRelease
+> Task :source:mergeReleaseGlobalSynthetics FROM-CACHE
+> Task :source:generateReleaseLintVitalReportModel
+> Task :source:compressReleaseJavaRes FROM-CACHE
+> Task :source:mergeReleaseJavaResource
+> Task :source:mergeDexRelease
+> Task :source:compileReleaseArtProfile
+> Task :core:lintVitalAnalyzeRelease
+> Task :source:lintVitalAnalyzeRelease
+> Task :source:lintVitalReportRelease
+> Task :source:lintVitalRelease
+> Task :source:packageRelease
+> Task :source:createReleaseApkListingFileRedirect
+> Task :source:assembleRelease
+
+[Incubating] Problems report is available at: file:///C:/Code/Wideawake-wt-phonefs-m2/projects/phonefs/android/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 25s
+85 actionable tasks: 55 executed, 30 from cache

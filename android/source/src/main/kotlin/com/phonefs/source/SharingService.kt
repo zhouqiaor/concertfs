@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
+import android.content.res.Configuration
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.IBinder
@@ -72,6 +73,7 @@ class SharingService : Service() {
                 identity = identity,
                 deviceId = deviceId,
                 deviceName = resolveDeviceName(),
+                deviceFormFactor = resolveFormFactor(),
                 token = token,
             )
             port = srv.start(PREFERRED_PORT)
@@ -105,6 +107,16 @@ class SharingService : Service() {
 
         return Build.MODEL.orEmpty().trim().ifEmpty { "Android" }
     }
+
+    /** pair/info additive 形态字段：TV/Watch/车机等优先 other，PC 由 demo2 对端自行上报。 */
+    private fun resolveFormFactor(): String = runCatching {
+        val config = resources.configuration
+        when (config.uiMode and Configuration.UI_MODE_TYPE_MASK) {
+            Configuration.UI_MODE_TYPE_NORMAL ->
+                if (config.smallestScreenWidthDp >= 600) "tablet" else "phone"
+            else -> "other" // 含 TEQU-S2C 的 television，以及 undefined/取不到的非手机形态
+        }
+    }.getOrDefault("other")
 
     private fun startHeartbeat() {
         heartbeat = scope.launch {

@@ -19,6 +19,7 @@ data class PairDeviceInfo(
     val id: String,
     val name: String,
     val type: String,
+    @SerialName("form_factor") val formFactor: String = "other",
 )
 
 /** §6.2 Attribute JSON，字段名严格对齐 SPEC（snake_case）。 */

@@ -64,6 +64,7 @@ class PhoneFsServer(
     private val identity: Identity,
     private val deviceId: String,
     private val deviceName: String,
+    private val deviceFormFactor: String,
     private val token: String,
 ) {
     private var engine: io.ktor.server.engine.EmbeddedServer<*, *>? = null
@@ -169,7 +170,7 @@ class PhoneFsServer(
                         fingerprint = identity.fingerprint,
                         pairingOpen = false, // W2 固定演示配对，配对窗未开放
                         serverTimeMs = System.currentTimeMillis(),
-                        device = PairDeviceInfo(deviceId, deviceName, "android"),
+                        device = PairDeviceInfo(deviceId, deviceName, "android", deviceFormFactor),
                     ),
                 )
             }
