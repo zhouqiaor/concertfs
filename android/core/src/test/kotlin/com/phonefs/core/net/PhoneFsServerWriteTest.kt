@@ -13,14 +13,11 @@ import com.phonefs.core.protocol.ListResp
 import com.phonefs.core.protocol.MetaReq
 import com.phonefs.core.protocol.StatFsResp
 import com.phonefs.core.protocol.WriteResp
-import io.ktor.client.request.header
-import io.ktor.client.request.request
-import io.ktor.client.request.setBody
-import io.ktor.client.statement.bodyAsBytes
 import io.ktor.http.HttpMethod
 import io.ktor.http.encodeURLParameter
-import io.ktor.server.testing.ApplicationTestBuilder
-import io.ktor.server.testing.testApplication
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.long
@@ -33,6 +30,10 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.io.File
 import java.io.FileInputStream
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
 import java.nio.file.Files
 
 class PhoneFsServerWriteTest {
@@ -303,8 +304,8 @@ class PhoneFsServerWriteTest {
     }
 
     private fun withServer(
-        block: suspend ApplicationTestBuilder.(Harness) -> Unit,
-    ) = testApplication {
+        block: suspend (Harness) -> Unit,
+    ) = runBlocking {
         val root = Files.createTempDirectory("phonefs-server-write-test").toFile()
         val backend = TestBackend(root)
         val server = PhoneFsServer(
@@ -315,10 +316,15 @@ class PhoneFsServerWriteTest {
             deviceFormFactor = "phone",
             token = TOKEN,
         )
+        val engine = embeddedServer(Netty, host = "127.0.0.1", port = 0) {
+            with(server) { configure() }
+        }
         try {
-            application { with(server) { configure() } }
-            block(Harness(this, backend, root))
+            engine.start(wait = false)
+            val port = engine.engine.resolvedConnectors().single().port
+            block(Harness(HttpClient.newHttpClient(), "http://127.0.0.1:$port", backend, root))
         } finally {
+            engine.stop(1_000, 1_000)
             server.stop()
             root.deleteRecursively()
         }
@@ -329,7 +335,8 @@ class PhoneFsServerWriteTest {
     }
 
     private inner class Harness(
-        private val builder: ApplicationTestBuilder,
+        private val client: HttpClient,
+        private val baseUrl: String,
         private val backend: TestBackend,
         val root: File,
     ) {
@@ -350,13 +357,17 @@ class PhoneFsServerWriteTest {
             headers: Map<String, String> = emptyMap(),
             expected: Int = 200,
         ): Reply {
-            val response = builder.client.request(path) {
-                this.method = method
-                header("Authorization", "Bearer $TOKEN")
-                headers.forEach { (name, value) -> header(name, value) }
-                if (body != null) setBody(body)
-            }
-            val reply = Reply(response.status.value, response.bodyAsBytes())
+            val httpRequest = HttpRequest.newBuilder(URI.create("$baseUrl$path"))
+                .header("Authorization", "Bearer $TOKEN")
+                .apply { headers.forEach { (name, value) -> header(name, value) } }
+                .method(
+                    method.value,
+                    body?.let { HttpRequest.BodyPublishers.ofByteArray(it) }
+                        ?: HttpRequest.BodyPublishers.noBody(),
+                )
+                .build()
+            val response = client.send(httpRequest, HttpResponse.BodyHandlers.ofByteArray())
+            val reply = Reply(response.statusCode(), response.body())
             assertEquals("unexpected response: ${reply.text}", expected, reply.status)
             return reply
         }
