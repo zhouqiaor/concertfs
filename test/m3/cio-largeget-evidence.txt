@@ -1,0 +1,39 @@
+PhoneFS M3 大文件流式 GET 准入证据（CIO 引擎，真机）
+================================================================
+采集时间：2026-11-01 22:20–22:22（+0800）
+分支/构建：feat-phonefs-m3 工作树，含 ADR-19 增补（生产引擎＝CIO 3.6.1）与 P0-1 delta 基线修复
+设备：HUAWEI TEQU-S2C，ro.serialno=HOMEVISION202111，Android 12/API31，adb 192.168.43.1:5555
+服务：com.phonefs.source pid=16847，HTTPS 192.168.43.1:18443（LoopbackTlsFront/Conscrypt TLS1.3）
+文件：/storage/emulated/0/PhoneFS-m3-big/big.bin（/dev/zero 生成）
+      2,147,495,993 B
+
+一、全量 GET（HTTPS，PC 侧 curl 8.x `-k --tlsv1.3`；证书指纹校验见 W2 结果，本项只测吞吐/内存）
+----------------------------------------------------------------
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+ETag: "2147495993-1793542816000"
+Last-Modified: Sun, 1 Nov 2026 14:20:16 GMT
+Content-Length: 2147495993
+Content-Type: application/octet-stream
+
+PC 侧收到字节数：2,147,495,993（与 Content-Length 一致，无短读）
+PC 侧 sha256：818e2054922b534ddf65fdd2032023dd2bbc744543f4af2ed516e706a91481ab
+设备侧 sha256（adb sha256sum 直读）：818e2054922b534ddf65fdd2032023dd2bbc744543f4af2ed516e706a91481ab
+墙钟：84s → 24.4 MiB/s
+
+二、内存（传输全程每 2s 采样 /proc/16847/status，共 40 个样本）
+----------------------------------------------------------------
+VmRSS：min 165,912 kB / max 182,176 kB（162–178 MiB），不随流量增长
+VmHWM：192,704 kB（188 MiB）
+传输结束后 RSS 168,928 kB，进程存活（pidof 仍为 16847）
+
+对照（Netty 引擎，已退役）：同一文件交付 58–65MiB 后 RSS 4.74–7.29GiB，被厂商 SWAP 杀。
+
+三、keep-alive 复用（P1 关闭：正常 GET 不再强制 Connection: close）
+----------------------------------------------------------------
+同一次 curl 调用、同一连接连续两个 GET（40B fixture）：
+  reqA 200 connects=1
+  reqB 200 connects=0   ← 第二个请求复用连接，无新 TCP/TLS 握手
+
+备注：短读（声明长度未交满）时 writer 抛异常，CIO 中止整个响应连接，客户端只能以 EOF
+识别缺口，不会出现"看似完整"的 200；该不变量由 core JVM 测试覆盖（内容短读用例）。
