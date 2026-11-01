@@ -27,6 +27,7 @@ import (
 
 	"github.com/winfsp/cgofuse/fuse"
 
+	"phonefs/go/internal/driveicon"
 	"phonefs/go/internal/httpfs"
 )
 
@@ -72,7 +73,8 @@ func main() {
 	tokenFile := flag.String("token-file", "", "从文件读 Bearer token（自动去空白）")
 	logPath := flag.String("log", "", "日志文件路径（同时输出 stderr；空则仅 stderr）")
 	label := flag.String("label", "", "卷标覆盖（默认自动取 pair/info 的 device.name，清洗后 ≤32 字符）")
-	icon := flag.String("icon", "", "盘符图标 ico 绝对路径（覆盖 device.form_factor 自动选择；不写注册表）")
+	icon := flag.String("icon", "", "盘符图标 ico 绝对路径（覆盖 device.form_factor 自动选择；HKLM DriveIcons 需管理员）")
+	cleanupIcons := flag.Bool("cleanup-icons", false, "清理指向 assets/icons/drive_*.ico 的全部 HKLM DriveIcons 残留（需管理员，然后退出）")
 	trace := flag.Bool("trace", false, "记录每个 FUSE 回调与 Range 块")
 	readOnly := flag.Bool("ro", false, "只读挂载（M1 行为：写回调全 EROFS、Access 拒写/删）；默认 rw（M2）")
 	flag.Parse()
@@ -87,6 +89,20 @@ func main() {
 		w = io.MultiWriter(os.Stderr, f)
 	}
 	lg := newLevelLogger(w, *trace)
+
+	// 离线清理不依赖 token/设备；按约定匹配 assets/icons/drive_*.ico，
+	// 不匹配用户显式 -icon 的其他路径，也不受二进制输出目录影响。
+	if *cleanupIcons {
+		n, err := driveicon.NewManager(nil, lg, nil).Cleanup()
+		if err != nil {
+			if driveicon.IsAccessDenied(err) {
+				lg.Fatalf("清理盘符图标需要管理员，请以管理员身份运行 -cleanup-icons：%v", err)
+			}
+			lg.Fatalf("清理盘符图标失败：%v", err)
+		}
+		lg.Infof("-cleanup-icons 完成：删除 %d 个残留盘符键", n)
+		return
+	}
 
 	bearer := resolveToken(*token, *tokenFile, lg)
 	if bearer == "" {
@@ -167,6 +183,15 @@ func main() {
 		lg.Fatalf("preflight failed (server=%s): %v", *server, err)
 	}
 
+	// 最终生效方案是 HKLM DriveIcons；autorun.inf 保留但本 WinFsp 卷无效。
+	// 非管理员 Install 只告警并继续挂载。kill -9 残留可接受：静态 ico 路径，
+	// 下次同盘符挂载覆盖；-cleanup-icons 可离线清理 assets/icons 残留。
+	var iconManager *driveicon.Manager
+	if iconPath != "" {
+		iconManager = driveicon.NewManager(nil, lg, nil)
+		iconManager.Install(mp, iconPath)
+	}
+
 	host := fuse.NewFileSystemHost(bfs)
 	host.SetCapCaseInsensitive(true) // Windows 语义；桥内已做大小写不敏感解析
 	host.SetCapReaddirPlus(true)     // Readdir 直接带 stat，省一轮 Getattr
@@ -183,6 +208,15 @@ func main() {
 		opts = append(opts, "-o", "volname="+volLabel)
 	}
 
+	cleanupDriveIcon := func() {
+		if iconManager == nil {
+			return
+		}
+		if err := iconManager.Uninstall(mp); err != nil {
+			lg.Warnf("卸载时清理盘符图标失败（不影响卸载）：%v", err)
+		}
+	}
+
 	// 优雅卸载：CTRL_C / CTRL_BREAK → host.Unmount()，Mount 随即返回；第二次信号强退。
 	sigc := make(chan os.Signal, 2)
 	signal.Notify(sigc, os.Interrupt, syscall.SIGTERM)
@@ -192,6 +226,7 @@ func main() {
 		if !host.Unmount() {
 			lg.Warnf("host.Unmount returned false")
 		}
+		cleanupDriveIcon()
 		time.Sleep(3 * time.Second)
 		<-sigc
 		lg.Errorf("second signal: force exit")
@@ -209,6 +244,7 @@ func main() {
 		ok = host.Mount(mp, opts)
 	}
 	lg.Infof("Mount returned ok=%v after %s", ok, time.Since(t0))
+	cleanupDriveIcon()
 	if !ok {
 		os.Exit(2)
 	}

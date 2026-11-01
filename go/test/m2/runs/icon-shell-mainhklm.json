@@ -1,0 +1,16 @@
+﻿{
+    "drive":  "Q:",
+    "expected_icon":  "C:\\Code\\Wideawake-wt-phonefs-bridge\\projects\\phonefs\\go\\assets\\icons\\drive_phone.ico",
+    "autorun_content":  "[autorun]\\r\\nIcon=C:/Code/Wideawake-wt-phonefs-bridge/projects/phonefs/go/assets/icons/drive_phone.ico\\r\\n",
+    "autorun_content_match":  false,
+    "shgfi_iconlocation_ret":  1,
+    "shell_icon_location":  "C:\\Code\\Wideawake-wt-phonefs-bridge\\projects\\phonefs\\go\\assets\\icons\\drive_phone.ico",
+    "shell_icon_index":  0,
+    "shell_location_matches_expected":  true,
+    "shgfi_icon_ret":  1,
+    "shell_hicon_nonzero":  true,
+    "extracted_icon_size":  "32x32",
+    "evidence_png":  "C:\\Code\\Wideawake-wt-phonefs-bridge\\projects\\phonefs\\go\\test\\m2\\runs\\icon-shell-mainhklm.png",
+    "registry_modified":  false,
+    "pass":  false
+}

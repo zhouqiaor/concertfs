@@ -47,6 +47,7 @@ type node struct {
 	mod      time.Time
 	writable bool
 	ino      uint64
+	version  uint64 // 写提交递增；其他已打开读句柄据此废弃旧 Range 块
 }
 
 type dirCache struct {
@@ -55,10 +56,11 @@ type dirCache struct {
 }
 
 type openFile struct {
-	n      *node
-	mu     sync.Mutex // 串行化同句柄块取/缓存与写缓冲（WinFsp 可能并发下发）
-	blocks map[int64][]byte
-	lru    []int64
+	n           *node
+	mu          sync.Mutex // 串行化同句柄块取/缓存与写缓冲（WinFsp 可能并发下发）
+	blocks      map[int64][]byte
+	lru         []int64
+	readVersion uint64 // 已缓存块对应的 node.version
 
 	// M2 写句柄状态：write=true 时读写都走 data 内存映像（M2 限制：
 	// 写缓冲=整文件内存，大文件写 M3 评估落盘；上传阶段按 1MiB 分块）。
@@ -214,6 +216,19 @@ func (b *BridgeFS) resolve(path string) (*node, int) {
 		return nil, lastErr
 	}
 	return nil, -fuse.ENOENT
+}
+
+// canonicalPath 返回已存在路径的规范大小写形式；调用前应由 resolve 确保存在。
+// WinFsp rename 常把父目录大写传入，byPath/dirs 必须统一使用规范键。
+func (b *BridgeFS) canonicalPath(path string) string {
+	comps := splitComps(path)
+	b.mu.Lock()
+	_, missAt, canon := b.walkLocked(comps)
+	b.mu.Unlock()
+	if missAt == len(comps) {
+		return canon
+	}
+	return path
 }
 
 // refreshDir 取目录列表并入缓存。force=true 时忽略 TTL（Readdir 走这里）。
@@ -576,6 +591,17 @@ func (b *BridgeFS) Read(path string, buff []byte, ofst int64, fh uint64) int {
 	// M2 写句柄：读写同走 data 内存映像（O_RDWR 一致性；ensureLoaded 可能拉网）
 	if f.write {
 		return b.readWriteImage(path, f, buff, ofst)
+	}
+
+	// 其他句柄提交写后 node.version 已递增：本句柄旧 Range 块全部失效，
+	// 否则已打开 reader 会无限读到写前字节（真机 harness 04）。
+	b.mu.Lock()
+	version := f.n.version
+	b.mu.Unlock()
+	if f.readVersion != version {
+		f.blocks = map[int64][]byte{}
+		f.lru = nil
+		f.readVersion = version
 	}
 
 	n := 0

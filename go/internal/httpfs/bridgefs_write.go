@@ -220,6 +220,7 @@ func (b *BridgeFS) upload(path string, f *openFile) int {
 	b.mu.Lock()
 	f.n.size = int64(len(data))
 	f.n.mod = time.Now()
+	f.n.version++ // 使同 node 的其他已打开读句柄废弃旧块
 	b.invalidateDirLocked(internalParent(path))
 	b.mu.Unlock()
 	if b.trace {
@@ -305,6 +306,7 @@ func (b *BridgeFS) truncate(path string, size int64, fh uint64) int {
 	b.mu.Lock()
 	n.size = 0
 	n.mod = time.Now()
+	n.version++
 	b.invalidateDirLocked(internalParent(path))
 	b.mu.Unlock()
 	return 0
@@ -375,6 +377,7 @@ func (b *BridgeFS) rename(oldpath string, newpath string) int {
 	if errc != 0 {
 		return errc
 	}
+	oldCanon := b.canonicalPath(oldpath)
 	if isVirtualAutorun(n) {
 		return -fuse.EROFS
 	}
@@ -394,6 +397,7 @@ func (b *BridgeFS) rename(oldpath string, newpath string) int {
 	if errc != 0 {
 		return errc
 	}
+	newParentCanon := b.canonicalPath(newParent)
 	if !pn.isDir {
 		return -fuse.ENOTDIR
 	}
@@ -415,8 +419,10 @@ func (b *BridgeFS) rename(oldpath string, newpath string) int {
 					return b.apiErrno(err, "rename-target", newpath)
 				}
 			}
+			targetCanon := b.canonicalPath(newpath)
 			b.mu.Lock()
 			delete(b.byPath, newpath)
+			delete(b.byPath, targetCanon)
 			b.mu.Unlock()
 		}
 	}
@@ -424,12 +430,23 @@ func (b *BridgeFS) rename(oldpath string, newpath string) int {
 	if err != nil {
 		return b.apiErrno(err, "rename", oldpath)
 	}
+	newCanon := newParentCanon + "/" + e.Name
 	b.mu.Lock()
+	// 事务性迁移同一个 node：旧键删除、新键建立，已打开句柄/版本号/ino
+	// 全部随节点保留。不要 upsert 出新节点，否则句柄指向旧对象。
+	// byPath/dirs 一律使用规范路径：WinFsp 可能传入大写父目录别名，直接保存
+	// newpath 会让目标 dirCache 未失效，紧随其后的 Utimens 读到空目录（harness 10）。
 	delete(b.byPath, oldpath)
-	nn := b.upsertLocked(newpath, &e)
-	nn.ino = n.ino // inode 稳定：已打开句柄跨 rename 继续可用
+	delete(b.byPath, oldCanon)
+	n.id, n.name, n.isDir, n.size, n.writable = e.ID, e.Name, e.IsDir, e.Size, e.Writable
+	if e.ModifiedMs > 0 {
+		n.mod = time.UnixMilli(e.ModifiedMs)
+	}
+	b.byPath[newCanon] = n
 	b.invalidateDirLocked(internalParent(oldpath))
+	b.invalidateDirLocked(internalParent(oldCanon))
 	b.invalidateDirLocked(newParent)
+	b.invalidateDirLocked(newParentCanon)
 	b.mu.Unlock()
 	if b.trace {
 		b.log.Tracef("rename %q -> %q done", oldpath, newpath)

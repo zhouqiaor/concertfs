@@ -529,7 +529,7 @@ func TestRenameFileAndMove(t *testing.T) {
 	if errc := f.b.Mkdir(dir+"/sub", 0); errc != 0 {
 		t.Fatalf("Mkdir sub errc=%d", errc)
 	}
-	if errc := f.b.Rename(dir+"/b.txt", dir+"/sub/c.txt"); errc != 0 {
+	if errc := f.b.Rename(dir+"/b.txt", dir+"/SUB/c.txt"); errc != 0 {
 		t.Fatalf("move errc=%d", errc)
 	}
 	if n := f.fileByName("stor:primary", "b.txt"); n != nil {
@@ -538,6 +538,17 @@ func TestRenameFileAndMove(t *testing.T) {
 	sub := f.fileByName("stor:primary", "sub")
 	if n := f.fileByName(sub.id, "c.txt"); n == nil || string(n.data) != "aaa" {
 		t.Fatalf("c.txt not moved correctly")
+	}
+	// rename + 跨目录 move 后，新路径必须可 Getattr/Utimens（真机 harness 10）。
+	if errc := f.b.Getattr(dir+"/sub/c.txt", &st, ^uint64(0)); errc != 0 {
+		t.Fatalf("moved path Getattr errc=%d", errc)
+	}
+	ts := []fuse.Timespec{{Sec: 0, Nsec: 0}, {Sec: 1700000001, Nsec: 0}}
+	if errc := f.b.Utimens(dir+"/sub/c.txt", ts); errc != 0 {
+		t.Fatalf("moved path Utimens errc=%d", errc)
+	}
+	if errc := f.b.Getattr(dir+"/sub/c.txt", &st, ^uint64(0)); errc != 0 || st.Mtim.Sec != 1700000001 {
+		t.Fatalf("moved path mtime errc=%d sec=%d", errc, st.Mtim.Sec)
 	}
 }
 
@@ -671,6 +682,41 @@ func TestWriteAtOffsetPreservesOriginal(t *testing.T) {
 	}
 	if n := f.fileByName("stor:primary", "cow.txt"); n == nil || string(n.data) != "012XY56789" {
 		t.Fatalf("copy-on-write content=%q want 012XY56789", n.data)
+	}
+}
+
+func TestOtherOpenHandleCacheInvalidation(t *testing.T) {
+	f := newFixture(t, false)
+	path := dir + "/shared.txt"
+	f.createWrite(t, path, []byte("0123456789"))
+
+	errc, reader := f.b.Open(path, fuse.O_RDONLY)
+	if errc != 0 {
+		t.Fatalf("open reader errc=%d", errc)
+	}
+	before := make([]byte, 4)
+	if n := f.b.Read(path, before, 0, reader); n != 4 || string(before) != "0123" {
+		t.Fatalf("initial read n=%d data=%q", n, before)
+	}
+	errc, writer := f.b.Open(path, fuse.O_WRONLY)
+	if errc != 0 {
+		t.Fatalf("open writer errc=%d", errc)
+	}
+	if n := f.b.Write(path, []byte("ABCD"), 0, writer); n != 4 {
+		t.Fatalf("write n=%d", n)
+	}
+	if errc := f.b.Flush(path, writer); errc != 0 {
+		t.Fatalf("flush writer errc=%d", errc)
+	}
+	after := make([]byte, 4)
+	if n := f.b.Read(path, after, 0, reader); n != 4 || string(after) != "ABCD" {
+		t.Fatalf("existing reader stale: n=%d data=%q want ABCD", n, after)
+	}
+	if errc := f.b.Release(path, writer); errc != 0 {
+		t.Fatalf("release writer errc=%d", errc)
+	}
+	if errc := f.b.Release(path, reader); errc != 0 {
+		t.Fatalf("release reader errc=%d", errc)
 	}
 }
 

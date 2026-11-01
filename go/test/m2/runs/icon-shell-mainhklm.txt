@@ -1,0 +1,6 @@
+﻿PhoneFS M2 Shell icon verification - 2026-11-01 17:42:53
+PASS=False drive=Q:
+autorun_content_match=False content=[autorun]\r\nIcon=C:/Code/Wideawake-wt-phonefs-bridge/projects/phonefs/go/assets/icons/drive_phone.ico\r\n
+SHGetFileInfo ICONLOCATION='C:\Code\Wideawake-wt-phonefs-bridge\projects\phonefs\go\assets\icons\drive_phone.ico' index=0 matches_expected=True
+SHGetFileInfo ICON hIcon_nonzero=True size=32x32 png=C:\Code\Wideawake-wt-phonefs-bridge\projects\phonefs\go\test\m2\runs\icon-shell-mainhklm.png
+registry_modified=False

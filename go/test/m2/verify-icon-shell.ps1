@@ -64,7 +64,9 @@ if ($info.hIcon -ne [IntPtr]::Zero) {
         [void][PhoneFSShellIcon]::DestroyIcon($info.hIcon)
     }
 }
-$pass = $contentOK -and $locationOK -and ($info.hIcon -ne [IntPtr]::Zero)
+# Final mechanism is HKLM DriveIcons. autorun.inf is informational only because
+# Shell ignores it on this WinFsp volume; do not let its text formatting gate PASS.
+$pass = $locationOK -and ($info.hIcon -ne [IntPtr]::Zero)
 $result = [pscustomobject]@{
     drive = $Drive
     expected_icon = $expectedFull

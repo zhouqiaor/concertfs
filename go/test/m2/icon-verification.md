@@ -18,8 +18,21 @@
 
 复跑：挂载后执行 `test/m2/verify-icon-shell.ps1 -Drive P: -ExpectedIcon <ico 绝对路径> -Tag phone`。脚本仅读文件并调用 Shell API，不写注册表。
 
-## DriveIcons（仅后备方案，未实施）
+## 最终定论：HKLM DriveIcons 生效（主会话提权实证）
 
-若后续必须实现视觉图标，可评估安装器在管理员授权下写
-`HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<盘符>\DefaultIcon`，
-并在卸载时清理、处理盘符复用和 Explorer 刷新。本次任务明确禁止改注册表，故未采用、未验证该方案；不把注册表键路径描述为已实现能力。
+主会话继续对照验证：HKCU DriveIcons 无效；提权写
+`HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\Q\DefaultIcon`
+后，`SHGetFileInfo(Q:\)` 的图标位置变为 `drive_phone.ico`，提取句柄也确认是手机图。
+证据 `runs/icon-shell-mainhklm.json/.png/.txt`。因此最终方案是 **DriveIcons 生命周期管理**；
+autorun.inf 代码保留，但明确标注对本 WinFsp 卷无效。
+
+桥侧实现：
+
+- 图标启用时写 `DriveIcons\<盘符>\DefaultIcon` 默认值为 `<ico绝对路径>,0`，随后发送
+  `SHCNE_ASSOCCHANGED=0x08000000` 与 `SHCNE_UPDATEIMAGE=0x00008000`（后者为主会话 PoC 实测生效值）。
+- 非管理员 `ERROR_ACCESS_DENIED` 明确告警「盘符图标需要管理员，跳过」，挂载继续，绝不假报写入成功。
+- 仅记录本进程成功写入的盘符；优雅卸载时再次读取并逐字比较，值已被其他方改动则不删除。
+- kill -9 可能残留静态 ico 路径，无安全面；下次同盘符挂载会覆盖。管理员可运行
+  `-cleanup-icons` 清理所有指向 `assets/icons/drive_*.ico` 的残留键；权限不足或任何删除失败均非零退出。
+- `test/m2/driveicon_test.go` 用注册表 mock 覆盖无管理员跳过、他方改值后卸载不误删、正常清理与残留清理；
+  提权端到端写键→图标生效→优雅卸载键消失由主会话独立复验。
