@@ -4,8 +4,9 @@
 //   - PUT    /v1/fs/content   整写原子替换 200 {received,etag}；
 //     分块 Content-Range: bytes S-E/T + X-Upload-Id，
 //     非末块 complete:false、末块 complete:true+etag；
-//     409 UPLOAD_INCOMPLETE 带 received 供续传
-//   - PATCH  /v1/fs/meta      仅文件 name/parent_id/modified_ms；目录 501
+//     409 UPLOAD_INCOMPLETE 带 received 供续传；M3 delta 可选 X-Base-ETag
+//     与 X-Upload-Final:true，412 PRECONDITION_FAILED 表示基底已变化。
+//   - PATCH  /v1/fs/meta      仅文件 name/parent_id/modified_ms/replace；目录 501
 //   - DELETE /v1/fs           204 幂等；409 NOT_EMPTY/409 PARTIAL
 //   - 写后 mtime：X-Set-Mtime 头（ms；0=不带，服务端默认 now）
 //
@@ -56,6 +57,7 @@ type patchReq struct {
 	Name       string `json:"name,omitempty"`
 	ParentID   string `json:"parent_id,omitempty"`
 	ModifiedMs *int64 `json:"modified_ms,omitempty"`
+	Replace    bool   `json:"replace,omitempty"`
 }
 
 // Create 建文件/目录，返回 201 Attr。
@@ -90,11 +92,23 @@ func (c *Client) PutContent(ctx context.Context, id string, data []byte, mtimeMs
 	return pr.ETag, nil
 }
 
-// PutChunk 分块上传一块 [start, start+len(data)-1]/total。
-// uploadID 同一上传会话恒定（客户端生成），同 id+START 重传覆盖幂等。
-// 返回（received, complete, etag）；末块（start+len==total）complete=true 且带 etag。
-// 409 UPLOAD_INCOMPLETE 以 *APIError 返回，Received 字段给出续传水位。
+// PutChunkOptions 控制分块协议。BaseETag 非空时启用 additive delta；
+// Final 只在最后一个脏块设置，delta 不要求 ranges 覆盖全文件。
+type PutChunkOptions struct {
+	UploadID string
+	BaseETag string
+	Final    bool
+	MtimeMs  int64
+}
+
+// PutChunk 保留 M2 全覆盖分块契约；末块仍以 start+len==total 自动提交。
 func (c *Client) PutChunk(ctx context.Context, id, uploadID string, start, total int64, data []byte, mtimeMs int64) (int64, bool, string, error) {
+	return c.PutChunkWithOptions(ctx, id, start, total, data, PutChunkOptions{UploadID: uploadID, MtimeMs: mtimeMs})
+}
+
+// PutChunkWithOptions 上传 [start,start+len(data)-1]/total。
+// 412 PRECONDITION_FAILED 原样返回，绝不自动切换全量覆盖。
+func (c *Client) PutChunkWithOptions(ctx context.Context, id string, start, total int64, data []byte, opt PutChunkOptions) (int64, bool, string, error) {
 	if len(data) == 0 {
 		return start, false, "", fmt.Errorf("empty chunk at %d", start)
 	}
@@ -102,9 +116,15 @@ func (c *Client) PutChunk(ctx context.Context, id, uploadID string, start, total
 	q := url.Values{"id": {id}}
 	hdr := map[string]string{
 		"Content-Range": fmt.Sprintf("bytes %d-%d/%d", start, end, total),
-		"X-Upload-Id":   uploadID,
+		"X-Upload-Id":   opt.UploadID,
 	}
-	respData, err := c.doWrite(ctx, http.MethodPut, pathContent, q, data, "application/octet-stream", mtimeMs, hdr)
+	if opt.BaseETag != "" {
+		hdr["X-Base-ETag"] = opt.BaseETag
+	}
+	if opt.Final {
+		hdr["X-Upload-Final"] = "true"
+	}
+	respData, err := c.doWrite(ctx, http.MethodPut, pathContent, q, data, "application/octet-stream", opt.MtimeMs, hdr)
 	if err != nil {
 		var ae *APIError
 		if errors.As(err, &ae) && ae.Code == "UPLOAD_INCOMPLETE" {
@@ -121,9 +141,9 @@ func (c *Client) PutChunk(ctx context.Context, id, uploadID string, start, total
 
 // PatchMeta 文件改名/移动/改 mtime（至少给一项）。目录 id 的 name/parent_id
 // 变更服务端 501 NOT_SUPPORTED（FR-19，M4 前）→ 调用方映射 ENOSYS。
-func (c *Client) PatchMeta(ctx context.Context, id string, name, parentID *string, modifiedMs *int64) (Entry, error) {
+func (c *Client) PatchMeta(ctx context.Context, id string, name, parentID *string, modifiedMs *int64, replace bool) (Entry, error) {
 	var out Entry
-	req := patchReq{ID: id, ModifiedMs: modifiedMs}
+	req := patchReq{ID: id, ModifiedMs: modifiedMs, Replace: replace}
 	if name != nil {
 		req.Name = *name
 	}

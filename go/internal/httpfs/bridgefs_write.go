@@ -1,12 +1,14 @@
-// bridgefs_write.go M2 写回调实现（rw 模式；ro 由 bridgefs.go 分流拒绝）。
+// bridgefs_write.go M3 写回调实现（rw 模式；ro 由 bridgefs.go 分流拒绝）。
 //
-// 写模型（M2 冻结，YAGNI）：
-//   - 写句柄持有整文件内存映像 data（新文件/O_TRUNC 从空开始；非截断写打开
-//     已有文件时首次读/写前 ensureLoaded 拉回原文）。内存=文件大小，
-//     大文件写落盘排 M3；上传阶段按 1MiB 分块，不受内存映像影响协议正确性。
-//   - Write 只改映像并标脏；Flush/Fsync/Release 触发上传：
-//     ≤4MiB 整写 PutContent（原子替换），>4MiB 分块 PutChunk（X-Upload-Id
-//     幂等续传，409 UPLOAD_INCOMPLETE 按 received 水位续传/乱序补全）。
+// 写模型：
+//   - 写句柄持有挂载会话目录中的磁盘临时文件；已有文件首次读/写前用固定
+//     1MiB 缓冲 Range 流式加载，不按文件大小分配内存。
+//   - Write 记录并合并非对齐脏区间；已有文件 Flush 仅上传本轮脏块，使用
+//     X-Base-ETag 乐观并发校验与 X-Upload-Final 显式提交。失败保留全部脏块
+//     和 Upload-Id，成功后清空；412 不降级为全量覆盖。
+//   - 新文件及零长度提交走完整上传（空文件没有可发送的 delta 块）；
+//     已有文件 O_TRUNC 后的非空映像也走 base delta，并显式覆盖零洞：
+//     ≤4MiB 完整写 PutContent，>4MiB 旧分块协议续传。
 //   - 写后一致性：失效本 fh 读块缓存与父目录 dirCache；Create/Rename/Delete
 //     同步维护 byPath 键与父目录缓存。
 //   - 目录改名/移动恒 ENOSYS（FR-19，M4）；非零 Truncate 恒 ENOSYS（P2-12）。
@@ -18,6 +20,11 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"io"
+	"os"
+	"path/filepath"
+	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -26,6 +33,119 @@ import (
 
 // wholeWriteThreshold ≤4MiB 走整写；以上按 1MiB 块分块上传。
 const wholeWriteThreshold = 4 << 20
+
+type dirtyRange struct {
+	start int64
+	end   int64 // 开区间
+}
+
+// initTempSession 只创建本次挂载独占的随机目录；不扫其他会话，避免误删活动写句柄。
+func (b *BridgeFS) initTempSession() {
+	cache, err := os.UserCacheDir() // Windows: %LOCALAPPDATA%
+	if err == nil {
+		err = os.MkdirAll(filepath.Join(cache, "PhoneFS", "tmp"), 0o700)
+	}
+	if err == nil {
+		b.tempDir, err = os.MkdirTemp(filepath.Join(cache, "PhoneFS", "tmp"), "mount-")
+	}
+	if err != nil {
+		b.tempErr = err
+		b.log.Errorf("write temp session unavailable: %v", err)
+	}
+}
+
+func (b *BridgeFS) createTempImage(f *openFile) int {
+	if b.tempErr != nil {
+		b.log.Errorf("create write temp file: %v", b.tempErr)
+		return -fuse.EIO
+	}
+	file, err := os.CreateTemp(b.tempDir, "write-*")
+	if err != nil {
+		b.log.Errorf("create write temp file in %q: %v", b.tempDir, err)
+		return -fuse.EIO
+	}
+	f.file, f.tempPath = file, file.Name()
+	return 0
+}
+
+// cleanupTempFile 幂等关闭并删除句柄自己的临时文件；调用方持 f.mu。
+func (b *BridgeFS) cleanupTempFile(f *openFile) {
+	if f.file != nil {
+		if err := f.file.Close(); err != nil {
+			b.log.Warnf("close write temp %q: %v", f.tempPath, err)
+		}
+		f.file = nil
+	}
+	if f.tempPath != "" {
+		if err := os.Remove(f.tempPath); err != nil && !errors.Is(err, os.ErrNotExist) {
+			b.log.Warnf("remove write temp %q: %v", f.tempPath, err)
+		}
+		f.tempPath = ""
+	}
+}
+
+func (b *BridgeFS) localIOErrno(op, path string, err error) int {
+	b.log.Errorf("%s %s local temp file: %v", op, slashOrRoot(path), err)
+	return -fuse.EIO
+}
+
+// addDirtyRange 插入 [start,end) 并合并重叠/相邻区间，保持 start 排序。
+func addDirtyRange(ranges []dirtyRange, start, end int64) []dirtyRange {
+	if end <= start {
+		return ranges
+	}
+	i := sort.Search(len(ranges), func(i int) bool { return ranges[i].end >= start })
+	j := i
+	for j < len(ranges) && ranges[j].start <= end {
+		if ranges[j].start < start {
+			start = ranges[j].start
+		}
+		if ranges[j].end > end {
+			end = ranges[j].end
+		}
+		j++
+	}
+	if i == j {
+		ranges = append(ranges, dirtyRange{})
+		copy(ranges[i+1:], ranges[i:])
+		ranges[i] = dirtyRange{start: start, end: end}
+		return ranges
+	}
+	ranges[i] = dirtyRange{start: start, end: end}
+	copy(ranges[i+1:], ranges[j:])
+	return ranges[:len(ranges)-(j-i-1)]
+}
+
+func entryBaseETag(size int64, mod time.Time) string {
+	var ms int64
+	if !mod.IsZero() {
+		ms = mod.UnixMilli()
+	}
+	return fmt.Sprintf("\"%d-%d\"", size, ms)
+}
+
+func normalizeBaseETag(etag string) string {
+	if etag == "" || strings.HasPrefix(etag, "\"") {
+		return etag
+	}
+	return "\"" + etag + "\""
+}
+
+// applyUploadETag 让后续句柄从 node 构造出的 base 与服务端提交值一致。
+func applyUploadETag(n *node, etag string, fallbackSize int64) {
+	n.size = fallbackSize
+	n.mod = time.Now()
+	etag = strings.Trim(etag, "\"")
+	sizeText, msText, ok := strings.Cut(etag, "-")
+	if !ok {
+		return
+	}
+	size, err1 := strconv.ParseInt(sizeText, 10, 64)
+	ms, err2 := strconv.ParseInt(msText, 10, 64)
+	if err1 == nil && err2 == nil {
+		n.size, n.mod = size, time.UnixMilli(ms)
+	}
+}
 
 // ---------- 句柄/节点辅助 ----------
 
@@ -72,7 +192,10 @@ func (b *BridgeFS) createFile(path string, flags int) (int, uint64) {
 	if errc != 0 {
 		return errc, ^uint64(0)
 	}
-	f := &openFile{n: n, blocks: map[int64][]byte{}, write: true, data: []byte{}, loaded: true}
+	f := &openFile{n: n, blocks: map[int64][]byte{}, write: true, loaded: true, fullUpload: true}
+	if errc := b.createTempImage(f); errc != 0 {
+		return errc, ^uint64(0)
+	}
 	fh := b.registerFile(f)
 	if b.trace {
 		b.log.Tracef("createFile %q flags=%#x fh=%d", path, flags, fh)
@@ -139,57 +262,88 @@ func (b *BridgeFS) write(path string, buff []byte, ofst int64, fh uint64) int {
 		return errc
 	}
 	end := ofst + int64(len(buff))
-	if end > int64(len(f.data)) {
-		f.data = append(f.data, make([]byte, end-int64(len(f.data)))...)
+	if end < ofst {
+		return -fuse.EINVAL
 	}
-	copy(f.data[ofst:end], buff)
-	f.dirty = true
-	b.setNodeSize(f.n, int64(len(f.data)))
+	if len(buff) > 0 {
+		if _, err := f.file.WriteAt(buff, ofst); err != nil {
+			return b.localIOErrno("write", path, err)
+		}
+		f.dirtyRanges = addDirtyRange(f.dirtyRanges, ofst, end)
+		f.dirty = true
+		if end > f.size {
+			f.size = end
+		}
+	}
+	b.setNodeSize(f.n, f.size)
 	if b.trace {
-		b.log.Tracef("write %q ofst=%d len=%d size=%d", path, ofst, len(buff), len(f.data))
+		b.log.Tracef("write %q ofst=%d len=%d size=%d dirtyRanges=%d", path, ofst, len(buff), f.size, len(f.dirtyRanges))
 	}
 	return len(buff)
 }
 
-// readWriteImage 写句柄的 Read：与 Write 共用内存映像保证 O_RDWR 一致。
+// readWriteImage 写句柄的 Read：与 Write 共用临时文件保证 O_RDWR 一致。
 func (b *BridgeFS) readWriteImage(path string, f *openFile, buff []byte, ofst int64) int {
 	if errc := b.ensureLoaded(path, f); errc != 0 {
 		return errc
 	}
-	if ofst >= int64(len(f.data)) {
+	if ofst >= f.size {
 		return 0
 	}
 	end := ofst + int64(len(buff))
-	if end > int64(len(f.data)) {
-		end = int64(len(f.data))
+	if end > f.size {
+		end = f.size
 	}
-	return copy(buff, f.data[ofst:end])
+	n, err := f.file.ReadAt(buff[:end-ofst], ofst)
+	if err != nil && !(errors.Is(err, io.EOF) && n > 0) {
+		return b.localIOErrno("read", path, err)
+	}
+	return n
 }
 
-// ensureLoaded 非截断写打开已有文件时拉回原文（分块 Range，不整包一次读）。
+// ensureLoaded 非截断写打开已有文件时以固定缓冲流式拉回原文。
 func (b *BridgeFS) ensureLoaded(path string, f *openFile) int {
 	if f.loaded {
 		return 0
 	}
 	b.mu.Lock()
-	size := f.n.size
+	size, mod := f.n.size, f.n.mod
 	b.mu.Unlock()
-	data := make([]byte, 0, size)
-	for start := int64(0); start < size; start += blockSize {
-		end := start + blockSize - 1
-		if end >= size {
-			end = size - 1
+	if err := f.file.Truncate(size); err != nil {
+		return b.localIOErrno("write-load-size", path, err)
+	}
+	for start := int64(0); start < size; {
+		end := start + blockSize
+		if end > size {
+			end = size
 		}
-		res, err := b.cl.ContentRange(context.Background(), f.n.id, start, end)
+		res, err := b.cl.ContentRange(context.Background(), f.n.id, start, end-1)
 		if err != nil {
 			return b.apiErrno(err, "write-load", path)
 		}
-		data = append(data, res.Data...)
+		if res.First != start || int64(len(res.Data)) != end-start {
+			return b.localIOErrno("write-load", path, fmt.Errorf("bad range [%d-%d): first=%d len=%d", start, end, res.First, len(res.Data)))
+		}
+		// Truncate 已提供全零洞；跳过全零页可避免稀疏大文件写占满磁盘。
+		allZero := true
+		for _, v := range res.Data {
+			if v != 0 {
+				allZero = false
+				break
+			}
+		}
+		if !allZero {
+			if _, err := f.file.WriteAt(res.Data, start); err != nil {
+				return b.localIOErrno("write-load", path, err)
+			}
+		}
+		start = end
 	}
-	f.data = data
+	f.size = size
+	f.baseETag = entryBaseETag(size, mod)
 	f.loaded = true
 	if b.trace {
-		b.log.Tracef("ensureLoaded %q original=%d bytes", path, len(data))
+		b.log.Tracef("ensureLoaded %q original=%d bytes base=%s", path, size, f.baseETag)
 	}
 	return 0
 }
@@ -203,37 +357,112 @@ func (b *BridgeFS) upload(path string, f *openFile) int {
 	if errc := b.ensureLoaded(path, f); errc != 0 {
 		return errc
 	}
-	data := f.data
+	var etag string
 	var err error
-	if int64(len(data)) <= wholeWriteThreshold {
-		_, err = b.cl.PutContent(context.Background(), f.n.id, data, f.setMtime)
+	if f.fullUpload || f.size == 0 { // 空文件没有可携带 X-Upload-Final 的非空 delta 块
+		etag, err = b.uploadWhole(f)
 	} else {
-		err = b.uploadChunked(f, data)
+		etag, err = b.uploadDelta(f)
 	}
 	if err != nil {
 		return b.apiErrno(err, "upload", path)
 	}
+	if etag == "" {
+		return b.localIOErrno("upload", path, errors.New("server completed upload without etag"))
+	}
 	f.dirty = false
+	f.dirtyRanges = nil
+	f.fullUpload = false
+	f.truncated = false
+	f.uploadID = ""
+	f.baseETag = normalizeBaseETag(etag)
 	// 写后失效：本 fh 读块缓存 + 父目录 dirCache（任务书一致性要求）
 	f.blocks = map[int64][]byte{}
 	f.lru = nil
 	b.mu.Lock()
-	f.n.size = int64(len(data))
-	f.n.mod = time.Now()
+	applyUploadETag(f.n, etag, f.size)
 	f.n.version++ // 使同 node 的其他已打开读句柄废弃旧块
 	b.invalidateDirLocked(internalParent(path))
 	b.mu.Unlock()
 	if b.trace {
-		b.log.Tracef("upload %q %d bytes complete", path, len(data))
+		b.log.Tracef("upload %q size=%d complete etag=%s", path, f.size, etag)
 	}
 	return 0
 }
 
-// uploadChunked 按 1MiB 块顺序上传；409 UPLOAD_INCOMPLETE 按 received 水位
-// 续传（覆盖乱序/缺块场景）；同 uploadID 重传幂等。
-func (b *BridgeFS) uploadChunked(f *openFile, data []byte) error {
+func (b *BridgeFS) readTempChunk(f *openFile, start, end int64) ([]byte, error) {
+	data := make([]byte, end-start)
+	_, err := f.file.ReadAt(data, start)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}
+
+func (b *BridgeFS) uploadWhole(f *openFile) (string, error) {
+	if f.size <= wholeWriteThreshold {
+		data, err := b.readTempChunk(f, 0, f.size)
+		if err != nil {
+			return "", err
+		}
+		return b.cl.PutContent(context.Background(), f.n.id, data, f.setMtime)
+	}
+	return b.uploadChunked(f)
+}
+
+// uploadDelta 只读并发送本轮脏区间；同一失败会话的块可安全重传。
+func (b *BridgeFS) uploadDelta(f *openFile) (string, error) {
+	if len(f.dirtyRanges) == 0 {
+		return "", errors.New("delta upload has no dirty ranges")
+	}
+	if f.baseETag == "" {
+		return "", errors.New("delta upload has no base etag")
+	}
+	if f.uploadID == "" {
+		f.uploadID = newUploadID()
+	}
+	ranges := f.dirtyRanges
+	if f.truncated {
+		// setLength(T) 会保留基底中未覆盖的字节；截断映像的零洞也必须显式覆盖。
+		ranges = []dirtyRange{{start: 0, end: f.size}}
+	}
+	for ri, r := range ranges {
+		for start := r.start; start < r.end; {
+			end := start + blockSize
+			if end > r.end {
+				end = r.end
+			}
+			data, err := b.readTempChunk(f, start, end)
+			if err != nil {
+				return "", err
+			}
+			final := ri == len(ranges)-1 && end == r.end
+			_, complete, etag, err := b.cl.PutChunkWithOptions(context.Background(), f.n.id, start, f.size, data, PutChunkOptions{
+				UploadID: f.uploadID, BaseETag: f.baseETag, Final: final, MtimeMs: f.setMtime,
+			})
+			if err != nil {
+				return "", err
+			}
+			if final {
+				if !complete {
+					return "", errors.New("final delta chunk acked without complete")
+				}
+				return etag, nil
+			}
+			if complete {
+				return "", errors.New("non-final delta chunk unexpectedly committed")
+			}
+			start = end
+		}
+	}
+	return "", errors.New("delta upload ended without final chunk")
+}
+
+// uploadChunked 按 1MiB 块从临时文件顺序上传；409 UPLOAD_INCOMPLETE 按
+// received 水位续传（覆盖乱序/缺块场景）；同 uploadID 重传幂等。
+func (b *BridgeFS) uploadChunked(f *openFile) (string, error) {
 	uploadID := newUploadID()
-	total := int64(len(data))
+	total := f.size
 	start := int64(0)
 	resumeRetries := 0
 	for start < total {
@@ -241,7 +470,11 @@ func (b *BridgeFS) uploadChunked(f *openFile, data []byte) error {
 		if end > total {
 			end = total
 		}
-		received, complete, _, err := b.cl.PutChunk(context.Background(), f.n.id, uploadID, start, total, data[start:end], f.setMtime)
+		data, err := b.readTempChunk(f, start, end)
+		if err != nil {
+			return "", err
+		}
+		received, complete, etag, err := b.cl.PutChunk(context.Background(), f.n.id, uploadID, start, total, data, f.setMtime)
 		if err != nil {
 			var ae *APIError
 			if errors.As(err, &ae) && ae.Code == "UPLOAD_INCOMPLETE" {
@@ -253,17 +486,17 @@ func (b *BridgeFS) uploadChunked(f *openFile, data []byte) error {
 					continue
 				}
 			}
-			return err
+			return "", err
 		}
 		resumeRetries = 0
 		if complete {
 			if received != total {
-				return fmt.Errorf("upload complete but received=%d != total=%d", received, total)
+				return "", fmt.Errorf("upload complete but received=%d != total=%d", received, total)
 			}
-			return nil
+			return etag, nil
 		}
 		if end == total {
-			return fmt.Errorf("last chunk acked without complete (received=%d total=%d)", received, total)
+			return "", fmt.Errorf("last chunk acked without complete (received=%d total=%d)", received, total)
 		}
 		// 非末块：以服务端水位为准前进（正常 received==end）
 		if received > start {
@@ -272,7 +505,7 @@ func (b *BridgeFS) uploadChunked(f *openFile, data []byte) error {
 			start = end
 		}
 	}
-	return fmt.Errorf("upload ended without complete (total=%d)", total)
+	return "", fmt.Errorf("upload ended without complete (total=%d)", total)
 }
 
 // ---------- Truncate（截零支持；非零 P2-12 ENOSYS） ----------
@@ -285,7 +518,18 @@ func (b *BridgeFS) truncate(path string, size int64, fh uint64) int {
 	if f := b.fileByFH(fh); f != nil && f.write {
 		f.mu.Lock()
 		defer f.mu.Unlock()
-		f.data, f.loaded, f.dirty = []byte{}, true, true
+		if err := f.file.Truncate(0); err != nil {
+			return b.localIOErrno("truncate0", path, err)
+		}
+		if !f.fullUpload && f.baseETag == "" {
+			b.mu.Lock()
+			f.baseETag = entryBaseETag(f.n.size, f.n.mod)
+			b.mu.Unlock()
+		}
+		f.size, f.loaded, f.dirty = 0, true, true
+		f.truncated = true
+		f.dirtyRanges = nil
+		f.uploadID = ""
 		b.setNodeSize(f.n, 0)
 		return 0
 	}
@@ -371,7 +615,7 @@ func (b *BridgeFS) deleteEntry(path string, wantDir bool) int {
 }
 
 // rename 仅文件改名+移动（FR-19：目录源恒 ENOSYS，M4）。
-// 目标已存在按 POSIX 文件替换：先删目标文件再 PATCH meta。
+// 目标已存在时发 replace=true，由服务端单次 PATCH 原子替换，不预 DELETE。
 func (b *BridgeFS) rename(oldpath string, newpath string) int {
 	n, errc := b.resolve(oldpath)
 	if errc != 0 {
@@ -404,7 +648,8 @@ func (b *BridgeFS) rename(oldpath string, newpath string) int {
 	if pn.id == "" || strings.HasPrefix(pn.id, "cat:") {
 		return -fuse.EROFS // 虚拟根/分类根不可作为移动目标
 	}
-	// 目标已存在：文件→先删（替换语义）；目录→EISDIR
+	replace := false
+	targetCanon := ""
 	if tn, terrc := b.resolve(newpath); terrc == 0 && tn != nil {
 		if isVirtualAutorun(tn) {
 			return -fuse.EROFS
@@ -413,20 +658,11 @@ func (b *BridgeFS) rename(oldpath string, newpath string) int {
 			return -fuse.EISDIR
 		}
 		if tn.id != n.id {
-			if err := b.cl.Delete(context.Background(), tn.id, false); err != nil {
-				var ae *APIError
-				if !(errors.As(err, &ae) && ae.HTTPStatus == 404) {
-					return b.apiErrno(err, "rename-target", newpath)
-				}
-			}
-			targetCanon := b.canonicalPath(newpath)
-			b.mu.Lock()
-			delete(b.byPath, newpath)
-			delete(b.byPath, targetCanon)
-			b.mu.Unlock()
+			replace = true
+			targetCanon = b.canonicalPath(newpath)
 		}
 	}
-	e, err := b.cl.PatchMeta(context.Background(), n.id, &newName, &pn.id, nil)
+	e, err := b.cl.PatchMeta(context.Background(), n.id, &newName, &pn.id, nil, replace)
 	if err != nil {
 		return b.apiErrno(err, "rename", oldpath)
 	}
@@ -438,6 +674,10 @@ func (b *BridgeFS) rename(oldpath string, newpath string) int {
 	// newpath 会让目标 dirCache 未失效，紧随其后的 Utimens 读到空目录（harness 10）。
 	delete(b.byPath, oldpath)
 	delete(b.byPath, oldCanon)
+	if replace {
+		delete(b.byPath, newpath)
+		delete(b.byPath, targetCanon)
+	}
 	n.id, n.name, n.isDir, n.size, n.writable = e.ID, e.Name, e.IsDir, e.Size, e.Writable
 	if e.ModifiedMs > 0 {
 		n.mod = time.UnixMilli(e.ModifiedMs)
@@ -476,7 +716,7 @@ func (b *BridgeFS) utimens(path string, tmsp []fuse.Timespec) int {
 		ms = tmsp[1].Sec*1000 + tmsp[1].Nsec/1e6 // [0]=atime [1]=mtime
 	}
 	if !n.isDir {
-		if _, err := b.cl.PatchMeta(context.Background(), n.id, nil, nil, &ms); err != nil {
+		if _, err := b.cl.PatchMeta(context.Background(), n.id, nil, nil, &ms, false); err != nil {
 			var ae *APIError
 			if errors.As(err, &ae) && ae.HTTPStatus == 501 {
 				b.log.Warnf("utimens %q: server 501, no-op fallback", path)

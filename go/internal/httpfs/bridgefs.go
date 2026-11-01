@@ -12,6 +12,7 @@ package httpfs
 import (
 	"context"
 	"errors"
+	"os"
 	"sort"
 	"strings"
 	"sync"
@@ -62,13 +63,20 @@ type openFile struct {
 	lru         []int64
 	readVersion uint64 // 已缓存块对应的 node.version
 
-	// M2 写句柄状态：write=true 时读写都走 data 内存映像（M2 限制：
-	// 写缓冲=整文件内存，大文件写 M3 评估落盘；上传阶段按 1MiB 分块）。
-	write    bool
-	dirty    bool
-	data     []byte
-	loaded   bool  // data 是否已含完整内容（新文件/O_TRUNC 打开即 true）
-	setMtime int64 // Utimens 记录的 mtime(ms)，上传时 X-Set-Mtime
+	// M3 写句柄状态：write=true 时读写都走本会话目录下的磁盘临时文件。
+	// 已有文件只上传合并后的脏区间；新文件/截零保留完整上传协议。
+	write       bool
+	dirty       bool
+	file        *os.File
+	tempPath    string
+	size        int64
+	loaded      bool // 临时文件是否已含完整原文（新文件/O_TRUNC 打开即 true）
+	fullUpload  bool
+	truncated   bool // 已有文件截断后，非空 delta 必须覆盖新映像中的零洞
+	baseETag    string
+	uploadID    string // 失败的 delta Flush 保留同一会话，完成态重传幂等
+	dirtyRanges []dirtyRange
+	setMtime    int64 // Utimens 记录的 mtime(ms)，上传时 X-Set-Mtime
 }
 
 // BridgeFS 实现 fuse.FileSystemInterface 的桥（M1 只读；M2 -ro=false 时读写）。
@@ -99,6 +107,9 @@ type BridgeFS struct {
 	fhMu  sync.Mutex
 	fhSeq uint64
 	files map[uint64]*openFile
+
+	tempDir string // 随机挂载会话目录；Destroy 只删除这一目录
+	tempErr error
 }
 
 // NewBridgeFS 创建桥文件系统；随后必须 Warmup 再挂载。
@@ -118,6 +129,7 @@ func NewBridgeFS(cl *Client, log Logger, trace bool, readOnly bool) *BridgeFS {
 	}
 	b.root = &node{name: "/", isDir: true, ino: 1}
 	b.byPath[""] = b.root
+	b.initTempSession()
 	return b
 }
 
@@ -397,6 +409,11 @@ func (b *BridgeFS) apiErrno(err error, op, path string) int {
 				b.log.Errorf("%s %s: PARTIAL details=%v", op, slashOrRoot(path), ae.Details)
 				return -fuse.EIO
 			}
+		case 412:
+			if ae.Code == "PRECONDITION_FAILED" {
+				b.log.Warnf("%s %s: base etag conflict: %v", op, slashOrRoot(path), ae)
+				return -fuse.EBUSY
+			}
 		case 416:
 			return 0 // Read 路径特判；其它路径理论不可达
 		case 501:
@@ -415,12 +432,29 @@ func (b *BridgeFS) apiErrno(err error, op, path string) int {
 
 // Init 由 cgofuse 在挂载线程启动时回调。
 func (b *BridgeFS) Init() {
-	b.log.Infof("Init: phonefs-m1 read-only bridge ready (block=%dMiB cache=%d/fh)",
-		blockSize/(1<<20), maxBlocksPerFH)
+	b.log.Infof("Init: phonefs bridge ready (block=%dMiB cache=%d/fh temp=%s)",
+		blockSize/(1<<20), maxBlocksPerFH, b.tempDir)
 }
 
 func (b *BridgeFS) Destroy() {
-	b.log.Infof("Destroy: bridge torn down (open handles=%d)", len(b.files))
+	b.fhMu.Lock()
+	files := make([]*openFile, 0, len(b.files))
+	for _, f := range b.files {
+		files = append(files, f)
+	}
+	b.files = map[uint64]*openFile{}
+	b.fhMu.Unlock()
+	for _, f := range files {
+		f.mu.Lock()
+		b.cleanupTempFile(f)
+		f.mu.Unlock()
+	}
+	if b.tempDir != "" {
+		if err := os.RemoveAll(b.tempDir); err != nil {
+			b.log.Warnf("Destroy: remove mount temp session %q: %v", b.tempDir, err)
+		}
+	}
+	b.log.Infof("Destroy: bridge torn down (open handles=%d)", len(files))
 }
 
 func (b *BridgeFS) Statfs(path string, st *fuse.Statfs_t) int {
@@ -558,11 +592,22 @@ func (b *BridgeFS) Open(path string, flags int) (int, uint64) {
 	f := &openFile{n: n, blocks: map[int64][]byte{}}
 	if wantWrite {
 		f.write = true
-		if flags&fuse.O_TRUNC != 0 {
-			f.data, f.loaded = []byte{}, true
-			if n.size > 0 {
+		trunc := flags&fuse.O_TRUNC != 0
+		f.loaded, f.truncated = trunc, trunc
+		if errc := b.createTempImage(f); errc != 0 {
+			return errc, ^uint64(0)
+		}
+		b.mu.Lock()
+		f.size = n.size
+		if trunc {
+			f.baseETag = entryBaseETag(n.size, n.mod)
+		}
+		b.mu.Unlock()
+		if trunc {
+			if f.size > 0 {
 				f.dirty = true
 			}
+			f.size = 0
 			b.setNodeSize(n, 0)
 		}
 	}
@@ -588,7 +633,7 @@ func (b *BridgeFS) Read(path string, buff []byte, ofst int64, fh uint64) int {
 		return b.readVirtualAutorun(buff, ofst)
 	}
 
-	// M2 写句柄：读写同走 data 内存映像（O_RDWR 一致性；ensureLoaded 可能拉网）
+	// M3 写句柄：读写同走临时文件映像（O_RDWR 一致性；ensureLoaded 可能拉网）
 	if f.write {
 		return b.readWriteImage(path, f, buff, ofst)
 	}
@@ -671,6 +716,7 @@ func (b *BridgeFS) Release(path string, fh uint64) int {
 	if f.write && f.dirty {
 		errc = b.upload(path, f) // 关闭前兜底上传（Explorer 复制依赖 Release 落盘）
 	}
+	b.cleanupTempFile(f)
 	f.mu.Unlock()
 	b.fhMu.Lock()
 	delete(b.files, fh)
