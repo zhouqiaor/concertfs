@@ -1,0 +1,89 @@
+{
+  "base_url": "https://192.168.43.1:18443",
+  "isolated_root": "/storage/emulated/0/PhoneFS-m3-protocol",
+  "run_id": "1793535440988933700",
+  "pass": 12,
+  "fail": 0,
+  "environment_limited": 1,
+  "results": [
+    {
+      "name": "create-root-201",
+      "pass": true,
+      "detail": "PhoneFS-m3-protocol",
+      "duration_ms": 56.3
+    },
+    {
+      "name": "delta-nonfinal-no-commit-final-ranges-only",
+      "pass": true,
+      "detail": "non-final left 128B unchanged; final patched [11,16) and [61,67); sha=dfcf60cc6eaf00dbe7fe31099b6e48beb55aca9cae9b6dfa851db66a623ace06",
+      "duration_ms": 602.8
+    },
+    {
+      "name": "delta-extension-preserves-prefix",
+      "pass": true,
+      "detail": "44B prefix retained; extended to 71B; sha=9f9178323fcf4c75c603736ac7dc667f2700984c2f671ee76fd4b681548db070",
+      "duration_ms": 445.5
+    },
+    {
+      "name": "delta-wrong-base-412-preserves-target",
+      "pass": true,
+      "detail": "stale base -> 412 PRECONDITION_FAILED; original bytes unchanged",
+      "duration_ms": 430.8
+    },
+    {
+      "name": "delta-missing-target-412-remains-absent",
+      "pass": true,
+      "detail": "missing delta target -> 412 PRECONDITION_FAILED; target remains absent",
+      "duration_ms": 160.1
+    },
+    {
+      "name": "delta-concurrent-write-final-412-preserves-new",
+      "pass": true,
+      "detail": "whole-file write after session start -> final 412; concurrent replacement preserved",
+      "duration_ms": 659.0
+    },
+    {
+      "name": "delta-final-retransmit-idempotent",
+      "pass": true,
+      "detail": "identical final response on retransmit; bytes stable; sha=b310ccafec50134d383780d7ba4ad4181a6caeb615d0d2fb1c36bad4eed3dd05",
+      "duration_ms": 543.4
+    },
+    {
+      "name": "upload-id-cannot-mix-base-modes-400",
+      "pass": true,
+      "detail": "legacy->delta and delta->legacy both 400 INVALID_ARGUMENT; target unchanged",
+      "duration_ms": 643.8
+    },
+    {
+      "name": "patch-replace-false-existing-target-409",
+      "pass": true,
+      "detail": "replace=false -> 409 ALREADY_EXISTS; source and target unchanged",
+      "duration_ms": 715.4
+    },
+    {
+      "name": "patch-replace-true-existing-target",
+      "pass": true,
+      "detail": "replace=true -> target has source bytes, source 404, exactly one target entry",
+      "duration_ms": 808.8
+    },
+    {
+      "name": "patch-case-only-rename-tequ",
+      "pass": false,
+      "environment_limited": true,
+      "detail": "PATCH returned 200 and new-case lookup resolves, but directory listing retains CaseOnly.bin; TEQU ROM did not materialize case-only rename (not counted as PASS)",
+      "duration_ms": 613.9
+    },
+    {
+      "name": "cleanup-recursive-204",
+      "pass": true,
+      "detail": 204,
+      "duration_ms": 308.7
+    },
+    {
+      "name": "cleanup-root-get-404",
+      "pass": true,
+      "detail": 404,
+      "duration_ms": 68.6
+    }
+  ]
+}

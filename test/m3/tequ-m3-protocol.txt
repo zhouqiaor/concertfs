@@ -1,0 +1,14 @@
+PASS create-root-201: PhoneFS-m3-protocol
+PASS delta-nonfinal-no-commit-final-ranges-only: non-final left 128B unchanged; final patched [11,16) and [61,67); sha=dfcf60cc6eaf00dbe7fe31099b6e48beb55aca9cae9b6dfa851db66a623ace06
+PASS delta-extension-preserves-prefix: 44B prefix retained; extended to 71B; sha=9f9178323fcf4c75c603736ac7dc667f2700984c2f671ee76fd4b681548db070
+PASS delta-wrong-base-412-preserves-target: stale base -> 412 PRECONDITION_FAILED; original bytes unchanged
+PASS delta-missing-target-412-remains-absent: missing delta target -> 412 PRECONDITION_FAILED; target remains absent
+PASS delta-concurrent-write-final-412-preserves-new: whole-file write after session start -> final 412; concurrent replacement preserved
+PASS delta-final-retransmit-idempotent: identical final response on retransmit; bytes stable; sha=b310ccafec50134d383780d7ba4ad4181a6caeb615d0d2fb1c36bad4eed3dd05
+PASS upload-id-cannot-mix-base-modes-400: legacy->delta and delta->legacy both 400 INVALID_ARGUMENT; target unchanged
+PASS patch-replace-false-existing-target-409: replace=false -> 409 ALREADY_EXISTS; source and target unchanged
+PASS patch-replace-true-existing-target: replace=true -> target has source bytes, source 404, exactly one target entry
+ENV_LIMIT patch-case-only-rename-tequ: PATCH returned 200 and new-case lookup resolves, but directory listing retains CaseOnly.bin; TEQU ROM did not materialize case-only rename (not counted as PASS)
+PASS cleanup-recursive-204: 204
+PASS cleanup-root-get-404: 404
+RESULT pass=12 fail=0 environment_limited=1 evidence=C:\Code\Wideawake-wt-phonefs-m3-accept\projects\phonefs\test\m3\protocol-results.json
