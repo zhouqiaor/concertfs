@@ -1,5 +1,5 @@
-// Package httpfs 把 PhoneFS 安卓端 HTTPS v1 协议封装成 Go API，
-// 供 cgofuse 桥（cmd/phonefs-m1）消费。
+// Package httpfs 把 PhoneFS 安卓端 HTTPS v1 协议封装成只读 Go API，
+// 供 M1 cgofuse 桥（cmd/phonefs-m1）消费。
 //
 // 已真机核实的服务端契约（TEQU-S2C, 0.1.0-w2, 2026-11-01）：
 //
@@ -42,16 +42,12 @@ const (
 	pathList     = "/v1/fs/list"
 	pathStatfs   = "/v1/fs/statfs"
 	pathContent  = "/v1/fs/content"
-	pathCreate   = "/v1/fs/create"
-	pathMeta     = "/v1/fs/meta"
-	pathDelete   = "/v1/fs"
 )
 
 // 超时按「单次尝试」计；底层失败会再重试一次，故最坏延迟约 2 倍。
 const (
 	metadataTimeout = 20 * time.Second // roots/list/statfs/pair
 	contentTimeout  = 30 * time.Second // 单块 1MiB 随机读
-	writeTimeout    = 60 * time.Second // 单块 1MiB 写；整写调用应按文件大小自行控制 ctx
 	retryBackoff    = 300 * time.Millisecond
 )
 
@@ -84,18 +80,23 @@ type FSInfo struct {
 
 // PairInfo 是 /v1/pair/info 的最小字段集（指纹留作 W3 证书钉死）。
 type PairInfo struct {
-	Service     string `json:"service"`
-	Fingerprint string `json:"fingerprint"`
-	DeviceName  string `json:"device.name"`
+	Service          string `json:"service"`
+	Fingerprint      string `json:"fingerprint"`
+	DeviceName       string `json:"device.name"`
+	DeviceFormFactor string `json:"device.form_factor"`
 }
 
 // APIError 是 4xx/5xx 结构化错误（body 形如 {"error":{...}}）。
+// Received 在 409 UPLOAD_INCOMPLETE 时给出续传水位（details.received）；
+// Details 保留原始 details 对象（如 409 PARTIAL 的 deleted/failed）。
 type APIError struct {
 	HTTPStatus int
 	Code       string
 	Message    string
 	TraceID    string
 	Retriable  bool
+	Received   int64
+	Details    map[string]any
 }
 
 func (e *APIError) Error() string {
@@ -126,21 +127,15 @@ type statfsResp struct {
 
 type errBody struct {
 	Error struct {
-		Code      string `json:"code"`
-		Message   string `json:"message"`
-		TraceID   string `json:"trace_id"`
-		Retriable bool   `json:"retriable"`
+		Code      string         `json:"code"`
+		Message   string         `json:"message"`
+		TraceID   string         `json:"trace_id"`
+		Retriable bool           `json:"retriable"`
+		Details   map[string]any `json:"details"`
 	} `json:"error"`
 }
 
-// WriteResult 是 PUT /v1/fs/content 的确认。
-type WriteResult struct {
-	Received int64  `json:"received"`
-	Complete bool   `json:"complete"`
-	ETag     string `json:"etag"`
-}
-
-// Client 是 PhoneFS HTTPS v1 客户端。
+// Client 是 PhoneFS HTTPS v1 的只读客户端。
 type Client struct {
 	baseURL string
 	token   string
@@ -178,13 +173,15 @@ func (c *Client) PairInfo(ctx context.Context) (PairInfo, error) {
 		Service     string `json:"service"`
 		Fingerprint string `json:"fingerprint"`
 		Device      struct {
-			Name string `json:"name"`
+			Name       string `json:"name"`
+			FormFactor string `json:"form_factor"`
 		} `json:"device"`
 	}
 	if err := json.Unmarshal(body, &raw); err != nil {
 		return out, fmt.Errorf("decode pair/info: %w", err)
 	}
 	out.Service, out.Fingerprint, out.DeviceName = raw.Service, raw.Fingerprint, raw.Device.Name
+	out.DeviceFormFactor = raw.Device.FormFactor
 	return out, nil
 }
 
@@ -342,148 +339,6 @@ func (c *Client) ContentRange(ctx context.Context, id string, start, end int64) 
 	}
 }
 
-// Create 在 parent 下创建文件或目录。冲突由服务端返回 ALREADY_EXISTS。
-func (c *Client) Create(ctx context.Context, parent, name string, isDir bool) (Entry, error) {
-	payload, err := json.Marshal(struct {
-		Parent string `json:"parent"`
-		Name   string `json:"name"`
-		IsDir  bool   `json:"is_dir"`
-	}{parent, name, isDir})
-	if err != nil {
-		return Entry{}, err
-	}
-	var out Entry
-	err = c.jsonCall(ctx, http.MethodPost, pathCreate, nil, payload, &out)
-	return out, err
-}
-
-// PatchMeta 修改文件名、父目录或 mtime；nil 字段不下发。M2 目录由服务端返回 501。
-func (c *Client) PatchMeta(ctx context.Context, id string, name, parentID *string, modifiedMs *int64) (Entry, error) {
-	payload, err := json.Marshal(struct {
-		ID         string  `json:"id"`
-		Name       *string `json:"name,omitempty"`
-		ParentID   *string `json:"parent_id,omitempty"`
-		ModifiedMs *int64  `json:"modified_ms,omitempty"`
-	}{id, name, parentID, modifiedMs})
-	if err != nil {
-		return Entry{}, err
-	}
-	var out Entry
-	err = c.jsonCall(ctx, http.MethodPatch, pathMeta, nil, payload, &out)
-	return out, err
-}
-
-// Delete 删除文件或目录；不存在仍为成功（服务端 204 幂等语义）。
-func (c *Client) Delete(ctx context.Context, id string, recursive bool) error {
-	q := url.Values{"id": {id}, "recursive": {strconv.FormatBool(recursive)}}
-	return c.jsonCall(ctx, http.MethodDelete, pathDelete, q, nil, nil)
-}
-
-// WriteFull 以原子整写替换目标。src 用 ReaderAt 而非 []byte，重试可重建 SectionReader，
-// 调用方可以是 os.File，不会因一次网络重试而重复/错位，也不要求整文件进内存。
-func (c *Client) WriteFull(ctx context.Context, id string, src io.ReaderAt, size int64, mtimeMs *int64) (WriteResult, error) {
-	if size < 0 {
-		return WriteResult{}, fmt.Errorf("negative write size %d", size)
-	}
-	return c.putContent(ctx, id, src, 0, size, 0, "", mtimeMs)
-}
-
-// WriteChunk 写 [start,start+length) 并携带 X-Upload-Id/Content-Range。
-// 同一 Upload-Id 可安全重传；complete=false 表示服务端仍在等待其它区间。
-func (c *Client) WriteChunk(ctx context.Context, id, uploadID string, src io.ReaderAt, start, length, total int64, mtimeMs *int64) (WriteResult, error) {
-	if uploadID == "" || start < 0 || length <= 0 || total <= 0 || start+length > total {
-		return WriteResult{}, fmt.Errorf("bad chunk upload=%q start=%d length=%d total=%d", uploadID, start, length, total)
-	}
-	return c.putContent(ctx, id, src, start, length, total, uploadID, mtimeMs)
-}
-
-func (c *Client) putContent(ctx context.Context, id string, src io.ReaderAt, start, length, total int64, uploadID string, mtimeMs *int64) (WriteResult, error) {
-	var out WriteResult
-	q := url.Values{"id": {id}}
-	_, data, err := c.retryCall(ctx, func() (*http.Response, []byte, error) {
-		reqCtx, cancel := context.WithTimeout(ctx, writeTimeout)
-		defer cancel()
-		var body io.Reader = http.NoBody
-		if length > 0 {
-			body = io.NewSectionReader(src, start, length)
-		}
-		req, err := http.NewRequestWithContext(reqCtx, http.MethodPut,
-			c.baseURL+pathContent+"?"+q.Encode(), body)
-		if err != nil {
-			return nil, nil, err
-		}
-		req.ContentLength = length
-		req.Header.Set("Authorization", "Bearer "+c.token)
-		req.Header.Set("Content-Type", "application/octet-stream")
-		if uploadID != "" {
-			req.Header.Set("X-Upload-Id", uploadID)
-			req.Header.Set("Content-Range", fmt.Sprintf("bytes %d-%d/%d", start, start+length-1, total))
-		}
-		if mtimeMs != nil {
-			req.Header.Set("X-Set-Mtime", strconv.FormatInt(*mtimeMs, 10))
-		}
-		resp, err := c.httpc.Do(req)
-		if err != nil {
-			return nil, nil, err
-		}
-		defer resp.Body.Close()
-		data, rerr := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
-		if rerr != nil {
-			return resp, nil, rerr
-		}
-		return resp, data, nil
-	})
-	if err != nil {
-		return out, err
-	}
-	if err := json.Unmarshal(data, &out); err != nil {
-		return out, fmt.Errorf("decode write response: %w", err)
-	}
-	return out, nil
-}
-
-// jsonCall 发带认证的 JSON 请求；body 为 nil 时不带实体，out 为 nil 时丢弃成功正文。
-func (c *Client) jsonCall(ctx context.Context, method, path string, q url.Values, body []byte, out any) error {
-	u := c.baseURL + path
-	if len(q) > 0 {
-		u += "?" + q.Encode()
-	}
-	_, data, err := c.retryCall(ctx, func() (*http.Response, []byte, error) {
-		reqCtx, cancel := context.WithTimeout(ctx, metadataTimeout)
-		defer cancel()
-		var rd io.Reader
-		if body != nil {
-			rd = bytes.NewReader(body)
-		}
-		req, err := http.NewRequestWithContext(reqCtx, method, u, rd)
-		if err != nil {
-			return nil, nil, err
-		}
-		req.Header.Set("Authorization", "Bearer "+c.token)
-		req.Header.Set("Accept", "application/json")
-		if body != nil {
-			req.Header.Set("Content-Type", "application/json")
-		}
-		resp, err := c.httpc.Do(req)
-		if err != nil {
-			return nil, nil, err
-		}
-		defer resp.Body.Close()
-		data, rerr := io.ReadAll(io.LimitReader(resp.Body, 4<<20))
-		if rerr != nil {
-			return resp, nil, rerr
-		}
-		return resp, data, nil
-	})
-	if err != nil || out == nil {
-		return err
-	}
-	if err := json.Unmarshal(data, out); err != nil {
-		return fmt.Errorf("decode %s %s: %w", method, path, err)
-	}
-	return nil
-}
-
 // getJSON 发带认证的 GET 并重试，返回原始 JSON。
 func (c *Client) getJSON(ctx context.Context, path string, q url.Values) ([]byte, error) {
 	u := c.baseURL + path
@@ -557,6 +412,13 @@ func parseAPIError(status int, body []byte) *APIError {
 		ae.Message = eb.Error.Message
 		ae.TraceID = eb.Error.TraceID
 		ae.Retriable = eb.Error.Retriable
+		ae.Details = eb.Error.Details
+		// details.received：UPLOAD_INCOMPLETE 续传水位（JSON number → float64）
+		if eb.Error.Details != nil {
+			if rv, ok := eb.Error.Details["received"].(float64); ok {
+				ae.Received = int64(rv)
+			}
+		}
 	} else {
 		ae.Message = strings.TrimSpace(string(body))
 	}

@@ -1,6 +1,5 @@
-// bridgefs.go 把 httpfs.Client 适配为 cgofuse 文件系统。
-// M1 保留 -ro 只读路径；M2 默认 rw，以本地临时文件承接随机写并在
-// Flush/Fsync/Release 用 1MiB Content-Range 分块上传。
+// bridgefs.go 把 httpfs.Client 适配为 cgofuse 只读文件系统（M1：Getattr/
+// Readdir/Open/Read/Statfs + Windows 兼容层）。
 //
 // 路径模型：FUSE 路径 "/内部存储/PhoneFS-w2/test10mb.bin"。盘符根是虚拟目录，
 // 其 8 个子项直接铺服务端 /v1/roots；分类根（cat:*）在 W2 列表返回 501，
@@ -11,14 +10,8 @@
 package httpfs
 
 import (
-	"bytes"
 	"context"
-	"crypto/rand"
-	"encoding/hex"
 	"errors"
-	"io"
-	"os"
-	pathpkg "path"
 	"sort"
 	"strings"
 	"sync"
@@ -54,7 +47,6 @@ type node struct {
 	mod      time.Time
 	writable bool
 	ino      uint64
-	version  uint64 // 写/改名后递增；其它读句柄据此废弃旧 Range 块
 }
 
 type dirCache struct {
@@ -63,33 +55,33 @@ type dirCache struct {
 }
 
 type openFile struct {
-	n        *node
-	mu       sync.Mutex // 串行化同句柄读写/上传（WinFsp 可能并发下发回调）
-	blocks   map[int64][]byte
-	lru      []int64
-	cacheVer uint64
+	n      *node
+	mu     sync.Mutex // 串行化同句柄块取/缓存与写缓冲（WinFsp 可能并发下发）
+	blocks map[int64][]byte
+	lru    []int64
 
-	// rw 句柄：原始内容按 1MiB Range 落入本地临时文件，随机写只改 spool。
-	spool     *os.File
-	spoolPath string
-	size      int64
-	mod       time.Time
-	dirty     bool
-	uploadID  string // 失败重试沿用；每次新脏写周期更换
+	// M2 写句柄状态：write=true 时读写都走 data 内存映像（M2 限制：
+	// 写缓冲=整文件内存，大文件写 M3 评估落盘；上传阶段按 1MiB 分块）。
+	write    bool
+	dirty    bool
+	data     []byte
+	loaded   bool  // data 是否已含完整内容（新文件/O_TRUNC 打开即 true）
+	setMtime int64 // Utimens 记录的 mtime(ms)，上传时 X-Set-Mtime
 }
 
-// BridgeFS 实现 fuse.FileSystemInterface 的只读桥。
+// BridgeFS 实现 fuse.FileSystemInterface 的桥（M1 只读；M2 -ro=false 时读写）。
 type BridgeFS struct {
 	fuse.FileSystemBase // 未实现回调默认 -ENOSYS（Setxattr 等见下覆写）
 
 	cl       *Client
 	log      Logger
 	trace    bool
-	readOnly bool
-	spoolDir string
+	readOnly bool // -ro 开关：true 时维持 M1 全部 EROFS/Access 只读行为
 
-	mountTime time.Time
-	root      *node
+	mountTime   time.Time
+	root        *node
+	autorun     *node
+	autorunData []byte
 
 	mu      sync.Mutex
 	inoSeq  uint64
@@ -107,19 +99,14 @@ type BridgeFS struct {
 	files map[uint64]*openFile
 }
 
-// NewBridgeFS 创建桥文件系统；随后必须 Warmup 再挂载。readOnly=true 完整保留 M1 行为。
-func NewBridgeFS(cl *Client, log Logger, trace, readOnly bool) *BridgeFS {
-	spoolDir := ""
-	if !readOnly {
-		// 每挂载会话独立目录；Destroy 清理。创建失败在首次写打开时显式返回 ENOSPC。
-		spoolDir, _ = os.MkdirTemp("", "phonefs-m2-")
-	}
+// NewBridgeFS 创建桥文件系统；随后必须 Warmup 再挂载。
+// readOnly=true 对应 -ro 开关（M1 行为）；false 开放 M2 写回调。
+func NewBridgeFS(cl *Client, log Logger, trace bool, readOnly bool) *BridgeFS {
 	b := &BridgeFS{
 		cl:        cl,
 		log:       log,
 		trace:     trace,
 		readOnly:  readOnly,
-		spoolDir:  spoolDir,
 		mountTime: time.Now(),
 		byPath:    map[string]*node{},
 		dirs:      map[string]*dirCache{},
@@ -141,7 +128,9 @@ func (b *BridgeFS) Warmup(ctx context.Context) error {
 		return err
 	}
 	b.mu.Lock()
-	b.dirs[""] = &dirCache{entries: b.storeEntriesLocked("", roots), at: time.Now()}
+	rootEntries := b.storeEntriesLocked("", roots)
+	rootEntries = b.appendVirtualRootLocked("", rootEntries)
+	b.dirs[""] = &dirCache{entries: rootEntries, at: time.Now()}
 	b.mu.Unlock()
 	if info, err := b.cl.StatFS(ctx); err == nil {
 		b.sfMu.Lock()
@@ -227,22 +216,6 @@ func (b *BridgeFS) resolve(path string) (*node, int) {
 	return nil, -fuse.ENOENT
 }
 
-// canonicalNode 同时返回缓存规范路径，写操作据此精确失效大小写不敏感节点。
-func (b *BridgeFS) canonicalNode(path string) (string, *node, int) {
-	n, errc := b.resolve(path)
-	if errc != 0 {
-		return "", nil, errc
-	}
-	comps := splitComps(path)
-	b.mu.Lock()
-	_, missAt, canon := b.walkLocked(comps)
-	b.mu.Unlock()
-	if missAt != len(comps) {
-		return "", nil, -fuse.ENOENT
-	}
-	return canon, n, 0
-}
-
 // refreshDir 取目录列表并入缓存。force=true 时忽略 TTL（Readdir 走这里）。
 // 返回缓存与 0/负 errno。
 func (b *BridgeFS) refreshDir(dirPath string, force bool) (*dirCache, int) {
@@ -290,6 +263,7 @@ func (b *BridgeFS) refreshDir(dirPath string, force bool) (*dirCache, int) {
 
 	b.mu.Lock()
 	nodes := b.storeEntriesLocked(dirPath, entries)
+	nodes = b.appendVirtualRootLocked(dirPath, nodes)
 	dc := &dirCache{entries: nodes, at: time.Now()}
 	b.dirs[dirPath] = dc
 	b.mu.Unlock()
@@ -328,9 +302,6 @@ func (b *BridgeFS) upsertLocked(path string, e *Entry) *node {
 		mod = time.UnixMilli(e.ModifiedMs)
 	}
 	if n, ok := b.byPath[path]; ok {
-		if n.id != e.ID || n.isDir != e.IsDir || n.size != e.Size || !n.mod.Equal(mod) {
-			n.version++
-		}
 		n.id, n.isDir, n.size, n.mod, n.writable = e.ID, e.IsDir, e.Size, mod, e.Writable
 		n.name = e.Name
 		return n
@@ -338,7 +309,7 @@ func (b *BridgeFS) upsertLocked(path string, e *Entry) *node {
 	b.inoSeq++
 	n := &node{
 		id: e.ID, name: e.Name, isDir: e.IsDir, size: e.Size,
-		mod: mod, writable: e.Writable, ino: b.inoSeq, version: 1,
+		mod: mod, writable: e.Writable, ino: b.inoSeq,
 	}
 	b.byPath[path] = n
 	return n
@@ -381,13 +352,15 @@ func slashOrRoot(p string) string {
 
 // ---------- errno 映射 ----------
 
-// apiErrno 记录并映射服务端错误；409 按 code 区分冲突，507 映射 Windows 磁盘已满。
+// apiErrno 记录并映射服务端错误：401/403→EACCES、404→ENOENT、
+// 409 ALREADY_EXISTS→EEXIST、409 NOT_EMPTY→ENOTEMPTY、400 INVALID_NAME→EINVAL、
+// 507→ENOSPC、501（非 cat 分支）→ENOSYS、416 由 Read 特判、其余→EIO。
 func (b *BridgeFS) apiErrno(err error, op, path string) int {
 	var ae *APIError
 	if errors.As(err, &ae) {
 		switch ae.HTTPStatus {
 		case 401, 403:
-			b.log.Warnf("%s %s: auth failure: %v", op, slashOrRoot(path), ae)
+			b.log.Warnf("%s %s: auth/scope failure: %v", op, slashOrRoot(path), ae)
 			return -fuse.EACCES
 		case 404:
 			if b.trace {
@@ -395,26 +368,27 @@ func (b *BridgeFS) apiErrno(err error, op, path string) int {
 			}
 			return -fuse.ENOENT
 		case 400:
-			return -fuse.EINVAL
+			if ae.Code == "INVALID_NAME" {
+				b.log.Warnf("%s %s: invalid name: %v", op, slashOrRoot(path), ae)
+				return -fuse.EINVAL
+			}
 		case 409:
 			switch ae.Code {
 			case "ALREADY_EXISTS":
 				return -fuse.EEXIST
 			case "NOT_EMPTY":
 				return -fuse.ENOTEMPTY
-			default: // UPLOAD_INCOMPLETE / PARTIAL：调用方可重试整轮上传
+			case "PARTIAL":
+				b.log.Errorf("%s %s: PARTIAL details=%v", op, slashOrRoot(path), ae.Details)
 				return -fuse.EIO
 			}
-		case 413:
-			return -fuse.EFBIG
 		case 416:
 			return 0 // Read 路径特判；其它路径理论不可达
-		case 429:
-			return -fuse.EAGAIN
 		case 501:
 			b.log.Warnf("%s %s: not implemented: %v", op, slashOrRoot(path), ae)
 			return -fuse.ENOSYS
 		case 507:
+			b.log.Warnf("%s %s: quota exhausted: %v", op, slashOrRoot(path), ae)
 			return -fuse.ENOSPC
 		}
 	}
@@ -426,20 +400,11 @@ func (b *BridgeFS) apiErrno(err error, op, path string) int {
 
 // Init 由 cgofuse 在挂载线程启动时回调。
 func (b *BridgeFS) Init() {
-	mode := "rw"
-	if b.readOnly {
-		mode = "ro"
-	}
-	b.log.Infof("Init: phonefs bridge ready mode=%s (block=%dMiB cache=%d/fh)",
-		mode, blockSize/(1<<20), maxBlocksPerFH)
+	b.log.Infof("Init: phonefs-m1 read-only bridge ready (block=%dMiB cache=%d/fh)",
+		blockSize/(1<<20), maxBlocksPerFH)
 }
 
 func (b *BridgeFS) Destroy() {
-	if b.spoolDir != "" {
-		if err := os.RemoveAll(b.spoolDir); err != nil {
-			b.log.Warnf("spool cleanup %q failed: %v", b.spoolDir, err)
-		}
-	}
 	b.log.Infof("Destroy: bridge torn down (open handles=%d)", len(b.files))
 }
 
@@ -522,17 +487,11 @@ func (b *BridgeFS) fillAttr(n *node, st *fuse.Stat_t) {
 	t := fuse.NewTimespec(b.effTime(mt))
 	st.Atim, st.Mtim, st.Ctim, st.Birthtim = t, t, t, t
 	if isDir {
-		st.Mode = fuse.S_IFDIR | 0o755
-		if b.readOnly {
-			st.Mode = fuse.S_IFDIR | 0o555
-		}
+		st.Mode = fuse.S_IFDIR | 0o555
 		st.Nlink = 2
 		return
 	}
-	st.Mode = fuse.S_IFREG | 0o644
-	if b.readOnly {
-		st.Mode = fuse.S_IFREG | 0o444
-	}
+	st.Mode = fuse.S_IFREG | 0o444
 	st.Nlink = 1
 	st.Size = size
 	st.Blocks = (size + 511) / 512
@@ -546,16 +505,8 @@ func (b *BridgeFS) effTime(t time.Time) time.Time {
 }
 
 func (b *BridgeFS) Getattr(path string, st *fuse.Stat_t, fh uint64) int {
-	if f := b.fileByFH(fh); f != nil {
-		f.mu.Lock()
-		defer f.mu.Unlock()
-		b.fillAttr(f.n, st)
-		if f.spool != nil {
-			st.Size = f.size
-			st.Blocks = (f.size + 511) / 512
-			t := fuse.NewTimespec(b.effTime(f.mod))
-			st.Atim, st.Mtim, st.Ctim, st.Birthtim = t, t, t, t
-		}
+	if n := b.fileNodeByFH(fh); n != nil {
+		b.fillAttr(n, st)
 		return 0
 	}
 	n, errc := b.resolve(path)
@@ -569,82 +520,42 @@ func (b *BridgeFS) Getattr(path string, st *fuse.Stat_t, fh uint64) int {
 // ---------- 打开 / 读 ----------
 
 func (b *BridgeFS) Open(path string, flags int) (int, uint64) {
+	wantWrite := flags&fuse.O_ACCMODE != fuse.O_RDONLY || flags&(fuse.O_CREAT|fuse.O_TRUNC) != 0
 	n, errc := b.resolve(path)
+	// rw 模式 O_CREAT：节点不存在则就地创建（Windows CreateFile OPEN_ALWAYS 路径）
+	if errc == -fuse.ENOENT && wantWrite && !b.readOnly && flags&fuse.O_CREAT != 0 {
+		return b.createFile(path, flags)
+	}
 	if errc != 0 {
 		return errc, ^uint64(0)
 	}
 	if n.isDir {
 		return -fuse.EISDIR, ^uint64(0)
 	}
-	writeIntent := flags&fuse.O_ACCMODE != fuse.O_RDONLY || flags&(fuse.O_CREAT|fuse.O_TRUNC) != 0
-	if b.readOnly && writeIntent {
+	if wantWrite && isVirtualAutorun(n) {
+		return -fuse.EROFS, ^uint64(0) // 虚拟图标配置永远只读，rw 挂载也不例外
+	}
+	if wantWrite && b.readOnly {
+		// M1 防线：ro 挂载下内核应已挡掉写打开；到这里也给明确写保护。
 		b.log.Warnf("write-open refused on read-only bridge: %q flags=%#x", path, flags)
 		return -fuse.EROFS, ^uint64(0)
 	}
-	f := &openFile{n: n, blocks: map[int64][]byte{}, cacheVer: n.version, size: n.size, mod: n.mod}
-	if writeIntent {
-		if errc := b.initSpool(f, flags&fuse.O_TRUNC != 0); errc != 0 {
-			return errc, ^uint64(0)
+	f := &openFile{n: n, blocks: map[int64][]byte{}}
+	if wantWrite {
+		f.write = true
+		if flags&fuse.O_TRUNC != 0 {
+			f.data, f.loaded = []byte{}, true
+			if n.size > 0 {
+				f.dirty = true
+			}
+			b.setNodeSize(n, 0)
 		}
 	}
 	fh := b.registerFile(f)
 	if b.trace {
-		b.log.Tracef("Open %q size=%d fh=%d spool=%v", path, n.size, fh, f.spool != nil)
+		b.log.Tracef("Open %q size=%d flags=%#x write=%v fh=%d", path, n.size, flags, f.write, fh)
 	}
 	return 0, fh
-}
-
-func (b *BridgeFS) registerFile(f *openFile) uint64 {
-	b.fhMu.Lock()
-	defer b.fhMu.Unlock()
-	b.fhSeq++
-	b.files[b.fhSeq] = f
-	return b.fhSeq
-}
-
-// initSpool 创建本地随机写副本；原始内容按块下载，绝不整文件进内存。
-func (b *BridgeFS) initSpool(f *openFile, truncate bool) int {
-	if b.spoolDir == "" {
-		b.log.Errorf("no local spool directory available")
-		return -fuse.ENOSPC
-	}
-	tmp, err := os.CreateTemp(b.spoolDir, "write-*.tmp")
-	if err != nil {
-		b.log.Errorf("create spool for %q failed: %v", f.n.name, err)
-		return -fuse.ENOSPC
-	}
-	f.spool, f.spoolPath = tmp, tmp.Name()
-	fail := func(errc int) int {
-		_ = tmp.Close()
-		_ = os.Remove(tmp.Name())
-		f.spool, f.spoolPath = nil, ""
-		return errc
-	}
-	for off := int64(0); off < f.size; {
-		end := off + blockSize - 1
-		if end >= f.size {
-			end = f.size - 1
-		}
-		res, err := b.cl.ContentRange(context.Background(), f.n.id, off, end)
-		if err != nil {
-			return fail(b.apiErrno(err, "spool-read", f.n.name))
-		}
-		if len(res.Data) == 0 {
-			return fail(-fuse.EIO)
-		}
-		if _, err := tmp.WriteAt(res.Data, off); err != nil {
-			b.log.Errorf("spool write %q failed: %v", f.n.name, err)
-			return fail(-fuse.ENOSPC)
-		}
-		off += int64(len(res.Data))
-	}
-	if truncate {
-		if err := tmp.Truncate(0); err != nil {
-			return fail(-fuse.EIO)
-		}
-		f.size, f.mod, f.dirty = 0, time.Now(), true
-	}
-	return 0
 }
 
 func (b *BridgeFS) Read(path string, buff []byte, ofst int64, fh uint64) int {
@@ -657,26 +568,16 @@ func (b *BridgeFS) Read(path string, buff []byte, ofst int64, fh uint64) int {
 	}
 	f.mu.Lock()
 	defer f.mu.Unlock()
-	if f.spool != nil {
-		if ofst >= f.size {
-			return 0
-		}
-		n, err := f.spool.ReadAt(buff, ofst)
-		if err != nil && !errors.Is(err, io.EOF) {
-			b.log.Errorf("spool read %q failed: %v", path, err)
-			return -fuse.EIO
-		}
-		return n
+
+	if isVirtualAutorun(f.n) {
+		return b.readVirtualAutorun(buff, ofst)
 	}
 
-	b.mu.Lock()
-	version := f.n.version
-	b.mu.Unlock()
-	if f.cacheVer != version {
-		f.blocks = map[int64][]byte{}
-		f.lru = nil
-		f.cacheVer = version
+	// M2 写句柄：读写同走 data 内存映像（O_RDWR 一致性；ensureLoaded 可能拉网）
+	if f.write {
+		return b.readWriteImage(path, f, buff, ofst)
 	}
+
 	n := 0
 	for n < len(buff) {
 		pos := ofst + int64(n)
@@ -718,109 +619,38 @@ func (b *BridgeFS) Read(path string, buff []byte, ofst int64, fh uint64) int {
 func (b *BridgeFS) Flush(path string, fh uint64) int {
 	f := b.fileByFH(fh)
 	if f == nil {
-		return 0
+		return 0 // WinFsp 在只读打开/目录等路径也会 Flush；无句柄不算错
 	}
 	f.mu.Lock()
 	defer f.mu.Unlock()
-	return b.flushLocked(path, f)
+	if !f.write || !f.dirty {
+		return 0
+	}
+	return b.upload(path, f)
 }
 
 func (b *BridgeFS) Fsync(path string, datasync bool, fh uint64) int {
-	f := b.fileByFH(fh)
-	if f == nil {
-		return 0
-	}
-	f.mu.Lock()
-	defer f.mu.Unlock()
-	if f.spool != nil {
-		if err := f.spool.Sync(); err != nil {
-			b.log.Errorf("spool sync %q failed: %v", path, err)
-			return -fuse.EIO
-		}
-	}
-	return b.flushLocked(path, f)
-}
-
-// flushLocked 上传一个脏写周期；同 Upload-Id 从头重传可覆盖「已提交但响应丢失」。
-func (b *BridgeFS) flushLocked(path string, f *openFile) int {
-	if f.spool == nil || !f.dirty {
-		return 0
-	}
-	mtime := f.mod.UnixMilli()
-	var err error
-	if f.size == 0 {
-		_, err = b.cl.WriteFull(context.Background(), f.n.id, bytes.NewReader(nil), 0, &mtime)
-	} else {
-		if f.uploadID == "" {
-			f.uploadID, err = newUploadID()
-			if err != nil {
-				return -fuse.EIO
-			}
-		}
-		for off := int64(0); off < f.size; off += blockSize {
-			length := blockSize
-			if remain := f.size - off; remain < length {
-				length = remain
-			}
-			var res WriteResult
-			res, err = b.cl.WriteChunk(context.Background(), f.n.id, f.uploadID, f.spool, off, length, f.size, &mtime)
-			if err != nil {
-				break
-			}
-			if off+length == f.size && !res.Complete {
-				err = errors.New("final chunk acknowledged without complete=true")
-				break
-			}
-		}
-	}
-	if err != nil {
-		return b.apiErrno(err, "flush", path)
-	}
-	f.dirty, f.uploadID = false, ""
-	b.mu.Lock()
-	f.n.size, f.n.mod = f.size, time.UnixMilli(mtime)
-	f.n.version++
-	// 目录属性在下一次 Readdir/Getattr 重新拉取；其它句柄靠 version 清 Range 块。
-	b.dirs = map[string]*dirCache{}
-	b.mu.Unlock()
-	b.sfMu.Lock()
-	b.sfAt = time.Time{} // 写后容量不沿用旧 TTL
-	b.sfMu.Unlock()
-	if b.trace {
-		b.log.Tracef("Flush %q uploaded=%d bytes fh-spool=%q", path, f.size, f.spoolPath)
-	}
-	return 0
-}
-
-func newUploadID() (string, error) {
-	var raw [16]byte
-	if _, err := rand.Read(raw[:]); err != nil {
-		return "", err
-	}
-	return "m2-" + hex.EncodeToString(raw[:]), nil
+	return b.Flush(path, fh) // M2：Fsync 与 Flush 同语义（上传即服务端原子替换）
 }
 
 func (b *BridgeFS) Release(path string, fh uint64) int {
 	b.fhMu.Lock()
 	f := b.files[fh]
-	delete(b.files, fh)
 	b.fhMu.Unlock()
 	if f == nil {
 		return -fuse.EBADF
 	}
+	errc := 0
 	f.mu.Lock()
-	defer f.mu.Unlock()
-	errc := b.flushLocked(path, f)
-	if f.spool != nil {
-		if err := f.spool.Close(); err != nil && errc == 0 {
-			errc = -fuse.EIO
-		}
-		if err := os.Remove(f.spoolPath); err != nil && !os.IsNotExist(err) {
-			b.log.Warnf("remove spool %q failed: %v", f.spoolPath, err)
-		}
+	if f.write && f.dirty {
+		errc = b.upload(path, f) // 关闭前兜底上传（Explorer 复制依赖 Release 落盘）
 	}
+	f.mu.Unlock()
+	b.fhMu.Lock()
+	delete(b.files, fh)
+	b.fhMu.Unlock()
 	if b.trace {
-		b.log.Tracef("Release %q fh=%d cachedBlocks=%d errc=%d", path, fh, len(f.blocks), errc)
+		b.log.Tracef("Release %q fh=%d cachedBlocks=%d write=%v errc=%d", path, fh, len(f.blocks), f.write, errc)
 	}
 	return errc
 }
@@ -942,23 +772,30 @@ func (b *BridgeFS) Readdir(path string, fill func(name string, stat *fuse.Stat_t
 
 func (b *BridgeFS) Releasedir(path string, fh uint64) int { return 0 }
 
-// ---------- 访问与 Windows 兼容层 ----------
+// ---------- 只读访问与 Windows 兼容层 ----------
 
 func (b *BridgeFS) Access(path string, mask uint32) int {
-	// ro：写/删提前拒绝，避免 WinFsp delete-on-cleanup 假成功；rw 交给具体操作映射错误。
+	// -ro：写（W_OK）与删（DELETE_OK，配合 SetCapDeleteAccess）一律拒绝。
+	// 没有这道闸门时 WinFsp 删除走 delete-on-cleanup：DeleteFile 先报成功、
+	// Unlink 在句柄清理时才被调用，错误传不回调用方，文件又随目录刷新「复活」。
+	// rw：写/删访问放行，由 Unlink/Rmdir/写回调实际执行并如实报错。
 	if b.readOnly && mask&(fuse.W_OK|fuse.DELETE_OK) != 0 {
 		if b.trace {
 			b.log.Tracef("Access %q mask=%#x -> EACCES (read-only)", path, mask)
 		}
 		return -fuse.EACCES
 	}
-	if _, errc := b.resolve(path); errc != 0 {
+	n, errc := b.resolve(path)
+	if errc != 0 {
 		return errc
+	}
+	if isVirtualAutorun(n) && mask&(fuse.W_OK|fuse.DELETE_OK) != 0 {
+		return -fuse.EACCES
 	}
 	return 0
 }
 
-// ---------- M2 写操作；ro 模式保持 M1 的 EROFS ----------
+// ---------- 写操作：-ro 维持 M1 EROFS；rw 走 bridgefs_write.go 真实实现 ----------
 
 func (b *BridgeFS) roRefused(op, path string) int {
 	if b.trace {
@@ -971,273 +808,84 @@ func (b *BridgeFS) Unlink(path string) int {
 	if b.readOnly {
 		return b.roRefused("Unlink", path)
 	}
-	return b.delete(path, false)
+	return b.unlink(path)
 }
 
 func (b *BridgeFS) Rmdir(path string) int {
 	if b.readOnly {
 		return b.roRefused("Rmdir", path)
 	}
-	return b.delete(path, true)
-}
-
-func (b *BridgeFS) delete(path string, wantDir bool) int {
-	canon, n, errc := b.canonicalNode(path)
-	if errc != 0 {
-		return errc
-	}
-	if n.isDir != wantDir {
-		if wantDir {
-			return -fuse.ENOTDIR
-		}
-		return -fuse.EISDIR
-	}
-	if err := b.cl.Delete(context.Background(), n.id, false); err != nil {
-		return b.apiErrno(err, "delete", path)
-	}
-	b.mu.Lock()
-	b.removeSubtreeLocked(canon)
-	b.dirs = map[string]*dirCache{}
-	b.mu.Unlock()
-	b.sfMu.Lock()
-	b.sfAt = time.Time{}
-	b.sfMu.Unlock()
-	return 0
-}
-
-// removeSubtreeLocked 删除路径缓存；已打开句柄仍持有 node 指针，不受影响。
-func (b *BridgeFS) removeSubtreeLocked(path string) {
-	for p := range b.byPath {
-		if p == path || strings.HasPrefix(p, path+"/") {
-			delete(b.byPath, p)
-		}
-	}
-	for p := range b.dirs {
-		if p == path || strings.HasPrefix(p, path+"/") {
-			delete(b.dirs, p)
-		}
-	}
+	return b.rmdir(path)
 }
 
 func (b *BridgeFS) Mkdir(path string, mode uint32) int {
 	if b.readOnly {
 		return b.roRefused("Mkdir", path)
 	}
-	parentPath, name, parent, errc := b.createTarget(path)
-	if errc != 0 {
-		return errc
-	}
-	e, err := b.cl.Create(context.Background(), parent.id, name, true)
-	if err != nil {
-		return b.apiErrno(err, "mkdir", path)
-	}
-	b.mu.Lock()
-	b.upsertLocked(parentPath+"/"+e.Name, &e)
-	b.dirs = map[string]*dirCache{}
-	b.mu.Unlock()
-	return 0
+	return b.mkdir(path)
 }
 
 func (b *BridgeFS) Mknod(path string, mode uint32, dev uint64) int {
 	if b.readOnly {
 		return b.roRefused("Mknod", path)
 	}
-	return -fuse.ENOSYS
+	// Windows 侧 Mknod 即建普通文件（无设备节点语义），与 Create 同路
+	errc, _ := b.createFile(path, fuse.O_WRONLY)
+	return errc
 }
 
 func (b *BridgeFS) Create(path string, flags int, mode uint32) (int, uint64) {
 	if b.readOnly {
 		return b.roRefused("Create", path), ^uint64(0)
 	}
-	parentPath, name, parent, errc := b.createTarget(path)
-	if errc != 0 {
-		return errc, ^uint64(0)
-	}
-	e, err := b.cl.Create(context.Background(), parent.id, name, false)
-	if err != nil {
-		return b.apiErrno(err, "create", path), ^uint64(0)
-	}
-	b.mu.Lock()
-	n := b.upsertLocked(parentPath+"/"+e.Name, &e)
-	b.dirs = map[string]*dirCache{}
-	b.mu.Unlock()
-	f := &openFile{n: n, blocks: map[int64][]byte{}, cacheVer: n.version, size: 0, mod: n.mod}
-	if errc := b.initSpool(f, false); errc != 0 {
-		_ = b.cl.Delete(context.Background(), n.id, false)
-		b.mu.Lock()
-		b.removeSubtreeLocked(parentPath + "/" + e.Name)
-		b.mu.Unlock()
-		return errc, ^uint64(0)
-	}
-	return 0, b.registerFile(f)
-}
-
-func (b *BridgeFS) createTarget(path string) (string, string, *node, int) {
-	name := pathpkg.Base(path)
-	if !legalName(name) {
-		return "", "", nil, -fuse.EINVAL
-	}
-	parent := pathpkg.Dir(path)
-	if parent == "/" || parent == "." {
-		parent = ""
-	}
-	canon, n, errc := b.canonicalNode(parent)
-	if errc != 0 {
-		return "", "", nil, errc
-	}
-	if !n.isDir {
-		return "", "", nil, -fuse.ENOTDIR
-	}
-	if canon == "" { // 虚拟盘符根不是服务端真实父目录
-		return "", "", nil, -fuse.EACCES
-	}
-	return canon, name, n, 0
+	return b.createFile(path, flags)
 }
 
 func (b *BridgeFS) Write(path string, buff []byte, ofst int64, fh uint64) int {
 	if b.readOnly {
 		return b.roRefused("Write", path)
 	}
-	if ofst < 0 {
-		return -fuse.EINVAL
-	}
-	f := b.fileByFH(fh)
-	if f == nil {
-		return -fuse.EBADF
-	}
-	f.mu.Lock()
-	defer f.mu.Unlock()
-	if f.spool == nil {
-		return -fuse.EACCES
-	}
-	n, err := f.spool.WriteAt(buff, ofst)
-	if err != nil {
-		b.log.Errorf("Write spool %q failed: %v", path, err)
-		return -fuse.ENOSPC
-	}
-	if end := ofst + int64(n); end > f.size {
-		f.size = end
-	}
-	f.mod, f.dirty, f.uploadID = time.Now(), true, ""
-	return n
+	return b.write(path, buff, ofst, fh)
 }
 
 func (b *BridgeFS) Truncate(path string, size int64, fh uint64) int {
 	if b.readOnly {
 		return b.roRefused("Truncate", path)
 	}
-	if size < 0 {
-		return -fuse.EINVAL
-	}
-	if size != 0 { // SPEC P2-12：已有文件缩短到非零长度降 M4；M2 仅承诺截零。
-		return -fuse.ENOSYS
-	}
-	if f := b.fileByFH(fh); f != nil {
-		f.mu.Lock()
-		defer f.mu.Unlock()
-		if f.spool == nil {
-			return -fuse.EACCES
-		}
-		if err := f.spool.Truncate(0); err != nil {
-			return -fuse.EIO
-		}
-		f.size, f.mod, f.dirty, f.uploadID = 0, time.Now(), true, ""
-		return 0
-	}
-	canon, n, errc := b.canonicalNode(path)
-	if errc != 0 {
-		return errc
-	}
-	if n.isDir {
-		return -fuse.EISDIR
-	}
-	mtime := time.Now().UnixMilli()
-	if _, err := b.cl.WriteFull(context.Background(), n.id, bytes.NewReader(nil), 0, &mtime); err != nil {
-		return b.apiErrno(err, "truncate", path)
-	}
-	b.mu.Lock()
-	n.size, n.mod = 0, time.UnixMilli(mtime)
-	n.version++
-	if current := b.byPath[canon]; current == nil {
-		b.byPath[canon] = n
-	}
-	b.dirs = map[string]*dirCache{}
-	b.mu.Unlock()
-	return 0
+	return b.truncate(path, size, fh)
 }
 
 func (b *BridgeFS) Rename(oldpath string, newpath string) int {
 	if b.readOnly {
 		return b.roRefused("Rename", oldpath)
 	}
-	oldCanon, n, errc := b.canonicalNode(oldpath)
-	if errc != 0 {
-		return errc
-	}
-	newParent, name, parent, errc := b.createTarget(newpath)
-	if errc != 0 {
-		return errc
-	}
-	e, err := b.cl.PatchMeta(context.Background(), n.id, &name, &parent.id, nil)
-	if err != nil {
-		return b.apiErrno(err, "rename", oldpath)
-	}
-	b.mu.Lock()
-	delete(b.byPath, oldCanon)
-	n.id, n.name, n.mod = e.ID, e.Name, time.UnixMilli(e.ModifiedMs)
-	n.version++
-	b.byPath[newParent+"/"+e.Name] = n
-	b.dirs = map[string]*dirCache{}
-	b.mu.Unlock()
-	return 0
+	return b.rename(oldpath, newpath)
 }
 
-func (b *BridgeFS) Link(path string, newpath string) int {
-	if b.readOnly {
-		return b.roRefused("Link", path)
-	}
-	return -fuse.ENOSYS
-}
-func (b *BridgeFS) Symlink(target string, newpath string) int {
-	if b.readOnly {
-		return b.roRefused("Symlink", newpath)
-	}
-	return -fuse.ENOSYS
-}
+// Link/Symlink 恒 ENOSYS（SPEC §5.10 冻结：不实现，对齐华为 xattr 语义）。
+func (b *BridgeFS) Link(path string, newpath string) int      { return -fuse.ENOSYS }
+func (b *BridgeFS) Symlink(target string, newpath string) int { return -fuse.ENOSYS }
+
+// Chmod/Chown：rw 时 FAT 语义空操作成功（SPEC §5.10）；ro 时写保护。
 func (b *BridgeFS) Chmod(path string, mode uint32) int {
 	if b.readOnly {
 		return b.roRefused("Chmod", path)
 	}
-	return 0 // FAT/MES 语义：权限位空操作
+	return 0
 }
+
 func (b *BridgeFS) Chown(path string, uid uint32, gid uint32) int {
 	if b.readOnly {
 		return b.roRefused("Chown", path)
 	}
 	return 0
 }
+
 func (b *BridgeFS) Utimens(path string, tmsp []fuse.Timespec) int {
 	if b.readOnly {
 		return b.roRefused("Utimens", path)
 	}
-	canon, n, errc := b.canonicalNode(path)
-	if errc != 0 {
-		return errc
-	}
-	mtime := time.Now()
-	if len(tmsp) >= 2 {
-		mtime = tmsp[1].Time()
-	}
-	ms := mtime.UnixMilli()
-	e, err := b.cl.PatchMeta(context.Background(), n.id, nil, nil, &ms)
-	if err != nil {
-		return b.apiErrno(err, "utimens", path)
-	}
-	b.mu.Lock()
-	b.upsertLocked(canon, &e)
-	b.dirs = map[string]*dirCache{}
-	b.mu.Unlock()
-	return 0
+	return b.utimens(path, tmsp)
 }
 
 // Setxattr 必须成功：Defender 在创建/扫描路径携带 $KERNEL.PURGE.* EA，
