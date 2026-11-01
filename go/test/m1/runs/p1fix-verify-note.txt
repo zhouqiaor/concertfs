@@ -1,0 +1,11 @@
+== P1 fix verification (2026-11-01 14:0x, fixed binary, CGO_ENABLED=0) ==
+P1-1: synthetic statfs fallback 1<<18 -> 1<<28 blocks; 2^28 * 4096 = 2^40 = 1TiB
+      (comment/log now consistent; synthetic path not reachable on live device
+      because statfs always succeeds - arithmetic verified, no live trigger)
+P1-2: -label 'X,rw=Y' -> volume label 'XrwY' (comma/equals stripped before
+      WinFsp fuse_opt_parse); delete still denied after injection attempt: True
+mainverify2: 16/16 PASS on Q: with fixed binary (device TEQU-S2C), see
+      m1-results-mainverify2.json/.txt
+note: first mainverify2 attempt (14:03, P:) ran against the coordinator's
+      older live mount by mistake; superseded by the 14:04 Q: run above.
+      Coordinator's P: instance was left running and untouched.

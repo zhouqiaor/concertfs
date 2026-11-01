@@ -1,0 +1,114 @@
+﻿[
+    {
+        "id":  1,
+        "category":  "roots/eight-chinese-roots",
+        "pass":  true,
+        "detail":  "roots=8 all 8 expected present",
+        "ts":  "12:47:14.773"
+    },
+    {
+        "id":  2,
+        "category":  "volume/device-label-and-statfs",
+        "pass":  true,
+        "detail":  "label=\u0027TEQU-S2C\u0027 fixed DriveType=3 Size=53840183296==statfs Free=46099681280",
+        "ts":  "12:47:14.869"
+    },
+    {
+        "id":  3,
+        "category":  "tree/phonefs-w2-fixtures",
+        "pass":  true,
+        "detail":  "w2 has txt(40B)+bin(10MiB)+中文目录; mtime matches server modified_ms",
+        "ts":  "12:47:15.458"
+    },
+    {
+        "id":  4,
+        "category":  "content/txt-40b-exact",
+        "pass":  true,
+        "detail":  "40 bytes sha256=6875592D2454CE6A... == server; UTF8 decodes",
+        "ts":  "12:47:15.574"
+    },
+    {
+        "id":  5,
+        "category":  "names/chinese-dir-and-emoji",
+        "pass":  true,
+        "detail":  "cn dir: 2 entries incl emoji-name bin(8B) + \u0027a b c.md\u0027(20B)",
+        "ts":  "12:47:15.648"
+    },
+    {
+        "id":  6,
+        "category":  "random/bin-head-1k",
+        "pass":  true,
+        "detail":  "head 1KiB sha256 == server range ref",
+        "ts":  "12:47:15.837"
+    },
+    {
+        "id":  7,
+        "category":  "random/bin-tail-1k",
+        "pass":  true,
+        "detail":  "tail 1KiB @10484736 sha256 == server range ref",
+        "ts":  "12:47:15.990"
+    },
+    {
+        "id":  8,
+        "category":  "random/bin-mid-unaligned",
+        "pass":  true,
+        "detail":  "mid 4KiB @5242881 (unaligned) sha256 == server ref",
+        "ts":  "12:47:16.202"
+    },
+    {
+        "id":  9,
+        "category":  "stream/bin-full-10mb-sha256",
+        "pass":  true,
+        "detail":  "10MiB full-stream sha256 match in 0.72s",
+        "ts":  "12:47:17.473"
+    },
+    {
+        "id":  10,
+        "category":  "category/cat-root-empty-501",
+        "pass":  true,
+        "detail":  "category root opens and enumerates empty (W2 501 NOT_SUPPORTED mapped)",
+        "ts":  "12:47:17.497"
+    },
+    {
+        "id":  11,
+        "category":  "names/case-insensitive",
+        "pass":  true,
+        "detail":  "PHONEFS-W2/TEST10MB.BIN resolves",
+        "ts":  "12:47:17.498"
+    },
+    {
+        "id":  12,
+        "category":  "readonly/create-denied",
+        "pass":  true,
+        "detail":  "create on read-only volume denied, nothing created",
+        "ts":  "12:47:17.543"
+    },
+    {
+        "id":  13,
+        "category":  "readonly/delete-denied",
+        "pass":  true,
+        "detail":  "delete denied; fixture intact",
+        "ts":  "12:47:17.562"
+    },
+    {
+        "id":  14,
+        "category":  "errors/missing-path-enonet",
+        "pass":  true,
+        "detail":  "missing path -\u003e not found (ENOENT mapped)",
+        "ts":  "12:47:17.564"
+    },
+    {
+        "id":  15,
+        "category":  "errors/eof-zero-read",
+        "pass":  true,
+        "detail":  "EOF read=0; last-10-bytes read=10",
+        "ts":  "12:47:17.714"
+    },
+    {
+        "id":  16,
+        "category":  "shell/shell-application-browse",
+        "pass":  true,
+        "detail":  "shell sees 8 root items incl 内部存储",
+        "ts":  "12:47:17.817"
+    }
+]

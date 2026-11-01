@@ -31,7 +31,7 @@ const (
 	maxNameLen              = 255
 )
 
-// 合成根 ino=1；固定根从 2 起；动态节点从 100 起，便于日志辨认。
+// 合成根 ino=1；动态节点统一从 inoDynamicStart 起分配，便于日志辨认。
 const inoDynamicStart = 100
 
 var (
@@ -384,7 +384,7 @@ func (b *BridgeFS) Statfs(path string, st *fuse.Statfs_t) int {
 		if !ok {
 			b.log.Errorf("statfs unavailable and no cached value: reporting synthetic 1TiB: %v", err)
 			st.Bsize, st.Frsize = 4096, 4096
-			st.Blocks, st.Bfree, st.Bavail = 1<<18, 1<<18, 1<<18 // 1TiB
+			st.Blocks, st.Bfree, st.Bavail = 1<<28, 1<<28, 1<<28 // 1TiB = 2^28 块 × 4096B
 		} else {
 			b.log.Warnf("statfs refresh failed: serving stale capacity: %v", err)
 			b.fillStatfs(st, info)
@@ -669,9 +669,6 @@ func (b *BridgeFS) Readdir(path string, fill func(name string, stat *fuse.Stat_t
 	}
 	if self == nil {
 		b.log.Errorf("Readdir %q: refreshed dir but self node missing (key=%q)", path, key)
-		return -fuse.ENOENT
-	}
-	if self == nil {
 		return -fuse.ENOENT
 	}
 	var st fuse.Stat_t

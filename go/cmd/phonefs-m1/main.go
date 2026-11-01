@@ -179,10 +179,12 @@ func main() {
 
 // cleanVolumeLabel 清洗卷标：去掉 Windows 卷标非法字符（\ / : * ? " < > | 与
 // 控制字符）、trim 空白、限制 32 字符（NTFS 卷标上限），避免设备名带怪字符时挂载失败。
+// 逗号与等号也必须剔除：volname 原样进 WinFsp C 侧 fuse_opt_parse 按逗号分词，
+// 不清洗则 "-label 'X,rw=Y'" 类输入会被解析成额外挂载选项（注入面，Colossus P1-2）。
 func cleanVolumeLabel(s string) string {
 	var b strings.Builder
 	for _, r := range s {
-		if r < 0x20 || strings.ContainsRune(`\/:*?"<>|`, r) {
+		if r < 0x20 || strings.ContainsRune(`\/:*?"<>|,=`, r) {
 			continue
 		}
 		b.WriteRune(r)
