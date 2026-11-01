@@ -18,6 +18,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"strings"
 	"sync"
 	"testing"
@@ -198,16 +199,24 @@ func (fs *fakeServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		fs.handlePut(w, r, id)
 	case path == "/v1/fs/meta" && r.Method == http.MethodPatch:
 		var req struct {
-			ID       string `json:"id"`
-			Name     string `json:"name"`
-			ParentID string `json:"parent_id"`
-			Replace  bool   `json:"replace"`
+			ID         string `json:"id"`
+			Name       string `json:"name"`
+			ParentID   string `json:"parent_id"`
+			Replace    bool   `json:"replace"`
+			ModifiedMs *int64 `json:"modified_ms"`
 		}
 		_ = json.NewDecoder(r.Body).Decode(&req)
 		fs.opLog = append(fs.opLog, fmt.Sprintf("patch replace=%v", req.Replace))
 		n := fs.nodes[req.ID]
 		if n == nil {
 			writeErr(w, 404, "NOT_FOUND", "not found", false, nil)
+			return
+		}
+		if req.ModifiedMs != nil {
+			// 与真实服务端一致：改 mtime 会改变 ETag(<size>-<mtime>)，从而打断
+			// 早先捕获的 delta 基线——这正是 P0-1 回归测试要覆盖的语义。
+			n.modMs = *req.ModifiedMs
+			writeJSON(w, 200, fs.attr(n))
 			return
 		}
 		if n.isDir {
@@ -362,6 +371,11 @@ func (fs *fakeServer) handleDeltaPut(w http.ResponseWriter, r *http.Request, n *
 		return
 	}
 	n.data, n.logicalSize = append([]byte(nil), up.data...), 0
+	if ms := r.Header.Get("X-Set-Mtime"); ms != "" {
+		if v, err := strconv.ParseInt(ms, 10, 64); err == nil {
+			n.modMs = v // 真实服务端在提交时原子应用 mtime
+		}
+	}
 	up.done, up.etag = true, n.etag()
 	if fs.deltaFinal503Once && !fs.deltaInjected {
 		fs.deltaInjected = true
@@ -761,6 +775,49 @@ func TestUtimensSetsMtime(t *testing.T) {
 	}
 	if st.Mtim.Sec != 1700000000 {
 		t.Fatalf("mtime=%d want 1700000000", st.Mtim.Sec)
+	}
+}
+
+// P0-1 回归：Windows 复制/覆盖常在同一写句柄周期内 SetFileTime。Utimens 不能先
+// PATCH 服务端 mtime（会改 ETag 打断 delta 基线），否则 final 412/EBUSY、覆盖写丢失。
+func TestUtimensDuringOpenWriteKeepsDeltaBaseline(t *testing.T) {
+	f := newFixture(t, false)
+	path := dir + "/overwrite.txt"
+	f.createWrite(t, path, []byte("old"))
+
+	errc, fh := f.b.Open(path, fuse.O_RDWR|fuse.O_TRUNC)
+	if errc != 0 {
+		t.Fatalf("Open O_TRUNC errc=%d", errc)
+	}
+	if n := f.b.Write(path, []byte("new"), 0, fh); n != 3 {
+		t.Fatalf("Write n=%d want 3", n)
+	}
+	// SetFileTimeUtc 会另开一个写属性句柄；它先 Release 时不得抢先 PATCH mtime，
+	// 否则打断数据写句柄的 delta 基线（真机复现路径）。
+	errc, attrs := f.b.Open(path, fuse.O_WRONLY)
+	if errc != 0 {
+		t.Fatalf("Open attrs errc=%d", errc)
+	}
+	ts := []fuse.Timespec{{Sec: 1000}, {Sec: 1700000100}}
+	if errc := f.b.Utimens(path, ts); errc != 0 {
+		t.Fatalf("Utimens during write errc=%d", errc)
+	}
+	if errc := f.b.Release(path, attrs); errc != 0 {
+		t.Fatalf("Release attrs errc=%d", errc)
+	}
+	if errc := f.b.Flush(path, fh); errc != 0 {
+		t.Fatalf("Flush errc=%d (delta baseline broken -> data loss)", errc)
+	}
+	if errc := f.b.Release(path, fh); errc != 0 {
+		t.Fatalf("Release errc=%d", errc)
+	}
+
+	n := f.fileByName("stor:primary", "overwrite.txt")
+	if n == nil || string(n.data) != "new" {
+		t.Fatalf("server content=%q want new (overwrite lost)", n.data)
+	}
+	if n.modMs != 1700000100000 {
+		t.Fatalf("server mtime=%d want 1700000100000", n.modMs)
 	}
 }
 

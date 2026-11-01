@@ -46,7 +46,10 @@ type node struct {
 	isDir    bool
 	size     int64
 	mod      time.Time
-	writable bool
+	// pendingMtime 非 0 表示有写句柄期间的 Utimens 尚未提交；Getattr 先回显该值，
+	// 但 baseETag/服务端比较仍用 mod（服务端真值），避免破坏 delta 基线。
+	pendingMtime int64
+	writable     bool
 	ino      uint64
 	version  uint64 // 写提交递增；其他已打开读句柄据此废弃旧 Range 块
 }
@@ -75,6 +78,7 @@ type openFile struct {
 	truncated   bool // 已有文件截断后，非空 delta 必须覆盖新映像中的零洞
 	baseETag    string
 	uploadID    string // 失败的 delta Flush 保留同一会话，完成态重传幂等
+	uploadTotal int64  // 会话绑定的总长；文件增长必须换会话（服务端同 id 异 total→400）
 	dirtyRanges []dirtyRange
 	setMtime    int64 // Utimens 记录的 mtime(ms)，上传时 X-Set-Mtime
 }
@@ -529,6 +533,9 @@ func (b *BridgeFS) fillAttr(n *node, st *fuse.Stat_t) {
 	b.mu.Lock()
 	ino, isDir, size := n.ino, n.isDir, n.size
 	mt := n.mod
+	if n.pendingMtime > 0 {
+		mt = time.UnixMilli(n.pendingMtime)
+	}
 	b.mu.Unlock()
 	st.Ino = ino
 	st.Uid, st.Gid = 0, 0
@@ -715,6 +722,29 @@ func (b *BridgeFS) Release(path string, fh uint64) int {
 	f.mu.Lock()
 	if f.write && f.dirty {
 		errc = b.upload(path, f) // 关闭前兜底上传（Explorer 复制依赖 Release 落盘）
+	} else if f.write && f.setMtime > 0 && errc == 0 && !b.hasOtherOpenWriter(f.n, f) {
+		// 只打开写句柄、没有待提交数据，且同节点已无其它写句柄：Utimens 延后的
+		// mtime 直接落服务端。仍有其它写句柄时必须等它提交——否则先 PATCH 会改
+		// ETag 打断它的 delta 基线（SetFileTime 常另开一个写属性句柄，正是此情形）。
+		ms := f.setMtime
+		if _, err := b.cl.PatchMeta(context.Background(), f.n.id, nil, nil, &ms, false); err != nil {
+			var ae *APIError
+			if !errors.As(err, &ae) || ae.HTTPStatus != 501 {
+				errc = b.apiErrno(err, "utimens-close", path)
+			}
+		} else {
+			b.mu.Lock()
+			f.n.mod = time.UnixMilli(ms)
+			f.n.pendingMtime = 0
+			b.mu.Unlock()
+		}
+		f.setMtime = 0
+	}
+	// 最后一个写句柄离开后撤销临时回显：若提交失败，Getattr 必须回到服务端真值。
+	if f.write && !b.hasOtherOpenWriter(f.n, f) {
+		b.mu.Lock()
+		f.n.pendingMtime = 0
+		b.mu.Unlock()
 	}
 	b.cleanupTempFile(f)
 	f.mu.Unlock()

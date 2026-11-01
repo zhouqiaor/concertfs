@@ -319,6 +319,13 @@ func (b *BridgeFS) ensureLoaded(path string, f *openFile) int {
 		}
 		res, err := b.cl.ContentRange(context.Background(), f.n.id, start, end-1)
 		if err != nil {
+			var ae *APIError
+			if errors.As(err, &ae) && ae.HTTPStatus == 416 {
+				// write-load 依赖完整原文；416 说明服务端比本地 n.size 短，
+				// 不能按 Read 语义当成功（那会留下未加载的稀疏零洞）。
+				return b.localIOErrno("write-load", path, fmt.Errorf(
+					"server file shorter than local size %d (range %d-%d)", size, start, end-1))
+			}
 			return b.apiErrno(err, "write-load", path)
 		}
 		if res.First != start || int64(len(res.Data)) != end-start {
@@ -375,13 +382,16 @@ func (b *BridgeFS) upload(path string, f *openFile) int {
 	f.fullUpload = false
 	f.truncated = false
 	f.uploadID = ""
+	f.uploadTotal = 0
+	f.setMtime = 0 // 本次提交已生效，避免后续写会话重放陈旧 mtime
 	f.baseETag = normalizeBaseETag(etag)
 	// 写后失效：本 fh 读块缓存 + 父目录 dirCache（任务书一致性要求）
 	f.blocks = map[int64][]byte{}
 	f.lru = nil
 	b.mu.Lock()
 	applyUploadETag(f.n, etag, f.size)
-	f.n.version++ // 使同 node 的其他已打开读句柄废弃旧块
+	f.n.pendingMtime = 0 // 提交已落 mtime，撤销 Getattr 临时回显
+	f.n.version++       // 使同 node 的其他已打开读句柄废弃旧块
 	b.invalidateDirLocked(internalParent(path))
 	b.mu.Unlock()
 	if b.trace {
@@ -418,8 +428,33 @@ func (b *BridgeFS) uploadDelta(f *openFile) (string, error) {
 	if f.baseETag == "" {
 		return "", errors.New("delta upload has no base etag")
 	}
-	if f.uploadID == "" {
+	// 会话绑定 total：失败后若文件继续增长，同 uploadID 换 total 会被服务端 400
+	// 永久卡死；换新会话重发本轮脏区间即可自愈。
+	for attempt := 0; ; attempt++ {
+		etag, err := b.uploadDeltaOnce(f)
+		if err == nil {
+			return etag, nil
+		}
+		var ae *APIError
+		if attempt == 0 && errors.As(err, &ae) && ae.HTTPStatus == 400 &&
+			ae.Code == "INVALID_ARGUMENT" && f.uploadID != "" {
+			b.log.Warnf("upload %q: session binding mismatch, restart upload session", f.n.name)
+			f.uploadID = ""
+			f.uploadTotal = 0
+			continue
+		}
+		return "", err
+	}
+}
+
+// uploadDeltaOnce 用当前 uploadID 发送一轮脏区间；失败会话保留供同参数重传。
+func (b *BridgeFS) uploadDeltaOnce(f *openFile) (string, error) {
+	if f.uploadID == "" || f.uploadTotal != f.size {
+		if f.uploadID != "" {
+			b.log.Warnf("upload %q: total changed %d->%d, new upload session", f.n.name, f.uploadTotal, f.size)
+		}
 		f.uploadID = newUploadID()
+		f.uploadTotal = f.size
 	}
 	ranges := f.dirtyRanges
 	if f.truncated {
@@ -716,6 +751,13 @@ func (b *BridgeFS) utimens(path string, tmsp []fuse.Timespec) int {
 		ms = tmsp[1].Sec*1000 + tmsp[1].Nsec/1e6 // [0]=atime [1]=mtime
 	}
 	if !n.isDir {
+		// 该节点仍有打开写句柄时，mtime 必须延后到上传提交携带 X-Set-Mtime：
+		// PATCH meta 会改服务端 ETag(大小-mtime)，使句柄打开时捕获的 delta 基线失效，
+		// final 返回 412/EBUSY（Windows 复制/覆盖常在同一句柄周期内 SetFileTime）。
+		// 延后期间不更新 n.mod，避免其它新句柄从被改过的 mtime 构造错误基线。
+		if b.deferMtimeToOpenWrites(n, ms) {
+			return 0
+		}
 		if _, err := b.cl.PatchMeta(context.Background(), n.id, nil, nil, &ms, false); err != nil {
 			var ae *APIError
 			if errors.As(err, &ae) && ae.HTTPStatus == 501 {
@@ -729,4 +771,48 @@ func (b *BridgeFS) utimens(path string, tmsp []fuse.Timespec) int {
 	n.mod = time.UnixMilli(ms)
 	b.mu.Unlock()
 	return 0
+}
+
+// deferMtimeToOpenWrites 把 mtime 记到该节点所有打开写句柄，由上传提交的
+// X-Set-Mtime 生效；返回是否存在写句柄。句柄表锁与句柄锁分开获取，避免与
+// Release(fhMu→f.mu) 形成嵌套死锁。
+func (b *BridgeFS) deferMtimeToOpenWrites(n *node, ms int64) bool {
+	b.fhMu.Lock()
+	handles := make([]*openFile, 0, 1)
+	for _, f := range b.files {
+		if !f.write || f.n == nil {
+			continue
+		}
+		if f.n == n || (f.n.id != "" && f.n.id == n.id) {
+			handles = append(handles, f)
+		}
+	}
+	b.fhMu.Unlock()
+	if len(handles) == 0 {
+		return false
+	}
+	b.mu.Lock()
+	n.pendingMtime = ms // Getattr 立即回显；服务端/base 仍用 n.mod 真值
+	b.mu.Unlock()
+	for _, f := range handles {
+		f.mu.Lock()
+		f.setMtime = ms
+		f.mu.Unlock()
+	}
+	return true
+}
+
+// hasOtherOpenWriter 判断同节点除 self 外是否还有打开写句柄（Release 兜底用）。
+func (b *BridgeFS) hasOtherOpenWriter(n *node, self *openFile) bool {
+	b.fhMu.Lock()
+	defer b.fhMu.Unlock()
+	for _, g := range b.files {
+		if g == self || !g.write || g.n == nil {
+			continue
+		}
+		if g.n == n || (g.n.id != "" && g.n.id == n.id) {
+			return true
+		}
+	}
+	return false
 }

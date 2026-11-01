@@ -69,6 +69,17 @@ $txtPath = Join-Path $w2 $txtName
 $binPath = Join-Path $w2 'test10mb.bin'
 $cnDir = Join-Path $w2 $cnDirName
 
+# 只读卷预检：用例 12/13 断言"写入/删除必须被拒绝"，若卷实际可写，这些用例会真的
+# 在设备上创建/删除文件（曾误删 40B fixture）。卷可写即拒绝运行，必须用 -ro 挂载。
+$rwProbe = Join-Path $w2 ('.m1-rw-probe-' + [Guid]::NewGuid().ToString('N') + '.tmp')
+$volumeWritable = $false
+try {
+    [IO.File]::WriteAllText($rwProbe, 'x')
+    $volumeWritable = $true
+    Remove-Item -LiteralPath $rwProbe -Force -ErrorAction SilentlyContinue
+} catch { }
+if ($volumeWritable) { throw "volume $Drive is writable; this read-only suite asserts write/delete denial and requires a -ro mount" }
+
 # ---------- 参考字节（curl 直取服务端，不经 FUSE） ----------
 $token = (& $Adb -s $Serial shell cat /data/data/com.phonefs.source/files/identity/token).Trim()
 Must ($token.Length -gt 10) 'token read failed'
