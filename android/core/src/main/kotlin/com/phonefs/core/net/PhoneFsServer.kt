@@ -29,6 +29,7 @@ import io.ktor.server.application.call
 import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import io.ktor.server.netty.NettyApplicationCall
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.request.header
@@ -36,13 +37,16 @@ import io.ktor.server.request.path
 import io.ktor.server.request.receive
 import io.ktor.server.response.header
 import io.ktor.server.response.respond
-import io.ktor.server.response.respondOutputStream
+import io.ktor.server.response.respondBytesWriter
+import io.ktor.server.routing.RoutingCall
 import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
 import io.ktor.server.routing.patch
 import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
+import io.ktor.utils.io.ByteWriteChannel
+import io.ktor.utils.io.writeFully
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
@@ -52,7 +56,6 @@ import kotlinx.serialization.json.JsonPrimitive
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
-import java.io.OutputStream
 import java.net.InetAddress
 import java.net.ServerSocket
 import java.nio.file.FileVisitResult
@@ -487,9 +490,9 @@ class PhoneFsServer(
             ?: throw PhoneFsException(ErrCode.NOT_FOUND, HttpStatusCode.NotFound, "file vanished")
         input.use { source ->
             try {
-                respondOutputStream(mime, status, len) {
+                respondBytesWriter(mime, status, len) {
                     withContext(Dispatchers.IO) {
-                        copyContent(source, this@respondOutputStream, len)
+                        copyContent(source, this@respondBytesWriter, len)
                     }
                 }
             } catch (t: ContentShortReadException) {
@@ -499,12 +502,16 @@ class PhoneFsServer(
                     "GET content short read: declared=${t.declared}, actual=${t.actual}",
                     t,
                 )
+                // ByteWriteChannel 已 flush 的前缀可能让 Netty 把异常关闭竞态成正常尾包；
+                // 直接关闭引擎通道，保证短读必然 EOF，而不是复用一个长度不完整的连接。
+                val engineCall = (this as? RoutingCall)?.pipelineCall?.engineCall
+                (engineCall as? NettyApplicationCall)?.context?.close()
                 throw t
             }
         }
     }
 
-    private suspend fun copyContent(source: InputStream, destination: OutputStream, len: Long) {
+    private suspend fun copyContent(source: InputStream, destination: ByteWriteChannel, len: Long) {
         val buffer = ByteArray(CONTENT_BUFFER_SIZE)
         var remaining = len
         var copied = 0L
@@ -512,8 +519,14 @@ class PhoneFsServer(
             currentCoroutineContext().ensureActive()
             val requested = minOf(remaining, buffer.size.toLong()).toInt()
             val n = source.read(buffer, 0, requested)
-            if (n <= 0) throw ContentShortReadException(len, copied)
-            destination.write(buffer, 0, n)
+            if (n <= 0) {
+                val error = ContentShortReadException(len, copied)
+                destination.cancel(error)
+                throw error
+            }
+            destination.writeFully(buffer, 0, n)
+            // 每块显式挂起冲刷；Netty 消费慢时停在有界通道上，不再继续 source.read。
+            destination.flush()
             remaining -= n
             copied += n
         }

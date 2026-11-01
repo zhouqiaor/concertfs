@@ -11,6 +11,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.io.BufferedInputStream
@@ -179,6 +180,72 @@ class PhoneFsServerContentTest {
         assertTrue("cancellation test did not stream a bounded prefix", stream.bytesRead <= 64L * BUFFER_SIZE)
     }
 
+    @Test
+    fun realNettySlowConsumerBoundsSourceReadsAndReadAhead() {
+        val declared = Int.MAX_VALUE.toLong() + BUFFER_SIZE + 17L
+        val file = newFile()
+        val backend = FakeBackend(
+            file = file,
+            declaredSize = declared,
+            streamFactory = { _, offset -> GeneratedFileInputStream(file, offset, delayMs = 0) },
+        )
+        val port = start(backend)
+
+        Socket().use { socket ->
+            // 小接收缓冲 + 只读 1KiB：让 TCP/Netty 背压回到逻辑流，而非预先消费整个响应。
+            socket.receiveBufferSize = 16 * 1024
+            socket.connect(InetSocketAddress("127.0.0.1", port), 2_000)
+            socket.soTimeout = 5_000
+            socket.getOutputStream().write(requestBytes(port))
+            socket.getOutputStream().flush()
+            val input = BufferedInputStream(socket.getInputStream())
+            val header = readHeaders(input)
+            assertTrue(header.startsWith("HTTP/1.1 200"))
+            assertTrue(header.contains("Content-Length: $declared"))
+            val consumed = input.readNBytes(1024).size.toLong()
+            assertEquals(1024L, consumed)
+
+            val stream = backend.streams.single() as GeneratedFileInputStream
+            val stalled = stream.awaitReadAheadStall()
+            assertTrue("source did not start or did not reach backpressure", stalled)
+            val bytesRead = stream.bytesRead
+            val readCount = stream.readCount
+            val readAhead = bytesRead - consumed
+            assertTrue(
+                "slow consumer allowed $readCount source reads (bytes=$bytesRead)",
+                readCount in 1..MAX_SLOW_CONSUMER_READS,
+            )
+            assertTrue(
+                "slow consumer allowed $readAhead bytes of read-ahead after $readCount reads",
+                readAhead in 0..MAX_SLOW_CONSUMER_READ_AHEAD,
+            )
+            assertFalse("large logical response was consumed eagerly", bytesRead >= declared)
+        }
+
+        val stream = backend.streams.single() as GeneratedFileInputStream
+        assertTrue("source was not closed after slow consumer left", stream.closed.await(5, TimeUnit.SECONDS))
+    }
+
+    private fun GeneratedFileInputStream.awaitReadAheadStall(): Boolean {
+        val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5)
+        var previousBytes = -1L
+        var stableSince = 0L
+        while (System.nanoTime() < deadline) {
+            val current = bytesRead
+            val now = System.nanoTime()
+            if (current != previousBytes) {
+                previousBytes = current
+                stableSince = now
+            } else if (current >= 4L * BUFFER_SIZE &&
+                now - stableSince >= TimeUnit.MILLISECONDS.toNanos(300)
+            ) {
+                return true
+            }
+            Thread.sleep(20)
+        }
+        return false
+    }
+
     private fun assertPartial(response: HttpResponse<ByteArray>, data: ByteArray, first: Int, last: Int) {
         assertEquals(206, response.statusCode())
         assertArrayEquals(data.copyOfRange(first, last + 1), response.body())
@@ -324,7 +391,9 @@ class PhoneFsServerContentTest {
         private val delayMs: Long,
     ) : TrackingFileInputStream(file) {
         private var position = offset
-        var bytesRead = 0L
+        @Volatile var bytesRead = 0L
+            private set
+        @Volatile var readCount = 0
             private set
 
         override fun read(buffer: ByteArray, offset: Int, len: Int): Int {
@@ -333,18 +402,22 @@ class PhoneFsServerContentTest {
             for (i in 0 until len) buffer[offset + i] = ((position + i) * 31).toByte()
             position += len
             bytesRead += len
+            readCount++
             return len
         }
 
         override fun read(): Int {
             position++
             bytesRead++
+            readCount++
             return 0
         }
     }
 
     companion object {
         private const val BUFFER_SIZE = 256 * 1024
+        private const val MAX_SLOW_CONSUMER_READS = 32
+        private const val MAX_SLOW_CONSUMER_READ_AHEAD = MAX_SLOW_CONSUMER_READS.toLong() * BUFFER_SIZE
         private const val TOKEN = "content-test-token"
         private const val MODIFIED_MS = 1_700_000_000_123L
         private val HTTP_DATE = DateTimeFormatter.RFC_1123_DATE_TIME
