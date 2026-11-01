@@ -18,7 +18,6 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.RequestConnectionPoint
-import io.ktor.http.content.OutgoingContent
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
@@ -33,38 +32,32 @@ import io.ktor.server.request.header
 import io.ktor.server.request.path
 import io.ktor.server.response.header
 import io.ktor.server.response.respond
+import io.ktor.server.response.respondBytes
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
-import io.ktor.utils.io.ByteWriteChannel
-import io.ktor.utils.io.writeFully
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
-import org.bouncycastle.openssl.PEMParser
-import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter
-import org.bouncycastle.util.io.pem.PemObject
 import java.io.File
 import java.io.FileInputStream
-import java.io.StringReader
 import java.net.InetAddress
 import java.net.ServerSocket
-import java.security.KeyStore
 import java.security.MessageDigest
 import java.security.SecureRandom
-import java.security.cert.CertificateFactory
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 /**
- * PhoneFS 源端 HTTPS/1.1 server（Ktor 3.6.1）。
+ * PhoneFS 源端 HTTP/1.1 server（Ktor 3.6.1 Netty 引擎，仅环回明文）。
  *
- * W2 闸门发现 F-W2-1：Ktor CIO 3.6.1 的 JVM ApplicationEngine 显式拒绝 HTTPS
- * （CIOApplicationEngine.initServerJob："CIO Engine does not currently support HTTPS"），
- * 与 SPEC §2.2「Ktor CIO + TLS」钉点冲突；W2 改用同一 Ktor 版本的 Netty 引擎
- * （协程模型/content-negotiation/SSE 插件生态全部不变，仅传输引擎不同），
- * Netty JDK SSL 走 provider 顺序首位的 Conscrypt，enabledProtocols 钉死 TLSv1.3。
- * 需 M1 前补 ADR 修订 SPEC §2.2。
+ * W2 真机闸门两次修订（详见 docs/research/2026-10-31-phonefs-m0-w2-*.md）：
+ * - F-W2-1：Ktor CIO 3.6.1 JVM ApplicationEngine 显式拒绝 HTTPS，换 Netty 引擎。
+ * - F-W2-3：Netty SslHandler/JdkEngine 在 Android 上包 Conscrypt 引擎做密文 record
+ *   流水时 [anon:dalvik-LinearAlloc] 随流量无界增长（每 10MB 约 +150MB，百级分块
+ *   RSS→9GB 被 SWAP 杀）；同 provider 的原生 SSLServerSocket 10GB 恒定 146MB。
+ *   TLS 边界移到 Netty 之外（[LoopbackTlsFront]：SSLSocket 前置 → 环回明文），
+ *   Ktor 只监听 127.0.0.1。M1 前需补 ADR 修订 SPEC §2.2 传输形态。
  */
 class PhoneFsServer(
     private val backend: FsBackend,
@@ -74,57 +67,53 @@ class PhoneFsServer(
     private val token: String,
 ) {
     private var engine: io.ktor.server.engine.EmbeddedServer<*, *>? = null
+    private var tlsFront: LoopbackTlsFront? = null
 
-    /** @return 实际监听端口；首选 18443，占用则 OS 动态端口。 */
+    /** @return 实际 TLS 公网口；首选 18443，占用则 OS 动态端口。 */
     fun start(preferredPort: Int = 18443): Int {
         val port = choosePort(preferredPort)
-        val keyStore = buildKeyStore()
-        // Ktor 3.6.1：sslConnector 仅作为 ApplicationEngine.Configuration 扩展存在；
-        // 显式只挂 HTTPS connector，避免 embeddedServer(host,port) 默认再开明文口。
-        val https = io.ktor.server.engine.EngineSSLConnectorBuilder(
-            keyStore,
-            KEY_ALIAS,
-            { KS_PWD },
-            { KS_PWD },
-        ).apply {
-            host = BIND_HOST
-            this.port = port
-            // §7.3 MinVersion TLS1.3：拒绝任何降级（Netty 逐 engine 应用 enabledProtocols）
-            enabledProtocols = listOf("TLSv1.3")
+        val loopbackPort = choosePort(0)
+        runCatching {
+            com.phonefs.core.telemetry.FsLog.i(
+                "phonefs.net",
+                "allocator=" + io.netty.buffer.ByteBufAllocator.DEFAULT.javaClass.name +
+                    " directNoCleaner=" + io.netty.util.internal.PlatformDependent.useDirectBufferNoCleaner() +
+                    " prop.allocator.type=" + System.getProperty("io.netty.allocator.type"),
+            )
         }
         engine = embeddedServer(
             factory = Netty,
-            configure = { connectors.add(https) },
+            configure = {
+                // 唯一 HTTP 口只绑环回；外部入口只有 LoopbackTlsFront 的 TLS 口
+                connectors.add(
+                    io.ktor.server.engine.EngineConnectorBuilder().apply {
+                        host = LOOPBACK_HOST
+                        this.port = loopbackPort
+                    },
+                )
+            },
             module = { configure() },
         ).start(wait = false)
+        val front = LoopbackTlsFront(port, loopbackPort, identity)
+        front.start()
+        tlsFront = front
         return port
     }
 
     fun stop() {
+        runCatching { tlsFront?.stop() }
+        tlsFront = null
         engine?.stop(500, 1000)
         engine = null
     }
 
     private fun choosePort(preferred: Int): Int {
+        if (preferred == 0) return ServerSocket(0).use { it.localPort }
         return try {
             ServerSocket(preferred).use { }
             preferred
         } catch (_: Exception) {
             ServerSocket(0).use { it.localPort }
-        }
-    }
-
-    private fun buildKeyStore(): KeyStore {
-        val cf = CertificateFactory.getInstance("X.509")
-        val cert = cf.generateCertificate(identity.certPem.byteInputStream())
-        val key = PEMParser(StringReader(identity.keyPem)).use { parser ->
-            val obj = parser.readObject() as PemObject
-            val keyInfo = org.bouncycastle.asn1.pkcs.PrivateKeyInfo.getInstance(obj.content)
-            JcaPEMKeyConverter().getPrivateKey(keyInfo)
-        }
-        return KeyStore.getInstance("PKCS12").apply {
-            load(null, null)
-            setKeyEntry(KEY_ALIAS, key, KS_PWD, arrayOf(cert))
         }
     }
 
@@ -291,15 +280,11 @@ class PhoneFsServer(
                         )
                     }
                     RangeSpec.Full -> {
-                        call.respond(
-                            object : OutgoingContent.WriteChannelContent() {
-                                override val contentType = mime
-                                override val contentLength: Long? = size
-                                override val status = HttpStatusCode.OK
-                                override suspend fun writeTo(channel: ByteWriteChannel) =
-                                    streamRange(channel, path, 0, size)
-                            },
-                        )
+                        // W2：一次性字节响应（单块 ≤10MB），规避 Ktor/Netty WriteChannelContent
+                        // 在长连接背压下每分块写分配累积（实测 10MB 拉流泄漏 ~0.7GB RSS）。
+                        val bytes = readRange(path, 0, size)
+                            ?: throw PhoneFsException(ErrCode.NOT_FOUND, HttpStatusCode.NotFound, "file vanished")
+                        call.respondBytes(bytes, mime, HttpStatusCode.OK)
                     }
                     is RangeSpec.Partial -> {
                         val len = range.last - range.first + 1
@@ -307,38 +292,29 @@ class PhoneFsServer(
                             HttpHeaders.ContentRange,
                             "bytes ${range.first}-${range.last}/$size",
                         )
-                        call.respond(
-                            object : OutgoingContent.WriteChannelContent() {
-                                override val contentType = mime
-                                override val contentLength: Long? = len
-                                override val status = HttpStatusCode.PartialContent
-                                override suspend fun writeTo(channel: ByteWriteChannel) =
-                                    streamRange(channel, path, range.first, len)
-                            },
-                        )
+                        val bytes = readRange(path, range.first, len)
+                            ?: throw PhoneFsException(ErrCode.NOT_FOUND, HttpStatusCode.NotFound, "file vanished")
+                        call.respondBytes(bytes, mime, HttpStatusCode.PartialContent)
                     }
                 }
             }
         }
     }
 
-    private suspend fun streamRange(channel: ByteWriteChannel, path: String, offset: Long, len: Long) {
+    private suspend fun readRange(path: String, offset: Long, len: Long): ByteArray? =
         withContext(Dispatchers.IO) {
-            val fis = backend.openInput(path, offset)
-                ?: throw PhoneFsException(ErrCode.NOT_FOUND, HttpStatusCode.NotFound, "file vanished")
+            val fis = backend.openInput(path, offset) ?: return@withContext null
             fis.use { input: FileInputStream ->
-                val buf = ByteArray(128 * 1024)
-                var remaining = len
-                while (remaining > 0) {
-                    val want = minOf(buf.size.toLong(), remaining).toInt()
-                    val n = input.read(buf, 0, want)
+                val out = ByteArray(len.toInt())
+                var read = 0
+                while (read < out.size) {
+                    val n = input.read(out, read, out.size - read)
                     if (n <= 0) break
-                    channel.writeFully(buf, 0, n)
-                    remaining -= n
+                    read += n
                 }
+                if (read == out.size) out else out.copyOf(read)
             }
         }
-    }
 
     private fun enforceSiteLocal(conn: RequestConnectionPoint) {
         val addr = runCatching { InetAddress.getByName(conn.remoteHost) }.getOrNull()
@@ -447,9 +423,7 @@ class PhoneFsServer(
         java.net.URLEncoder.encode(name, "UTF-8").replace("+", "%20")
 
     companion object {
-        private const val BIND_HOST = "0.0.0.0"
-        private const val KEY_ALIAS = "phonefs"
-        private val KS_PWD = "phonefs-w2".toCharArray()
+        private const val LOOPBACK_HOST = "127.0.0.1"
         private const val PATH_PAIR_INFO = "/v1/pair/info"
 
         // §6.5.1 固定 8 行（7 cat + stor），cat:camera 不入（P2-7）
