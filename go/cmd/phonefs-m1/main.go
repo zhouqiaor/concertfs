@@ -1,13 +1,13 @@
-// Command phonefs-m1 把安卓 PhoneFS HTTPS 服务（W2, v1 协议）通过
-// cgofuse + WinFsp 挂成 Windows 只读盘符——M1 demo1 最小桥。
+// Command phonefs-m1 把安卓 PhoneFS HTTPS 服务通过 cgofuse + WinFsp 挂成 Windows 盘符。
+// M2 默认 rw；-ro 保留 M1 只读挂载与写拒绝语义。
 //
 // 例：
 //
 //	phonefs-m1 -mount P: -server https://192.168.43.1:18443 \
 //	  -token-file token.txt -trace -log m1.log
 //
-// 只读 P0：Getattr/Readdir/Open/Read(1MiB Range)/Statfs；CTRL_C/CTRL_BREAK
-// 优雅卸载。协议 conformance 债见 internal/httpfs/client.go 包注释。
+// 写路径：Create/Write/Truncate/Flush/Fsync/Release/Unlink/Rename/Mkdir/Rmdir/Utimens；
+// CTRL_C/CTRL_BREAK 优雅卸载。协议 conformance 债见 internal/httpfs/client.go 包注释。
 package main
 
 import (
@@ -73,6 +73,7 @@ func main() {
 	logPath := flag.String("log", "", "日志文件路径（同时输出 stderr；空则仅 stderr）")
 	label := flag.String("label", "", "卷标覆盖（默认自动取 pair/info 的 device.name，清洗后 ≤32 字符）")
 	trace := flag.Bool("trace", false, "记录每个 FUSE 回调与 Range 块")
+	readOnly := flag.Bool("ro", false, "只读挂载（M1 兼容模式）；默认 rw")
 	flag.Parse()
 
 	var w io.Writer = os.Stderr
@@ -100,7 +101,7 @@ func main() {
 	}
 
 	cl := httpfs.New(*server, bearer, lg)
-	bfs := httpfs.NewBridgeFS(cl, lg, *trace)
+	bfs := httpfs.NewBridgeFS(cl, lg, *trace, *readOnly)
 
 	// 卷标默认 = 设备名（pair/info device.name，真机如 "HUAWEI TEQU-S2C"），
 	// 使资源管理器「此电脑」显示 "HUAWEI TEQU-S2C (P:)"。拿不到回退 PhoneFS。
@@ -139,8 +140,11 @@ func main() {
 	host.SetCapReaddirPlus(true)     // Readdir 直接带 stat，省一轮 Getattr
 	host.SetCapDeleteAccess(true)    // 只读卷在 Access(DELETE_OK) 即拒删，避免假成功
 
-	// uid/gid=-1：归属映射到当前登录用户；ro：只读卷（写路径内核先挡）。
-	opts := []string{"-o", "uid=-1,gid=-1,umask=00,ro"}
+	// uid/gid=-1：归属映射到当前登录用户；默认 rw，-ro 时让内核和桥双层拒写。
+	opts := []string{"-o", "uid=-1,gid=-1,umask=00"}
+	if *readOnly {
+		opts[1] += ",ro"
+	}
 	withLabel := volLabel != ""
 	if withLabel {
 		opts = append(opts, "-o", "volname="+volLabel)
@@ -162,8 +166,8 @@ func main() {
 	}()
 
 	absLog, _ := filepath.Abs(*logPath)
-	lg.Infof("phonefs-m1 starting: mount=%s server=%s label=%q trace=%v cgofuse=v1.6.0 nocgo log=%s",
-		mp, *server, volLabel, *trace, absLog)
+	lg.Infof("phonefs-m1 starting: mount=%s server=%s label=%q trace=%v ro=%v cgofuse=v1.6.0 nocgo log=%s",
+		mp, *server, volLabel, *trace, *readOnly, absLog)
 	t0 := time.Now()
 	ok := host.Mount(mp, opts)
 	if !ok && withLabel {

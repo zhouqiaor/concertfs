@@ -1,0 +1,11 @@
+CREATED bytes=68
+QUERY after create:
+Row: 0 _id=456, _data=/storage/emulated/0/PhoneFS-m2-media/probe.png, _size=68
+RENAMED
+QUERY old path after rename:
+No result found.
+QUERY new path after rename:
+Row: 0 _id=456, _data=/storage/emulated/0/PhoneFS-m2-media/renamed.png, _size=68
+DELETED
+QUERY after delete:
+No result found.

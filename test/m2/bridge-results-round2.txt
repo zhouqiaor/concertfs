@@ -1,0 +1,17 @@
+﻿PhoneFS M2 rw bridge - round2 - 2026-11-01 17:35:10 - drive=P: serial=192.168.43.1:5555
+PASS 15/15 FAIL 0 TOTAL 10.1s
+PASS [01] mkdir-isolated-root                        17:35:00.906 | P:\内部存储\PhoneFS-m2-bridge
+PASS [02] create-multichunk-write-fsync-server-sha   17:35:01.625 | 2500000B (3 chunks) server sha256=4B827337487FF9AB2D9CFD831B9201B25E7065F051562D07779638C14A2C85B4
+PASS [03] fuse-readback-sha                          17:35:01.867 | FUSE readback sha256=4B827337487FF9AB2D9CFD831B9201B25E7065F051562D07779638C14A2C85B4
+PASS [04] other-open-handle-cache-invalidation       17:35:02.645 | existing handle dropped old block after node version changed
+PASS [05] random-unaligned-write-and-extension       17:35:03.418 | unaligned overwrite=100003B extension=50017B size=2550017 sha=8E559EDECAECF50D563A99A14ABFEC857FC5A020E95FC40EFC0D2E59691AA60B
+PASS [06] nonzero-truncate-enosys                    17:35:03.683 | SetLength(123456) rejected; server bytes unchanged
+PASS [07] zero-truncate-supported                    17:35:04.147 | SetLength(0)+empty upload passed; rewrote 30B
+PASS [08] rename-file                                17:35:04.957 | old id/path gone; renamed bytes match
+PASS [09] mkdir-and-move-file                        17:35:05.774 | cross-directory PATCH parent_id; server bytes match
+PASS [10] utimens-mtime                              17:35:05.864 | mtime=2026-10-29T09:35:05.0000000Z
+PASS [11] create-conflict-eexist                     17:35:06.011 | CreateNew existing file failed; bytes unchanged
+PASS [12] nonempty-rmdir-enotempty                   17:35:06.050 | nonempty Rmdir rejected; child intact
+PASS [13] shell-explorer-copyhere                    17:35:08.709 | Shell.Application.CopyHere 3200123B sha=F89B7C65DC93BB418989269A65F98FA53F4CAF011EDC13308F7A2A2107CDB690
+PASS [14] unlink-and-rmdir                           17:35:08.922 | Unlink + empty Rmdir passed
+PASS [15] cleanup-isolated-tree                      17:35:10.241 | all M2 bridge test objects removed through FUSE

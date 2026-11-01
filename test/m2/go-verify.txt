@@ -1,0 +1,9 @@
+go version go1.26.2 windows/386
+== go vet ./... ==
+== go test ./... ==
+?   	phonefs/go/cmd/phonefs-m1	[no test files]
+?   	phonefs/go/cmd/w1spike	[no test files]
+?   	phonefs/go/internal/httpfs	[no test files]
+== go build ./cmd/phonefs-m1 ==
+BUILD OK
+4e335fefc04247f610838651ad6584aa068570fc08269332a39956cf6e2aba59 *test/m2/phonefs-m2.exe

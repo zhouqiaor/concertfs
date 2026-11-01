@@ -1,0 +1,107 @@
+﻿[
+    {
+        "id":  "01",
+        "name":  "mkdir-isolated-root",
+        "pass":  true,
+        "detail":  "P:\\内部存储\\PhoneFS-m2-bridge",
+        "ts":  "17:32:23.379"
+    },
+    {
+        "id":  "02",
+        "name":  "create-multichunk-write-fsync-server-sha",
+        "pass":  true,
+        "detail":  "2500000B (3 chunks) server sha256=E19ED9289F3B60E03614E2583B68E13D092F4E4C21CA8C8E0CFAAFDFB1A9064C",
+        "ts":  "17:32:23.927"
+    },
+    {
+        "id":  "03",
+        "name":  "fuse-readback-sha",
+        "pass":  true,
+        "detail":  "FUSE readback sha256=E19ED9289F3B60E03614E2583B68E13D092F4E4C21CA8C8E0CFAAFDFB1A9064C",
+        "ts":  "17:32:24.110"
+    },
+    {
+        "id":  "04",
+        "name":  "other-open-handle-cache-invalidation",
+        "pass":  false,
+        "detail":  "MethodInvocationException: 使用“1”个参数调用“Flush”时发生异常:“The request could not be performed because of an I/O device error. ”",
+        "ts":  "17:32:24.632"
+    },
+    {
+        "id":  "05",
+        "name":  "random-unaligned-write-and-extension",
+        "pass":  true,
+        "detail":  "unaligned overwrite=100003B extension=50017B size=2550017 sha=8EC30B6147F83F32821A763EA9AD1444A6CAC2FDFF254336B6B68D2EE3CE0767",
+        "ts":  "17:32:25.422"
+    },
+    {
+        "id":  "06",
+        "name":  "nonzero-truncate-enosys",
+        "pass":  true,
+        "detail":  "SetLength(123456) rejected; server bytes unchanged",
+        "ts":  "17:32:25.659"
+    },
+    {
+        "id":  "07",
+        "name":  "zero-truncate-supported",
+        "pass":  true,
+        "detail":  "SetLength(0)+empty upload passed; rewrote 30B",
+        "ts":  "17:32:26.118"
+    },
+    {
+        "id":  "08",
+        "name":  "rename-file",
+        "pass":  true,
+        "detail":  "old id/path gone; renamed bytes match",
+        "ts":  "17:32:26.773"
+    },
+    {
+        "id":  "09",
+        "name":  "mkdir-and-move-file",
+        "pass":  true,
+        "detail":  "cross-directory PATCH parent_id; server bytes match",
+        "ts":  "17:32:27.437"
+    },
+    {
+        "id":  "10",
+        "name":  "utimens-mtime",
+        "pass":  true,
+        "detail":  "mtime=2026-10-29T09:32:27.0000000Z",
+        "ts":  "17:32:27.521"
+    },
+    {
+        "id":  "11",
+        "name":  "create-conflict-eexist",
+        "pass":  true,
+        "detail":  "CreateNew existing file failed; bytes unchanged",
+        "ts":  "17:32:27.635"
+    },
+    {
+        "id":  "12",
+        "name":  "nonempty-rmdir-enotempty",
+        "pass":  true,
+        "detail":  "nonempty Rmdir rejected; child intact",
+        "ts":  "17:32:27.678"
+    },
+    {
+        "id":  "13",
+        "name":  "shell-explorer-copyhere",
+        "pass":  true,
+        "detail":  "Shell.Application.CopyHere 3200123B sha=A707188B6891400D22A42531CCC60931834C755C96D44D43DBBB85540105101F",
+        "ts":  "17:32:29.969"
+    },
+    {
+        "id":  "14",
+        "name":  "unlink-and-rmdir",
+        "pass":  true,
+        "detail":  "Unlink + empty Rmdir passed",
+        "ts":  "17:32:30.116"
+    },
+    {
+        "id":  "15",
+        "name":  "cleanup-isolated-tree",
+        "pass":  true,
+        "detail":  "all M2 bridge test objects removed through FUSE",
+        "ts":  "17:32:31.239"
+    }
+]

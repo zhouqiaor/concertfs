@@ -1,0 +1,17 @@
+﻿PhoneFS M2 rw bridge - round1 - 2026-11-01 17:32:31 - drive=P: serial=192.168.43.1:5555
+PASS 14/15 FAIL 1 TOTAL 8.4s
+PASS [01] mkdir-isolated-root                        17:32:23.379 | P:\内部存储\PhoneFS-m2-bridge
+PASS [02] create-multichunk-write-fsync-server-sha   17:32:23.927 | 2500000B (3 chunks) server sha256=E19ED9289F3B60E03614E2583B68E13D092F4E4C21CA8C8E0CFAAFDFB1A9064C
+PASS [03] fuse-readback-sha                          17:32:24.110 | FUSE readback sha256=E19ED9289F3B60E03614E2583B68E13D092F4E4C21CA8C8E0CFAAFDFB1A9064C
+FAIL [04] other-open-handle-cache-invalidation       17:32:24.632 | MethodInvocationException: 使用“1”个参数调用“Flush”时发生异常:“The request could not be performed because of an I/O device error. ”
+PASS [05] random-unaligned-write-and-extension       17:32:25.422 | unaligned overwrite=100003B extension=50017B size=2550017 sha=8EC30B6147F83F32821A763EA9AD1444A6CAC2FDFF254336B6B68D2EE3CE0767
+PASS [06] nonzero-truncate-enosys                    17:32:25.659 | SetLength(123456) rejected; server bytes unchanged
+PASS [07] zero-truncate-supported                    17:32:26.118 | SetLength(0)+empty upload passed; rewrote 30B
+PASS [08] rename-file                                17:32:26.773 | old id/path gone; renamed bytes match
+PASS [09] mkdir-and-move-file                        17:32:27.437 | cross-directory PATCH parent_id; server bytes match
+PASS [10] utimens-mtime                              17:32:27.521 | mtime=2026-10-29T09:32:27.0000000Z
+PASS [11] create-conflict-eexist                     17:32:27.635 | CreateNew existing file failed; bytes unchanged
+PASS [12] nonempty-rmdir-enotempty                   17:32:27.678 | nonempty Rmdir rejected; child intact
+PASS [13] shell-explorer-copyhere                    17:32:29.969 | Shell.Application.CopyHere 3200123B sha=A707188B6891400D22A42531CCC60931834C755C96D44D43DBBB85540105101F
+PASS [14] unlink-and-rmdir                           17:32:30.116 | Unlink + empty Rmdir passed
+PASS [15] cleanup-isolated-tree                      17:32:31.239 | all M2 bridge test objects removed through FUSE
