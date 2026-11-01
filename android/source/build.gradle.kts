@@ -24,9 +24,28 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    signingConfigs {
+        create("w2DebugKey") {
+            val home = System.getProperty("user.home")
+            storeFile = File(home, ".android/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
         debug {
             // W2：debug 签名即可（SPEC §12.4）
+        }
+        release {
+            // W2 真机闸门专用：非 debuggable 包用于 A/B 验证「CheckJNI（debuggable 进程
+            // 默认开启 -Xcheck:jni）下 Conscrypt JNI 记账导致 LinearAlloc 暴涨」假设。
+            // 复用本机标准 debug 密钥（口令 android 是 AOSP 公开默认值，非密钥），
+            // 使 release 包可在已装 debug 包上 -r 覆盖安装；不开 minify（M1 再议）。
+            signingConfig = signingConfigs.getByName("w2DebugKey")
+            isMinifyEnabled = false
+            isDebuggable = false
         }
     }
 

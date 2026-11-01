@@ -75,6 +75,7 @@ class SharingService : Service() {
             port = srv.start(PREFERRED_PORT)
             server = srv
             val fixture = runCatching { FixtureMaker.ensure() }.getOrNull()
+            starting.set(false)
             FsLog.i(TAG, "server started port=$port ips=${NetInfo.siteLocalIpv4()} fp=${identity.fingerprint}")
             FsLog.i(TAG, "fixture=${fixture?.absolutePath} mes=${android.os.Environment.isExternalStorageManager()}")
             val nm = getSystemService(NotificationManager::class.java)

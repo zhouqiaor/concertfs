@@ -7,7 +7,11 @@ PORT="${PORT:-18443}"
 TOKEN="${TOKEN:?need TOKEN}"
 PIN="${PIN:-}"
 BASE="https://$HOST:$PORT"
-TMP="$(mktemp -d)"
+# Windows + Git Bash：curl.exe/python 是原生程序，MSYS 的 /tmp 绝对路径它们不可见。
+# 临时目录放当前目录下并用相对路径，保证 bash/curl.exe/python 三方都能读写。
+TMP="./.w2tmp-$$"
+mkdir -p "$TMP"
+trap 'rm -rf "$TMP"' EXIT
 PASS=0; FAIL=0
 
 CURL=(curl.exe -sS -k --tlsv1.3 --tls-max 1.3)
@@ -30,10 +34,12 @@ hasre(){ grep -Eq "$1" "$TMP/body" && ok "$2" || bad "$2" "missing /$1/"; }
 
 echo "== 0. TLS1.3 握手证据（openssl s_client） =="
 echo | openssl s_client -connect "$HOST:$PORT" -tls1_3 -showcerts -servername phonefs 2>/dev/null > "$TMP/sclient"
-grep -E "Protocol *: TLSv1.3" "$TMP/sclient" >/dev/null && ok "tls protocol TLSv1.3" || bad "tls protocol" "$(grep Protocol "$TMP/sclient")"
-SUITE=$(grep -E "Cipher *: TLS_" "$TMP/sclient" | head -1 | sed 's/.*Cipher *: //')
+grep -Eq "Protocol[[:space:]]*: TLSv1.3" "$TMP/sclient" && ok "tls protocol TLSv1.3" || bad "tls protocol" "$(grep Protocol "$TMP/sclient")"
+SUITE=$(grep -oE 'TLS_AES_[A-Z0-9_]+' "$TMP/sclient" | head -1)
 echo "    cipher=$SUITE"
-SVR_FP=$(openssl x509 -in "$TMP/sclient" -noout -fingerprint -sha256 2>/dev/null | sed 's/.*=//' | tr -d ':' | tr 'A-F' 'a-f')
+# 从 s_client 输出中切 PEM 证书段→DER→SHA256（s_client 文本不能直接喂 x509 -in）
+SVR_FP=$(sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p' "$TMP/sclient" \
+  | openssl x509 -outform DER 2>/dev/null | sha256sum | cut -d' ' -f1)
 echo "    server fingerprint=$SVR_FP"
 [ -n "$PIN" ] && { [ "$SVR_FP" = "$(echo "$PIN"|tr 'A-F' 'a-f')" ] && ok "fingerprint pin" || bad "fingerprint pin" "server=$SVR_FP pin=$PIN"; }
 

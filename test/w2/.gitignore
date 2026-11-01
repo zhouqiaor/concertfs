@@ -1,0 +1,5 @@
+# 功能脚本临时目录（curl.exe/python 用相对路径读写）
+.w2tmp-*/
+# 10MB 随机夹具与设备拉回的大文件不入库（sha256 证据另存）
+results/test10mb.bin
+*.bin
