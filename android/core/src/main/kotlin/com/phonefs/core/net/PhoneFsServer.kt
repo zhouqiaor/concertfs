@@ -16,6 +16,7 @@ import com.phonefs.core.protocol.PairInfo
 import com.phonefs.core.protocol.PhoneFsException
 import com.phonefs.core.protocol.RootsResp
 import com.phonefs.core.protocol.StatFsResp
+import com.phonefs.core.telemetry.FsLog
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
@@ -35,7 +36,7 @@ import io.ktor.server.request.path
 import io.ktor.server.request.receive
 import io.ktor.server.response.header
 import io.ktor.server.response.respond
-import io.ktor.server.response.respondBytes
+import io.ktor.server.response.respondOutputStream
 import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
 import io.ktor.server.routing.patch
@@ -43,12 +44,15 @@ import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonPrimitive
 import java.io.File
-import java.io.FileInputStream
 import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 import java.net.InetAddress
 import java.net.ServerSocket
 import java.nio.file.FileVisitResult
@@ -135,7 +139,8 @@ class PhoneFsServer(
         }
     }
 
-    private fun Application.configure() {
+    /** JVM 集成测试直接复用实际模块（不经 TLS front）。 */
+    internal fun Application.configure() {
         val json = Json {
             ignoreUnknownKeys = true
             explicitNulls = false
@@ -298,11 +303,7 @@ class PhoneFsServer(
                         )
                     }
                     RangeSpec.Full -> {
-                        // W2：一次性字节响应（单块 ≤10MB），规避 Ktor/Netty WriteChannelContent
-                        // 在长连接背压下每分块写分配累积（实测 10MB 拉流泄漏 ~0.7GB RSS）。
-                        val bytes = readRange(path, 0, size)
-                            ?: throw PhoneFsException(ErrCode.NOT_FOUND, HttpStatusCode.NotFound, "file vanished")
-                        call.respondBytes(bytes, mime, HttpStatusCode.OK)
+                        call.respondContent(path, mime, HttpStatusCode.OK, offset = 0L, len = size)
                     }
                     is RangeSpec.Partial -> {
                         val len = range.last - range.first + 1
@@ -310,9 +311,7 @@ class PhoneFsServer(
                             HttpHeaders.ContentRange,
                             "bytes ${range.first}-${range.last}/$size",
                         )
-                        val bytes = readRange(path, range.first, len)
-                            ?: throw PhoneFsException(ErrCode.NOT_FOUND, HttpStatusCode.NotFound, "file vanished")
-                        call.respondBytes(bytes, mime, HttpStatusCode.PartialContent)
+                        call.respondContent(path, mime, HttpStatusCode.PartialContent, range.first, len)
                     }
                 }
             }
@@ -446,20 +445,54 @@ class PhoneFsServer(
         }
     }
 
-    private suspend fun readRange(path: String, offset: Long, len: Long): ByteArray? =
-        withContext(Dispatchers.IO) {
-            val fis = backend.openInput(path, offset) ?: return@withContext null
-            fis.use { input: FileInputStream ->
-                val out = ByteArray(len.toInt())
-                var read = 0
-                while (read < out.size) {
-                    val n = input.read(out, read, out.size - read)
-                    if (n <= 0) break
-                    read += n
+    private suspend fun ApplicationCall.respondContent(
+        path: String,
+        mime: ContentType,
+        status: HttpStatusCode,
+        offset: Long,
+        len: Long,
+    ) {
+        // 在响应提交前打开，保留文件消失时的 404；use 覆盖客户端取消和响应建立失败。
+        val input = withContext(Dispatchers.IO) { backend.openInput(path, offset) }
+            ?: throw PhoneFsException(ErrCode.NOT_FOUND, HttpStatusCode.NotFound, "file vanished")
+        input.use { source ->
+            try {
+                respondOutputStream(mime, status, len) {
+                    withContext(Dispatchers.IO) {
+                        copyContent(source, this@respondOutputStream, len)
+                    }
                 }
-                if (read == out.size) out else out.copyOf(read)
+            } catch (t: ContentShortReadException) {
+                // 已提交的 Content-Length 不能缩水或补零伪装成功；抛出由引擎中止连接。
+                FsLog.e(
+                    "phonefs.net",
+                    "GET content short read: declared=${t.declared}, actual=${t.actual}",
+                    t,
+                )
+                throw t
             }
         }
+    }
+
+    private suspend fun copyContent(source: InputStream, destination: OutputStream, len: Long) {
+        val buffer = ByteArray(CONTENT_BUFFER_SIZE)
+        var remaining = len
+        var copied = 0L
+        while (remaining > 0) {
+            currentCoroutineContext().ensureActive()
+            val requested = minOf(remaining, buffer.size.toLong()).toInt()
+            val n = source.read(buffer, 0, requested)
+            if (n <= 0) throw ContentShortReadException(len, copied)
+            destination.write(buffer, 0, n)
+            remaining -= n
+            copied += n
+        }
+    }
+
+    private class ContentShortReadException(
+        val declared: Long,
+        val actual: Long,
+    ) : IOException("content ended at $actual of $declared bytes")
 
     private fun requireReady() {
         if (!backend.ready()) throw notReady()
@@ -654,6 +687,7 @@ class PhoneFsServer(
     companion object {
         private const val LOOPBACK_HOST = "127.0.0.1"
         private const val PATH_PAIR_INFO = "/v1/pair/info"
+        private const val CONTENT_BUFFER_SIZE = 256 * 1024
         private val CONTENT_RANGE_RE = Regex("""bytes (\d+)-(\d+)/(\d+)""")
 
         // §6.5.1 固定 8 行（7 cat + stor），cat:camera 不入（P2-7）

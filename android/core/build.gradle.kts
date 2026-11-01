@@ -16,6 +16,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
+    testOptions {
+        // JVM Netty 集成测试覆盖 FsLog 分支，android.util.Log 使用 Android 默认桩。
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 kotlin {
