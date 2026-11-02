@@ -303,6 +303,23 @@ class PhoneFsServerWriteTest {
         assertEquals(listOf("casename.bin"), h.root.listFiles()?.map { it.name })
     }
 
+    @Test
+    fun encodedStorageRootIdCannotBeDeletedRecursively() = withServer { h ->
+        val sentinel = h.file("sentinel.bin")
+        sentinel.writeText("keep")
+
+        // stor:primary 已被拒绝；等价的 p:<base64(root)> 必须同样被拒绝，
+        // 否则 recursive DELETE 会连根删掉整个共享存储。
+        val encodedRoot = DocIds.encodePath(h.root.absolutePath)
+        val reply = h.request(
+            HttpMethod.Delete,
+            "/v1/fs?id=${encodedRoot.encodeURLParameter()}&recursive=true",
+            expected = 400,
+        )
+        assertEquals("INVALID_ARGUMENT", h.error(reply))
+        assertTrue("storage root delete removed files", sentinel.exists())
+    }
+
     private fun withServer(
         block: suspend (Harness) -> Unit,
     ) = runBlocking {

@@ -433,6 +433,10 @@ class PhoneFsServer(
                     else -> throw badRequest("recursive must be true/false")
                 }
                 val target = realPath(id, allowStorageRoot = false)
+                // 双保险：即使 realPath 语义将来放宽，DELETE 也绝不把存储根当目标。
+                if (runCatching { target.canonicalFile == backend.storageRoot.canonicalFile }.getOrDefault(false)) {
+                    throw badRequest("storage root itself is not a valid delete target")
+                }
                 if (!target.exists()) {
                     call.respond(HttpStatusCode.NoContent)
                     return@delete
@@ -537,7 +541,17 @@ class PhoneFsServer(
         if (!id.startsWith(DocIds.P_PREFIX)) throw notFound()
         val path = DocIds.decodePath(id)?.takeIf { backend.isInsideStorage(it) }
             ?: throw badRequest("malformed or escaping id")
-        return File(path)
+        val file = File(path)
+        // p:<base64(storageRoot)> 与 stor:primary 是同一个目标；只拦字面量会让
+        // recursive DELETE 绕过根保护删掉整个共享存储。GET/list 仍可解析到根。
+        val isRoot = runCatching {
+            file.canonicalFile == backend.storageRoot.canonicalFile
+        }.getOrDefault(false)
+        if (isRoot) {
+            if (allowStorageRoot) return backend.storageRoot
+            throw badRequest("storage root itself is not a valid write target")
+        }
+        return file
     }
 
     private fun validateName(name: String) {
