@@ -1,0 +1,24 @@
+# PhoneFS OpenAPI 最小 lint 规则（Spectral）
+# 运行：spectral lint openapi/phonefs.yaml
+extends:
+  - spectral:oas
+
+rules:
+  # 契约必需元数据（比 spectral:oas 默认 warn 更严格）
+  operation-operationId: error
+  operation-tags: error
+  operation-tag-defined: error
+  path-params: error
+  no-ambiguous-paths: error
+  duplicated-entry-in-enum: error
+  oas3-api-servers: error
+
+  # 不适用于本项目/会产生噪声的规则
+  info-contact: off
+  info-license: off
+  license-url: off
+  tag-description: off
+  operation-description: off
+  oas3-unused-component: off
+  oas3-valid-media-example: off
+  oas3-valid-schema-example: off

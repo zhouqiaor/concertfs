@@ -20,5 +20,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "phonefs-android"
-include(":core")
+include(":core-protocol")
+include(":core-server")
 include(":source")

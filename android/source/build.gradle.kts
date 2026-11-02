@@ -80,5 +80,5 @@ kotlin {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":core-server"))
 }

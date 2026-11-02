@@ -1,0 +1,2506 @@
+openapi: 3.1.0
+
+info:
+  title: PhoneFS API
+  version: 0.3.0
+  description: |
+    PhoneFS 双端协议契约（唯一机器可读真源，SPEC §6 / ADR-16）。
+
+    纪律：
+    - 字段命名一律 snake_case；时间一律 int64 UTC unix 毫秒；二进制字节一律
+      base64url 无填充（内容端点例外，正文为原始 octet-stream）。
+    - 客户端必须容忍未知字段；本契约不设置 additionalProperties: false。
+    - 成功响应直接返回业务对象；失败响应统一为 ErrorEnvelope。
+    - x-phonefs-stage 标注交付阶段（P0 / P1）；x-phonefs-implemented 标注当前
+      实现是否已挂载（以 projects/phonefs/android/.../net/PhoneFsServer.kt 为准）。
+    - x-phonefs-origin 标注非基础 SPEC 的来源 ADR。
+
+    详细裁决与差异记录见同目录 README.md。
+
+servers:
+  - url: https://{host}:{port}
+    description: 手机侧 HTTPS/1.1 源端。动态端口，实际端口以 mDNS TXT / 扫码载荷为准。
+    variables:
+      host:
+        default: 192.168.43.1
+        description: 站点本地地址（真机热点默认网段）。服务端仅绑定站点本地地址。
+      port:
+        default: '18443'
+        description: 首选端口；被占用时回退 OS 动态端口。SPEC §6.1 定义为动态端口。
+
+tags:
+  - name: pair
+    description: 配对、信任台账与设备撤销。
+  - name: session
+    description: 文件会话、保活与舰队写者位。
+  - name: fs
+    description: 文件系统浏览、读写与元数据。
+  - name: index
+    description: 媒体索引快照与增量。
+  - name: events
+    description: SSE 事件流与轮询降级。
+  - name: share
+    description: 分享 offer / 批次（ADR-17）。
+
+security:
+  - bearerAuth: []
+
+paths:
+  /v1/pair/info:
+    get:
+      tags: [pair]
+      operationId: pairInfo
+      summary: 服务名 / 协议版本 / 指纹 / 配对窗状态
+      security: []
+      responses:
+        '200':
+          description: 服务端身份与配对窗状态。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PairInfo'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: true
+
+  /v1/pair/hello:
+    post:
+      tags: [pair]
+      operationId: pairHello
+      summary: 交换证书与 ECDH，建立配对会话并派生 SAS
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PairHelloReq'
+      responses:
+        '200':
+          description: 配对会话与双方临时材料。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PairHelloResp'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+
+  /v1/pair/commit:
+    post:
+      tags: [pair]
+      operationId: pairCommit
+      summary: 用户确认后颁发 bearer token
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/XPairMac'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PairCommitReq'
+      responses:
+        '200':
+          description: 长期 bearer token 与对端信息。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PairCommitResp'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+
+  /v1/pair/sessions/{sid}:
+    delete:
+      tags: [pair]
+      operationId: pairCancelSession
+      summary: 取消 / 失效配对会话
+      security: []
+      parameters:
+        - name: sid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: 配对会话已关闭。
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+
+  /v1/session/start:
+    post:
+      tags: [session]
+      operationId: startSession
+      summary: 建立文件会话，返回能力与索引 revision
+      parameters:
+        - $ref: '#/components/parameters/XDeviceId'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionStartReq'
+      responses:
+        '200':
+          description: 会话已建立；rw 写者位被占时降级为 scope_effective=ro。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionStartResp'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+
+  /v1/session/{sid}/ping:
+    post:
+      tags: [session]
+      operationId: pingSession
+      summary: 保活（只证活，容量辅证走 statfs）
+      parameters:
+        - name: sid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 会话仍有效。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionPingResp'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+
+  /v1/session/{sid}:
+    delete:
+      tags: [session]
+      operationId: endSession
+      summary: 优雅结束会话
+      parameters:
+        - name: sid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: 已结束（幂等）。
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+
+  /v1/session/{sid}/promote:
+    post:
+      tags: [session]
+      operationId: promoteSession
+      summary: ro→rw 写者位提升（ADR-18）
+      parameters:
+        - name: sid
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XDeviceId'
+      responses:
+        '200':
+          description: 写者位已获得。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoteResp'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '423':
+          $ref: '#/components/responses/Locked'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+      x-phonefs-origin: ADR-18
+
+  /v1/roots:
+    get:
+      tags: [fs]
+      operationId: getRoots
+      summary: 根布局（固定 8 行 = 7 cat + stor）
+      parameters:
+        - $ref: '#/components/parameters/AcceptLanguage'
+      responses:
+        '200':
+          description: 固定 8 个根条目；cat:camera 不在此固定行内。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootsResp'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: true
+
+  /v1/fs/list:
+    get:
+      tags: [fs]
+      operationId: listDir
+      summary: 列目录 / 分类；cursor 分页
+      parameters:
+        - name: id
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/DocId'
+          description: 缺省为 root。
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 不透明游标，与 id+order 绑定；错配 400 BAD_CURSOR。
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5000
+            default: 1000
+        - name: order
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 排序提示；真实树 name ASC、分类 modified DESC。取值不冻结。
+      responses:
+        '200':
+          description: 一页条目与 revision。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResp'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: true
+
+  /v1/fs/stat:
+    post:
+      tags: [fs]
+      operationId: statEntries
+      summary: 批量 stat（≤200 个/次）
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatReq'
+      responses:
+        '200':
+          description: 与请求 ids 保序；缺失条目为 null。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatResp'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+
+  /v1/fs/content:
+    get:
+      tags: [fs]
+      operationId: getContent
+      summary: 读内容（Range/206，ETag/If-Range）
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/DocId'
+        - name: download
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: 存在即 attachment；默认 inline。SPEC 文字存在歧义，见 README。
+        - $ref: '#/components/parameters/Range'
+        - $ref: '#/components/parameters/IfRange'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          description: 全量内容。
+          headers:
+            Accept-Ranges:
+              $ref: '#/components/headers/AcceptRanges'
+            Content-Length:
+              $ref: '#/components/headers/ContentLength'
+            ETag:
+              $ref: '#/components/headers/ETag'
+            Last-Modified:
+              $ref: '#/components/headers/LastModified'
+            Content-Disposition:
+              $ref: '#/components/headers/ContentDisposition'
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '206':
+          description: 部分内容。
+          headers:
+            Content-Range:
+              $ref: '#/components/headers/ContentRange'
+            Content-Length:
+              $ref: '#/components/headers/ContentLength'
+            ETag:
+              $ref: '#/components/headers/ETag'
+            Last-Modified:
+              $ref: '#/components/headers/LastModified'
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '416':
+          $ref: '#/components/responses/RangeNotSatisfiable'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: true
+
+    put:
+      tags: [fs]
+      operationId: putContent
+      summary: 写内容（整写或 Content-Range 分块，断点续传）
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/DocId'
+        - $ref: '#/components/parameters/ContentLength'
+        - $ref: '#/components/parameters/ContentRange'
+        - $ref: '#/components/parameters/XUploadId'
+        - $ref: '#/components/parameters/XBaseETag'
+        - $ref: '#/components/parameters/XUploadFinal'
+        - $ref: '#/components/parameters/XSetMtime'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: 整写完成，或分块接收（非末块 complete=false）。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WriteResp'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: true
+
+  /v1/fs/create:
+    post:
+      tags: [fs]
+      operationId: createEntry
+      summary: 建文件 / 目录
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReq'
+      responses:
+        '201':
+          description: 已创建。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attr'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: true
+
+  /v1/fs/meta:
+    patch:
+      tags: [fs]
+      operationId: patchMeta
+      summary: 改名 / 移动 /（P1）改 mtime
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetaReq'
+      responses:
+        '200':
+          description: 更新后的 Attr。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attr'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: true
+
+  /v1/fs:
+    delete:
+      tags: [fs]
+      operationId: deleteEntry
+      summary: 删文件 / 目录
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/DocId'
+        - name: recursive
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '204':
+          description: 已删除或不存在（幂等）。
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: true
+
+  /v1/fs/statfs:
+    get:
+      tags: [fs]
+      operationId: statFs
+      summary: 容量（兼只读健康探针）
+      responses:
+        '200':
+          description: 卷容量。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatFsResp'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: true
+
+  /v1/fs/copy:
+    post:
+      tags: [fs]
+      operationId: copyEntry
+      summary: 服务端同卷复制（不支持时 501，客户端读+写兜底）
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyReq'
+      responses:
+        '201':
+          description: 复制完成。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attr'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
+      x-phonefs-stage: P1
+      x-phonefs-implemented: false
+
+  /v1/thumb:
+    get:
+      tags: [fs]
+      operationId: getThumb
+      summary: 缩略图（96/256 两档，image/jpeg）
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/DocId'
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            enum: [96, 256]
+            default: 256
+      responses:
+        '200':
+          description: JPEG 缩略图。
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+            Cache-Control:
+              $ref: '#/components/headers/CacheControl'
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+      x-phonefs-stage: P1
+      x-phonefs-implemented: false
+
+  /v1/index/meta:
+    get:
+      tags: [index]
+      operationId: getIndexMeta
+      summary: revision / 计数 / 生成时间
+      responses:
+        '200':
+          description: 索引元信息（ADR-21 起 schema:2）。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexMetaResp'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+
+  /v1/index/snapshot:
+    get:
+      tags: [index]
+      operationId: getIndexSnapshot
+      summary: 全量分页（gzip）
+      parameters:
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 2000
+            default: 2000
+        - $ref: '#/components/parameters/AcceptEncoding'
+      responses:
+        '200':
+          description: 一页快照行；body >64KiB 时服务端强制 gzip。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotResp'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+
+  /v1/index/changes:
+    get:
+      tags: [index]
+      operationId: getIndexChanges
+      summary: since revision 增量（过旧 410）
+      parameters:
+        - name: since
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+        - $ref: '#/components/parameters/AcceptEncoding'
+      responses:
+        '200':
+          description: 增量变更。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangesResp'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '410':
+          $ref: '#/components/responses/Gone'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P1
+      x-phonefs-implemented: false
+
+  /v1/events:
+    get:
+      tags: [events]
+      operationId: getEvents
+      summary: SSE 事件流（失败时客户端以 ?minimal=1 轮询降级）
+      parameters:
+        - name: minimal
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: 为真时立即返回当前 JSON 状态，不挂起。
+        - $ref: '#/components/parameters/LastEventID'
+      responses:
+        '200':
+          description: |
+            默认 text/event-stream 长连接；?minimal=1 时返回一次 JSON 状态。
+            服务端每 25s 发送 ": ping" 注释行保活。
+          content:
+            text/event-stream:
+              schema:
+                type: string
+                description: SSE 帧流（event/data/空行）。
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MinimalState'
+          x-sse-events:
+            - name: index
+              data_schema:
+                $ref: '#/components/schemas/IndexEvent'
+            - name: state
+              data_schema:
+                $ref: '#/components/schemas/StateEvent'
+            - name: storage
+              data_schema:
+                $ref: '#/components/schemas/StorageEvent'
+            - name: share_offer
+              data_schema:
+                $ref: '#/components/schemas/ShareOfferEvent'
+            - name: share_batch
+              data_schema:
+                $ref: '#/components/schemas/ShareBatchEvent'
+            - name: device_scope
+              data_schema:
+                $ref: '#/components/schemas/DeviceScopeEvent'
+            - name: device_revoked
+              data_schema:
+                $ref: '#/components/schemas/DeviceRevokedEvent'
+            - name: fleet
+              data_schema:
+                $ref: '#/components/schemas/FleetEvent'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+
+  /v1/pair/devices/me:
+    get:
+      tags: [pair, session]
+      operationId: getMyDevice
+      summary: 调用方查看自己的信任记录（不返回其他设备身份）
+      parameters:
+        - $ref: '#/components/parameters/XDeviceId'
+      responses:
+        '200':
+          description: 本设备信任记录、舰队状态与自己的会话。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyDeviceResp'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+      x-phonefs-origin: ADR-18
+
+    delete:
+      tags: [pair, session]
+      operationId: removeMyDevice
+      summary: 消费端自我移除（幂等 204）
+      parameters:
+        - $ref: '#/components/parameters/XDeviceId'
+      responses:
+        '204':
+          description: 已移除或不存在（幂等）。
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-phonefs-stage: P0
+      x-phonefs-implemented: false
+      x-phonefs-origin: ADR-18
+
+  /v1/share/offers:
+    get:
+      tags: [share]
+      operationId: listShareOffers
+      summary: 列出建给本设备的 offer
+      parameters:
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [open, history]
+            default: open
+      responses:
+        '200':
+          description: offer 摘要列表。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareOfferListResp'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-phonefs-stage: P1
+      x-phonefs-implemented: false
+      x-phonefs-origin: ADR-17
+
+  /v1/share/offers/{oid}:
+    get:
+      tags: [share]
+      operationId: getShareOffer
+      summary: offer 清单详情
+      parameters:
+        - name: oid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: offer 详情。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareOfferDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-phonefs-stage: P1
+      x-phonefs-implemented: false
+      x-phonefs-origin: ADR-17
+
+    delete:
+      tags: [share]
+      operationId: deleteShareOffer
+      summary: PC 取消 / 忽略，或手机侧清理同步
+      parameters:
+        - name: oid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: 已删除（幂等）。
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-phonefs-stage: P1
+      x-phonefs-implemented: false
+      x-phonefs-origin: ADR-17
+
+  /v1/share/offers/{oid}/decision:
+    post:
+      tags: [share]
+      operationId: decideShareOffer
+      summary: PC 用户审批结果
+      parameters:
+        - name: oid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareDecisionReq'
+      responses:
+        '200':
+          description: 当前 offer 状态（accept 幂等）。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareOfferDetail'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '410':
+          $ref: '#/components/responses/Gone'
+      x-phonefs-stage: P1
+      x-phonefs-implemented: false
+      x-phonefs-origin: ADR-17
+
+  /v1/share/offers/{oid}/content/{fid}:
+    get:
+      tags: [share]
+      operationId: getShareOfferContent
+      summary: 拉取 offer 文件字节（Range/206/ETag/If-Range）
+      parameters:
+        - name: oid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fid
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Range'
+        - $ref: '#/components/parameters/IfRange'
+      responses:
+        '200':
+          description: 全量内容。
+          headers:
+            Accept-Ranges:
+              $ref: '#/components/headers/AcceptRanges'
+            Content-Length:
+              $ref: '#/components/headers/ContentLength'
+            ETag:
+              $ref: '#/components/headers/ETag'
+            Last-Modified:
+              $ref: '#/components/headers/LastModified'
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '206':
+          description: 部分内容。
+          headers:
+            Content-Range:
+              $ref: '#/components/headers/ContentRange'
+            Content-Length:
+              $ref: '#/components/headers/ContentLength'
+            ETag:
+              $ref: '#/components/headers/ETag'
+            Last-Modified:
+              $ref: '#/components/headers/LastModified'
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '410':
+          $ref: '#/components/responses/Gone'
+        '416':
+          $ref: '#/components/responses/RangeNotSatisfiable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-phonefs-stage: P1
+      x-phonefs-implemented: false
+      x-phonefs-origin: ADR-17
+
+  /v1/share/batches:
+    post:
+      tags: [share]
+      operationId: createShareBatch
+      summary: PC→手机提交发送清单，返回空间/冲突计划
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareBatchCreateReq'
+      responses:
+        '201':
+          description: 批次计划（咨询+预留）。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareBatchPlan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: |
+            批次被拒。Share 草案 §3.2 示例曾使用 BATCH_REJECTED，
+            该码未进入 ADR-17 冻结 enum（待裁决）；details.plan 给出失败项。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '413':
+          $ref: '#/components/responses/PayloadTooLarge'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
+      x-phonefs-stage: P1
+      x-phonefs-implemented: false
+      x-phonefs-origin: ADR-17
+
+  /v1/share/batches/{bid}:
+    get:
+      tags: [share]
+      operationId: getShareBatch
+      summary: 批次状态（断链恢复）
+      parameters:
+        - name: bid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 批次与每文件进度。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareBatchStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-phonefs-stage: P1
+      x-phonefs-implemented: false
+      x-phonefs-origin: ADR-17
+
+  /v1/share/batches/{bid}/cancel:
+    post:
+      tags: [share]
+      operationId: cancelShareBatch
+      summary: 取消批次（幂等）
+      parameters:
+        - name: bid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: 已取消或已终态（幂等）。
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-phonefs-stage: P1
+      x-phonefs-implemented: false
+      x-phonefs-origin: ADR-17
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: base64url
+      description: |
+        pair/commit 颁发的 32 字节 bearer token，base64url 无填充。
+        除 4 个配对端点外，所有请求必须携带 Authorization: Bearer <token>
+        与 X-Device-Id。
+
+  parameters:
+    Authorization:
+      name: Authorization
+      in: header
+      required: true
+      description: 'Bearer <32B base64url token>；语义由 securitySchemes.bearerAuth 表达。'
+      schema:
+        type: string
+        pattern: '^Bearer [A-Za-z0-9_-]+$'
+    XDeviceId:
+      name: X-Device-Id
+      in: header
+      required: true
+      description: 调用方自己的 deviceId；与 token 绑定的设备不一致时 401 DEVICE_MISMATCH。
+      schema:
+        type: string
+    XTraceId:
+      name: X-Trace-Id
+      in: header
+      required: false
+      description: 客户端生成的 16 随机字节 hex；服务端错误体与响应头回带。
+      schema:
+        type: string
+        pattern: '^[0-9a-fA-F]{32}$'
+    XPairMac:
+      name: X-Pair-MAC
+      in: header
+      required: true
+      description: base64(HMAC-SHA256(K, "phonefs-commit:" + session))。
+      schema:
+        type: string
+    Range:
+      name: Range
+      in: header
+      required: false
+      description: 标准字节范围，如 bytes=START-END（END 可空）。
+      schema:
+        type: string
+        pattern: '^bytes=([0-9]+-[0-9]*|-[0-9]+)$'
+    IfRange:
+      name: If-Range
+      in: header
+      required: false
+      description: 仅当值与当前 ETag 一致时才按 Range 返回 206；否则 200 全量。
+      schema:
+        type: string
+    ContentRange:
+      name: Content-Range
+      in: header
+      required: false
+      description: 分块上传写作 bytes START-END/TOTAL。
+      schema:
+        type: string
+        pattern: '^bytes [0-9]+-[0-9]+/[0-9]+$'
+    ContentLength:
+      name: Content-Length
+      in: header
+      required: true
+      description: 请求正文长度；PUT 分块时必须等于 Content-Range 区间长度。
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    XUploadId:
+      name: X-Upload-Id
+      in: header
+      required: false
+      description: 客户端生成的 upload 会话 uuid；24h TTL，同 id+START 重传幂等。
+      schema:
+        type: string
+    XBaseETag:
+      name: X-Base-ETag
+      in: header
+      required: false
+      description: delta 上传的基底 ETag；不匹配 412 PRECONDITION_FAILED。
+      schema:
+        type: string
+    XUploadFinal:
+      name: X-Upload-Final
+      in: header
+      required: false
+      description: delta 会话的最终块标记；为 true 时必须同时给 X-Base-ETag。
+      schema:
+        type: string
+        enum: ['true', 'false']
+        default: 'false'
+    XSetMtime:
+      name: X-Set-Mtime
+      in: header
+      required: false
+      description: 写完成后的 mtime（int64 UTC ms）；缺省为服务端 now。
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    AcceptLanguage:
+      name: Accept-Language
+      in: header
+      required: false
+      description: '分类名本地化：P0 zh-CN，P1 en。'
+      schema:
+        type: string
+    AcceptEncoding:
+      name: Accept-Encoding
+      in: header
+      required: false
+      description: snapshot/changes 支持 gzip（body >64KiB 时服务端强制 gzip）。
+      schema:
+        type: string
+    LastEventID:
+      name: Last-Event-ID
+      in: header
+      required: false
+      description: 客户端上次收到的 revision；服务端无状态，不据此补发。
+      schema:
+        type: string
+
+  headers:
+    XTraceId:
+      description: 服务端回带的追踪 id；若请求未带则服务端生成。
+      schema:
+        type: string
+    ETag:
+      description: '"<size>-<modified_ms>"'
+      schema:
+        type: string
+    LastModified:
+      description: HTTP-date 形式的最后修改时间。
+      schema:
+        type: string
+    AcceptRanges:
+      description: 恒为 bytes。
+      schema:
+        type: string
+        enum: [bytes]
+    ContentDisposition:
+      description: download 给出时为 attachment；默认 inline。
+      schema:
+        type: string
+    ContentRange:
+      description: '响应范围：bytes START-END/TOTAL；416 时为 bytes */TOTAL。'
+      schema:
+        type: string
+    ContentLength:
+      description: 响应正文长度。
+      schema:
+        type: integer
+        format: int64
+    CacheControl:
+      description: 缩略图缓存策略。
+      schema:
+        type: string
+    RetryAfter:
+      description: 建议重试间隔（秒）。
+      schema:
+        type: integer
+        minimum: 0
+
+  responses:
+    BadRequest:
+      description: 400 INVALID_ARGUMENT / BAD_CURSOR / INVALID_NAME / PROTOCOL_VERSION / INVALID_MANIFEST。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Unauthorized:
+      description: 401 TOKEN_INVALID / TOKEN_EXPIRED / PAIR_REQUIRED / REVOKED / DEVICE_MISMATCH。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Forbidden:
+      description: 403 SCOPE_DENIED / PAIRING_CLOSED / USER_DENIED / PAIR_MAC_INVALID / BIND_REFUSED。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: 404 NOT_FOUND / SESSION_NOT_FOUND / NO_THUMB / OFFER_NOT_FOUND / BATCH_NOT_FOUND。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    MethodNotAllowed:
+      description: 405 METHOD_NOT_ALLOWED。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    RequestTimeout:
+      description: 408 REQUEST_TIMEOUT。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Conflict:
+      description: 409 ALREADY_EXISTS / NOT_EMPTY / UPLOAD_INCOMPLETE / PARTIAL / OFFER_EXPIRED / BATCH_CANCELED / FILE_CHANGED。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Gone:
+      description: 410 REVISION_TOO_OLD / OFFER_GONE。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    PreconditionFailed:
+      description: 412 PRECONDITION_FAILED；details 带 expected / actual。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    PayloadTooLarge:
+      description: 413 TOO_LARGE。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    UnsupportedMediaType:
+      description: 415 UNSUPPORTED_MEDIA。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    RangeNotSatisfiable:
+      description: 416 RANGE_NOT_SATISFIABLE；响应带 Content-Range bytes */TOTAL。
+      headers:
+        Content-Range:
+          $ref: '#/components/headers/ContentRange'
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    UnprocessableEntity:
+      description: 422 CHECKSUM_MISMATCH。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Locked:
+      description: 423 WRITER_BUSY；details 带 retry_after。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    TooManyRequests:
+      description: 429 RATE_LIMITED；响应带 Retry-After。
+      headers:
+        Retry-After:
+          $ref: '#/components/headers/RetryAfter'
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    InternalServerError:
+      description: 500 INTERNAL。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotImplemented:
+      description: 501 NOT_SUPPORTED；可选能力（copy/thumb/目录 meta）未实现。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    ServiceUnavailable:
+      description: 503 UNAVAILABLE / FLEET_FULL / NOT_READY / ANOTHER_SESSION(deprecated)。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    InsufficientStorage:
+      description: 507 INSUFFICIENT_STORAGE；details 带 required / free。
+      headers:
+        X-Trace-Id:
+          $ref: '#/components/headers/XTraceId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+
+  schemas:
+    DocId:
+      type: string
+      maxLength: 1024
+      description: |
+        不透明文档 id。冻结形态：
+        - root：虚拟根（固定 8 行 = 7 个 cat:* + stor:primary）
+        - cat:image / cat:video / cat:audio / cat:document / cat:archive /
+          cat:downloads / cat:screenshots：P0 分类；cat:camera 为 P1，
+          仅在 session/start 协商 features.camera=true 时由客户端展示为第 9 root
+        - stor:primary：内部存储根（/storage/emulated/0）
+        - p:<base64url(UTF-8 绝对路径)>：真实文件/目录（无填充）
+        客户端不得拼接路径语义；p: 仅用于调试展示。pattern 刻意保持宽松，
+        分类集合后续可扩张。
+      pattern: '^(root|stor:primary|cat:[^/]+|p:[A-Za-z0-9_-]+)$'
+
+    Attr:
+      type: object
+      description: |
+        文件/目录属性。parent 在实现中允许 null（虚拟根/边界），
+        与 SPEC §6.2「parent 必填」冲突，契约按可选 nullable 记录。
+      required: [id, name, is_dir, size, modified_ms, writable]
+      properties:
+        id:
+          $ref: '#/components/schemas/DocId'
+        parent:
+          type: [string, 'null']
+          description: 父目录 docId；分类条目为 cat:*，真实条目为父目录 p:。允许 null。
+        name:
+          type: string
+        is_dir:
+          type: boolean
+        size:
+          type: integer
+          format: int64
+          minimum: 0
+        modified_ms:
+          type: integer
+          format: int64
+          description: int64 UTC unix ms。
+        mime:
+          type: string
+          description: MIME 类型；未知时缺省。
+        media_type:
+          type: integer
+          minimum: 0
+          maximum: 3
+          description: |
+            媒体类型：0=unknown/other, 1=image, 2=audio, 3=video（SPEC 定义）。
+            当前 Kotlin DTO 误为 String 且实现恒 null；契约按 integer。
+        writable:
+          type: boolean
+
+    RootsResp:
+      type: object
+      required: [roots]
+      properties:
+        roots:
+          type: array
+          minItems: 8
+          maxItems: 8
+          items:
+            $ref: '#/components/schemas/Attr'
+
+    ListResp:
+      type: object
+      required: [entries, next_cursor, revision]
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attr'
+        next_cursor:
+          type: string
+          description: 空串表示结束；不透明且与 id+order 绑定。
+        revision:
+          type: integer
+          format: int64
+          description: |
+            SPEC：当前索引 revision。当前实现 = 当页 max(modified_ms)，
+            root 固定行为 0；契约保留 int64 语义。
+
+    StatReq:
+      type: object
+      required: [ids]
+      properties:
+        ids:
+          type: array
+          minItems: 1
+          maxItems: 200
+          items:
+            $ref: '#/components/schemas/DocId'
+
+    StatResp:
+      type: object
+      required: [entries]
+      properties:
+        entries:
+          type: array
+          description: 与请求 ids 保序；缺失条目给 null，不整体 404。
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/Attr'
+              - type: 'null'
+
+    StatFsResp:
+      type: object
+      required: [total_bytes, free_bytes, block_size]
+      properties:
+        total_bytes:
+          type: integer
+          format: int64
+        free_bytes:
+          type: integer
+          format: int64
+        block_size:
+          type: integer
+          format: int64
+
+    CreateReq:
+      type: object
+      required: [parent, name, is_dir]
+      properties:
+        parent:
+          $ref: '#/components/schemas/DocId'
+        name:
+          type: string
+          maxLength: 255
+        is_dir:
+          type: boolean
+        mime:
+          type: string
+        tmp:
+          type: boolean
+          default: false
+          description: 客户端意图提示；实际临时文件由 PUT 原子写管理。
+
+    WriteResp:
+      type: object
+      required: [received, complete]
+      properties:
+        received:
+          type: integer
+          format: int64
+          description: 已接收字节数（分块时为 END+1；完成时为总长）。
+        complete:
+          type: boolean
+        etag:
+          type: string
+          description: 完成时返回 "<size>-<modified_ms>"；非末块缺省。
+
+    MetaReq:
+      type: object
+      description: |
+        M2 仅文件改名/移动/mtime；目录 id 的 name/parent_id 变更返回 501。
+        无 size 字段（size patch 不开放，P2-12）。replace 为实现者增量。
+      required: [id]
+      anyOf:
+        - required: [name]
+        - required: [parent_id]
+        - required: [modified_ms]
+      properties:
+        id:
+          $ref: '#/components/schemas/DocId'
+        name:
+          type: string
+          maxLength: 255
+        parent_id:
+          $ref: '#/components/schemas/DocId'
+        modified_ms:
+          type: integer
+          format: int64
+          minimum: 0
+        replace:
+          type: boolean
+          default: false
+          description: 目标已存在时是否替换；实现已存在，待 ADR 登记。
+          x-phonefs-origin: implementer
+
+    CopyReq:
+      type: object
+      required: [src_id, dst_parent_id, name]
+      properties:
+        src_id:
+          $ref: '#/components/schemas/DocId'
+        dst_parent_id:
+          $ref: '#/components/schemas/DocId'
+        name:
+          type: string
+          maxLength: 255
+
+    DeviceInfo:
+      type: object
+      required: [id, name, type]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          description: android / windows / saf / cli 等对端类型。
+        form_factor:
+          type: string
+          default: other
+          description: 形态因子（Tablet/Phone 等），未知为 other。
+
+    PairInfo:
+      type: object
+      required: [service, protocol_versions, fingerprint, pairing_open, server_time_ms]
+      properties:
+        service:
+          type: string
+          enum: [phonefs]
+        protocol_versions:
+          type: array
+          items:
+            type: integer
+          description: major 版本列表；当前 [1]。
+        fingerprint:
+          type: string
+          description: 服务端 TLS 证书 SHA-256 指纹（hex64）。
+        pairing_open:
+          type: boolean
+        server_time_ms:
+          type: integer
+          format: int64
+        device:
+          $ref: '#/components/schemas/DeviceInfo'
+
+    PairHelloReq:
+      type: object
+      required: [device, cert, ecdh, sas_v]
+      properties:
+        device:
+          $ref: '#/components/schemas/DeviceInfo'
+        cert:
+          type: string
+          description: 客户端证书 DER 的 base64url（无填充）。
+        ecdh:
+          type: string
+          description: P-256 临时公钥点的 base64url（无填充）。
+        sas_v:
+          type: integer
+          enum: [1]
+
+    PairHelloResp:
+      type: object
+      required: [session, cert, ecdh, server, expires_ms]
+      properties:
+        session:
+          type: string
+          description: 配对会话 id（ps_…）。
+        cert:
+          type: string
+          description: 服务端证书 DER 的 base64url（无填充）。
+        ecdh:
+          type: string
+          description: 服务端 P-256 临时公钥点的 base64url（无填充）。
+        server:
+          $ref: '#/components/schemas/DeviceInfo'
+        expires_ms:
+          type: integer
+          format: int64
+
+    PairCommitReq:
+      type: object
+      required: [session, scope]
+      properties:
+        session:
+          type: string
+        scope:
+          type: string
+          enum: [ro, rw]
+
+    PairCommitResp:
+      type: object
+      required: [token, peer, server_time_ms]
+      properties:
+        token:
+          type: string
+          description: 32B base64url 无填充长期 bearer。
+        peer:
+          $ref: '#/components/schemas/DeviceInfo'
+        server_time_ms:
+          type: integer
+          format: int64
+
+    SessionClient:
+      type: object
+      required: [kind, version, os]
+      properties:
+        kind:
+          type: string
+          enum: [winfsp, saf, mirror, cli]
+        version:
+          type: string
+        os:
+          type: string
+        name:
+          type: string
+          description: 对端当前自报名；服务端据此更新设备台账。
+
+    SessionFeatureName:
+      type: string
+      enum: [thumb, watch, changes, seek, copy, camera, share, fleet, mirror]
+
+    SessionStartReq:
+      type: object
+      required: [protocol, features, scope_want]
+      properties:
+        protocol:
+          type: integer
+          enum: [1]
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionFeatureName'
+        scope_want:
+          type: string
+          enum: [ro, rw]
+        client:
+          $ref: '#/components/schemas/SessionClient'
+
+    SessionFeatures:
+      type: object
+      required: [thumb, watch, changes, seek, copy, camera]
+      properties:
+        thumb:
+          type: boolean
+        watch:
+          type: boolean
+        changes:
+          type: boolean
+        seek:
+          type: boolean
+        copy:
+          type: boolean
+        camera:
+          type: boolean
+        share:
+          type: boolean
+        fleet:
+          type: boolean
+        mirror:
+          type: boolean
+
+    SessionLimits:
+      type: object
+      required: [stat_batch, list_max, put_block_hint, snapshot_page]
+      properties:
+        stat_batch:
+          type: integer
+          default: 200
+        list_max:
+          type: integer
+          default: 5000
+        put_block_hint:
+          type: integer
+          format: int64
+          default: 1048576
+        snapshot_page:
+          type: integer
+          default: 2000
+        fleet_max:
+          type: integer
+          description: ADR-18 增量；fleet 设备上限。
+        sessions_per_device:
+          type: integer
+          description: ADR-18 增量；每设备 sid 上限 K=3。
+
+    SessionDevice:
+      type: object
+      required: [id, name, type]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        form_factor:
+          type: string
+        battery:
+          type: integer
+          minimum: 0
+          maximum: 100
+        charging:
+          type: boolean
+
+    StorageInfo:
+      type: object
+      required: [total_bytes, free_bytes]
+      properties:
+        total_bytes:
+          type: integer
+          format: int64
+        free_bytes:
+          type: integer
+          format: int64
+
+    FleetState:
+      type: object
+      required: [active, max, writers]
+      properties:
+        active:
+          type: integer
+        max:
+          type: integer
+        writers:
+          type: integer
+        max_writers:
+          type: integer
+        writer_id8:
+          type: string
+          description: 写者设备 id 前 8 位；仅供 UI 文案。
+
+    SessionStartResp:
+      type: object
+      required: [sid, server_time_ms, writable, revision, features, limits, device, storage]
+      properties:
+        sid:
+          type: string
+        server_time_ms:
+          type: integer
+          format: int64
+        writable:
+          type: boolean
+          description: 与 scope_effective == "rw" 一致。
+        revision:
+          type: integer
+          format: int64
+        features:
+          $ref: '#/components/schemas/SessionFeatures'
+        limits:
+          $ref: '#/components/schemas/SessionLimits'
+        device:
+          $ref: '#/components/schemas/SessionDevice'
+        storage:
+          $ref: '#/components/schemas/StorageInfo'
+        scope_effective:
+          type: string
+          enum: [ro, rw]
+          description: ADR-18；rw 写者位被占时降级为 ro。
+        fleet:
+          $ref: '#/components/schemas/FleetState'
+
+    SessionPingResp:
+      type: object
+      required: [server_time_ms, revision]
+      properties:
+        server_time_ms:
+          type: integer
+          format: int64
+        revision:
+          type: integer
+          format: int64
+
+    PromoteResp:
+      type: object
+      required: [scope_effective]
+      properties:
+        scope_effective:
+          type: string
+          enum: [ro, rw]
+
+    DeviceTrust:
+      type: object
+      required: [id, name, type, fingerprint8, scope, paired_ms, last_seen_ms]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        fingerprint8:
+          type: string
+          description: 设备指纹前 8 位。
+        scope:
+          type: string
+          enum: [ro, rw]
+        paired_ms:
+          type: integer
+          format: int64
+        last_seen_ms:
+          type: integer
+          format: int64
+
+    FleetInfo:
+      type: object
+      required: [active, max, writers, max_writers]
+      properties:
+        active:
+          type: integer
+        max:
+          type: integer
+        writers:
+          type: integer
+        max_writers:
+          type: integer
+
+    SessionSummary:
+      type: object
+      required: [sid, scope_effective, started_ms]
+      properties:
+        sid:
+          type: string
+        scope_effective:
+          type: string
+          enum: [ro, rw]
+        started_ms:
+          type: integer
+          format: int64
+
+    MyDeviceResp:
+      type: object
+      required: [device, fleet, sessions]
+      properties:
+        device:
+          $ref: '#/components/schemas/DeviceTrust'
+        fleet:
+          $ref: '#/components/schemas/FleetInfo'
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionSummary'
+
+    IndexCounts:
+      type: object
+      required: [image, video, audio, document, archive, downloads, screenshots, camera]
+      properties:
+        image:
+          type: integer
+          format: int64
+        video:
+          type: integer
+          format: int64
+        audio:
+          type: integer
+          format: int64
+        document:
+          type: integer
+          format: int64
+        archive:
+          type: integer
+          format: int64
+        downloads:
+          type: integer
+          format: int64
+        screenshots:
+          type: integer
+          format: int64
+        camera:
+          type: integer
+          format: int64
+
+    IndexMetaResp:
+      type: object
+      required: [revision, schema, generated_ms, counts, rows_total]
+      properties:
+        revision:
+          type: integer
+          format: int64
+        schema:
+          type: integer
+          enum: [1, 2]
+          description: ADR-21 起 schema:2；旧服务端可为 1。
+        generated_ms:
+          type: integer
+          format: int64
+        counts:
+          $ref: '#/components/schemas/IndexCounts'
+        rows_total:
+          type: integer
+          format: int64
+
+    IndexRow:
+      type: object
+      required: [path, name, is_dir, size, modified_ms, date_taken_ms, media_type, mime, bucket_id, bucket_name, width, height, orientation]
+      properties:
+        path:
+          type: string
+        name:
+          type: string
+        is_dir:
+          type: boolean
+        size:
+          type: integer
+          format: int64
+        modified_ms:
+          type: integer
+          format: int64
+        date_taken_ms:
+          type: integer
+          format: int64
+        media_type:
+          type: integer
+          minimum: 0
+          maximum: 3
+        mime:
+          type: string
+        bucket_id:
+          type: string
+        bucket_name:
+          type: string
+        width:
+          type: integer
+        height:
+          type: integer
+        orientation:
+          type: integer
+        title:
+          type: string
+          description: ADR-21 schema:2 可选列。
+        artist:
+          type: string
+          description: ADR-21 schema:2 可选列。
+        album:
+          type: string
+          description: ADR-21 schema:2 可选列。
+        app_label:
+          type: string
+          description: ADR-21 schema:2 可选列（懒解析 APK label）。
+        duration_ms:
+          type: integer
+          format: int64
+          description: ADR-21 schema:2 可选列（媒体时长）。
+
+    SnapshotResp:
+      type: object
+      required: [revision, schema, cursor, rows]
+      properties:
+        revision:
+          type: integer
+          format: int64
+        schema:
+          type: integer
+          enum: [1, 2]
+        cursor:
+          type: string
+        next_cursor:
+          type: [string, 'null']
+          description: null 表示最后一页；翻页中断需丢弃重来。
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexRow'
+
+    IndexChange:
+      type: object
+      required: [rev, op, row]
+      properties:
+        rev:
+          type: integer
+          format: int64
+        op:
+          type: string
+          enum: [add, upd, del, ren]
+        row:
+          $ref: '#/components/schemas/IndexRow'
+        old_path:
+          type: string
+          description: op=ren 时的旧路径。
+
+    ChangesResp:
+      type: object
+      required: [from, revision, changes, has_more, next]
+      properties:
+        from:
+          type: integer
+          format: int64
+        revision:
+          type: integer
+          format: int64
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexChange'
+        has_more:
+          type: boolean
+        next:
+          type: integer
+          format: int64
+
+    ShareFile:
+      type: object
+      required: [fid, name, size, mime]
+      properties:
+        fid:
+          type: string
+        name:
+          type: string
+        size:
+          type: integer
+          format: int64
+        mime:
+          type: string
+        sha256:
+          type: string
+          description: 可选；声明时用于完成态校验。
+
+    ShareOfferSummary:
+      type: object
+      required: [offer_id, created_ms, expires_ms, file_count, total_bytes]
+      properties:
+        offer_id:
+          type: string
+        created_ms:
+          type: integer
+          format: int64
+        expires_ms:
+          type: integer
+          format: int64
+        file_count:
+          type: integer
+        total_bytes:
+          type: integer
+          format: int64
+        from_app:
+          type: string
+
+    ShareOfferListResp:
+      type: object
+      required: [offers]
+      properties:
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShareOfferSummary'
+
+    ShareOfferDetail:
+      type: object
+      required: [offer_id, state, files, target_device]
+      properties:
+        offer_id:
+          type: string
+        state:
+          type: string
+          enum: [open, accepted, rejected, expired, received]
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShareFile'
+        target_device:
+          type: string
+          description: 目标消费端 deviceId；S1 只返回建给调用方的 offer。
+
+    ShareDecisionReq:
+      type: object
+      required: [decision]
+      properties:
+        decision:
+          type: string
+          enum: [accept, reject]
+
+    ShareBatchTarget:
+      type: object
+      required: [base]
+      properties:
+        base:
+          type: string
+          enum: [download, stor]
+        subdir:
+          type: string
+        path:
+          type: string
+          description: base=stor 时给出目标路径。
+
+    ShareBatchFile:
+      type: object
+      required: [fid, relative_path, name, size, mime]
+      properties:
+        fid:
+          type: string
+        relative_path:
+          type: string
+        name:
+          type: string
+        size:
+          type: integer
+          format: int64
+        mime:
+          type: string
+        sha256:
+          type: string
+
+    ShareBatchCreateReq:
+      type: object
+      required: [target, conflict, files]
+      properties:
+        target:
+          $ref: '#/components/schemas/ShareBatchTarget'
+        conflict:
+          type: string
+          enum: [rename, fail]
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShareBatchFile'
+
+    ShareBatchPlanItem:
+      type: object
+      required: [fid, action]
+      properties:
+        fid:
+          type: string
+        action:
+          type: string
+          description: ok / conflict 等；取值由服务端计划语义扩展。
+        proposed_name:
+          type: string
+        target_docid:
+          $ref: '#/components/schemas/DocId'
+
+    ShareBatchPlan:
+      type: object
+      required: [batch_id, target_docid, free_bytes, plan]
+      properties:
+        batch_id:
+          type: string
+        target_docid:
+          $ref: '#/components/schemas/DocId'
+        free_bytes:
+          type: integer
+          format: int64
+        plan:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShareBatchPlanItem'
+
+    ShareBatchFileStatus:
+      type: object
+      required: [fid, state]
+      properties:
+        fid:
+          type: string
+        state:
+          type: string
+          enum: [done, in_progress, pending]
+        bytes:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int64
+
+    ShareBatchStatus:
+      type: object
+      required: [batch_id, state, files, scan_required]
+      properties:
+        batch_id:
+          type: string
+        state:
+          type: string
+          enum: [active, complete, canceled, expired]
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShareBatchFileStatus'
+        scan_required:
+          type: boolean
+
+    MinimalState:
+      type: object
+      required: [revision, state, storage]
+      properties:
+        revision:
+          type: integer
+          format: int64
+        state:
+          type: string
+        storage:
+          $ref: '#/components/schemas/StorageInfo'
+
+    IndexEvent:
+      type: object
+      required: [revision]
+      properties:
+        revision:
+          type: integer
+          format: int64
+
+    StateEvent:
+      type: object
+      required: [state]
+      properties:
+        state:
+          type: string
+          description: 如 sharing_stopping（手机用户点停止后的 2s 优雅窗口）。
+
+    StorageEvent:
+      type: object
+      required: [total, free]
+      properties:
+        total:
+          type: integer
+          format: int64
+        free:
+          type: integer
+          format: int64
+
+    ShareOfferEvent:
+      type: object
+      required: [offer_id, from_device, file_count, total_bytes]
+      properties:
+        offer_id:
+          type: string
+        from_device:
+          type: string
+        file_count:
+          type: integer
+        total_bytes:
+          type: integer
+          format: int64
+
+    ShareBatchEvent:
+      type: object
+      required: [batch_id, state]
+      properties:
+        batch_id:
+          type: string
+        state:
+          type: string
+          enum: [canceled, receiving, complete]
+
+    DeviceScopeEvent:
+      type: object
+      required: [scope]
+      properties:
+        scope:
+          type: string
+          enum: [ro, rw]
+
+    DeviceRevokedEvent:
+      type: object
+      required: [reason]
+      properties:
+        reason:
+          type: string
+          enum: [revoked, wipe_all]
+
+    FleetEvent:
+      type: object
+      required: [active, max, writers]
+      properties:
+        active:
+          type: integer
+        max:
+          type: integer
+        writers:
+          type: integer
+        writer_id8:
+          type: string
+
+    ErrorBody:
+      type: object
+      required: [code, message, trace_id, retriable]
+      properties:
+        code:
+          type: string
+          description: |
+            HTTP 错误机器码（冻结 enum）。客户端合成码（OFFLINE / PAIR_SAS_MISMATCH /
+            FINGERPRINT_CHANGED / LOCAL_DISK_FULL / SENDTO_NO_RW_DEVICE /
+            STAGING_QUOTA_EXCEEDED）不产生 HTTP 响应，不在本 enum 中。
+            ANOTHER_SESSION 为 ADR-18 前的 deprecated 别名，保留一个版本。
+          enum:
+            - INVALID_ARGUMENT
+            - BAD_CURSOR
+            - INVALID_NAME
+            - PROTOCOL_VERSION
+            - INVALID_MANIFEST
+            - TOKEN_INVALID
+            - TOKEN_EXPIRED
+            - PAIR_REQUIRED
+            - REVOKED
+            - DEVICE_MISMATCH
+            - SCOPE_DENIED
+            - PAIRING_CLOSED
+            - USER_DENIED
+            - PAIR_MAC_INVALID
+            - BIND_REFUSED
+            - NOT_FOUND
+            - SESSION_NOT_FOUND
+            - NO_THUMB
+            - OFFER_NOT_FOUND
+            - BATCH_NOT_FOUND
+            - METHOD_NOT_ALLOWED
+            - REQUEST_TIMEOUT
+            - ALREADY_EXISTS
+            - NOT_EMPTY
+            - UPLOAD_INCOMPLETE
+            - PARTIAL
+            - OFFER_EXPIRED
+            - BATCH_CANCELED
+            - FILE_CHANGED
+            - REVISION_TOO_OLD
+            - OFFER_GONE
+            - PRECONDITION_FAILED
+            - TOO_LARGE
+            - UNSUPPORTED_MEDIA
+            - RANGE_NOT_SATISFIABLE
+            - CHECKSUM_MISMATCH
+            - WRITER_BUSY
+            - RATE_LIMITED
+            - INTERNAL
+            - NOT_SUPPORTED
+            - UNAVAILABLE
+            - ANOTHER_SESSION
+            - FLEET_FULL
+            - NOT_READY
+            - INSUFFICIENT_STORAGE
+          x-phonefs-deprecated-codes:
+            ANOTHER_SESSION:
+              deprecated: true
+              description: ADR-14 单活跃 consumer 时代别名；ADR-18 起由 FLEET_FULL 取代，保留一个版本。
+        message:
+          type: string
+          description: 人类可读英文短串，不面向终端用户。
+        trace_id:
+          type: string
+        retriable:
+          type: boolean
+        details:
+          type: object
+          additionalProperties: true
+          description: |
+            可选结构化细节。已知键（非 required，按错误码出现）：
+            received / required / expected / actual / deleted / failed / reason /
+            hint / latest_full / size / retry_after / active / max / fid / free /
+            plan。客户端必须容忍未知键。
+
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'

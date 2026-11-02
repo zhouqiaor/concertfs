@@ -1,0 +1,2 @@
+# 本地 codegen 工具缓存（openapi-generator CLI jar ~33MB、下载校验日志），不入库
+tools/

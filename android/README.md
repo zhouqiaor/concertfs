@@ -1,6 +1,6 @@
 # PhoneFS Android（M0 W2 spike）
 
-`:core` 协议层（Ktor HTTPS server + Conscrypt TLS1.3 + MES FsBackend）与 `:source` App（FGS + 配对/共享 UI）。
+`:core-protocol` 纯协议层（DTO / ErrCode / DocIds / codegen 模型，无 Ktor server 依赖）→ `:core-server` 服务端（Ktor HTTPS server + Conscrypt TLS1.3 + MES FsBackend）→ `:source` App（FGS + 配对/共享 UI）。依赖方向：`core-server → core-protocol`，`source → core-server`。
 W2 退出标准见 `docs/design/2026-10-31-phone-files-selfbuild.md` §13，闸门报告：
 `docs/research/2026-10-31-phonefs-m0-w2-android-ktor-gate.md`。
 
