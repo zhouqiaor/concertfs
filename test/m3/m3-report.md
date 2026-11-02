@@ -7,7 +7,13 @@
 
 ## 结果
 
-**12 PASS / 0 FAIL / 1 ENV_LIMIT**。最终复跑 `run_id=1793535440988933700`；环境受限项不计为 PASS。
+**12 PASS / 0 FAIL / 1 ENV_LIMIT**。最终复跑 `run_id=1793542553271809200`（以
+`protocol-results.json` 为准；`tequ-m3-protocol.txt` 是早期捕获的控制台日志，其中 RESULT
+路径指向当时的 `-accept` 工作树，仅作历史记录）。环境受限项不计为 PASS。
+
+被测版本：Android 服务端为 CIO 构建的 release APK（行为证据见 >2GiB GET 内存曲线；该构建的
+APK sha256 未在本分支留档，列为证据缺口），桥侧为 `feat-phonefs-m3` 工作树（内容随后原样
+提交为 `34c797f`）；设备序列号在每个会话开始时复验为 `HOMEVISION202111`。
 
 | 实测项 | 结果 |
 |---|---|

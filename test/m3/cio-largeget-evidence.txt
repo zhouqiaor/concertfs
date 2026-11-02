@@ -1,7 +1,8 @@
 PhoneFS M3 大文件流式 GET 准入证据（CIO 引擎，真机）
 ================================================================
 采集时间：2026-11-01 22:20–22:22（+0800）
-分支/构建：feat-phonefs-m3 工作树，含 ADR-19 增补（生产引擎＝CIO 3.6.1）与 P0-1 delta 基线修复
+分支/构建：feat-phonefs-m3；Android 服务端为 CIO 构建的 release APK（APK sha256 未留档，
+            证据缺口）；桥侧工作树内容＝commit 34c797f（P0-1 delta 基线修复）
 设备：HUAWEI TEQU-S2C，ro.serialno=HOMEVISION202111，Android 12/API31，adb 192.168.43.1:5555
 服务：com.phonefs.source pid=16847，HTTPS 192.168.43.1:18443（LoopbackTlsFront/Conscrypt TLS1.3）
 文件：/storage/emulated/0/PhoneFS-m3-big/big.bin（/dev/zero 生成）
